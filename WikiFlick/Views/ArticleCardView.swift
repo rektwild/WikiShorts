@@ -5,6 +5,7 @@ struct ArticleCardView: View {
     @State private var imageLoaded = false
     @State private var imageScale: CGFloat = 0.8
     @State private var imageOpacity: Double = 0.0
+    @State private var showingSettings = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -18,6 +19,9 @@ struct ArticleCardView: View {
             }
         }
         .ignoresSafeArea()
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+        }
     }
     
     private var backgroundView: some View {
@@ -41,13 +45,21 @@ struct ArticleCardView: View {
     }
     
     private func imageArea(_ geometry: GeometryProxy) -> some View {
-        ZStack(alignment: .topTrailing) {
-            Rectangle()
+        ZStack(alignment: .bottomTrailing) {
+            RoundedRectangle(cornerRadius: 20)
                 .fill(Color.gray.opacity(0.1))
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.55)
+                .frame(width: geometry.size.width - 20, height: geometry.size.height * 0.55)
                 .overlay(imageContent(geometry))
+            
+            HStack(spacing: 8) {
+                safariButton
+                shareButton
+            }
+            .padding(.bottom, 8)
+            .padding(.trailing, 8)
         }
         .frame(maxWidth: .infinity)
+        .padding(.horizontal, 10)
         .padding(.top, 120)
     }
     
@@ -66,8 +78,8 @@ struct ArticleCardView: View {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.55)
-                .clipped()
+                .frame(width: geometry.size.width - 10, height: geometry.size.height * 0.55)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .scaleEffect(imageScale)
                 .opacity(imageOpacity)
                 .onAppear {
@@ -83,9 +95,9 @@ struct ArticleCardView: View {
     }
     
     private func placeholderView(geometry: GeometryProxy) -> some View {
-        Rectangle()
+        RoundedRectangle(cornerRadius: 20)
             .fill(Color.gray.opacity(0.2))
-            .frame(width: geometry.size.width, height: geometry.size.height * 0.55)
+            .frame(width: geometry.size.width - 20, height: geometry.size.height * 0.55)
             .overlay(
                 Image(systemName: "photo.fill")
                     .font(.system(size: 40))
@@ -163,7 +175,7 @@ struct ArticleCardView: View {
                 wLogoButton
                 removeAdsButton
                 Spacer()
-                topActionButtons
+                settingsButton
             }
             .padding(.top, 60)
             
@@ -183,7 +195,7 @@ struct ArticleCardView: View {
                         .fill(Color.black.opacity(0.7))
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
                         )
                 )
                 .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
@@ -231,7 +243,7 @@ struct ArticleCardView: View {
                         .fill(Color.black.opacity(0.7))
                         .overlay(
                             Circle()
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
                         )
                 )
                 .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
@@ -249,7 +261,27 @@ struct ArticleCardView: View {
                         .fill(Color.black.opacity(0.7))
                         .overlay(
                             Circle()
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
+                        )
+                )
+                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+        }
+    }
+    
+    private var settingsButton: some View {
+        Button(action: {
+            showingSettings = true
+        }) {
+            Image(systemName: "gearshape")
+                .font(.system(size: 18, weight: .medium))
+                .foregroundColor(.white)
+                .frame(width: 44, height: 44)
+                .background(
+                    Circle()
+                        .fill(Color.black.opacity(0.7))
+                        .overlay(
+                            Circle()
+                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
                         )
                 )
                 .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
