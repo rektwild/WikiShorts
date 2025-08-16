@@ -10,7 +10,22 @@ struct SettingsView: View {
     @State private var showingArticleLanguageSelection = false
     
     private let languages = ["English", "Türkçe", "Deutsch", "Français", "Italiano", "中文"]
-    private let topics = ["All Topics", "Science", "History", "Technology", "Sports", "Arts", "Geography", "Biography"]
+    private let topics = [
+        "All Topics",
+        "General Reference", 
+        "Culture and the Arts",
+        "Geography and Places",
+        "Health and Fitness",
+        "History and Events",
+        "Human Activities",
+        "Mathematics and Logic",
+        "Natural and Physical Sciences",
+        "People and Self",
+        "Philosophy and Thinking",
+        "Religion and Belief Systems",
+        "Society and Social Sciences",
+        "Technology and Applied Sciences"
+    ]
     private let articleLanguages = ["English", "Turkish", "German", "French", "Italian", "Chinese", "Spanish", "Japanese"]
     
     var body: some View {
@@ -162,7 +177,22 @@ struct TopicSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var selectedTopics: Set<String>
     
-    private let topics = ["All Topics", "Science", "History", "Technology", "Sports", "Arts", "Geography", "Biography"]
+    private let topics = [
+        "All Topics",
+        "General Reference", 
+        "Culture and the Arts",
+        "Geography and Places",
+        "Health and Fitness",
+        "History and Events",
+        "Human Activities",
+        "Mathematics and Logic",
+        "Natural and Physical Sciences",
+        "People and Self",
+        "Philosophy and Thinking",
+        "Religion and Belief Systems",
+        "Society and Social Sciences",
+        "Technology and Applied Sciences"
+    ]
     
     var body: some View {
         NavigationView {

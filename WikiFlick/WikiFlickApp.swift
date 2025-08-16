@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct WikiFlickApp: App {
+    @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if showOnboarding {
+                OnboardingView(showOnboarding: $showOnboarding)
+            } else {
+                ContentView()
+            }
         }
     }
 }
