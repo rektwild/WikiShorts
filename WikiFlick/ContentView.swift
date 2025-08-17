@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  WikiFlick
+//  WikiShorts
 //
 //  Created by Sefa Cem Turan on 16.08.2025.
 //

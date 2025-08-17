@@ -1,13 +1,13 @@
 //
-//  WikiFlickUITests.swift
-//  WikiFlickUITests
+//  WikiShortsUITests.swift
+//  WikiShortsUITests
 //
 //  Created by Sefa Cem Turan on 16.08.2025.
 //
 
 import XCTest
 
-final class WikiFlickUITests: XCTestCase {
+final class WikiShortsUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -322,6 +322,7 @@ struct ArticleCardView: View {
                     .textFieldStyle(PlainTextFieldStyle())
                     .foregroundColor(.white)
                     .font(.system(size: 16))
+                    .accentColor(.white)
                     .onChange(of: searchText) { _, newValue in
                         wikipediaService.searchWikipedia(query: newValue)
                     }

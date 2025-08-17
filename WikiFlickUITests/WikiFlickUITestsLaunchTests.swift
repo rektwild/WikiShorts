@@ -1,13 +1,13 @@
 //
-//  WikiFlickUITestsLaunchTests.swift
-//  WikiFlickUITests
+//  WikiShortsUITestsLaunchTests.swift
+//  WikiShortsUITests
 //
 //  Created by Sefa Cem Turan on 16.08.2025.
 //
 
 import XCTest
 
-final class WikiFlickUITestsLaunchTests: XCTestCase {
+final class WikiShortsUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
