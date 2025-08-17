@@ -6,6 +6,7 @@ struct ArticleCardView: View {
     @State private var imageScale: CGFloat = 0.8
     @State private var imageOpacity: Double = 0.0
     @State private var showingSettings = false
+    @State private var showingPaywall = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -21,6 +22,9 @@ struct ArticleCardView: View {
         .ignoresSafeArea()
         .sheet(isPresented: $showingSettings) {
             SettingsView()
+        }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView(isPresented: $showingPaywall)
         }
     }
     
@@ -203,21 +207,29 @@ struct ArticleCardView: View {
     }
     
     private var removeAdsButton: some View {
-        Button(action: {}) {
-            Text("Remove Ads")
-                .font(.system(size: 18, weight: .bold, design: .rounded))
-                .foregroundColor(.white)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.black.opacity(0.7))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
-                        )
-                )
-                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+        Button(action: {
+            showingPaywall = true
+        }) {
+            HStack(spacing: 6) {
+                Text("Remove Ads")
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                
+                Image(systemName: "nosign")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(.white)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.black.opacity(0.7))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.gray.opacity(0.6), lineWidth: 1)
+                    )
+            )
+            .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
         }
     }
     
@@ -300,6 +312,7 @@ struct ArticleCardView: View {
         }
     }
 }
+
 
 #Preview {
     ArticleCardView(
