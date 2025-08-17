@@ -4,6 +4,7 @@ import StoreKit
 struct PaywallView: View {
     @Binding var isPresented: Bool
     @StateObject private var storeManager = StoreManager()
+    @StateObject private var languageManager = AppLanguageManager.shared
     @State private var showingAlert = false
     @State private var alertMessage = ""
     
@@ -32,8 +33,8 @@ struct PaywallView: View {
             }
             .padding(.vertical, 20)
         }
-        .alert("Error", isPresented: $showingAlert) {
-            Button("OK") { }
+        .alert(languageManager.localizedString(key: "error"), isPresented: $showingAlert) {
+            Button(languageManager.localizedString(key: "ok")) { }
         } message: {
             Text(alertMessage)
         }
@@ -77,7 +78,7 @@ struct PaywallView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 120, height: 120)
             
-            Text("WikiShorts PRO")
+            Text(languageManager.localizedString(key: "wikishorts_pro"))
                 .font(.system(size: 32, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
@@ -86,9 +87,9 @@ struct PaywallView: View {
     
     private var featuresSection: some View {
         VStack(spacing: 16) {
-            FeatureRow(icon: "nosign", title: "Ad-Free Experience", description: "Enjoy uninterrupted reading without any ads")
-            FeatureRow(icon: "calendar", title: "2-Week Free Trial", description: "Try all premium features completely free")
-            FeatureRow(icon: "bolt.fill", title: "Faster Loading", description: "Premium servers for lightning-fast article loading")
+            FeatureRow(icon: "nosign", title: languageManager.localizedString(key: "ad_free_experience"), description: languageManager.localizedString(key: "ad_free_experience_desc"))
+            FeatureRow(icon: "calendar", title: languageManager.localizedString(key: "free_trial"), description: languageManager.localizedString(key: "free_trial_desc"))
+            FeatureRow(icon: "bolt.fill", title: languageManager.localizedString(key: "faster_loading"), description: languageManager.localizedString(key: "faster_loading_desc"))
         }
     }
     
@@ -97,13 +98,13 @@ struct PaywallView: View {
             if let product = storeManager.getProduct(for: "wiki_m") {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("WikiShorts Pro")
+                        Text(languageManager.localizedString(key: "wikishorts_pro"))
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.white)
-                        Text("1 Month")
+                        Text(languageManager.localizedString(key: "one_month"))
                             .font(.system(size: 12))
                             .foregroundColor(.white.opacity(0.7))
-                        Text("Cancel anytime")
+                        Text(languageManager.localizedString(key: "cancel_anytime"))
                             .font(.system(size: 12))
                             .foregroundColor(.white.opacity(0.7))
                     }
@@ -126,20 +127,20 @@ struct PaywallView: View {
             } else {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("WikiShorts Pro")
+                        Text(languageManager.localizedString(key: "wikishorts_pro"))
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.white)
-                        Text("1 Month")
+                        Text(languageManager.localizedString(key: "one_month"))
                             .font(.system(size: 12))
                             .foregroundColor(.white.opacity(0.7))
-                        Text("Cancel anytime")
+                        Text(languageManager.localizedString(key: "cancel_anytime"))
                             .font(.system(size: 12))
                             .foregroundColor(.white.opacity(0.7))
                     }
                     
                     Spacer()
                     
-                    Text("Loading...")
+                    Text(languageManager.localizedString(key: "loading"))
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.white.opacity(0.7))
                 }
@@ -173,7 +174,7 @@ struct PaywallView: View {
                         .scaleEffect(0.8)
                 }
                 
-                Text(storeManager.isPurchased("wiki_m") ? "Already Subscribed" : "Start Free Trial")
+                Text(storeManager.isPurchased("wiki_m") ? languageManager.localizedString(key: "already_subscribed") : languageManager.localizedString(key: "start_free_trial"))
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.black)
             }
@@ -201,7 +202,7 @@ struct PaywallView: View {
                         .scaleEffect(0.6)
                 }
                 
-                Text("Restore Purchases")
+                Text(languageManager.localizedString(key: "restore_purchases"))
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.white.opacity(0.8))
             }
@@ -212,7 +213,7 @@ struct PaywallView: View {
     private var footerSection: some View {
         VStack(spacing: 8) {
             HStack(spacing: 20) {
-                Button("Terms of Service") {
+                Button(languageManager.localizedString(key: "terms_of_service")) {
                     if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
                         UIApplication.shared.open(url)
                     }
@@ -220,7 +221,7 @@ struct PaywallView: View {
                 .font(.system(size: 14))
                 .foregroundColor(.white.opacity(0.6))
                 
-                Button("Privacy Policy") {
+                Button(languageManager.localizedString(key: "privacy_policy")) {
                     if let url = URL(string: "https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d") {
                         UIApplication.shared.open(url)
                     }
@@ -229,7 +230,7 @@ struct PaywallView: View {
                 .foregroundColor(.white.opacity(0.6))
             }
             
-            Text("2-week free trial, then $4.99/month")
+            Text(languageManager.localizedString(key: "free_trial_then_price"))
                 .font(.system(size: 12))
                 .foregroundColor(.white.opacity(0.5))
                 .multilineTextAlignment(.center)

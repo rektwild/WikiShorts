@@ -6,9 +6,9 @@ extension Notification.Name {
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedLanguage = "English"
+    @StateObject private var languageManager = AppLanguageManager.shared
     @State private var showingLanguageSelection = false
-    @State private var selectedTopics: Set<String> = ["All Topics"]
+    @State private var selectedTopics: Set<String> = ["all_topics"]
     @State private var showingTopicSelection = false
     @State private var selectedArticleLanguage = "English"
     @State private var showingArticleLanguageSelection = false
@@ -32,16 +32,15 @@ struct SettingsView: View {
         "Society and Social Sciences",
         "Technology and Applied Sciences"
     ]
-    private let articleLanguages = ["English", "Turkish", "German", "French", "Italian", "Chinese", "Spanish", "Japanese"]
     
     var body: some View {
         NavigationView {
             List {
-                Section("Status") {
+                Section(languageManager.localizedString(key: "status")) {
                     HStack {
                         Image(systemName: storeManager.isPurchased("wiki_m") ? "crown.fill" : "person.circle")
                             .foregroundColor(storeManager.isPurchased("wiki_m") ? .yellow : .gray)
-                        Text("Account Status")
+                        Text(languageManager.localizedString(key: "account_status"))
                         Spacer()
                         Text(storeManager.isPurchased("wiki_m") ? "PRO" : "FREE")
                             .foregroundColor(storeManager.isPurchased("wiki_m") ? .yellow : .secondary)
@@ -55,7 +54,7 @@ struct SettingsView: View {
                             HStack {
                                 Image(systemName: "crown")
                                     .foregroundColor(.yellow)
-                                Text("Go Premium")
+                                Text(languageManager.localizedString(key: "go_premium"))
                                     .foregroundColor(.primary)
                                 Spacer()
                                 Image(systemName: "chevron.right")
@@ -66,10 +65,10 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section("Preferences") {
+                Section(languageManager.localizedString(key: "preferences")) {
                     HStack {
                         Image(systemName: "bell")
-                        Text("Notifications")
+                        Text(languageManager.localizedString(key: "notifications"))
                         Spacer()
                         Toggle("", isOn: .constant(true))
                     }
@@ -79,9 +78,9 @@ struct SettingsView: View {
                     }) {
                         HStack {
                             Image(systemName: "globe")
-                            Text("App Language")
+                            Text(languageManager.localizedString(key: "language"))
                             Spacer()
-                            Text(selectedLanguage)
+                            Text(languageManager.currentLanguage.displayName)
                                 .foregroundColor(.secondary)
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.secondary)
@@ -91,15 +90,15 @@ struct SettingsView: View {
                     .foregroundColor(.primary)
                 }
                 
-                Section("Wiki Article Preferences") {
+                Section(languageManager.localizedString(key: "wiki_article_preferences")) {
                     Button(action: {
                         showingTopicSelection = true
                     }) {
                         HStack {
                             Image(systemName: "book")
-                            Text("Topic")
+                            Text(languageManager.localizedString(key: "topic"))
                             Spacer()
-                            Text(selectedTopics.count == 1 ? selectedTopics.first! : "\(selectedTopics.count) selected")
+                            Text(getTopicDisplayText())
                                 .foregroundColor(.secondary)
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.secondary)
@@ -113,7 +112,7 @@ struct SettingsView: View {
                     }) {
                         HStack {
                             Image(systemName: "globe.americas")
-                            Text("Article Language")
+                            Text(languageManager.localizedString(key: "article_language"))
                             Spacer()
                             Text(selectedArticleLanguage)
                                 .foregroundColor(.secondary)
@@ -125,7 +124,7 @@ struct SettingsView: View {
                     .foregroundColor(.primary)
                 }
                 
-                Section("Legal") {
+                Section(languageManager.localizedString(key: "legal")) {
                     Button(action: {
                         if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
                             UIApplication.shared.open(url)
@@ -133,7 +132,7 @@ struct SettingsView: View {
                     }) {
                         HStack {
                             Image(systemName: "doc.text")
-                            Text("Terms of Service")
+                            Text(languageManager.localizedString(key: "terms_of_service"))
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.secondary)
@@ -149,7 +148,7 @@ struct SettingsView: View {
                     }) {
                         HStack {
                             Image(systemName: "hand.raised")
-                            Text("Privacy Policy")
+                            Text(languageManager.localizedString(key: "privacy_policy"))
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.secondary)
@@ -159,10 +158,10 @@ struct SettingsView: View {
                     .foregroundColor(.primary)
                 }
                 
-                Section("About") {
+                Section(languageManager.localizedString(key: "about")) {
                     HStack {
                         Image(systemName: "info.circle")
-                        Text("App Version")
+                        Text(languageManager.localizedString(key: "app_version"))
                         Spacer()
                         Text("1.0.0")
                             .foregroundColor(.secondary)
@@ -170,7 +169,7 @@ struct SettingsView: View {
                     
                     HStack {
                         Image(systemName: "star")
-                        Text("Rate App")
+                        Text(languageManager.localizedString(key: "rate_app"))
                         Spacer()
                         Image(systemName: "chevron.right")
                             .foregroundColor(.secondary)
@@ -178,11 +177,11 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(languageManager.localizedString(key: "settings"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button(languageManager.localizedString(key: "done")) {
                         dismiss()
                     }
                 }
@@ -195,7 +194,7 @@ struct SettingsView: View {
             }
         }
         .sheet(isPresented: $showingLanguageSelection) {
-            LanguageSelectionView(selectedLanguage: $selectedLanguage)
+            LanguageSelectionView()
         }
         .sheet(isPresented: $showingTopicSelection) {
             TopicSelectionView(selectedTopics: $selectedTopics)
@@ -210,45 +209,49 @@ struct SettingsView: View {
     }
     
     private func loadSettings() {
-        selectedLanguage = UserDefaults.standard.string(forKey: "selectedAppLanguage") ?? "English"
-        selectedArticleLanguage = UserDefaults.standard.string(forKey: "selectedArticleLanguage") ?? "English"
+        selectedArticleLanguage = UserDefaults.standard.string(forKey: "selectedArticleLanguage") ?? AppLanguage.english.displayName
         
         if let topicsArray = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] {
             selectedTopics = Set(topicsArray)
         }
         
         if selectedTopics.isEmpty {
-            selectedTopics = ["All Topics"]
+            selectedTopics = ["all_topics"]
         }
     }
     
     private func saveSettings() {
-        UserDefaults.standard.set(selectedLanguage, forKey: "selectedAppLanguage")
         UserDefaults.standard.set(selectedArticleLanguage, forKey: "selectedArticleLanguage")
         UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
+    }
+    
+    private func getTopicDisplayText() -> String {
+        if selectedTopics.count == 1, let firstTopic = selectedTopics.first {
+            return languageManager.localizedString(key: firstTopic)
+        } else {
+            return "\(selectedTopics.count) \(languageManager.localizedString(key: "selected"))"
+        }
     }
 }
 
 struct LanguageSelectionView: View {
     @Environment(\.dismiss) private var dismiss
-    @Binding var selectedLanguage: String
-    
-    private let languages = ["English", "Türkçe", "Deutsch", "Français", "Italiano", "中文"]
+    @StateObject private var languageManager = AppLanguageManager.shared
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(languages, id: \.self) { language in
+                ForEach(AppLanguage.allCases, id: \.self) { language in
                     Button(action: {
-                        selectedLanguage = language
-                        UserDefaults.standard.set(language, forKey: "selectedAppLanguage")
+                        languageManager.currentLanguage = language
                         NotificationCenter.default.post(name: .settingsChanged, object: nil)
                         dismiss()
                     }) {
                         HStack {
-                            Text(language)
+                            Text(language.flag)
+                            Text(language.displayName)
                             Spacer()
-                            if language == selectedLanguage {
+                            if language == languageManager.currentLanguage {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.blue)
                             }
@@ -257,7 +260,7 @@ struct LanguageSelectionView: View {
                     .foregroundColor(.primary)
                 }
             }
-            .navigationTitle("Language")
+            .navigationTitle(languageManager.localizedString(key: "language"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -274,54 +277,61 @@ struct LanguageSelectionView: View {
 struct TopicSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var selectedTopics: Set<String>
+    @StateObject private var languageManager = AppLanguageManager.shared
     
-    private let topics = [
-        "All Topics",
-        "General Reference", 
-        "Culture and the Arts",
-        "Geography and Places",
-        "Health and Fitness",
-        "History and Events",
-        "Human Activities",
-        "Mathematics and Logic",
-        "Natural and Physical Sciences",
-        "People and Self",
-        "Philosophy and Thinking",
-        "Religion and Belief Systems",
-        "Society and Social Sciences",
-        "Technology and Applied Sciences"
+    private let topicKeys = [
+        "all_topics",
+        "general_reference", 
+        "culture_and_arts",
+        "geography_and_places",
+        "health_and_fitness",
+        "history_and_events",
+        "human_activities",
+        "mathematics_and_logic",
+        "natural_and_physical_sciences",
+        "people_and_self",
+        "philosophy_and_thinking",
+        "religion_and_belief_systems",
+        "society_and_social_sciences",
+        "technology_and_applied_sciences"
     ]
+    
+    private var localizedTopics: [(key: String, display: String)] {
+        return topicKeys.map { key in
+            (key: key, display: languageManager.localizedString(key: key))
+        }
+    }
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(topics, id: \.self) { topic in
+                ForEach(localizedTopics, id: \.key) { topic in
                     Button(action: {
-                        if topic == "All Topics" {
-                            if selectedTopics.contains("All Topics") {
+                        if topic.key == "all_topics" {
+                            if selectedTopics.contains("all_topics") {
                                 selectedTopics.removeAll()
                             } else {
-                                selectedTopics = Set(topics)
+                                selectedTopics = Set(topicKeys)
                             }
                         } else {
-                            selectedTopics.remove("All Topics")
-                            if selectedTopics.contains(topic) {
-                                selectedTopics.remove(topic)
+                            selectedTopics.remove("all_topics")
+                            if selectedTopics.contains(topic.key) {
+                                selectedTopics.remove(topic.key)
                             } else {
-                                selectedTopics.insert(topic)
+                                selectedTopics.insert(topic.key)
                             }
                             
                             if selectedTopics.isEmpty {
-                                selectedTopics.insert("All Topics")
-                            } else if selectedTopics.count == topics.count - 1 {
-                                selectedTopics.insert("All Topics")
+                                selectedTopics.insert("all_topics")
+                            } else if selectedTopics.count == topicKeys.count - 1 {
+                                selectedTopics.insert("all_topics")
                             }
                         }
                     }) {
                         HStack {
-                            Text(topic)
+                            Text(topic.display)
                             Spacer()
-                            if selectedTopics.contains(topic) {
+                            if selectedTopics.contains(topic.key) {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.blue)
                             }
@@ -330,11 +340,11 @@ struct TopicSelectionView: View {
                     .foregroundColor(.primary)
                 }
             }
-            .navigationTitle("Topics")
+            .navigationTitle(AppLanguageManager.shared.localizedString(key: "topics"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Done") {
+                    Button(AppLanguageManager.shared.localizedString(key: "done")) {
                         UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
                         NotificationCenter.default.post(name: .settingsChanged, object: nil)
                         dismiss()
@@ -349,23 +359,23 @@ struct TopicSelectionView: View {
 struct ArticleLanguageSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var selectedArticleLanguage: String
-    
-    private let articleLanguages = ["English", "Turkish", "German", "French", "Italian", "Chinese", "Spanish", "Japanese"]
+    @StateObject private var languageManager = AppLanguageManager.shared
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(articleLanguages, id: \.self) { language in
+                ForEach(AppLanguage.allCases, id: \.self) { language in
                     Button(action: {
-                        selectedArticleLanguage = language
-                        UserDefaults.standard.set(language, forKey: "selectedArticleLanguage")
+                        selectedArticleLanguage = language.displayName
+                        UserDefaults.standard.set(language.displayName, forKey: "selectedArticleLanguage")
                         NotificationCenter.default.post(name: .settingsChanged, object: nil)
                         dismiss()
                     }) {
                         HStack {
-                            Text(language)
+                            Text(language.flag)
+                            Text(language.displayName)
                             Spacer()
-                            if language == selectedArticleLanguage {
+                            if language.displayName == selectedArticleLanguage {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.blue)
                             }
@@ -374,11 +384,11 @@ struct ArticleLanguageSelectionView: View {
                     .foregroundColor(.primary)
                 }
             }
-            .navigationTitle("Article Language")
+            .navigationTitle(languageManager.localizedString(key: "article_language"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Cancel") {
+                    Button(languageManager.localizedString(key: "cancel")) {
                         dismiss()
                     }
                 }

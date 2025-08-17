@@ -12,6 +12,7 @@ struct ArticleCardView: View {
     @State private var showingNoAdAlert = false
     @StateObject private var storeManager = StoreManager()
     @StateObject private var wikipediaService = WikipediaService()
+    @StateObject private var languageManager = AppLanguageManager.shared
     @State private var isSearchActive = false
     @State private var searchText = ""
     @State private var selectedSearchArticle: WikipediaArticle?
@@ -37,22 +38,22 @@ struct ArticleCardView: View {
         .sheet(isPresented: $showingPaywall) {
             PaywallView(isPresented: $showingPaywall)
         }
-        .alert("Ödüllü Reklam", isPresented: $showingRewardAlert) {
-            Button("İzle") {
+        .alert(languageManager.localizedString(key: "rewarded_ad"), isPresented: $showingRewardAlert) {
+            Button(languageManager.localizedString(key: "watch_ad")) {
                 if AdMobManager.shared.isRewardedAdLoaded {
                     AdMobManager.shared.showRewardedAd()
                 } else {
                     showingNoAdAlert = true
                 }
             }
-            Button("İptal", role: .cancel) { }
+            Button(languageManager.localizedString(key: "cancel"), role: .cancel) { }
         } message: {
-            Text("10 dakika reklamsız kullanım hakkı için reklam izlemek ister misiniz?")
+            Text(languageManager.localizedString(key: "ad_free_10_minutes"))
         }
-        .alert("Reklam Bulunamadı", isPresented: $showingNoAdAlert) {
-            Button("Tamam") { }
+        .alert(languageManager.localizedString(key: "no_ad_found"), isPresented: $showingNoAdAlert) {
+            Button(languageManager.localizedString(key: "ok")) { }
         } message: {
-            Text("Şuanda gösterilecek reklam yok, daha sonra tekrar deneyin.")
+            Text(languageManager.localizedString(key: "try_again_later"))
         }
         .onAppear {
             Task {
@@ -271,7 +272,7 @@ struct ArticleCardView: View {
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.white)
                 
-                Text("Back to Feed")
+                Text(languageManager.localizedString(key: "back_to_feed"))
                     .font(.system(size: 16, weight: .medium, design: .rounded))
                     .foregroundColor(.white)
             }
@@ -318,11 +319,17 @@ struct ArticleCardView: View {
                     .foregroundColor(.white.opacity(0.6))
                     .font(.system(size: 16))
                 
-                TextField("Search Wikipedia...", text: $searchText)
+                TextField(languageManager.localizedString(key: "search_wikipedia"), text: $searchText)
                     .textFieldStyle(PlainTextFieldStyle())
                     .foregroundColor(.white)
                     .font(.system(size: 16))
                     .accentColor(.white)
+                    .onAppear {
+                        UITextField.appearance().attributedPlaceholder = NSAttributedString(
+                            string: languageManager.localizedString(key: "search_wikipedia"),
+                            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
+                        )
+                    }
                     .onChange(of: searchText) { _, newValue in
                         wikipediaService.searchWikipedia(query: newValue)
                     }
@@ -376,7 +383,7 @@ struct ArticleCardView: View {
             showingPaywall = true
         }) {
             HStack(spacing: 6) {
-                Text("Remove Ads")
+                Text(languageManager.localizedString(key: "remove_ads"))
                     .font(.system(size: 18, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
                 

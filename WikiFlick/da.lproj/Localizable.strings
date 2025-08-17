@@ -1,0 +1,15 @@
+/* Danish Localizations */
+
+"remove_ads" = "Reklamefri";
+"settings" = "Indstillinger";
+"search_wikipedia" = "Søg på Wikipedia...";
+"language" = "Sprog";
+"done" = "Færdig";
+"topics" = "Emner";
+"all_topics" = "Alle emner";
+"selected" = "valgt";
+"wikishorts_pro" = "WikiShorts PRO";
+"free_trial_then_price" = "2 uger gratis, derefter 37 kr/måned";
+"error" = "Fejl";
+"rewarded_ad" = "Belønningsannonce";
+"no_ad_found" = "Ingen annonce tilgængelig";

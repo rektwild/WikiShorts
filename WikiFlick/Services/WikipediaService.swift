@@ -23,7 +23,7 @@ class WikipediaService: ObservableObject {
     }
     
     private var selectedLanguage: String {
-        UserDefaults.standard.string(forKey: "selectedArticleLanguage") ?? "English"
+        UserDefaults.standard.string(forKey: "selectedArticleLanguage") ?? AppLanguage.english.displayName
     }
     
     private var selectedTopics: [String] {
@@ -31,16 +31,11 @@ class WikipediaService: ObservableObject {
     }
     
     private var languageCode: String {
-        switch selectedLanguage {
-        case "Turkish": return "tr"
-        case "German": return "de"
-        case "French": return "fr"
-        case "Italian": return "it"
-        case "Chinese": return "zh"
-        case "Spanish": return "es"
-        case "Japanese": return "ja"
-        default: return "en"
+        // Find the AppLanguage case that matches the selected display name
+        if let appLanguage = AppLanguage.allCases.first(where: { $0.displayName == selectedLanguage }) {
+            return appLanguage.rawValue
         }
+        return "en" // Default to English
     }
     
     func fetchRandomArticles(count: Int = 10) {

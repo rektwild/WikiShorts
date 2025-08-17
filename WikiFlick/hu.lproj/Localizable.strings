@@ -1,0 +1,15 @@
+/* Hungarian Localizations */
+
+"remove_ads" = "Reklámmentes";
+"settings" = "Beállítások";
+"search_wikipedia" = "Keresés a Wikipédián...";
+"language" = "Nyelv";
+"done" = "Kész";
+"topics" = "Témák";
+"all_topics" = "Minden téma";
+"selected" = "kiválasztva";
+"wikishorts_pro" = "WikiShorts PRO";
+"free_trial_then_price" = "2 hét ingyenes, majd 1.990 Ft/hó";
+"error" = "Hiba";
+"rewarded_ad" = "Jutalmazott hirdetés";
+"no_ad_found" = "Nincs elérhető hirdetés";
