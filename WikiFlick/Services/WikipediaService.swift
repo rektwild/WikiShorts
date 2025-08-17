@@ -12,11 +12,34 @@ class WikipediaService: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private var searchTask: Task<Void, Never>?
     
+    private let problematicLanguages: Set<String> = ["lzh", "yue"]
+    private let requestTimeout: TimeInterval = 15.0
+    
+    // Track current settings to detect changes
+    private var currentLanguage: String = ""
+    private var currentTopics: [String] = []
+    
     init() {
-        NotificationCenter.default.publisher(for: .settingsChanged)
+        // Initialize current settings
+        currentLanguage = selectedLanguage
+        currentTopics = selectedTopics
+        
+        // Listen for article language changes
+        NotificationCenter.default.publisher(for: .articleLanguageChanged)
             .sink { [weak self] _ in
                 DispatchQueue.main.async {
-                    self?.refreshArticles()
+                    print("📱 Article language changed, refreshing...")
+                    self?.checkForLanguageChangeAndRefresh()
+                }
+            }
+            .store(in: &cancellables)
+        
+        // Listen for topic changes
+        NotificationCenter.default.publisher(for: .topicsChanged)
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    print("📝 Topics changed, refreshing...")
+                    self?.checkForTopicsChangeAndRefresh()
                 }
             }
             .store(in: &cancellables)
@@ -33,12 +56,20 @@ class WikipediaService: ObservableObject {
     private var languageCode: String {
         // Find the AppLanguage case that matches the selected display name
         if let appLanguage = AppLanguage.allCases.first(where: { $0.displayName == selectedLanguage }) {
-            return appLanguage.rawValue
+            let code = appLanguage.rawValue
+            // Use fallback for problematic languages
+            if problematicLanguages.contains(code) {
+                print("⚠️ Language \(code) is problematic, falling back to English")
+                return "en"
+            }
+            return code
         }
         return "en" // Default to English
     }
     
     func fetchRandomArticles(count: Int = 10) {
+        guard !isLoading else { return }
+        
         isLoading = true
         errorMessage = nil
         hasError = false
@@ -49,18 +80,23 @@ class WikipediaService: ObservableObject {
         
         Publishers.MergeMany(publishers)
             .collect()
+            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
                     self?.isLoading = false
                     if case .failure(let error) = completion {
-                        self?.errorMessage = error.localizedDescription
-                        self?.hasError = true
-                        print("Wikipedia API Error: \(error)")
+                        self?.handleFetchError(error)
                     }
                 },
                 receiveValue: { [weak self] articles in
-                    self?.articles.append(contentsOf: articles)
+                    if !articles.isEmpty {
+                        self?.articles.append(contentsOf: articles)
+                        self?.hasError = false
+                        self?.errorMessage = nil
+                    } else {
+                        self?.handleEmptyResult()
+                    }
                 }
             )
             .store(in: &cancellables)
@@ -74,7 +110,11 @@ class WikipediaService: ObservableObject {
                 .eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: url)
+        var request = URLRequest(url: url)
+        request.timeoutInterval = requestTimeout
+        request.setValue("WikiShorts/1.0", forHTTPHeaderField: "User-Agent")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
             .decode(type: RandomArticleResponse.self, decoder: JSONDecoder())
             .map { response in
@@ -86,6 +126,11 @@ class WikipediaService: ObservableObject {
                     fullURL: response.contentURLs.desktop.page
                 )
             }
+            .catch { [weak self] error -> AnyPublisher<WikipediaArticle, Error> in
+                print("⚠️ Failed to fetch article for \(self?.languageCode ?? "unknown"): \(error)")
+                // Try fallback to English if current language failed
+                return self?.fetchSingleRandomArticleWithFallback() ?? Fail(error: error).eraseToAnyPublisher()
+            }
             .eraseToAnyPublisher()
     }
     
@@ -94,6 +139,8 @@ class WikipediaService: ObservableObject {
     }
     
     func fetchTopicBasedArticles(count: Int = 10) {
+        guard !isLoading else { return }
+        
         isLoading = true
         errorMessage = nil
         hasError = false
@@ -109,19 +156,24 @@ class WikipediaService: ObservableObject {
         
         Publishers.MergeMany(publishers)
             .collect()
+            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
                     self?.isLoading = false
                     if case .failure(let error) = completion {
-                        self?.errorMessage = error.localizedDescription
-                        self?.hasError = true
-                        print("Wikipedia API Error: \(error)")
+                        self?.handleFetchError(error)
                     }
                 },
                 receiveValue: { [weak self] articleArrays in
                     let flattenedArticles = articleArrays.flatMap { $0 }
-                    self?.articles.append(contentsOf: flattenedArticles.shuffled())
+                    if !flattenedArticles.isEmpty {
+                        self?.articles.append(contentsOf: flattenedArticles.shuffled())
+                        self?.hasError = false
+                        self?.errorMessage = nil
+                    } else {
+                        self?.handleEmptyResult()
+                    }
                 }
             )
             .store(in: &cancellables)
@@ -190,7 +242,11 @@ class WikipediaService: ObservableObject {
             return fetchSingleRandomArticle()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: url)
+        var request = URLRequest(url: url)
+        request.timeoutInterval = requestTimeout
+        request.setValue("WikiShorts/1.0", forHTTPHeaderField: "User-Agent")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
             .decode(type: RandomArticleResponse.self, decoder: JSONDecoder())
             .map { response in
@@ -210,8 +266,39 @@ class WikipediaService: ObservableObject {
     
     
     
+    private func checkForLanguageChangeAndRefresh() {
+        let newLanguage = selectedLanguage
+        
+        if newLanguage != currentLanguage {
+            print("🔄 Language changed: \(currentLanguage) -> \(newLanguage)")
+            currentLanguage = newLanguage
+            refreshArticles()
+        }
+    }
+    
+    private func checkForTopicsChangeAndRefresh() {
+        let newTopics = selectedTopics
+        
+        if newTopics != currentTopics {
+            print("🔄 Topics changed: \(currentTopics) -> \(newTopics)")
+            currentTopics = newTopics
+            refreshArticles()
+        }
+    }
+    
     private func refreshArticles() {
+        print("🔄 Refreshing articles for language: \(selectedLanguage), topics: \(selectedTopics)")
+        
+        // Cancel any existing requests
+        cancellables.removeAll()
+        
+        // Clear state
         articles.removeAll()
+        isLoading = false
+        hasError = false
+        errorMessage = nil
+        
+        // Fetch new articles
         fetchTopicBasedArticles()
     }
     
@@ -255,7 +342,11 @@ class WikipediaService: ObservableObject {
                 throw URLError(.badURL)
             }
             
-            let (data, _) = try await URLSession.shared.data(from: url)
+            var request = URLRequest(url: url)
+            request.timeoutInterval = requestTimeout
+            request.setValue("WikiShorts/1.0", forHTTPHeaderField: "User-Agent")
+            
+            let (data, _) = try await URLSession.shared.data(for: request)
             
             // Check if task was cancelled
             if Task.isCancelled { return }
@@ -315,7 +406,11 @@ class WikipediaService: ObservableObject {
             throw URLError(.badURL)
         }
         
-        let (data, _) = try await URLSession.shared.data(from: url)
+        var request = URLRequest(url: url)
+        request.timeoutInterval = requestTimeout
+        request.setValue("WikiShorts/1.0", forHTTPHeaderField: "User-Agent")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
         let response = try JSONDecoder().decode(RandomArticleResponse.self, from: data)
         
         return WikipediaArticle(
@@ -330,6 +425,83 @@ class WikipediaService: ObservableObject {
     func clearSearchResults() {
         searchResults = []
         searchTask?.cancel()
+    }
+    
+    private func handleFetchError(_ error: Error) {
+        print("🚨 Wikipedia fetch error: \(error)")
+        
+        // Check if it's a timeout error
+        if error.localizedDescription.contains("timed out") || error.localizedDescription.contains("timeout") {
+            errorMessage = "Request timed out. Please check your connection."
+        } else {
+            errorMessage = error.localizedDescription
+        }
+        
+        hasError = true
+        
+        // Try fallback to English if we're not already using English
+        if languageCode != "en" {
+            print("🔄 Attempting fallback to English...")
+            fallbackToEnglish()
+        }
+    }
+    
+    private func handleEmptyResult() {
+        errorMessage = "No articles found for this language"
+        hasError = true
+        
+        // Try fallback to English if we're not already using English
+        if languageCode != "en" {
+            print("🔄 No articles found, attempting fallback to English...")
+            fallbackToEnglish()
+        }
+    }
+    
+    private func fallbackToEnglish() {
+        // Temporarily override language to English
+        let originalLanguage = selectedLanguage
+        
+        // Set English as fallback
+        UserDefaults.standard.set(AppLanguage.english.displayName, forKey: "selectedArticleLanguage")
+        
+        // Fetch articles in English
+        isLoading = true
+        hasError = false
+        errorMessage = nil
+        
+        fetchRandomArticles(count: 5)
+        
+        // Restore original language setting after 2 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            UserDefaults.standard.set(originalLanguage, forKey: "selectedArticleLanguage")
+        }
+    }
+    
+    private func fetchSingleRandomArticleWithFallback() -> AnyPublisher<WikipediaArticle, Error> {
+        let fallbackURL = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
+        
+        guard let url = URL(string: fallbackURL) else {
+            return Fail(error: URLError(.badURL))
+                .eraseToAnyPublisher()
+        }
+        
+        var request = URLRequest(url: url)
+        request.timeoutInterval = requestTimeout
+        request.setValue("WikiShorts/1.0", forHTTPHeaderField: "User-Agent")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .map(\.data)
+            .decode(type: RandomArticleResponse.self, decoder: JSONDecoder())
+            .map { response in
+                WikipediaArticle(
+                    title: response.title,
+                    extract: response.extract,
+                    pageId: response.pageId,
+                    imageURL: response.thumbnail?.source,
+                    fullURL: response.contentURLs.desktop.page
+                )
+            }
+            .eraseToAnyPublisher()
     }
 }
 

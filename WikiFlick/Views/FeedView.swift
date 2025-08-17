@@ -79,6 +79,14 @@ struct FeedView: View {
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("RefreshFeed"))) { _ in
             refreshFeed()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .articleLanguageChanged)) { _ in
+            // Article language changed, refresh feed
+            refreshFeed()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .topicsChanged)) { _ in
+            // Topics changed, refresh feed
+            refreshFeed()
+        }
     }
     
     private func refreshFeed() {

@@ -2,6 +2,8 @@ import SwiftUI
 
 extension Notification.Name {
     static let settingsChanged = Notification.Name("settingsChanged")
+    static let articleLanguageChanged = Notification.Name("articleLanguageChanged")
+    static let topicsChanged = Notification.Name("topicsChanged")
 }
 
 struct SettingsView: View {
@@ -194,6 +196,9 @@ struct SettingsView: View {
                 await storeManager.loadProducts()
             }
         }
+        .onDisappear {
+            saveSettings()
+        }
         .sheet(isPresented: $showingLanguageSelection) {
             LanguageSelectionView()
         }
@@ -224,6 +229,8 @@ struct SettingsView: View {
     private func saveSettings() {
         UserDefaults.standard.set(selectedArticleLanguage, forKey: "selectedArticleLanguage")
         UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
+        
+        // No general notification needed - specific notifications are sent when needed
     }
     
     private func getTopicDisplayText() -> String {
@@ -377,7 +384,7 @@ struct TopicSelectionView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(AppLanguageManager.shared.localizedString(key: "done")) {
                         UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
-                        NotificationCenter.default.post(name: .settingsChanged, object: nil)
+                        NotificationCenter.default.post(name: .topicsChanged, object: nil)
                         dismiss()
                     }
                 }
@@ -394,10 +401,11 @@ struct ArticleLanguageSelectionView: View {
     @State private var searchText = ""
     
     private var filteredLanguages: [AppLanguage] {
+        let workingLanguages = AppLanguage.workingLanguages
         if searchText.isEmpty {
-            return AppLanguage.allCases
+            return workingLanguages
         } else {
-            return AppLanguage.allCases.filter { language in
+            return workingLanguages.filter { language in
                 language.displayName.localizedCaseInsensitiveContains(searchText)
             }
         }
@@ -427,7 +435,7 @@ struct ArticleLanguageSelectionView: View {
                         Button(action: {
                             selectedArticleLanguage = language.displayName
                             UserDefaults.standard.set(language.displayName, forKey: "selectedArticleLanguage")
-                            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+                            NotificationCenter.default.post(name: .articleLanguageChanged, object: nil)
                             dismiss()
                         }) {
                             HStack {

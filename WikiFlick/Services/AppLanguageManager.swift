@@ -417,6 +417,16 @@ enum AppLanguage: String, CaseIterable {
             return "🇲🇳"
         }
     }
+    
+    var isWorkingWikipedia: Bool {
+        // These languages have been tested and don't work with Wikipedia API
+        let failedLanguages: Set<String> = ["lzh", "yue"]
+        return !failedLanguages.contains(self.rawValue)
+    }
+    
+    static var workingLanguages: [AppLanguage] {
+        return AppLanguage.allCases.filter { $0.isWorkingWikipedia }
+    }
 }
 
 class AppLanguageManager: ObservableObject {

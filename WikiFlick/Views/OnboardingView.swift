@@ -10,7 +10,7 @@ struct OnboardingView: View {
     @Binding var showOnboarding: Bool
     
     private let appLanguages = ["English", "Türkçe", "Deutsch", "Français", "Italiano", "中文"]
-    private let articleLanguages = ["English", "Turkish", "German", "French", "Italian", "Chinese", "Spanish", "Japanese"]
+    private let articleLanguages = AppLanguage.workingLanguages.prefix(8).map { $0.displayName }
     private let topics = [
         "All Topics",
         "General Reference", 
