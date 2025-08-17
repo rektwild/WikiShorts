@@ -237,28 +237,58 @@ struct SettingsView: View {
 struct LanguageSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var languageManager = AppLanguageManager.shared
+    @State private var searchText = ""
+    
+    private var filteredLanguages: [AppLanguage] {
+        if searchText.isEmpty {
+            return AppLanguage.allCases
+        } else {
+            return AppLanguage.allCases.filter { language in
+                language.displayName.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(AppLanguage.allCases, id: \.self) { language in
-                    Button(action: {
-                        languageManager.currentLanguage = language
-                        NotificationCenter.default.post(name: .settingsChanged, object: nil)
-                        dismiss()
-                    }) {
-                        HStack {
-                            Text(language.flag)
-                            Text(language.displayName)
-                            Spacer()
-                            if language == languageManager.currentLanguage {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.blue)
+            VStack(spacing: 0) {
+                // Search bar
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    
+                    TextField(languageManager.localizedString(key: "search"), text: $searchText)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .foregroundColor(.primary)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(Color(.systemGray6))
+                .cornerRadius(10)
+                .padding(.horizontal)
+                .padding(.top, 8)
+                
+                List {
+                    ForEach(filteredLanguages, id: \.self) { language in
+                        Button(action: {
+                            languageManager.currentLanguage = language
+                            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+                            dismiss()
+                        }) {
+                            HStack {
+                                Text(language.flag)
+                                Text(language.displayName)
+                                Spacer()
+                                if language == languageManager.currentLanguage {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
                             }
                         }
+                        .foregroundColor(.primary)
                     }
-                    .foregroundColor(.primary)
                 }
+                .listStyle(PlainListStyle())
             }
             .navigationTitle(languageManager.localizedString(key: "language"))
             .navigationBarTitleDisplayMode(.inline)
@@ -360,29 +390,59 @@ struct ArticleLanguageSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var selectedArticleLanguage: String
     @StateObject private var languageManager = AppLanguageManager.shared
+    @State private var searchText = ""
+    
+    private var filteredLanguages: [AppLanguage] {
+        if searchText.isEmpty {
+            return AppLanguage.allCases
+        } else {
+            return AppLanguage.allCases.filter { language in
+                language.displayName.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(AppLanguage.allCases, id: \.self) { language in
-                    Button(action: {
-                        selectedArticleLanguage = language.displayName
-                        UserDefaults.standard.set(language.displayName, forKey: "selectedArticleLanguage")
-                        NotificationCenter.default.post(name: .settingsChanged, object: nil)
-                        dismiss()
-                    }) {
-                        HStack {
-                            Text(language.flag)
-                            Text(language.displayName)
-                            Spacer()
-                            if language.displayName == selectedArticleLanguage {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.blue)
+            VStack(spacing: 0) {
+                // Search bar
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    
+                    TextField(languageManager.localizedString(key: "search"), text: $searchText)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .foregroundColor(.primary)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(Color(.systemGray6))
+                .cornerRadius(10)
+                .padding(.horizontal)
+                .padding(.top, 8)
+                
+                List {
+                    ForEach(filteredLanguages, id: \.self) { language in
+                        Button(action: {
+                            selectedArticleLanguage = language.displayName
+                            UserDefaults.standard.set(language.displayName, forKey: "selectedArticleLanguage")
+                            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+                            dismiss()
+                        }) {
+                            HStack {
+                                Text(language.flag)
+                                Text(language.displayName)
+                                Spacer()
+                                if language.displayName == selectedArticleLanguage {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
                             }
                         }
+                        .foregroundColor(.primary)
                     }
-                    .foregroundColor(.primary)
                 }
+                .listStyle(PlainListStyle())
             }
             .navigationTitle(languageManager.localizedString(key: "article_language"))
             .navigationBarTitleDisplayMode(.inline)
