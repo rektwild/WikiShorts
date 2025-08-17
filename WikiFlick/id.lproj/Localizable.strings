@@ -45,4 +45,6 @@
 "free_trial_then_price" = "2 minggu gratis, kemudian Rp 75.000/bulan";
 "error" = "Error";
 "rewarded_ad" = "Iklan berhadiah";
-"no_ad_found" = "Tidak ada iklan tersedia";
+"no_ad_found" = "Tidak ada iklan tersedia";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

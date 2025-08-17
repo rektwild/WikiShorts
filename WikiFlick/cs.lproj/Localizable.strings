@@ -12,4 +12,6 @@
 "free_trial_then_price" = "2 týdny zdarma, poté 99 Kč/měsíc";
 "error" = "Chyba";
 "rewarded_ad" = "Odměněná reklama";
-"no_ad_found" = "Žádná reklama k dispozici";
+"no_ad_found" = "Žádná reklama k dispozici";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

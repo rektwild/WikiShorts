@@ -6,4 +6,6 @@
 "topics" = "Themata";
 "selected" = "selectum";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "Error";
+"error" = "Error";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

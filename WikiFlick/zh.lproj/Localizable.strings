@@ -71,3 +71,6 @@
 "error" = "错误";
 "rewarded_ad" = "奖励广告";
 "no_ad_found" = "没有可用广告";
+"search" = "搜索";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "发现精彩的维基百科新文章！";

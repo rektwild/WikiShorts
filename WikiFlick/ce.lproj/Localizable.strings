@@ -37,4 +37,6 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "error" = "Гӏалат";
 "rewarded_ad" = "Наградни реклама";
-"no_ad_found" = "Реклама цакарийна";
+"no_ad_found" = "Реклама цакарийна";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

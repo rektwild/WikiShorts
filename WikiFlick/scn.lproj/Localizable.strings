@@ -6,4 +6,6 @@
 "topics" = "Argumenti";
 "selected" = "scigghiutu";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "Erruri";
+"error" = "Erruri";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

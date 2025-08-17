@@ -6,4 +6,6 @@
 "topics" = "Ábhair";
 "selected" = "roghnaithe";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "Earráid";
+"error" = "Earráid";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

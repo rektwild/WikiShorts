@@ -71,3 +71,6 @@
 "error" = "Error";
 "rewarded_ad" = "Anuncio con recompensa";
 "no_ad_found" = "No hay anuncios disponibles";
+"search" = "Buscar";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "¡Descubre nuevos artículos fascinantes de Wikipedia!";

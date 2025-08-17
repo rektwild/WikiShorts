@@ -71,3 +71,6 @@
 "error" = "エラー";
 "rewarded_ad" = "リワード広告";
 "no_ad_found" = "利用可能な広告がありません";
+"search" = "検索";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "魅力的な新しいWikipedia記事を発見しよう！";

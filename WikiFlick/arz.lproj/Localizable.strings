@@ -70,4 +70,6 @@
 "free_trial_then_price" = "أسبوعين مجاني، بعدين 50 جنيه/شهر";
 "error" = "خطأ";
 "rewarded_ad" = "إعلان بمكافأة";
-"no_ad_found" = "مفيش إعلانات متاحة";
+"no_ad_found" = "مفيش إعلانات متاحة";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "اكتشف مقالات ويكيبيديا جديدة ومسلية!";

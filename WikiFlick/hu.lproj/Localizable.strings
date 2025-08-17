@@ -12,4 +12,6 @@
 "free_trial_then_price" = "2 hét ingyenes, majd 1.990 Ft/hó";
 "error" = "Hiba";
 "rewarded_ad" = "Jutalmazott hirdetés";
-"no_ad_found" = "Nincs elérhető hirdetés";
+"no_ad_found" = "Nincs elérhető hirdetés";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

@@ -45,4 +45,6 @@
 "free_trial_then_price" = "2주 무료 체험, 이후 월 5,500원";
 "error" = "오류";
 "rewarded_ad" = "리워드 광고";
-"no_ad_found" = "사용 가능한 광고 없음";
+"no_ad_found" = "사용 가능한 광고 없음";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

@@ -6,4 +6,6 @@
 "topics" = "หัวข้อ";
 "selected" = "เลือกแล้ว";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "ข้อผิดพลาด";
+"error" = "ข้อผิดพลาด";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

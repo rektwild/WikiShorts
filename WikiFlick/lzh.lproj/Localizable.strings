@@ -6,4 +6,6 @@
 "topics" = "題";
 "selected" = "擇";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "誤";
+"error" = "誤";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

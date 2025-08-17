@@ -6,4 +6,6 @@
 "topics" = "Mowzuklar";
 "selected" = "saýlanan";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "Ýalňyşlyk";
+"error" = "Ýalňyşlyk";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

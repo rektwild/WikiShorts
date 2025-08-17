@@ -45,4 +45,6 @@
 "free_trial_then_price" = "2 setmanes gratuïtes, després 4,99€/mes";
 "error" = "Error";
 "rewarded_ad" = "Anunci amb recompensa";
-"no_ad_found" = "Cap anunci disponible";
+"no_ad_found" = "Cap anunci disponible";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

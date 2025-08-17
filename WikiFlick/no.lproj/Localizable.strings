@@ -45,4 +45,6 @@
 "free_trial_then_price" = "2 uker gratis, deretter 49 kr/måned";
 "error" = "Feil";
 "rewarded_ad" = "Belønningsannonse";
-"no_ad_found" = "Ingen annonse tilgjengelig";
+"no_ad_found" = "Ingen annonse tilgjengelig";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

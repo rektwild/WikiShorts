@@ -45,4 +45,6 @@
 "free_trial_then_price" = "۲ هفته رایگان، سپس ۲۰۰,۰۰۰ تومان/ماه";
 "error" = "خطا";
 "rewarded_ad" = "تبلیغات جایزه‌دار";
-"no_ad_found" = "تبلیغی در دسترس نیست";
+"no_ad_found" = "تبلیغی در دسترس نیست";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

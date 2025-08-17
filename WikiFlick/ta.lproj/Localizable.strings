@@ -6,4 +6,6 @@
 "topics" = "தலைப்புகள்";
 "selected" = "தேர்ந்தெடுக்கப்பட்டது";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "பிழை";
+"error" = "பிழை";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

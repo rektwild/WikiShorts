@@ -70,4 +70,6 @@
 "free_trial_then_price" = "2 tygodnie za darmo, następnie 19,99zł/miesiąc";
 "error" = "Błąd";
 "rewarded_ad" = "Reklama z nagrodą";
-"no_ad_found" = "Brak dostępnych reklam";
+"no_ad_found" = "Brak dostępnych reklam";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

@@ -6,4 +6,6 @@
 "topics" = "అంశాలు";
 "selected" = "ఎంచుకున్నవి";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "లోపం";
+"error" = "లోపం";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

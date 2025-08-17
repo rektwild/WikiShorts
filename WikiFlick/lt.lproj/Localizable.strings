@@ -6,4 +6,6 @@
 "topics" = "Temos";
 "selected" = "pasirinkta";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "Klaida";
+"error" = "Klaida";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

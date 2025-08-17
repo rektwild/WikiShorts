@@ -45,4 +45,6 @@
 "free_trial_then_price" = "2 недеље бесплатно, затим 549 дин/месец";
 "error" = "Грешка";
 "rewarded_ad" = "Награђена реклама";
-"no_ad_found" = "Нема доступних реклама";
+"no_ad_found" = "Нема доступних реклама";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

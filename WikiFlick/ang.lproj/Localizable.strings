@@ -6,4 +6,6 @@
 "topics" = "Ambihtscipe";
 "selected" = "ġecoren";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "Gedwola";
+"error" = "Gedwola";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

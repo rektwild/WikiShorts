@@ -45,4 +45,6 @@
 "free_trial_then_price" = "2 viikkoa ilmaiseksi, sitten 4,99€/kk";
 "error" = "Virhe";
 "rewarded_ad" = "Palkintomainos";
-"no_ad_found" = "Mainosta ei löytynyt";
+"no_ad_found" = "Mainosta ei löytynyt";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

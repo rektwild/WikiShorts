@@ -45,4 +45,6 @@
 "free_trial_then_price" = "Dùng thử 2 tuần miễn phí, sau đó 120.000₫/tháng";
 "error" = "Lỗi";
 "rewarded_ad" = "Quảng cáo có thưởng";
-"no_ad_found" = "Không có quảng cáo";
+"no_ad_found" = "Không có quảng cáo";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

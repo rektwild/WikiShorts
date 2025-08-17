@@ -6,4 +6,6 @@
 "topics" = "വിഷയങ്ങൾ";
 "selected" = "തിരഞ്ഞെടുത്തത്";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "പിശക്";
+"error" = "പിശക്";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

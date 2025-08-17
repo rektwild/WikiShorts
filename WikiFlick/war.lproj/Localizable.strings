@@ -45,4 +45,6 @@
 "free_trial_then_price" = "2 semana nga libre, unya ₱250/buwan";
 "error" = "Sayup";
 "rewarded_ad" = "Rewarded Ad";
-"no_ad_found" = "Waray Ad nga Nakita";
+"no_ad_found" = "Waray Ad nga Nakita";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

@@ -7,6 +7,7 @@ extension Notification.Name {
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var languageManager = AppLanguageManager.shared
+    @StateObject private var notificationManager = NotificationManager.shared
     @State private var showingLanguageSelection = false
     @State private var selectedTopics: Set<String> = ["all_topics"]
     @State private var showingTopicSelection = false
@@ -70,7 +71,7 @@ struct SettingsView: View {
                         Image(systemName: "bell")
                         Text(languageManager.localizedString(key: "notifications"))
                         Spacer()
-                        Toggle("", isOn: .constant(true))
+                        Toggle("", isOn: $notificationManager.isNotificationEnabled)
                     }
                     
                     Button(action: {

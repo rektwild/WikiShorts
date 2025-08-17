@@ -12,4 +12,6 @@
 "free_trial_then_price" = "2 שבועות חינם, אחר כך ₪18/חודש";
 "error" = "שגיאה";
 "rewarded_ad" = "פרסומת עם תגמול";
-"no_ad_found" = "אין פרסומת זמינה";
+"no_ad_found" = "אין פרסומת זמינה";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

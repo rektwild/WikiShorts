@@ -12,4 +12,6 @@
 "free_trial_then_price" = "2 minggu percuma, kemudian RM 20/bulan";
 "error" = "Ralat";
 "rewarded_ad" = "Iklan ganjaran";
-"no_ad_found" = "Tiada iklan tersedia";
+"no_ad_found" = "Tiada iklan tersedia";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

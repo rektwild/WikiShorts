@@ -69,5 +69,8 @@
 "restore_purchases" = "Восстановить покупки";
 "free_trial_then_price" = "2 недели бесплатно, затем 349₽/месяц";
 "error" = "Ошибка";
+"search" = "Поиск";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Откройте для себя новые увлекательные статьи Википедии!";
 "rewarded_ad" = "Вознаграждающая реклама";
 "no_ad_found" = "Реклама недоступна";

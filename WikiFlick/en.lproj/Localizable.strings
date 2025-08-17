@@ -72,3 +72,5 @@
 "rewarded_ad" = "Rewarded Ad";
 "no_ad_found" = "No Ad Available";
 "search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

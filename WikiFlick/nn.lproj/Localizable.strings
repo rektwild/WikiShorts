@@ -6,4 +6,6 @@
 "topics" = "Emne";
 "selected" = "valt";
 "wikishorts_pro" = "WikiShorts PRO";
-"error" = "Feil";
+"error" = "Feil";"search" = "Search";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";

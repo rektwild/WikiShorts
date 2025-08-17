@@ -72,3 +72,5 @@
 "rewarded_ad" = "Ödüllü Reklam";
 "no_ad_found" = "Reklam Bulunamadı";
 "search" = "Ara";
+"daily_reminder_title" = "WikiShorts";
+"daily_reminder_body" = "Yeni ilginç Wikipedia makalelerini keşfet!";

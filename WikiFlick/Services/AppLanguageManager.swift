@@ -424,6 +424,8 @@ class AppLanguageManager: ObservableObject {
         didSet {
             UserDefaults.standard.set(currentLanguage.rawValue, forKey: "app_language")
             updateLocalizations()
+            // Dil değişikliklerinde bildirimleri yenile
+            NotificationManager.shared.refreshNotifications()
         }
     }
     

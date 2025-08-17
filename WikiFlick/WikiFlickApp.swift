@@ -15,6 +15,9 @@ struct WikiShortsApp: App {
     init() {
         // AdMob'u başlat
         let _ = AdMobManager.shared
+        
+        // Bildirim sistemini başlat
+        let _ = NotificationManager.shared
     }
     
     var body: some Scene {
@@ -23,6 +26,10 @@ struct WikiShortsApp: App {
                 OnboardingView(showOnboarding: $showOnboarding)
             } else {
                 ContentView()
+                    .onAppear {
+                        // Uygulama her açıldığında bildirimleri yenile
+                        NotificationManager.shared.refreshNotifications()
+                    }
             }
         }
     }
