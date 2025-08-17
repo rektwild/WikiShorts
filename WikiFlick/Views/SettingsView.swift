@@ -12,6 +12,8 @@ struct SettingsView: View {
     @State private var showingTopicSelection = false
     @State private var selectedArticleLanguage = "English"
     @State private var showingArticleLanguageSelection = false
+    @State private var showingPaywall = false
+    @StateObject private var storeManager = StoreManager()
     
     private let languages = ["English", "Türkçe", "Deutsch", "Français", "Italiano", "中文"]
     private let topics = [
@@ -35,6 +37,35 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
+                Section("Status") {
+                    HStack {
+                        Image(systemName: storeManager.isPurchased("wiki_m") ? "crown.fill" : "person.circle")
+                            .foregroundColor(storeManager.isPurchased("wiki_m") ? .yellow : .gray)
+                        Text("Account Status")
+                        Spacer()
+                        Text(storeManager.isPurchased("wiki_m") ? "PRO" : "FREE")
+                            .foregroundColor(storeManager.isPurchased("wiki_m") ? .yellow : .secondary)
+                            .font(.system(size: 14, weight: .semibold))
+                    }
+                    
+                    if !storeManager.isPurchased("wiki_m") {
+                        Button(action: {
+                            showingPaywall = true
+                        }) {
+                            HStack {
+                                Image(systemName: "crown")
+                                    .foregroundColor(.yellow)
+                                Text("Go Premium")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                            }
+                        }
+                    }
+                }
+                
                 Section("Preferences") {
                     HStack {
                         Image(systemName: "bell")
@@ -94,6 +125,40 @@ struct SettingsView: View {
                     .foregroundColor(.primary)
                 }
                 
+                Section("Legal") {
+                    Button(action: {
+                        if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                            UIApplication.shared.open(url)
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "doc.text")
+                            Text("Terms of Service")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                        }
+                    }
+                    .foregroundColor(.primary)
+                    
+                    Button(action: {
+                        if let url = URL(string: "https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d") {
+                            UIApplication.shared.open(url)
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "hand.raised")
+                            Text("Privacy Policy")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                        }
+                    }
+                    .foregroundColor(.primary)
+                }
+                
                 Section("About") {
                     HStack {
                         Image(systemName: "info.circle")
@@ -125,6 +190,9 @@ struct SettingsView: View {
         }
         .onAppear {
             loadSettings()
+            Task {
+                await storeManager.loadProducts()
+            }
         }
         .sheet(isPresented: $showingLanguageSelection) {
             LanguageSelectionView(selectedLanguage: $selectedLanguage)
@@ -134,6 +202,9 @@ struct SettingsView: View {
         }
         .sheet(isPresented: $showingArticleLanguageSelection) {
             ArticleLanguageSelectionView(selectedArticleLanguage: $selectedArticleLanguage)
+        }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView(isPresented: $showingPaywall)
         }
         .preferredColorScheme(.dark)
     }

@@ -37,7 +37,7 @@ struct PaywallView: View {
         } message: {
             Text(alertMessage)
         }
-        .onChange(of: storeManager.errorMessage) { errorMessage in
+        .onChange(of: storeManager.errorMessage) { _, errorMessage in
             if !errorMessage.isEmpty {
                 alertMessage = errorMessage
                 showingAlert = true
@@ -213,13 +213,17 @@ struct PaywallView: View {
         VStack(spacing: 8) {
             HStack(spacing: 20) {
                 Button("Terms of Service") {
-                    // Handle terms
+                    if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                        UIApplication.shared.open(url)
+                    }
                 }
                 .font(.system(size: 14))
                 .foregroundColor(.white.opacity(0.6))
                 
                 Button("Privacy Policy") {
-                    // Handle privacy
+                    if let url = URL(string: "https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d") {
+                        UIApplication.shared.open(url)
+                    }
                 }
                 .font(.system(size: 14))
                 .foregroundColor(.white.opacity(0.6))

@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import AppTrackingTransparency
 
 @main
 struct WikiFlickApp: App {
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+    
+    init() {
+        // AdMob'u başlat
+        let _ = AdMobManager.shared
+    }
     
     var body: some Scene {
         WindowGroup {

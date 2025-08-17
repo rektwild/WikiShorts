@@ -1,8 +1,21 @@
 import SwiftUI
+import GoogleMobileAds
+
+extension Array {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
+enum FeedItem {
+    case article(WikipediaArticle)
+    case nativeAd(GADNativeAd)
+}
 
 struct FeedView: View {
     @StateObject private var wikipediaService = WikipediaService()
     @State private var currentIndex = 0
+    private let adMobManager = AdMobManager.shared
     
     var body: some View {
         ZStack {
@@ -20,9 +33,18 @@ struct FeedView: View {
                 }
             } else {
                 TabView(selection: $currentIndex) {
-                    ForEach(Array(wikipediaService.articles.enumerated()), id: \.element.id) { index, article in
-                        ArticleCardView(article: article)
-                            .tag(index)
+                    ForEach(Array(createFeedItems().enumerated()), id: \.offset) { index, item in
+                        Group {
+                            switch item {
+                            case .article(let article):
+                                ArticleCardView(article: article, onNavigateToTop: {
+                                    currentIndex = 0
+                                })
+                            case .nativeAd(let nativeAd):
+                                NativeAdCardView(nativeAd: nativeAd)
+                            }
+                        }
+                        .tag(index)
                     }
                 }
                 #if os(iOS)
@@ -30,8 +52,18 @@ struct FeedView: View {
                 #endif
                 .ignoresSafeArea()
                 .onChange(of: currentIndex) { _, newIndex in
-                    if newIndex >= wikipediaService.articles.count - 2 {
+                    let feedItems = createFeedItems()
+                    if newIndex >= feedItems.count - 2 {
                         wikipediaService.loadMoreArticles()
+                    }
+                    
+                    // Only count articles, not ads, for interstitial logic
+                    if case .article(_) = feedItems[safe: newIndex] {
+                        if adMobManager.shouldShowInterstitialAd() {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                adMobManager.showInterstitialAd()
+                            }
+                        }
                     }
                 }
             }
@@ -44,12 +76,33 @@ struct FeedView: View {
         .refreshable {
             refreshFeed()
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("RefreshFeed"))) { _ in
+            refreshFeed()
+        }
     }
     
     private func refreshFeed() {
         wikipediaService.articles.removeAll()
         currentIndex = 0
+        adMobManager.resetArticleCount()
         wikipediaService.fetchTopicBasedArticles()
+    }
+    
+    private func createFeedItems() -> [FeedItem] {
+        var feedItems: [FeedItem] = []
+        
+        for (index, article) in wikipediaService.articles.enumerated() {
+            feedItems.append(.article(article))
+            
+            // Add native ad every 5 articles
+            if adMobManager.shouldShowNativeAd(forArticleIndex: index) {
+                if let nativeAd = adMobManager.currentNativeAd {
+                    feedItems.append(.nativeAd(nativeAd))
+                }
+            }
+        }
+        
+        return feedItems
     }
 }
 

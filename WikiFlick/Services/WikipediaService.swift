@@ -6,8 +6,11 @@ class WikipediaService: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var hasError = false
+    @Published var searchResults: [SearchResult] = []
+    @Published var isSearching = false
     
     private var cancellables = Set<AnyCancellable>()
+    private var searchTask: Task<Void, Never>?
     
     init() {
         NotificationCenter.default.publisher(for: .settingsChanged)
@@ -217,7 +220,122 @@ class WikipediaService: ObservableObject {
         fetchTopicBasedArticles()
     }
     
+    func searchWikipedia(query: String) {
+        guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            searchResults = []
+            return
+        }
+        
+        // Cancel previous search task
+        searchTask?.cancel()
+        
+        searchTask = Task {
+            await performSearch(query: query)
+        }
+    }
     
+    @MainActor
+    private func performSearch(query: String) async {
+        isSearching = true
+        
+        do {
+            // Add small delay for debouncing
+            try await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+            
+            // Check if task was cancelled
+            if Task.isCancelled { return }
+            
+            // Use the same opensearch API that gives us better results
+            let searchBaseURL = "https://\(languageCode).wikipedia.org/w/api.php"
+            var components = URLComponents(string: searchBaseURL)!
+            components.queryItems = [
+                URLQueryItem(name: "action", value: "opensearch"),
+                URLQueryItem(name: "search", value: query),
+                URLQueryItem(name: "limit", value: "5"),
+                URLQueryItem(name: "namespace", value: "0"),
+                URLQueryItem(name: "format", value: "json")
+            ]
+            
+            guard let url = components.url else {
+                throw URLError(.badURL)
+            }
+            
+            let (data, _) = try await URLSession.shared.data(from: url)
+            
+            // Check if task was cancelled
+            if Task.isCancelled { return }
+            
+            // Parse opensearch response [query, [titles], [descriptions], [urls]]
+            guard let jsonArray = try JSONSerialization.jsonObject(with: data) as? [Any],
+                  jsonArray.count >= 4,
+                  let titles = jsonArray[1] as? [String],
+                  let descriptions = jsonArray[2] as? [String],
+                  let urls = jsonArray[3] as? [String] else {
+                throw URLError(.cannotParseResponse)
+            }
+            
+            var results: [SearchResult] = []
+            for i in 0..<min(titles.count, descriptions.count, urls.count) {
+                let result = SearchResult(
+                    title: titles[i],
+                    description: descriptions[i],
+                    url: urls[i]
+                )
+                results.append(result)
+            }
+            
+            searchResults = results
+            isSearching = false
+            
+        } catch {
+            if !Task.isCancelled {
+                searchResults = []
+                isSearching = false
+            }
+        }
+    }
+    
+    func addSearchResultToFeed(_ searchResult: SearchResult) {
+        Task {
+            do {
+                let fullArticle = try await fetchFullArticleDetails(from: searchResult)
+                await MainActor.run {
+                    articles.insert(fullArticle, at: 0)
+                }
+            } catch {
+                // Fallback to basic article if full details fail
+                await MainActor.run {
+                    let article = searchResult.wikipediaArticle
+                    articles.insert(article, at: 0)
+                }
+            }
+        }
+    }
+    
+    func fetchFullArticleDetails(from searchResult: SearchResult) async throws -> WikipediaArticle {
+        let encodedTitle = searchResult.title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? searchResult.title
+        let urlString = "https://\(languageCode).wikipedia.org/api/rest_v1/page/summary/\(encodedTitle)"
+        
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let response = try JSONDecoder().decode(RandomArticleResponse.self, from: data)
+        
+        return WikipediaArticle(
+            title: response.title,
+            extract: response.extract.isEmpty ? searchResult.description : response.extract,
+            pageId: response.pageId,
+            imageURL: response.thumbnail?.source,
+            fullURL: response.contentURLs.desktop.page
+        )
+    }
+    
+    func clearSearchResults() {
+        searchResults = []
+        searchTask?.cancel()
+    }
 }
 
 struct RandomArticleResponse: Codable {
