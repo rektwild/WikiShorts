@@ -70,6 +70,7 @@
 "free_trial_then_price" = "2 semana nga libre, unya ₱250/buwan";
 "error" = "Sayup";
 "rewarded_ad" = "Rewarded Ad";
-"no_ad_found" = "Walay Ad nga Nakit-an";"search" = "Search";
+"no_ad_found" = "Walay Ad nga Nakit-an";
+"search" = "Pangita";
 "daily_reminder_title" = "WikiShorts";
-"daily_reminder_body" = "Discover new fascinating Wikipedia articles!";
+"daily_reminder_body" = "Diskobre ang bag-ong makapainteres nga mga artikulo sa Wikipedia!";
