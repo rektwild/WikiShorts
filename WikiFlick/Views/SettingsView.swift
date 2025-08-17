@@ -1,5 +1,9 @@
 import SwiftUI
 
+extension Notification.Name {
+    static let settingsChanged = Notification.Name("settingsChanged")
+}
+
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedLanguage = "English"
@@ -54,7 +58,6 @@ struct SettingsView: View {
                         }
                     }
                     .foregroundColor(.primary)
-                    
                 }
                 
                 Section("Wiki Article Preferences") {
@@ -120,7 +123,9 @@ struct SettingsView: View {
                 }
             }
         }
-        .preferredColorScheme(.dark)
+        .onAppear {
+            loadSettings()
+        }
         .sheet(isPresented: $showingLanguageSelection) {
             LanguageSelectionView(selectedLanguage: $selectedLanguage)
         }
@@ -130,6 +135,26 @@ struct SettingsView: View {
         .sheet(isPresented: $showingArticleLanguageSelection) {
             ArticleLanguageSelectionView(selectedArticleLanguage: $selectedArticleLanguage)
         }
+        .preferredColorScheme(.dark)
+    }
+    
+    private func loadSettings() {
+        selectedLanguage = UserDefaults.standard.string(forKey: "selectedAppLanguage") ?? "English"
+        selectedArticleLanguage = UserDefaults.standard.string(forKey: "selectedArticleLanguage") ?? "English"
+        
+        if let topicsArray = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] {
+            selectedTopics = Set(topicsArray)
+        }
+        
+        if selectedTopics.isEmpty {
+            selectedTopics = ["All Topics"]
+        }
+    }
+    
+    private func saveSettings() {
+        UserDefaults.standard.set(selectedLanguage, forKey: "selectedAppLanguage")
+        UserDefaults.standard.set(selectedArticleLanguage, forKey: "selectedArticleLanguage")
+        UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
     }
 }
 
@@ -145,6 +170,8 @@ struct LanguageSelectionView: View {
                 ForEach(languages, id: \.self) { language in
                     Button(action: {
                         selectedLanguage = language
+                        UserDefaults.standard.set(language, forKey: "selectedAppLanguage")
+                        NotificationCenter.default.post(name: .settingsChanged, object: nil)
                         dismiss()
                     }) {
                         HStack {
@@ -237,6 +264,8 @@ struct TopicSelectionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Done") {
+                        UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
+                        NotificationCenter.default.post(name: .settingsChanged, object: nil)
                         dismiss()
                     }
                 }
@@ -258,6 +287,8 @@ struct ArticleLanguageSelectionView: View {
                 ForEach(articleLanguages, id: \.self) { language in
                     Button(action: {
                         selectedArticleLanguage = language
+                        UserDefaults.standard.set(language, forKey: "selectedArticleLanguage")
+                        NotificationCenter.default.post(name: .settingsChanged, object: nil)
                         dismiss()
                     }) {
                         HStack {

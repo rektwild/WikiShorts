@@ -25,7 +25,9 @@ struct FeedView: View {
                             .tag(index)
                     }
                 }
+                #if os(iOS)
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                #endif
                 .ignoresSafeArea()
                 .onChange(of: currentIndex) { _, newIndex in
                     if newIndex >= wikipediaService.articles.count - 2 {
@@ -36,7 +38,7 @@ struct FeedView: View {
         }
         .onAppear {
             if wikipediaService.articles.isEmpty {
-                wikipediaService.fetchRandomArticles()
+                wikipediaService.fetchTopicBasedArticles()
             }
         }
         .refreshable {
@@ -47,7 +49,7 @@ struct FeedView: View {
     private func refreshFeed() {
         wikipediaService.articles.removeAll()
         currentIndex = 0
-        wikipediaService.fetchRandomArticles()
+        wikipediaService.fetchTopicBasedArticles()
     }
 }
 
