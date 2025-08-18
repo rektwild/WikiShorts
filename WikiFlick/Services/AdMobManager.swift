@@ -24,8 +24,12 @@ class AdMobManager: NSObject, ObservableObject {
     @Published var isRewardedAdLoaded = false
     
     private var articleCount = 0
-    private let interstitialAdFrequency = 8
+    private let interstitialAdFrequency = 5
     private let nativeAdFrequency = 5
+    
+    // Ad-free period tracking
+    private var adFreeStartTime: Date?
+    private let adFreeDurationMinutes: TimeInterval = 10 * 60 // 10 minutes in seconds
     
     override init() {
         super.init()
@@ -93,6 +97,11 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     func shouldShowInterstitialAd() -> Bool {
+        // Don't show ads during ad-free period
+        if isInAdFreePeriod() {
+            return false
+        }
+        
         articleCount += 1
         
         if articleCount % interstitialAdFrequency == 0 && isAdLoaded {
@@ -102,6 +111,11 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     func shouldShowNativeAd(forArticleIndex index: Int) -> Bool {
+        // Don't show ads during ad-free period
+        if isInAdFreePeriod() {
+            return false
+        }
+        
         let articleNumber = index + 1
         return articleNumber % nativeAdFrequency == 0 && isNativeAdLoaded
     }
@@ -149,15 +163,34 @@ class AdMobManager: NSObject, ObservableObject {
                 return
             }
             
-            rewardedAd.present(fromRootViewController: rootViewController) {
-                // Ödül verildi - 10 dakika reklamsız kullanım
-                // Bu kısmı daha sonra implement edebiliriz
+            rewardedAd.present(fromRootViewController: rootViewController) { [weak self] in
+                // Start 10-minute ad-free period
+                self?.startAdFreePeriod()
             }
         }
     }
     
     func resetArticleCount() {
         articleCount = 0
+    }
+    
+    // MARK: - Ad-free period methods
+    
+    private func startAdFreePeriod() {
+        adFreeStartTime = Date()
+    }
+    
+    private func isInAdFreePeriod() -> Bool {
+        guard let startTime = adFreeStartTime else { return false }
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        return elapsedTime < adFreeDurationMinutes
+    }
+    
+    func getRemainingAdFreeTime() -> TimeInterval? {
+        guard let startTime = adFreeStartTime else { return nil }
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        let remainingTime = adFreeDurationMinutes - elapsedTime
+        return remainingTime > 0 ? remainingTime : nil
     }
 }
 
