@@ -118,24 +118,55 @@ struct ArticleCardView: View {
     }
     
     private func asyncImageView(url: URL, geometry: GeometryProxy) -> some View {
-        AsyncImage(url: url) { image in
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: geometry.size.width - 10, height: geometry.size.height * 0.55)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .scaleEffect(imageScale)
-                .opacity(imageOpacity)
-                .onAppear {
-                    imageLoaded = true
-                    withAnimation(.easeOut(duration: 0.8)) {
-                        imageScale = 1.0
-                        imageOpacity = 1.0
+        Group {
+            // Check if image is already cached
+            if let cachedImage = wikipediaService.getCachedImage(for: url.absoluteString) {
+                Image(uiImage: cachedImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: geometry.size.width - 40)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .scaleEffect(imageScale)
+                    .opacity(imageOpacity)
+                    .onAppear {
+                        imageLoaded = true
+                        withAnimation(.easeOut(duration: 0.8)) {
+                            imageScale = 1.0
+                            imageOpacity = 1.0
+                        }
                     }
+            } else {
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geometry.size.width - 40)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .scaleEffect(imageScale)
+                        .opacity(imageOpacity)
+                        .onAppear {
+                            imageLoaded = true
+                            withAnimation(.easeOut(duration: 0.8)) {
+                                imageScale = 1.0
+                                imageOpacity = 1.0
+                            }
+                        }
+                } placeholder: {
+                    loadingPlaceholderView(geometry: geometry)
                 }
-        } placeholder: {
-            placeholderView(geometry: geometry)
+            }
         }
+    }
+    
+    private func loadingPlaceholderView(geometry: GeometryProxy) -> some View {
+        RoundedRectangle(cornerRadius: 20)
+            .fill(Color.gray.opacity(0.2))
+            .frame(width: geometry.size.width - 40, height: geometry.size.height * 0.4)
+            .overlay(
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .scaleEffect(1.5)
+            )
     }
     
     private func placeholderView(geometry: GeometryProxy) -> some View {
