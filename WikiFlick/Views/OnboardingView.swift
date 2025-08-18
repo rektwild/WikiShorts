@@ -2,15 +2,40 @@ import SwiftUI
 
 struct OnboardingView: View {
     @State private var currentStep = 0
-    @State private var selectedAppLanguage = "English"
-    @State private var selectedArticleLanguage = "English"
+    @State private var selectedAppLanguage: AppLanguage = .english
+    @State private var selectedArticleLanguage: AppLanguage = .english
     @State private var selectedTopics: Set<String> = ["All Topics"]
     @State private var notificationPermissionGranted = false
+    @State private var appLanguageSearchText = ""
+    @State private var articleLanguageSearchText = ""
+    
+    @StateObject private var appLanguageManager = AppLanguageManager.shared
+    @StateObject private var articleLanguageManager = ArticleLanguageManager.shared
     
     @Binding var showOnboarding: Bool
     
-    private let appLanguages = ["English", "Türkçe", "Deutsch", "Français", "Italiano", "中文"]
-    private let articleLanguages = AppLanguage.workingLanguages.prefix(8).map { $0.displayName }
+    private var appLanguages: [AppLanguage] {
+        let allLanguages = AppLanguage.allCases.sorted { $0.displayName < $1.displayName }
+        if appLanguageSearchText.isEmpty {
+            return allLanguages
+        } else {
+            return allLanguages.filter { language in
+                language.displayName.localizedCaseInsensitiveContains(appLanguageSearchText) ||
+                language.rawValue.localizedCaseInsensitiveContains(appLanguageSearchText)
+            }
+        }
+    }
+    private var articleLanguages: [AppLanguage] {
+        let allLanguages = articleLanguageManager.availableLanguages
+        if articleLanguageSearchText.isEmpty {
+            return allLanguages
+        } else {
+            return allLanguages.filter { language in
+                language.displayName.localizedCaseInsensitiveContains(articleLanguageSearchText) ||
+                language.rawValue.localizedCaseInsensitiveContains(articleLanguageSearchText)
+            }
+        }
+    }
     private let topics = [
         "All Topics",
         "General Reference", 
@@ -36,14 +61,30 @@ struct OnboardingView: View {
                 AppLanguageSelectionScreen()
             } else if currentStep == 1 {
                 NotificationPermissionScreen()
+            } else if currentStep == 2 {
+                ArticleLanguageSelectionScreen()
             } else {
-                ArticlePreferencesScreen()
+                TopicSelectionScreen()
             }
+        }
+        .onAppear {
+            initializeSelections()
+        }
+    }
+    
+    private func initializeSelections() {
+        // Initialize with current language manager settings
+        selectedAppLanguage = appLanguageManager.currentLanguage
+        selectedArticleLanguage = articleLanguageManager.selectedLanguage
+        
+        // Initialize topics from UserDefaults if available
+        if let savedTopics = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] {
+            selectedTopics = Set(savedTopics)
         }
     }
     
     private func AppLanguageSelectionScreen() -> some View {
-        VStack(spacing: 40) {
+        VStack(spacing: 24) {
             Spacer()
             
             VStack(spacing: 16) {
@@ -62,34 +103,63 @@ struct OnboardingView: View {
                     .multilineTextAlignment(.center)
             }
             
-            VStack(spacing: 12) {
-                ForEach(appLanguages, id: \.self) { language in
+            // Search bar
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.gray)
+                
+                TextField("Search languages...", text: $appLanguageSearchText)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .foregroundColor(.white)
+                
+                if !appLanguageSearchText.isEmpty {
                     Button(action: {
-                        selectedAppLanguage = language
+                        appLanguageSearchText = ""
                     }) {
-                        HStack {
-                            Text(language)
-                                .font(.system(size: 18, weight: .medium))
-                            Spacer()
-                            if language == selectedAppLanguage {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.blue)
-                            }
-                        }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 16)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.white.opacity(0.1))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(language == selectedAppLanguage ? Color.blue : Color.white.opacity(0.2), lineWidth: 2)
-                                )
-                        )
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.gray)
                     }
                 }
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .background(Color.white.opacity(0.1))
+            .cornerRadius(12)
+            .padding(.horizontal, 40)
+            
+            ScrollView {
+                VStack(spacing: 12) {
+                    ForEach(appLanguages, id: \.self) { language in
+                        Button(action: {
+                            selectedAppLanguage = language
+                        }) {
+                            HStack {
+                                Text(language.flag)
+                                    .font(.system(size: 20))
+                                Text(language.displayName)
+                                    .font(.system(size: 18, weight: .medium))
+                                Spacer()
+                                if language == selectedAppLanguage {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 16)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.white.opacity(0.1))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(language == selectedAppLanguage ? Color.blue : Color.white.opacity(0.2), lineWidth: 2)
+                                    )
+                            )
+                        }
+                    }
+                }
+            }
+            .frame(maxHeight: 380)
             .padding(.horizontal, 40)
             
             Spacer()
@@ -114,85 +184,178 @@ struct OnboardingView: View {
         }
     }
     
-    private func ArticlePreferencesScreen() -> some View {
+    private func ArticleLanguageSelectionScreen() -> some View {
+        VStack(spacing: 24) {
+            Spacer()
+            
+            VStack(spacing: 16) {
+                Image(systemName: "globe.americas")
+                    .font(.system(size: 60))
+                    .foregroundColor(.white)
+                
+                Text("Article Language")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                
+                Text("Choose the language for Wikipedia articles")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(.white.opacity(0.8))
+                    .multilineTextAlignment(.center)
+            }
+            
+            // Search bar
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.gray)
+                
+                TextField("Search languages...", text: $articleLanguageSearchText)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .foregroundColor(.white)
+                
+                if !articleLanguageSearchText.isEmpty {
+                    Button(action: {
+                        articleLanguageSearchText = ""
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.gray)
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .background(Color.white.opacity(0.1))
+            .cornerRadius(12)
+            .padding(.horizontal, 40)
+            
+            ScrollView {
+                VStack(spacing: 12) {
+                    ForEach(articleLanguages, id: \.self) { language in
+                        Button(action: {
+                            selectedArticleLanguage = language
+                        }) {
+                            HStack {
+                                Text(language.flag)
+                                    .font(.system(size: 20))
+                                Text(language.displayName)
+                                    .font(.system(size: 18, weight: .medium))
+                                Spacer()
+                                if language == selectedArticleLanguage {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 16)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.white.opacity(0.1))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(language == selectedArticleLanguage ? Color.blue : Color.white.opacity(0.2), lineWidth: 2)
+                                    )
+                            )
+                        }
+                    }
+                }
+            }
+            .frame(maxHeight: 380)
+            .padding(.horizontal, 40)
+            
+            Spacer()
+            
+            HStack(spacing: 16) {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        currentStep = 1
+                    }
+                }) {
+                    Text("Back")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.gray.opacity(0.3))
+                        )
+                }
+                
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        currentStep = 3
+                    }
+                }) {
+                    Text("Continue")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.white)
+                        )
+                }
+            }
+            .padding(.horizontal, 40)
+            .padding(.bottom, 60)
+        }
+    }
+    
+    private func TopicSelectionScreen() -> some View {
         VStack(spacing: 30) {
             Spacer()
             
             VStack(spacing: 16) {
-                Image("topic-select")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 160)
+                Image(systemName: "book.fill")
+                    .font(.system(size: 60))
+                    .foregroundColor(.white)
+                
+                Text("Choose Your Topics")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                
+                Text("Select topics you're interested in")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(.white.opacity(0.8))
+                    .multilineTextAlignment(.center)
             }
             
-            VStack(spacing: 24) {
-                // Article Language Section
-                VStack(alignment: .center, spacing: 12) {
-                    Text("Article Language")
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.white)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(articleLanguages, id: \.self) { language in
-                                Button(action: {
-                                    selectedArticleLanguage = language
-                                }) {
-                                    Text(language)
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(language == selectedArticleLanguage ? .black : .white)
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 10)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .fill(language == selectedArticleLanguage ? Color.white : Color.white.opacity(0.1))
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 20)
-                                                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                                                )
-                                        )
-                                }
-                            }
-                        }
-                        .padding(.trailing, 40)
-                    }
-                }
+            VStack(spacing: 12) {
+                Text("Interested Topics")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.white)
                 
-                // Topics Section
-                VStack(alignment: .center, spacing: 12) {
-                    Text("Interested Topics")
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.white)
-                    
-                    let chunkedTopics = topics.chunked(into: 3)
-                    
-                    VStack(spacing: 12) {
-                        ForEach(0..<chunkedTopics.count, id: \.self) { rowIndex in
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 12) {
-                                    ForEach(chunkedTopics[rowIndex], id: \.self) { topic in
-                                        Button(action: {
-                                            toggleTopic(topic)
-                                        }) {
-                                            Text(topic)
-                                                .font(.system(size: 16, weight: .medium))
-                                                .foregroundColor(selectedTopics.contains(topic) ? .black : .white)
-                                                .lineLimit(1)
-                                                .padding(.horizontal, 16)
-                                                .padding(.vertical, 12)
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 20)
-                                                        .fill(selectedTopics.contains(topic) ? Color.white : Color.white.opacity(0.1))
-                                                        .overlay(
-                                                            RoundedRectangle(cornerRadius: 20)
-                                                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                                                        )
-                                                )
-                                        }
+                let chunkedTopics = topics.chunked(into: 3)
+                
+                VStack(spacing: 12) {
+                    ForEach(0..<chunkedTopics.count, id: \.self) { rowIndex in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(chunkedTopics[rowIndex], id: \.self) { topic in
+                                    Button(action: {
+                                        toggleTopic(topic)
+                                    }) {
+                                        Text(topic)
+                                            .font(.system(size: 16, weight: .medium))
+                                            .foregroundColor(selectedTopics.contains(topic) ? .black : .white)
+                                            .lineLimit(1)
+                                            .padding(.horizontal, 16)
+                                            .padding(.vertical, 12)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .fill(selectedTopics.contains(topic) ? Color.white : Color.white.opacity(0.1))
+                                                    .overlay(
+                                                        RoundedRectangle(cornerRadius: 20)
+                                                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                                    )
+                                            )
                                     }
                                 }
-                                .padding(.trailing, 40)
                             }
+                            .padding(.trailing, 40)
                         }
                     }
                 }
@@ -203,7 +366,7 @@ struct OnboardingView: View {
             HStack(spacing: 16) {
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.3)) {
-                        currentStep = 1
+                        currentStep = 2
                     }
                 }) {
                     Text("Back")
@@ -362,10 +525,16 @@ struct OnboardingView: View {
     }
     
     private func completeOnboarding() {
-        // Save preferences to UserDefaults or app state
-        UserDefaults.standard.set(selectedAppLanguage, forKey: "selectedAppLanguage")
-        UserDefaults.standard.set(selectedArticleLanguage, forKey: "selectedArticleLanguage")
+        // Apply app language selection to AppLanguageManager
+        appLanguageManager.currentLanguage = selectedAppLanguage
+        
+        // Apply article language selection to ArticleLanguageManager
+        articleLanguageManager.selectLanguage(selectedArticleLanguage)
+        
+        // Save topics selection
         UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
+        
+        // Mark onboarding as completed
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
         
         showOnboarding = false

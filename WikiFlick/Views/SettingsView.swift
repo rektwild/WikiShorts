@@ -2,7 +2,6 @@ import SwiftUI
 
 extension Notification.Name {
     static let settingsChanged = Notification.Name("settingsChanged")
-    static let articleLanguageChanged = Notification.Name("articleLanguageChanged")
     static let topicsChanged = Notification.Name("topicsChanged")
 }
 
@@ -10,10 +9,10 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var languageManager = AppLanguageManager.shared
     @StateObject private var notificationManager = NotificationManager.shared
+    @StateObject private var articleLanguageManager = ArticleLanguageManager.shared
     @State private var showingLanguageSelection = false
     @State private var selectedTopics: Set<String> = ["all_topics"]
     @State private var showingTopicSelection = false
-    @State private var selectedArticleLanguage = "English"
     @State private var showingArticleLanguageSelection = false
     @State private var showingPaywall = false
     @StateObject private var storeManager = StoreManager()
@@ -117,7 +116,7 @@ struct SettingsView: View {
                             Image(systemName: "globe.americas")
                             Text(languageManager.localizedString(key: "article_language"))
                             Spacer()
-                            Text(selectedArticleLanguage)
+                            Text(articleLanguageManager.displayName)
                                 .foregroundColor(.secondary)
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.secondary)
@@ -206,7 +205,7 @@ struct SettingsView: View {
             TopicSelectionView(selectedTopics: $selectedTopics)
         }
         .sheet(isPresented: $showingArticleLanguageSelection) {
-            ArticleLanguageSelectionView(selectedArticleLanguage: $selectedArticleLanguage)
+            ArticleLanguageSelectionView()
         }
         .sheet(isPresented: $showingPaywall) {
             PaywallView(isPresented: $showingPaywall)
@@ -215,8 +214,6 @@ struct SettingsView: View {
     }
     
     private func loadSettings() {
-        selectedArticleLanguage = UserDefaults.standard.string(forKey: "selectedArticleLanguage") ?? AppLanguage.english.displayName
-        
         if let topicsArray = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] {
             selectedTopics = Set(topicsArray)
         }
@@ -227,7 +224,6 @@ struct SettingsView: View {
     }
     
     private func saveSettings() {
-        UserDefaults.standard.set(selectedArticleLanguage, forKey: "selectedArticleLanguage")
         UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
         
         // No general notification needed - specific notifications are sent when needed
@@ -396,19 +392,12 @@ struct TopicSelectionView: View {
 
 struct ArticleLanguageSelectionView: View {
     @Environment(\.dismiss) private var dismiss
-    @Binding var selectedArticleLanguage: String
     @StateObject private var languageManager = AppLanguageManager.shared
+    @StateObject private var articleLanguageManager = ArticleLanguageManager.shared
     @State private var searchText = ""
     
     private var filteredLanguages: [AppLanguage] {
-        let workingLanguages = AppLanguage.workingLanguages
-        if searchText.isEmpty {
-            return workingLanguages
-        } else {
-            return workingLanguages.filter { language in
-                language.displayName.localizedCaseInsensitiveContains(searchText)
-            }
-        }
+        return articleLanguageManager.filteredLanguages(searchText: searchText)
     }
     
     var body: some View {
@@ -433,16 +422,14 @@ struct ArticleLanguageSelectionView: View {
                 List {
                     ForEach(filteredLanguages, id: \.self) { language in
                         Button(action: {
-                            selectedArticleLanguage = language.displayName
-                            UserDefaults.standard.set(language.displayName, forKey: "selectedArticleLanguage")
-                            NotificationCenter.default.post(name: .articleLanguageChanged, object: nil)
+                            articleLanguageManager.selectLanguage(language)
                             dismiss()
                         }) {
                             HStack {
                                 Text(language.flag)
                                 Text(language.displayName)
                                 Spacer()
-                                if language.displayName == selectedArticleLanguage {
+                                if language == articleLanguageManager.selectedLanguage {
                                     Image(systemName: "checkmark")
                                         .foregroundColor(.blue)
                                 }

@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import UIKit
 
 class WikipediaService: ObservableObject {
     @Published var articles: [WikipediaArticle] = []
@@ -18,13 +19,14 @@ class WikipediaService: ObservableObject {
     private let problematicLanguages: Set<String> = ["lzh", "yue"]
     private let requestTimeout: TimeInterval = 15.0
     
-    // Track current settings to detect changes
+    // Language and topic management
+    private let articleLanguageManager = ArticleLanguageManager.shared
     private var currentLanguage: String = ""
     private var currentTopics: [String] = []
     
     init() {
         // Initialize current settings
-        currentLanguage = selectedLanguage
+        currentLanguage = articleLanguageManager.languageCode
         currentTopics = selectedTopics
         
         // Configure image cache
@@ -52,26 +54,18 @@ class WikipediaService: ObservableObject {
             .store(in: &cancellables)
     }
     
-    private var selectedLanguage: String {
-        UserDefaults.standard.string(forKey: "selectedArticleLanguage") ?? AppLanguage.english.displayName
-    }
-    
     private var selectedTopics: [String] {
         UserDefaults.standard.array(forKey: "selectedTopics") as? [String] ?? ["All Topics"]
     }
     
     private var languageCode: String {
-        // Find the AppLanguage case that matches the selected display name
-        if let appLanguage = AppLanguage.allCases.first(where: { $0.displayName == selectedLanguage }) {
-            let code = appLanguage.rawValue
-            // Use fallback for problematic languages
-            if problematicLanguages.contains(code) {
-                print("⚠️ Language \(code) is problematic, falling back to English")
-                return "en"
-            }
-            return code
+        let code = articleLanguageManager.languageCode
+        // Use fallback for problematic languages
+        if problematicLanguages.contains(code) {
+            print("⚠️ Language \(code) is problematic, falling back to English")
+            return "en"
         }
-        return "en" // Default to English
+        return code
     }
     
     func fetchRandomArticles(count: Int = 10) {
@@ -113,9 +107,20 @@ class WikipediaService: ObservableObject {
     }
     
     private func fetchSingleRandomArticle() -> AnyPublisher<WikipediaArticle, Error> {
-        let urlString = "https://\(languageCode).wikipedia.org/api/rest_v1/page/random/summary"
+        let currentLanguageCode = languageCode
+        let urlString = "https://\(currentLanguageCode).wikipedia.org/api/rest_v1/page/random/summary"
+        
+        print("🔗 Fetching article from: \(urlString)")
         
         guard let url = URL(string: urlString) else {
+            print("❌ Invalid URL: \(urlString)")
+            return Fail(error: URLError(.badURL))
+                .eraseToAnyPublisher()
+        }
+        
+        // Additional validation for language code
+        guard currentLanguageCode.count >= 2 && currentLanguageCode.allSatisfy({ $0.isLetter || $0 == "-" }) else {
+            print("❌ Invalid language code format: \(currentLanguageCode)")
             return Fail(error: URLError(.badURL))
                 .eraseToAnyPublisher()
         }
@@ -290,7 +295,7 @@ class WikipediaService: ObservableObject {
     
     
     private func checkForLanguageChangeAndRefresh() {
-        let newLanguage = selectedLanguage
+        let newLanguage = articleLanguageManager.languageCode
         
         if newLanguage != currentLanguage {
             print("🔄 Language changed: \(currentLanguage) -> \(newLanguage)")
@@ -310,7 +315,7 @@ class WikipediaService: ObservableObject {
     }
     
     private func refreshArticles() {
-        print("🔄 Refreshing articles for language: \(selectedLanguage), topics: \(selectedTopics)")
+        print("🔄 Refreshing articles for language: \(articleLanguageManager.displayName) (\(articleLanguageManager.languageCode)), topics: \(selectedTopics)")
         
         // Cancel any existing requests
         cancellables.removeAll()
@@ -621,41 +626,51 @@ class WikipediaService: ObservableObject {
     }
     
     private func handleFetchError(_ error: Error) {
-        print("🚨 Wikipedia fetch error: \(error)")
+        print("🚨 Wikipedia fetch error for language '\(articleLanguageManager.displayName)' (\(languageCode)): \(error)")
         
         // Check if it's a timeout error
         if error.localizedDescription.contains("timed out") || error.localizedDescription.contains("timeout") {
             errorMessage = "Request timed out. Please check your connection."
+        } else if error.localizedDescription.contains("404") || error.localizedDescription.contains("not found") {
+            errorMessage = "No articles found for \(articleLanguageManager.displayName). Trying English..."
+        } else if error.localizedDescription.contains("network") || error.localizedDescription.contains("offline") {
+            errorMessage = "Network error. Please check your internet connection."
         } else {
-            errorMessage = error.localizedDescription
+            errorMessage = "Failed to load articles: \(error.localizedDescription)"
         }
         
         hasError = true
         
         // Try fallback to English if we're not already using English
-        if languageCode != "en" {
+        if languageCode != "en" && articleLanguageManager.isLanguageSupported(.english) {
             print("🔄 Attempting fallback to English...")
             fallbackToEnglish()
+        } else {
+            print("❌ Already using English or English not available, showing error")
         }
     }
     
     private func handleEmptyResult() {
-        errorMessage = "No articles found for this language"
+        print("⚠️ No articles found for language '\(articleLanguageManager.displayName)' (\(languageCode))")
+        errorMessage = "No articles found for \(articleLanguageManager.displayName)"
         hasError = true
         
         // Try fallback to English if we're not already using English
-        if languageCode != "en" {
+        if languageCode != "en" && articleLanguageManager.isLanguageSupported(.english) {
             print("🔄 No articles found, attempting fallback to English...")
             fallbackToEnglish()
+        } else {
+            print("❌ Already using English or English not available")
+            errorMessage = "No articles available. Please try again later."
         }
     }
     
     private func fallbackToEnglish() {
         // Temporarily override language to English
-        let originalLanguage = selectedLanguage
+        let originalLanguage = articleLanguageManager.selectedLanguage
         
         // Set English as fallback
-        UserDefaults.standard.set(AppLanguage.english.displayName, forKey: "selectedArticleLanguage")
+        articleLanguageManager.selectedLanguage = .english
         
         // Fetch articles in English
         isLoading = true
@@ -666,7 +681,7 @@ class WikipediaService: ObservableObject {
         
         // Restore original language setting after 2 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            UserDefaults.standard.set(originalLanguage, forKey: "selectedArticleLanguage")
+            self.articleLanguageManager.selectedLanguage = originalLanguage
         }
     }
     

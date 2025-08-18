@@ -427,6 +427,10 @@ enum AppLanguage: String, CaseIterable {
     static var workingLanguages: [AppLanguage] {
         return AppLanguage.allCases.filter { $0.isWorkingWikipedia }
     }
+    
+    static func languageFromDisplayName(_ displayName: String) -> AppLanguage? {
+        return AppLanguage.allCases.first { $0.displayName == displayName }
+    }
 }
 
 class AppLanguageManager: ObservableObject {
