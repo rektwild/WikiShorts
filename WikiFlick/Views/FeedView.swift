@@ -22,7 +22,8 @@ struct FeedView: View {
             Color.black.ignoresSafeArea()
             
             if wikipediaService.articles.isEmpty && wikipediaService.isLoading {
-                LoadingView()
+                FeedLoadingView()
+                    .transition(.opacity.combined(with: .scale(scale: 0.95)))
             } else if wikipediaService.hasError {
                 ErrorStateView(errorMessage: wikipediaService.errorMessage) {
                     refreshFeed()
@@ -117,9 +118,8 @@ struct FeedView: View {
 struct LoadingView: View {
     var body: some View {
         VStack(spacing: 20) {
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                .scaleEffect(1.5)
+            LoadingIndicatorView()
+                .scaleEffect(2.0)
             
             Text("Loading articles...")
                 .font(.title2)

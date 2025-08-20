@@ -11,6 +11,7 @@ import AppTrackingTransparency
 @main
 struct WikiShortsApp: App {
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+    @StateObject private var backgroundManager = AppBackgroundManager()
     
     init() {
         // AdMob'u başlat
@@ -18,6 +19,9 @@ struct WikiShortsApp: App {
         
         // Bildirim sistemini başlat
         let _ = NotificationManager.shared
+        
+        // Background refresh'i başlat
+        let _ = BackgroundRefreshService.shared
     }
     
     var body: some Scene {
@@ -29,7 +33,10 @@ struct WikiShortsApp: App {
                     .onAppear {
                         // Uygulama her açıldığında bildirimleri yenile
                         NotificationManager.shared.refreshNotifications()
+                        // Background refresh'i planla
+                        backgroundManager.scheduleBackgroundRefresh()
                     }
+                    .withErrorHandling()
             }
         }
     }

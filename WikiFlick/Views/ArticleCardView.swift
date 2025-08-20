@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct ArticleCardView: View {
     let article: WikipediaArticle
@@ -13,6 +14,7 @@ struct ArticleCardView: View {
     @StateObject private var storeManager = StoreManager()
     @StateObject private var wikipediaService = WikipediaService()
     @StateObject private var languageManager = AppLanguageManager.shared
+    private let imageLoadingService = ImageLoadingService.shared
     @State private var isSearchActive = false
     @State private var searchText = ""
     @State private var selectedSearchArticle: WikipediaArticle?
@@ -24,8 +26,12 @@ struct ArticleCardView: View {
                     backgroundView
                     mainContent(geometry)
                     topOverlayView
-                    if isSearchActive && !wikipediaService.searchResults.isEmpty {
-                        searchResultsOverlay
+                    if isSearchActive {
+                        if wikipediaService.isSearching {
+                            searchSkeletonOverlay
+                        } else if !wikipediaService.searchResults.isEmpty {
+                            searchResultsOverlay
+                        }
                     }
                 }
                 .frame(minHeight: geometry.size.height)
@@ -118,54 +124,23 @@ struct ArticleCardView: View {
     }
     
     private func asyncImageView(url: URL, geometry: GeometryProxy) -> some View {
-        Group {
-            // Check if image is already cached
-            if let cachedImage = wikipediaService.getCachedImage(for: url.absoluteString) {
-                Image(uiImage: cachedImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: geometry.size.width - 40)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .scaleEffect(imageScale)
-                    .opacity(imageOpacity)
-                    .onAppear {
-                        imageLoaded = true
-                        withAnimation(.easeOut(duration: 0.8)) {
-                            imageScale = 1.0
-                            imageOpacity = 1.0
-                        }
-                    }
-            } else {
-                AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: geometry.size.width - 40)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .scaleEffect(imageScale)
-                        .opacity(imageOpacity)
-                        .onAppear {
-                            imageLoaded = true
-                            withAnimation(.easeOut(duration: 0.8)) {
-                                imageScale = 1.0
-                                imageOpacity = 1.0
-                            }
-                        }
-                } placeholder: {
-                    loadingPlaceholderView(geometry: geometry)
-                }
-            }
+        AsyncImageView(
+            urlString: url.absoluteString,
+            imageLoadingService: imageLoadingService
+        ) {
+            loadingPlaceholderView(geometry: geometry)
         }
+        .aspectRatio(contentMode: .fit)
+        .frame(width: geometry.size.width - 40)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .progressiveImageLoading(urlString: url.absoluteString)
     }
     
     private func loadingPlaceholderView(geometry: GeometryProxy) -> some View {
-        RoundedRectangle(cornerRadius: 20)
-            .fill(Color.gray.opacity(0.2))
+        LoadingShimmerView(cornerRadius: 20)
             .frame(width: geometry.size.width - 40, height: geometry.size.height * 0.4)
             .overlay(
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                    .scaleEffect(1.5)
+                LoadingIndicatorView()
             )
     }
     
@@ -521,6 +496,19 @@ struct ArticleCardView: View {
         }
     }
     
+    private var searchSkeletonOverlay: some View {
+        VStack(spacing: 0) {
+            // Top spacing to position results below search bar
+            Rectangle()
+                .fill(Color.clear)
+                .frame(height: 140)
+            
+            SearchResultsSkeletonView()
+            
+            Spacer()
+        }
+    }
+    
     private var searchResultsOverlay: some View {
         VStack(spacing: 0) {
             // Top spacing to position results below search bar
@@ -531,28 +519,12 @@ struct ArticleCardView: View {
             VStack(spacing: 0) {
                 ForEach(wikipediaService.searchResults.prefix(5)) { result in
                     Button(action: {
-                        Task {
-                            do {
-                                let fullArticle = try await wikipediaService.fetchFullArticleDetails(from: result)
-                                await MainActor.run {
-                                    selectedSearchArticle = fullArticle
-                                    withAnimation(.easeInOut(duration: 0.3)) {
-                                        isSearchActive = false
-                                        searchText = ""
-                                        wikipediaService.clearSearchResults()
-                                    }
-                                }
-                            } catch {
-                                // Fallback to basic article if full details fail
-                                await MainActor.run {
-                                    selectedSearchArticle = result.wikipediaArticle
-                                    withAnimation(.easeInOut(duration: 0.3)) {
-                                        isSearchActive = false
-                                        searchText = ""
-                                        wikipediaService.clearSearchResults()
-                                    }
-                                }
-                            }
+                        // Use the search result directly
+                        selectedSearchArticle = result.wikipediaArticle
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            isSearchActive = false
+                            searchText = ""
+                            wikipediaService.clearSearchResults()
                         }
                     }) {
                         HStack(alignment: .top, spacing: 12) {
