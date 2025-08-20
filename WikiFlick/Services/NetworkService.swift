@@ -178,7 +178,8 @@ class NetworkService: NetworkServiceProtocol {
                     let result = SearchResult(
                         title: titles[i],
                         description: descriptions[i],
-                        url: urls[i]
+                        url: urls[i],
+                        thumbnail: nil
                     )
                     results.append(result)
                 }

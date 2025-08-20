@@ -79,6 +79,7 @@ class AdMobManager: NSObject, ObservableObject {
         GADInterstitialAd.load(withAdUnitID: testInterstitialAdUnitID, request: request) { [weak self] ad, error in
             DispatchQueue.main.async {
                 if let error = error {
+                    print("❌ Failed to load interstitial ad: \(error.localizedDescription)")
                     self?.isAdLoaded = false
                     return
                 }
@@ -141,6 +142,7 @@ class AdMobManager: NSObject, ObservableObject {
         GADRewardedAd.load(withAdUnitID: testRewardedAdUnitID, request: request) { [weak self] ad, error in
             DispatchQueue.main.async {
                 if let error = error {
+                    print("❌ Failed to load rewarded ad: \(error.localizedDescription)")
                     self?.isRewardedAdLoaded = false
                     return
                 }

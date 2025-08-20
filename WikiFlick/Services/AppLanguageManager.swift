@@ -474,7 +474,7 @@ extension Bundle {
 
 private var bundleKey: UInt8 = 0
 
-class BundleEx: Bundle {
+class BundleEx: Bundle, @unchecked Sendable {
     override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
         guard let bundle = objc_getAssociatedObject(self, &bundleKey) as? Bundle else {
             return super.localizedString(forKey: key, value: value, table: tableName)
