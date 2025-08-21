@@ -58,4 +58,8 @@ struct Page: Codable {
     let extract: String
     let thumbnail: Thumbnail?
     let fullurl: String
+    
+    enum CodingKeys: String, CodingKey {
+        case pageid, title, extract, thumbnail, fullurl
+    }
 }

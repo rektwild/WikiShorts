@@ -145,11 +145,19 @@ class NetworkService: NetworkServiceProtocol {
         let searchBaseURL = "https://\(languageCode).wikipedia.org/w/api.php"
         var components = URLComponents(string: searchBaseURL)!
         components.queryItems = [
-            URLQueryItem(name: "action", value: "opensearch"),
-            URLQueryItem(name: "search", value: query),
-            URLQueryItem(name: "limit", value: "5"),
-            URLQueryItem(name: "namespace", value: "0"),
-            URLQueryItem(name: "format", value: "json")
+            URLQueryItem(name: "action", value: "query"),
+            URLQueryItem(name: "format", value: "json"),
+            URLQueryItem(name: "generator", value: "search"),
+            URLQueryItem(name: "gsrsearch", value: query),
+            URLQueryItem(name: "gsrlimit", value: "5"),
+            URLQueryItem(name: "gsrnamespace", value: "0"),
+            URLQueryItem(name: "prop", value: "extracts|pageimages|info"),
+            URLQueryItem(name: "exintro", value: "true"),
+            URLQueryItem(name: "explaintext", value: "true"),
+            URLQueryItem(name: "exsentences", value: "3"),
+            URLQueryItem(name: "piprop", value: "thumbnail"),
+            URLQueryItem(name: "pithumbsize", value: "300"),
+            URLQueryItem(name: "inprop", value: "url")
         ]
         
         guard let url = components.url else {
@@ -165,23 +173,21 @@ class NetworkService: NetworkServiceProtocol {
             .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.main)
             .map(\.data)
             .tryMap { data in
-                guard let jsonArray = try JSONSerialization.jsonObject(with: data) as? [Any],
-                      jsonArray.count >= 4,
-                      let titles = jsonArray[1] as? [String],
-                      let descriptions = jsonArray[2] as? [String],
-                      let urls = jsonArray[3] as? [String] else {
-                    throw NetworkError.decodingError(URLError(.cannotParseResponse))
-                }
+                let searchResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
                 
                 var results: [SearchResult] = []
-                for i in 0..<min(titles.count, descriptions.count, urls.count) {
-                    let result = SearchResult(
-                        title: titles[i],
-                        description: descriptions[i],
-                        url: urls[i],
-                        thumbnail: nil
-                    )
-                    results.append(result)
+                if let pages = searchResponse.query?.pages {
+                    for (_, page) in pages {
+                        let result = SearchResult(
+                            title: page.title,
+                            description: page.extract ?? "No description available",
+                            url: page.fullurl ?? "https://\(languageCode).wikipedia.org/wiki/\(page.title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")",
+                            thumbnail: page.thumbnail.map { Thumbnail(source: $0.source, width: $0.width ?? 300, height: $0.height ?? 300) },
+                            pageId: page.pageid,
+                            imageURL: page.thumbnail?.source
+                        )
+                        results.append(result)
+                    }
                 }
                 
                 return results
@@ -235,4 +241,32 @@ class NetworkService: NetworkServiceProtocol {
             return .unknownError(error.localizedDescription)
         }
     }
+}
+
+// MARK: - Search API Response Models
+
+struct SearchResponse: Codable {
+    let query: SearchQuery?
+}
+
+struct SearchQuery: Codable {
+    let pages: [String: SearchPage]?
+}
+
+struct SearchPage: Codable {
+    let pageid: Int
+    let title: String
+    let extract: String?
+    let thumbnail: SearchThumbnail?
+    let fullurl: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case pageid, title, extract, thumbnail, fullurl
+    }
+}
+
+struct SearchThumbnail: Codable {
+    let source: String
+    let width: Int?
+    let height: Int?
 }

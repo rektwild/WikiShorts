@@ -14,6 +14,7 @@ struct ArticleCardView: View {
     @StateObject private var storeManager = StoreManager()
     @StateObject private var wikipediaService = WikipediaService()
     @StateObject private var languageManager = AppLanguageManager.shared
+    @StateObject private var searchHistoryManager = SearchHistoryManager.shared
     private let imageLoadingService = ImageLoadingService.shared
     @State private var isSearchActive = false
     @State private var searchText = ""
@@ -30,7 +31,12 @@ struct ArticleCardView: View {
                         if wikipediaService.isSearching {
                             searchSkeletonOverlay
                         } else if !wikipediaService.searchResults.isEmpty {
-                            searchResultsOverlay
+                            enhancedSearchResultsOverlay
+                        } else if !searchText.isEmpty {
+                            emptySearchResultsOverlay
+                        } else {
+                            // Show search history when search text is empty
+                            searchHistoryOverlay
                         }
                     }
                 }
@@ -117,8 +123,16 @@ struct ArticleCardView: View {
         VStack {
             if let imageURL = article.imageURL, let url = URL(string: imageURL) {
                 asyncImageView(url: url, geometry: geometry)
+                    .onAppear {
+                        print("🖼️ Loading image for article: \(article.title)")
+                        print("   Image URL: \(imageURL)")
+                    }
             } else {
                 placeholderView(geometry: geometry)
+                    .onAppear {
+                        print("📷 No image available for article: \(article.title)")
+                        print("   ImageURL: \(article.imageURL ?? "nil")")
+                    }
             }
         }
     }
@@ -134,6 +148,7 @@ struct ArticleCardView: View {
         .frame(width: geometry.size.width - 40)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .progressiveImageLoading(urlString: url.absoluteString)
+        .id(url.absoluteString) // Force view recreation when URL changes
     }
     
     private func loadingPlaceholderView(geometry: GeometryProxy) -> some View {
@@ -225,7 +240,7 @@ struct ArticleCardView: View {
                 profileImageView
                 
                 if isSearchActive {
-                    searchBarView
+                    enhancedSearchBarView
                 } else {
                     if selectedSearchArticle != nil {
                         backToFeedButton
@@ -318,70 +333,25 @@ struct ArticleCardView: View {
         }
     }
     
-    private var searchBarView: some View {
-        HStack(spacing: 12) {
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.white.opacity(0.6))
-                    .font(.system(size: 16))
-                
-                TextField(languageManager.localizedString(key: "search_wikipedia"), text: $searchText)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .foregroundColor(.white)
-                    .font(.system(size: 16))
-                    .accentColor(.white)
-                    .onAppear {
-                        UITextField.appearance().attributedPlaceholder = NSAttributedString(
-                            string: languageManager.localizedString(key: "search_wikipedia"),
-                            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
-                        )
-                    }
-                    .onChange(of: searchText) { _, newValue in
-                        wikipediaService.searchWikipedia(query: newValue)
-                    }
-                
-                if !searchText.isEmpty {
-                    Button(action: {
-                        searchText = ""
-                        wikipediaService.clearSearchResults()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.white.opacity(0.6))
-                            .font(.system(size: 16))
-                    }
-                }
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.black.opacity(0.7))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.gray.opacity(0.6), lineWidth: 1)
-                    )
-            )
-            
-            Button(action: {
+    private var enhancedSearchBarView: some View {
+        SearchBarView(
+            searchText: $searchText,
+            isActive: $isSearchActive,
+            onCancel: {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     isSearchActive = false
                     searchText = ""
                     wikipediaService.clearSearchResults()
                 }
-            }) {
-                Image(systemName: "xmark")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white.opacity(0.8))
-                    .frame(width: 32, height: 32)
-                    .background(
-                        Circle()
-                            .fill(Color.white.opacity(0.1))
-                    )
+            },
+            onClear: {
+                searchText = ""
+                wikipediaService.clearSearchResults()
             }
-            
-            Spacer()
+        )
+        .onChange(of: searchText) { _, newValue in
+            wikipediaService.searchWikipedia(query: newValue)
         }
-        .transition(.asymmetric(insertion: .move(edge: .leading).combined(with: .opacity), removal: .move(edge: .trailing).combined(with: .opacity)))
     }
     
     private var removeAdsButton: some View {
@@ -509,81 +479,80 @@ struct ArticleCardView: View {
         }
     }
     
-    private var searchResultsOverlay: some View {
+    private var enhancedSearchResultsOverlay: some View {
         VStack(spacing: 0) {
             // Top spacing to position results below search bar
             Rectangle()
                 .fill(Color.clear)
                 .frame(height: 140)
             
-            VStack(spacing: 0) {
-                ForEach(wikipediaService.searchResults.prefix(5)) { result in
-                    Button(action: {
-                        // Use the search result directly
-                        selectedSearchArticle = result.wikipediaArticle
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            isSearchActive = false
-                            searchText = ""
-                            wikipediaService.clearSearchResults()
-                        }
-                    }) {
-                        HStack(alignment: .top, spacing: 12) {
-                            Image(systemName: "doc.text")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white.opacity(0.6))
-                                .frame(width: 20)
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(result.title)
-                                    .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(.white)
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(2)
-                                
-                                Text(result.description.isEmpty ? "No description available" : result.description)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.white.opacity(0.7))
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(2)
-                            }
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 12))
-                                .foregroundColor(.white.opacity(0.4))
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 16)
-                        .background(
-                            Rectangle()
-                                .fill(Color.black.opacity(0.8))
-                        )
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    if result.id != wikipediaService.searchResults.last?.id {
-                        Rectangle()
-                            .fill(Color.white.opacity(0.1))
-                            .frame(height: 1)
-                            .padding(.horizontal, 20)
+            SearchResultsListView(
+                searchResults: wikipediaService.searchResults,
+                onResultSelected: { result in
+                    // Use the search result directly
+                    selectedSearchArticle = result.wikipediaArticle
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        isSearchActive = false
+                        searchText = ""
+                        wikipediaService.clearSearchResults()
                     }
                 }
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.black.opacity(0.9))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                    )
             )
             .padding(.horizontal, 20)
             .shadow(color: .black.opacity(0.3), radius: 20, x: 0, y: 10)
             
             Spacer()
         }
-        .transition(.asymmetric(insertion: .move(edge: .top).combined(with: .opacity), removal: .move(edge: .top).combined(with: .opacity)))
+        .transition(.asymmetric(
+            insertion: .move(edge: .top).combined(with: .opacity),
+            removal: .move(edge: .top).combined(with: .opacity)
+        ))
+    }
+    
+    private var emptySearchResultsOverlay: some View {
+        VStack(spacing: 0) {
+            // Top spacing to position results below search bar
+            Rectangle()
+                .fill(Color.clear)
+                .frame(height: 200)
+            
+            EmptySearchStateView(query: searchText)
+            
+            Spacer()
+        }
+        .transition(.opacity.combined(with: .scale(scale: 0.95)))
+    }
+    
+    private var searchHistoryOverlay: some View {
+        VStack(spacing: 0) {
+            // Top spacing to position results below search bar
+            Rectangle()
+                .fill(Color.clear)
+                .frame(height: 140)
+            
+            let recentSearches = searchHistoryManager.getRecentSearches(
+                for: wikipediaService.languageCode,
+                limit: 5
+            )
+            
+            if !recentSearches.isEmpty {
+                SearchHistoryView(
+                    searchHistory: recentSearches,
+                    onHistoryItemTap: { query in
+                        searchText = query
+                        wikipediaService.searchWikipedia(query: query)
+                    },
+                    onClearHistory: {
+                        searchHistoryManager.clearAllHistory()
+                    }
+                )
+                .padding(.horizontal, 20)
+                .shadow(color: .black.opacity(0.3), radius: 20, x: 0, y: 10)
+            }
+            
+            Spacer()
+        }
+        .transition(.opacity.combined(with: .move(edge: .top)))
     }
     
     private func shareArticle(article: WikipediaArticle) {

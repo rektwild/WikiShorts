@@ -40,6 +40,7 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     private let imageLoadingService: ImageLoadingServiceProtocol
     private let errorHandler = ErrorHandlingService.shared
     private let retryManager = RetryManager()
+    private let searchHistoryManager = SearchHistoryManager.shared
     private var currentLanguage: String = ""
     private var currentTopics: [String] = []
     
@@ -85,7 +86,7 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         UserDefaults.standard.array(forKey: "selectedTopics") as? [String] ?? ["All Topics"]
     }
     
-    private var languageCode: String {
+    var languageCode: String {
         let code = articleLanguageManager.languageCode
         // Ensure language is supported for Wikipedia API
         if !articleLanguageManager.isLanguageSupported(articleLanguageManager.selectedLanguage) {
@@ -287,8 +288,8 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         isSearching = true
         
         do {
-            // Add small delay for debouncing
-            try await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+            // Add debouncing delay - longer for better UX but not too long
+            try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
             
             // Check if task was cancelled
             if Task.isCancelled { return }
@@ -301,6 +302,18 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
             if !Task.isCancelled {
                 searchResults = results
                 isSearching = false
+                
+                // Add to search history if we have results
+                if !results.isEmpty {
+                    searchHistoryManager.addSearchQuery(
+                        query,
+                        languageCode: languageCode,
+                        resultCount: results.count
+                    )
+                    
+                    // Preload images for search results in background
+                    preloadSearchResultImages(results)
+                }
             }
             
         } catch {
@@ -407,6 +420,16 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         // Restore original language setting after 2 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.articleLanguageManager.selectedLanguage = originalLanguage
+        }
+    }
+    
+    private func preloadSearchResultImages(_ results: [SearchResult]) {
+        Task {
+            for result in results.prefix(3) { // Preload only first 3 images to avoid excessive network usage
+                if let imageURL = result.displayImageURL {
+                    await imageLoadingService.preloadImage(from: imageURL)
+                }
+            }
         }
     }
     
