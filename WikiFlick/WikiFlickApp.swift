@@ -14,14 +14,16 @@ struct WikiShortsApp: App {
     @StateObject private var backgroundManager = AppBackgroundManager()
     
     init() {
-        // AdMob'u başlat
-        let _ = AdMobManager.shared
-        
         // Bildirim sistemini başlat
         let _ = NotificationManager.shared
         
         // Background refresh'i başlat
         let _ = BackgroundRefreshService.shared
+        
+        // ATT izni ve AdMob başlatma - uygulama başlatıldığında hemen
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let _ = AdMobManager.shared
+        }
     }
     
     var body: some Scene {

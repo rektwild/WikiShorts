@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import StoreKit
 
 struct ArticleCardView: View {
     let article: WikipediaArticle
@@ -70,6 +71,13 @@ struct ArticleCardView: View {
         .onAppear {
             Task {
                 await storeManager.loadProducts()
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PremiumStatusChanged"))) { notification in
+            // Premium status changed, trigger UI refresh
+            print("🔄 Premium status changed - refreshing ArticleCardView UI")
+            Task {
+                await storeManager.updatePurchasedProducts()
             }
         }
     }

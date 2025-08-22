@@ -88,6 +88,13 @@ struct FeedView: View {
             // Topics changed, refresh feed
             refreshFeed()
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PremiumStatusChanged"))) { notification in
+            // Premium status changed, refresh feed to update ad visibility
+            print("🔄 Premium status changed - refreshing feed")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                refreshFeed()
+            }
+        }
     }
     
     private func refreshFeed() {

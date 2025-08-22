@@ -75,7 +75,7 @@ class StoreManager: ObservableObject {
         }
     }
     
-    private func updatePurchasedProducts() async {
+    func updatePurchasedProducts() async {
         var purchased: Set<String> = []
         
         for await result in Transaction.currentEntitlements {
