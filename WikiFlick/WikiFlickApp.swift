@@ -20,10 +20,11 @@ struct WikiShortsApp: App {
         // Background refresh'i başlat
         let _ = BackgroundRefreshService.shared
         
-        // ATT izni ve AdMob başlatma - uygulama başlatıldığında hemen
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let _ = AdMobManager.shared
-        }
+        // ATT koordinasyonunu başlat - didBecomeActive olayını dinlemeye başlar
+        ATTManager.shared.startATTCoordination()
+        
+        // AdMobManager'ı başlat - ATT bildirimi bekleyecek
+        let _ = AdMobManager.shared
     }
     
     var body: some Scene {

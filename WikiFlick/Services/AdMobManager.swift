@@ -60,7 +60,7 @@ class AdMobManager: NSObject, ObservableObject {
         self.isPremiumUser = storeManager.isPurchased("wiki_m")
         
         setupSubscriptionMonitoring()
-        requestATTPermissionAndSetupAdMob()
+        setupATTNotificationListener()
     }
     
     private func setupSubscriptionMonitoring() {
@@ -132,12 +132,28 @@ class AdMobManager: NSObject, ObservableObject {
         subscriptionCancellable?.cancel()
     }
     
-    private func requestATTPermissionAndSetupAdMob() {
-        ATTManager.shared.requestTrackingPermission { [weak self] status in
-            print("🔐 ATT Permission granted: \(status)")
-            self?.hasATTPermission = true
-            self?.configureAdSettings(for: status)
-            self?.initializeAdMob()
+    private func setupATTNotificationListener() {
+        // Listen for ATT permission updates
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name("ATTPermissionUpdated"),
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            if let status = notification.userInfo?["status"] as? ATTStatus {
+                print("🔐 ATT Permission updated: \(status)")
+                self?.hasATTPermission = true
+                self?.configureAdSettings(for: status)
+                self?.initializeAdMob()
+            }
+        }
+        
+        // Check if ATT has already been determined
+        let currentStatus = ATTManager.shared.getCurrentStatus()
+        if currentStatus != .notDetermined {
+            print("🔐 ATT already determined: \(currentStatus)")
+            hasATTPermission = true
+            configureAdSettings(for: currentStatus)
+            initializeAdMob()
         }
     }
     
