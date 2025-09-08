@@ -10,6 +10,7 @@ extension Array {
 enum FeedItem {
     case article(WikipediaArticle)
     case nativeAd(GADNativeAd)
+    case feedAd(GADNativeAd)
 }
 
 struct FeedView: View {
@@ -45,6 +46,8 @@ struct FeedView: View {
                                 })
                             case .nativeAd(let nativeAd):
                                 NativeAdCardView(nativeAd: nativeAd)
+                            case .feedAd(let nativeAd):
+                                FeedAdView(nativeAd: nativeAd)
                             }
                         }
                         .tag(index)
@@ -135,10 +138,10 @@ struct FeedView: View {
         for (index, article) in wikipediaService.articles.enumerated() {
             feedItems.append(.article(article))
             
-            // Add native ad every 5 articles
-            if adMobManager.shouldShowNativeAd(forArticleIndex: index) {
+            // Add feed ad every 5 articles (instead of native ad)
+            if adMobManager.shouldShowFeedAd(forArticleIndex: index) {
                 if let nativeAd = adMobManager.currentNativeAd {
-                    feedItems.append(.nativeAd(nativeAd))
+                    feedItems.append(.feedAd(nativeAd))
                 }
             }
         }

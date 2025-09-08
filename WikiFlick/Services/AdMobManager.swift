@@ -41,6 +41,7 @@ class AdMobManager: NSObject, ObservableObject {
     private var articleCount = 0
     private let interstitialAdFrequency = 5
     private let nativeAdFrequency = 5
+    private let feedAdFrequency = 5
     
     private var hasATTPermission = false
     private var isAdMobInitialized = false
@@ -288,6 +289,21 @@ class AdMobManager: NSObject, ObservableObject {
         
         let articleNumber = index + 1
         return articleNumber % nativeAdFrequency == 0 && isNativeAdLoaded
+    }
+    
+    func shouldShowFeedAd(forArticleIndex index: Int) -> Bool {
+        // Premium users never see ads
+        if shouldSkipAdsForPremium() {
+            return false
+        }
+        
+        // Don't show ads during ad-free period
+        if isInAdFreePeriod() {
+            return false
+        }
+        
+        let articleNumber = index + 1
+        return articleNumber % feedAdFrequency == 0 && isNativeAdLoaded
     }
     
     func showInterstitialAd() {
