@@ -357,7 +357,7 @@ struct ArticleCardView: View {
                 wikipediaService.clearSearchResults()
             }
         )
-        .onChange(of: searchText) { _, newValue in
+        .onChange(of: searchText) { newValue in
             wikipediaService.searchWikipedia(query: newValue)
         }
     }

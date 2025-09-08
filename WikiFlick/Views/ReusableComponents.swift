@@ -212,7 +212,7 @@ struct SearchBar: View {
                     .foregroundColor(.white)
                     .font(.system(size: 16))
                     .accentColor(.white)
-                    .onChange(of: searchText) { _, newValue in
+                    .onChange(of: searchText) { newValue in
                         onSearchTextChanged?(newValue)
                     }
                 

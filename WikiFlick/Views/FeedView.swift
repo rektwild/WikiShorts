@@ -15,6 +15,8 @@ enum FeedItem {
 struct FeedView: View {
     @StateObject private var wikipediaService = WikipediaService()
     @State private var currentIndex = 0
+    @State private var feedItems: [FeedItem] = []
+    @State private var isLoadingMore = false
     private let adMobManager = AdMobManager.shared
     
     var body: some View {
@@ -34,7 +36,7 @@ struct FeedView: View {
                 }
             } else {
                 TabView(selection: $currentIndex) {
-                    ForEach(Array(createFeedItems().enumerated()), id: \.offset) { index, item in
+                    ForEach(Array(feedItems.enumerated()), id: \.offset) { index, item in
                         Group {
                             switch item {
                             case .article(let article):
@@ -52,10 +54,9 @@ struct FeedView: View {
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 #endif
                 .ignoresSafeArea()
-                .onChange(of: currentIndex) { _, newIndex in
-                    let feedItems = createFeedItems()
-                    if newIndex >= feedItems.count - 2 {
-                        wikipediaService.loadMoreArticles()
+                .onChange(of: currentIndex) { newIndex in
+                    if newIndex >= feedItems.count - 2 && !isLoadingMore {
+                        loadMoreContent()
                     }
                     
                     // Only count articles, not ads, for interstitial logic
@@ -73,6 +74,9 @@ struct FeedView: View {
             if wikipediaService.articles.isEmpty {
                 wikipediaService.fetchTopicBasedArticles()
             }
+        }
+        .onChange(of: wikipediaService.articles) { newArticles in
+            updateFeedItems()
         }
         .refreshable {
             refreshFeed()
@@ -99,9 +103,30 @@ struct FeedView: View {
     
     private func refreshFeed() {
         wikipediaService.articles.removeAll()
+        feedItems.removeAll()
         currentIndex = 0
+        isLoadingMore = false
         adMobManager.resetArticleCount()
         wikipediaService.fetchTopicBasedArticles()
+    }
+    
+    private func loadMoreContent() {
+        guard !isLoadingMore else { return }
+        isLoadingMore = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            wikipediaService.loadMoreArticles()
+            self.isLoadingMore = false
+        }
+    }
+    
+    private func updateFeedItems() {
+        let newFeedItems = createFeedItems()
+        
+        // Smooth update to prevent overlapping
+        withAnimation(.easeInOut(duration: 0.2)) {
+            feedItems = newFeedItems
+        }
     }
     
     private func createFeedItems() -> [FeedItem] {
