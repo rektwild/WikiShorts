@@ -427,7 +427,7 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         Task {
             for result in results.prefix(3) { // Preload only first 3 images to avoid excessive network usage
                 if let imageURL = result.displayImageURL {
-                    await imageLoadingService.preloadImage(from: imageURL)
+                    _ = await imageLoadingService.preloadImage(from: imageURL)
                 }
             }
         }

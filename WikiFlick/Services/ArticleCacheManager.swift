@@ -18,7 +18,12 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     // MARK: - Private Properties
     private let imageCache = NSCache<NSString, UIImage>()
     private var articleCache = [Int: WikipediaArticle]()
+    private var articleAccessTime = [Int: Date]()
     private let userAgent = "WikiFlick/1.0"
+    
+    // MARK: - Thread Safety
+    private let cacheQueue = DispatchQueue(label: "com.wikishorts.cache", qos: .utility, attributes: .concurrent)
+    private let imageQueue = DispatchQueue(label: "com.wikishorts.imageCache", qos: .utility, attributes: .concurrent)
     
     // MARK: - Cache Configuration
     private let imageCacheLimit = 50
@@ -54,33 +59,54 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     
     // MARK: - Article Caching
     func cacheArticle(_ article: WikipediaArticle) {
-        articleCache[article.pageId] = article
-        
-        // Implement manual cache limit
-        if articleCache.count > articleCacheLimit {
-            // Remove oldest articles (simple LRU)
-            let sortedKeys = articleCache.keys.sorted()
-            let keysToRemove = sortedKeys.prefix(articleCache.count - articleCacheLimit)
-            for key in keysToRemove {
-                articleCache.removeValue(forKey: key)
+        cacheQueue.async(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            
+            self.articleCache[article.pageId] = article
+            self.articleAccessTime[article.pageId] = Date()
+            
+            // Implement manual cache limit
+            if self.articleCache.count > self.articleCacheLimit {
+                // Remove least recently accessed articles (proper LRU)
+                let sortedByAccessTime = self.articleAccessTime.sorted { $0.value < $1.value }
+                let keysToRemove = sortedByAccessTime.prefix(self.articleCache.count - self.articleCacheLimit).map(\.key)
+                for key in keysToRemove {
+                    self.articleCache.removeValue(forKey: key)
+                    self.articleAccessTime.removeValue(forKey: key)
+                }
+                LoggingService.shared.logInfo("Article cache cleaned up, removed \(keysToRemove.count) articles using LRU", category: .cache)
             }
         }
     }
     
     func getCachedArticle(pageId: Int) -> WikipediaArticle? {
-        return articleCache[pageId]
+        return cacheQueue.sync {
+            if let article = articleCache[pageId] {
+                // Update access time for LRU
+                articleAccessTime[pageId] = Date()
+                return article
+            }
+            return nil
+        }
     }
     
     // MARK: - Image Caching
     func cacheImage(_ image: UIImage, for urlString: String) {
-        let cost = calculateImageMemoryCost(image)
-        let key = NSString(string: urlString)
-        imageCache.setObject(image, forKey: key, cost: cost)
+        imageQueue.async(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            
+            let cost = self.calculateImageMemoryCost(image)
+            let key = NSString(string: urlString)
+            self.imageCache.setObject(image, forKey: key, cost: cost)
+        }
     }
     
     func getCachedImage(for urlString: String) -> UIImage? {
-        let key = NSString(string: urlString)
-        return imageCache.object(forKey: key)
+        return imageQueue.sync { [weak self] in
+            guard let self = self else { return nil }
+            let key = NSString(string: urlString)
+            return self.imageCache.object(forKey: key)
+        }
     }
     
     func preloadImage(from urlString: String) async -> UIImage? {
@@ -116,16 +142,26 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     
     // MARK: - Cache Management
     func clearImageCache() {
-        imageCache.removeAllObjects()
+        imageQueue.async(flags: .barrier) { [weak self] in
+            self?.imageCache.removeAllObjects()
+            print("🧹 Image cache cleared")
+        }
     }
     
     func clearArticleCache() {
-        articleCache.removeAll()
+        cacheQueue.async(flags: .barrier) { [weak self] in
+            self?.articleCache.removeAll()
+            self?.articleAccessTime.removeAll()
+            print("🧹 Article cache cleared")
+        }
     }
     
     func cacheMemoryUsage() -> Int64 {
-        // This is an approximation as NSCache doesn't provide exact memory usage
-        return Int64(imageCache.totalCostLimit)
+        return imageQueue.sync { [weak self] in
+            guard let self = self else { return 0 }
+            // This is an approximation as NSCache doesn't provide exact memory usage
+            return Int64(self.imageCache.totalCostLimit)
+        }
     }
     
     // MARK: - Private Helpers
@@ -136,16 +172,28 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     
     private func handleMemoryWarning() {
         print("🚨 Memory warning received - clearing caches")
+        
         // Clear half of the image cache
-        clearImageCache()
+        imageQueue.async(flags: .barrier) { [weak self] in
+            self?.imageCache.removeAllObjects()
+            print("🧹 Image cache cleared due to memory warning")
+        }
         
         // Clear half of the article cache
-        let currentCount = articleCache.count
-        let targetCount = currentCount / 2
-        let sortedKeys = articleCache.keys.sorted()
-        let keysToRemove = sortedKeys.prefix(currentCount - targetCount)
-        for key in keysToRemove {
-            articleCache.removeValue(forKey: key)
+        cacheQueue.async(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            
+            let currentCount = self.articleCache.count
+            let targetCount = currentCount / 2
+            let sortedKeys = self.articleCache.keys.sorted()
+            let keysToRemove = sortedKeys.prefix(currentCount - targetCount)
+            
+            for key in keysToRemove {
+                self.articleCache.removeValue(forKey: key)
+                self.articleAccessTime.removeValue(forKey: key)
+            }
+            
+            print("🧹 Article cache reduced from \(currentCount) to \(self.articleCache.count) articles due to memory warning")
         }
     }
     

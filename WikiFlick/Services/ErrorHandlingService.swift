@@ -158,7 +158,7 @@ class ErrorHandlingService: ErrorHandlingServiceProtocol {
     
     func logError(_ error: AppError, context: String? = nil) {
         let contextString = context.map { " [Context: \($0)]" } ?? ""
-        print("🚨 AppError [\(error.category)] \(error.localizedDescription ?? "Unknown error")\(contextString)")
+        print("🚨 AppError [\(error.category)] \(error.localizedDescription)\(contextString)")
         
         // In a production app, you might want to send this to a logging service
         // like Firebase Crashlytics or Sentry
@@ -272,7 +272,7 @@ struct ErrorAlertView: View {
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
                 
-                Text(error.localizedDescription ?? "Unknown error occurred")
+                Text(error.localizedDescription)
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -322,7 +322,7 @@ struct ErrorHandlingModifier: ViewModifier {
                 }
             } message: {
                 if let error = errorManager.currentError {
-                    Text(error.localizedDescription ?? "An unknown error occurred")
+                    Text(error.localizedDescription)
                 }
             }
             .environmentObject(errorManager)

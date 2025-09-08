@@ -37,12 +37,13 @@ struct SearchResult: Identifiable, Codable {
         let finalDescription = description.isEmpty ? "No description available" : description
         let finalPageId = pageId ?? Int.random(in: 1000...9999)
         
-        // Debug logging
-        print("🔍 SearchResult -> WikipediaArticle conversion:")
-        print("   Title: \(title)")
-        print("   ImageURL: \(imageURL ?? "nil")")
-        print("   Thumbnail source: \(thumbnail?.source ?? "nil")")
-        print("   Final ImageURL: \(finalImageURL ?? "nil")")
+        // Debug logging only in debug builds
+        #if DEBUG
+        LoggingService.shared.logInfo("SearchResult -> WikipediaArticle conversion for: \(title)", category: .general)
+        if finalImageURL == nil {
+            LoggingService.shared.logWarning("No image available for article: \(title)", category: .general)
+        }
+        #endif
         
         return WikipediaArticle(
             title: title,

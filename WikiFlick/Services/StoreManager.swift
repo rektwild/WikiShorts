@@ -46,8 +46,11 @@ class StoreManager: ObservableObject {
                 case .verified(let transaction):
                     await transaction.finish()
                     await updatePurchasedProducts()
-                case .unverified:
-                    errorMessage = "Transaction could not be verified"
+                case .unverified(let transaction, let verificationError):
+                    // Log security issue but don't grant entitlement
+                    print("🚨 SECURITY: Unverified transaction detected - \(verificationError)")
+                    await transaction.finish() // Finish to remove from queue but don't grant access
+                    errorMessage = "Purchase verification failed. Please contact support if this issue persists."
                 }
             case .userCancelled:
                 break

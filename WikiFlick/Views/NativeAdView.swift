@@ -225,19 +225,52 @@ struct NativeAdCardView: View {
     }
     
     private var titleView: some View {
-        Text(nativeAd.headline ?? "Sponsored Content")
-            .font(.system(size: 28, weight: .bold, design: .default))
-            .foregroundColor(.white)
-            .multilineTextAlignment(.leading)
-            .lineSpacing(2)
+        HStack(spacing: 12) {
+            Image(systemName: "star.fill")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.yellow)
+            
+            Text(nativeAd.headline ?? "🌟 Featured Content")
+                .font(.system(size: 28, weight: .bold, design: .default))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.leading)
+                .lineSpacing(2)
+            
+            Spacer()
+        }
     }
     
     private var descriptionView: some View {
-        Text(nativeAd.body ?? "This is a sponsored advertisement.")
-            .font(.system(size: 16, weight: .regular, design: .default))
-            .foregroundColor(.white.opacity(0.95))
-            .multilineTextAlignment(.leading)
-            .lineSpacing(4)
+        VStack(alignment: .leading, spacing: 12) {
+            Text(nativeAd.body ?? "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.")
+                .font(.system(size: 16, weight: .regular, design: .default))
+                .foregroundColor(.white.opacity(0.95))
+                .multilineTextAlignment(.leading)
+                .lineSpacing(4)
+            
+            // Enhanced branding section
+            HStack(spacing: 8) {
+                Image(systemName: "sparkles")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(.blue.opacity(0.8))
+                
+                Text("Sponsored · Recommended for You")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundColor(.blue.opacity(0.8))
+                
+                Spacer()
+                
+                HStack(spacing: 4) {
+                    Image(systemName: "heart.fill")
+                        .font(.system(size: 12))
+                        .foregroundColor(.red.opacity(0.8))
+                    
+                    Text("Premium Pick")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.white.opacity(0.7))
+                }
+            }
+        }
     }
     
     private var contentBackground: some View {
@@ -320,7 +353,7 @@ struct NativeAdCardView: View {
         Button(action: {
             // CTA action handled by AdMob
         }) {
-            Text(nativeAd.callToAction ?? "Learn More")
+            Text(nativeAd.callToAction ?? "Discover Now")
                 .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.horizontal, 16)
@@ -390,21 +423,70 @@ struct FeedAdView: View {
     }
     
     private func placeholderContent(_ geometry: GeometryProxy) -> some View {
-        VStack(spacing: 12) {
-            Image(systemName: "photo")
-                .font(.system(size: 40))
-                .foregroundColor(.gray.opacity(0.3))
+        ZStack {
+            // Gradient background for visual appeal
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(color: Color.blue.opacity(0.8), location: 0.0),
+                    .init(color: Color.purple.opacity(0.6), location: 0.5),
+                    .init(color: Color.indigo.opacity(0.8), location: 1.0)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
             
-            Text("Sponsored Content")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.gray.opacity(0.6))
+            // Animated elements
+            VStack(spacing: 16) {
+                // Rotating icon animation
+                ZStack {
+                    Circle()
+                        .stroke(Color.white.opacity(0.2), lineWidth: 2)
+                        .frame(width: 80, height: 80)
+                    
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 32, weight: .medium))
+                        .foregroundColor(.white)
+                        .scaleEffect(imageScale)
+                }
+                .rotationEffect(.degrees(imageOpacity * 360))
+                
+                VStack(spacing: 8) {
+                    Text("Sponsored")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    Text("Discover Amazing Content")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.white.opacity(0.8))
+                        .multilineTextAlignment(.center)
+                }
+            }
+            
+            // Floating particles effect
+            ForEach(0..<6, id: \.self) { index in
+                Circle()
+                    .fill(Color.white.opacity(0.3))
+                    .frame(width: CGFloat.random(in: 4...8), height: CGFloat.random(in: 4...8))
+                    .offset(
+                        x: CGFloat.random(in: -100...100),
+                        y: CGFloat.random(in: -100...100)
+                    )
+                    .scaleEffect(imageOpacity)
+                    .opacity(imageOpacity * 0.6)
+                    .animation(
+                        .easeInOut(duration: Double.random(in: 2...4))
+                        .repeatForever(autoreverses: true)
+                        .delay(Double(index) * 0.3),
+                        value: imageOpacity
+                    )
+            }
         }
         .frame(width: geometry.size.width - 20, height: geometry.size.height * 0.55)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .scaleEffect(imageScale)
         .opacity(imageOpacity)
         .onAppear {
-            withAnimation(.easeOut(duration: 0.8)) {
+            withAnimation(.easeOut(duration: 1.2)) {
                 imageScale = 1.0
                 imageOpacity = 1.0
             }
@@ -436,19 +518,52 @@ struct FeedAdView: View {
     }
     
     private var titleView: some View {
-        Text(nativeAd.headline ?? "Sponsored Content")
-            .font(.system(size: 28, weight: .bold, design: .default))
-            .foregroundColor(.white)
-            .multilineTextAlignment(.leading)
-            .lineSpacing(2)
+        HStack(spacing: 12) {
+            Image(systemName: "star.fill")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.yellow)
+            
+            Text(nativeAd.headline ?? "🌟 Featured Content")
+                .font(.system(size: 28, weight: .bold, design: .default))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.leading)
+                .lineSpacing(2)
+            
+            Spacer()
+        }
     }
     
     private var descriptionView: some View {
-        Text(nativeAd.body ?? "This is a sponsored advertisement.")
-            .font(.system(size: 16, weight: .regular, design: .default))
-            .foregroundColor(.white.opacity(0.95))
-            .multilineTextAlignment(.leading)
-            .lineSpacing(4)
+        VStack(alignment: .leading, spacing: 12) {
+            Text(nativeAd.body ?? "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.")
+                .font(.system(size: 16, weight: .regular, design: .default))
+                .foregroundColor(.white.opacity(0.95))
+                .multilineTextAlignment(.leading)
+                .lineSpacing(4)
+            
+            // Enhanced branding section
+            HStack(spacing: 8) {
+                Image(systemName: "sparkles")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(.blue.opacity(0.8))
+                
+                Text("Sponsored · Recommended for You")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundColor(.blue.opacity(0.8))
+                
+                Spacer()
+                
+                HStack(spacing: 4) {
+                    Image(systemName: "heart.fill")
+                        .font(.system(size: 12))
+                        .foregroundColor(.red.opacity(0.8))
+                    
+                    Text("Premium Pick")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.white.opacity(0.7))
+                }
+            }
+        }
     }
     
     private var contentBackground: some View {
@@ -530,7 +645,7 @@ struct FeedAdView: View {
         Button(action: {
             // CTA action handled by AdMob
         }) {
-            Text(nativeAd.callToAction ?? "Learn More")
+            Text(nativeAd.callToAction ?? "Discover Now")
                 .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.horizontal, 16)

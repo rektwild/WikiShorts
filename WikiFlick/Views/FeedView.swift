@@ -114,12 +114,32 @@ struct FeedView: View {
     }
     
     private func loadMoreContent() {
-        guard !isLoadingMore else { return }
-        isLoadingMore = true
+        guard !isLoadingMore else { 
+            LoggingService.shared.logInfo("Load more already in progress, skipping", category: .general)
+            return 
+        }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            wikipediaService.loadMoreArticles()
-            self.isLoadingMore = false
+        isLoadingMore = true
+        LoggingService.shared.logInfo("Starting load more content", category: .general)
+        
+        Task {
+            // Small delay to prevent rapid-fire requests
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+            
+            let initialArticleCount = await MainActor.run { wikipediaService.articles.count }
+            
+            await MainActor.run {
+                wikipediaService.loadMoreArticles()
+            }
+            
+            // Wait a bit more for the articles to actually load, then reset
+            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+            
+            await MainActor.run {
+                let finalArticleCount = wikipediaService.articles.count
+                LoggingService.shared.logInfo("Load more completed: \(initialArticleCount) -> \(finalArticleCount) articles", category: .general)
+                self.isLoadingMore = false
+            }
         }
     }
     

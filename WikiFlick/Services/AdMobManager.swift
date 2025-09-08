@@ -19,15 +19,15 @@ class AdMobManager: NSObject, ObservableObject {
     
     // Interstitial Ads
     private var interstitialAd: GADInterstitialAd?
-    private let interstitialAdUnitID = "ca-app-pub-7984188512879505/1948301985"
+    private let interstitialAdUnitID: String
     
     // Native Ads
     private var nativeAd: GADNativeAd?
-    private let nativeAdUnitID = "ca-app-pub-7984188512879505/2754504239"
+    private let nativeAdUnitID: String
     
     // Rewarded Ads
     private var rewardedAd: GADRewardedAd?
-    private let rewardedAdUnitID = "ca-app-pub-7984188512879505/1080112876"
+    private let rewardedAdUnitID: String
     
     @Published var isAdLoaded = false
     @Published var isNativeAdLoaded = false
@@ -42,6 +42,7 @@ class AdMobManager: NSObject, ObservableObject {
     private let interstitialAdFrequency = 5
     private let nativeAdFrequency = 5
     private let feedAdFrequency = 5
+    private let feedAdStartsFromIndex = 4 // Start showing feed ads from 5th article (index 4)
     
     private var hasATTPermission = false
     private var isAdMobInitialized = false
@@ -55,10 +56,21 @@ class AdMobManager: NSObject, ObservableObject {
     
     override init() {
         self.storeManager = StoreManager()
+        
+        // Initialize secure configuration
+        let config = SecureConfigManager.shared
+        self.interstitialAdUnitID = config.interstitialAdUnitID
+        self.nativeAdUnitID = config.nativeAdUnitID
+        self.rewardedAdUnitID = config.rewardedAdUnitID
+        
         super.init()
         
         // Set initial premium status
         self.isPremiumUser = storeManager.isPurchased("wiki_m")
+        
+        #if DEBUG
+        validateAdConfiguration()
+        #endif
         
         setupSubscriptionMonitoring()
         setupATTNotificationListener()
@@ -142,9 +154,11 @@ class AdMobManager: NSObject, ObservableObject {
         ) { [weak self] notification in
             if let status = notification.userInfo?["status"] as? ATTStatus {
                 print("🔐 ATT Permission updated: \(status)")
-                self?.hasATTPermission = true
-                self?.configureAdSettings(for: status)
-                self?.initializeAdMob()
+                Task { @MainActor in
+                    self?.hasATTPermission = true
+                    self?.configureAdSettings(for: status)
+                    self?.initializeAdMob()
+                }
             }
         }
         
@@ -302,8 +316,19 @@ class AdMobManager: NSObject, ObservableObject {
             return false
         }
         
+        // Don't show feed ads until we reach the starting index
+        if index < feedAdStartsFromIndex {
+            return false
+        }
+        
         let articleNumber = index + 1
-        return articleNumber % feedAdFrequency == 0 && isNativeAdLoaded
+        let shouldShow = articleNumber % feedAdFrequency == 0 && isNativeAdLoaded
+        
+        if shouldShow {
+            print("🎯 Showing feed ad at article index: \(index) (article number: \(articleNumber))")
+        }
+        
+        return shouldShow
     }
     
     func showInterstitialAd() {
@@ -396,39 +421,84 @@ class AdMobManager: NSObject, ObservableObject {
         let remainingTime = adFreeDurationMinutes - elapsedTime
         return remainingTime > 0 ? remainingTime : nil
     }
+    
+    // MARK: - Feed Ad Configuration
+    
+    func getFeedAdFrequency() -> Int {
+        return feedAdFrequency
+    }
+    
+    func getFeedAdStartIndex() -> Int {
+        return feedAdStartsFromIndex
+    }
+    
+    func isCurrentNativeAdValid() -> Bool {
+        return currentNativeAd != nil && isNativeAdLoaded
+    }
+    
+    // MARK: - Development Helpers
+    
+    #if DEBUG
+    private func validateAdConfiguration() {
+        let issues = SecureConfigManager.shared.validateConfiguration()
+        if !issues.isEmpty {
+            print("⚠️ Ad Configuration Issues:")
+            issues.forEach { print("  - \($0)") }
+        }
+        
+        // Additional validation
+        if interstitialAdUnitID.isEmpty {
+            print("🚨 CRITICAL: Interstitial Ad Unit ID is empty!")
+        }
+        if nativeAdUnitID.isEmpty {
+            print("🚨 CRITICAL: Native Ad Unit ID is empty!")
+        }
+        if rewardedAdUnitID.isEmpty {
+            print("🚨 CRITICAL: Rewarded Ad Unit ID is empty!")
+        }
+    }
+    #endif
 }
 
 extension AdMobManager: GADFullScreenContentDelegate {
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        if ad is GADInterstitialAd {
-            loadInterstitialAd()
-        } else if ad is GADRewardedAd {
-            loadRewardedAd()
+    nonisolated func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        Task { @MainActor in
+            if ad is GADInterstitialAd {
+                loadInterstitialAd()
+            } else if ad is GADRewardedAd {
+                loadRewardedAd()
+            }
         }
     }
     
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        if ad is GADInterstitialAd {
-            loadInterstitialAd()
-        } else if ad is GADRewardedAd {
-            loadRewardedAd()
+    nonisolated func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        Task { @MainActor in
+            if ad is GADInterstitialAd {
+                loadInterstitialAd()
+            } else if ad is GADRewardedAd {
+                loadRewardedAd()
+            }
         }
     }
     
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    nonisolated func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
     }
 }
 
 extension AdMobManager: GADAdLoaderDelegate {
-    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: Error) {
-        isNativeAdLoaded = false
+    nonisolated func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: Error) {
+        Task { @MainActor in
+            isNativeAdLoaded = false
+        }
     }
 }
 
 extension AdMobManager: GADNativeAdLoaderDelegate {
-    func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADNativeAd) {
-        self.nativeAd = nativeAd
-        self.currentNativeAd = nativeAd
-        self.isNativeAdLoaded = true
+    nonisolated func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADNativeAd) {
+        Task { @MainActor in
+            self.nativeAd = nativeAd
+            self.currentNativeAd = nativeAd
+            self.isNativeAdLoaded = true
+        }
     }
 }

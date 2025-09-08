@@ -96,9 +96,9 @@ class ArticleRepository: ArticleRepositoryProtocol {
     }
     
     func fetchArticleDetails(from searchResult: SearchResult, languageCode: String) -> AnyPublisher<WikipediaArticle, RepositoryError> {
-        // Check cache first
-        let randomPageId = Int.random(in: 1000...9999)
-        if let cachedArticle = cacheManager.getCachedArticle(pageId: randomPageId) {
+        // Check cache first using actual pageId from search result
+        if let pageId = searchResult.pageId,
+           let cachedArticle = cacheManager.getCachedArticle(pageId: pageId) {
             return Just(cachedArticle)
                 .setFailureType(to: RepositoryError.self)
                 .eraseToAnyPublisher()

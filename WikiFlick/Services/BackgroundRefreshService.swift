@@ -41,7 +41,12 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
         if #available(iOS 13.0, *) {
             // Register background task
             BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundTaskIdentifier, using: nil) { task in
-                self.handleBackgroundAppRefresh(task: task as! BGAppRefreshTask)
+                guard let refreshTask = task as? BGAppRefreshTask else {
+                    print("❌ Invalid background task type: \(type(of: task))")
+                    task.setTaskCompleted(success: false)
+                    return
+                }
+                self.handleBackgroundAppRefresh(task: refreshTask)
             }
         }
         #endif
@@ -74,21 +79,17 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
         let selectedTopics = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] ?? ["All Topics"]
         let languageCode = articleLanguageManager.languageCode
         
-        do {
-            // Preload articles for better user experience
-            let articles = await articleRepository.preloadArticles(
-                count: 5,
-                topics: selectedTopics,
-                languageCode: languageCode
-            )
-            
-            // Preload images
-            await articleRepository.preloadImages(for: articles)
-            
-            print("✅ Background refresh completed successfully - preloaded \(articles.count) articles")
-        } catch {
-            print("❌ Background refresh failed: \(error)")
-        }
+        // Preload articles for better user experience
+        let articles = await articleRepository.preloadArticles(
+            count: 5,
+            topics: selectedTopics,
+            languageCode: languageCode
+        )
+        
+        // Preload images
+        await articleRepository.preloadImages(for: articles)
+        
+        print("✅ Background refresh completed successfully - preloaded \(articles.count) articles")
     }
     
     func enableBackgroundRefresh(_ enabled: Bool) {
@@ -112,21 +113,16 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
         // Schedule the next background refresh
         scheduleBackgroundRefresh()
         
-        // Create a task to handle the refresh
+        // Create a single task to handle the refresh
         let refreshTask = Task {
             await handleBackgroundRefresh()
+            task.setTaskCompleted(success: true)
         }
         
         // Provide the background task with an expiration handler
         task.expirationHandler = {
             refreshTask.cancel()
             task.setTaskCompleted(success: false)
-        }
-        
-        // Execute the refresh
-        Task {
-            await handleBackgroundRefresh()
-            task.setTaskCompleted(success: true)
         }
     }
     #endif

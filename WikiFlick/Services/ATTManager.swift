@@ -16,6 +16,7 @@ final class ATTManager: ObservableObject {
     @Published var currentStatus: ATTStatus = .notDetermined
     private var didAttemptRequest = false
     private var hasStartedCoordination = false
+    private var observer: NSObjectProtocol?
     
     private init() {
         updateCurrentStatus()
@@ -35,7 +36,7 @@ final class ATTManager: ObservableObject {
         guard !hasStartedCoordination else { return }
         hasStartedCoordination = true
         
-        NotificationCenter.default.addObserver(
+        observer = NotificationCenter.default.addObserver(
             forName: UIApplication.didBecomeActiveNotification,
             object: nil,
             queue: .main
@@ -119,5 +120,11 @@ final class ATTManager: ObservableObject {
     
     private func updateCurrentStatus() {
         currentStatus = getCurrentStatus()
+    }
+    
+    deinit {
+        if let observer = observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
 }

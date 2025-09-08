@@ -44,18 +44,25 @@ class NetworkService: NetworkServiceProtocol {
     private let urlSession: URLSession
     private let requestTimeout: TimeInterval = 8.0
     private let userAgent = "WikiFlick/1.0"
+    private let certificatePinningService = CertificatePinningService.shared
     
-    init(urlSession: URLSession = .shared) {
-        self.urlSession = urlSession
+    init(urlSession: URLSession? = nil) {
+        if let urlSession = urlSession {
+            // Use provided session (useful for testing)
+            self.urlSession = urlSession
+        } else {
+            // Use secure session with certificate pinning for production
+            self.urlSession = certificatePinningService.createSecureURLSession()
+        }
     }
     
     func fetchRandomArticle(languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError> {
-        guard isValidLanguageCode(languageCode) else {
+        guard let url = SecureURLBuilder.randomArticleURL(languageCode: languageCode) else {
             return Fail(error: NetworkError.invalidLanguageCode)
                 .eraseToAnyPublisher()
         }
         
-        let urlString = "https://\(languageCode).wikipedia.org/api/rest_v1/page/random/summary"
+        let urlString = url.absoluteString
         
         return performRequest(urlString: urlString)
             .decode(type: RandomArticleResponse.self, decoder: JSONDecoder())
@@ -137,13 +144,15 @@ class NetworkService: NetworkServiceProtocol {
                 .eraseToAnyPublisher()
         }
         
-        guard isValidLanguageCode(languageCode) else {
+        guard SecureURLBuilder.isValidLanguageCode(languageCode) else {
             return Fail(error: NetworkError.invalidLanguageCode)
                 .eraseToAnyPublisher()
         }
         
-        let searchBaseURL = "https://\(languageCode).wikipedia.org/w/api.php"
-        var components = URLComponents(string: searchBaseURL)!
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "\(languageCode).wikipedia.org"
+        components.path = "/w/api.php"
         components.queryItems = [
             URLQueryItem(name: "action", value: "query"),
             URLQueryItem(name: "format", value: "json"),
@@ -170,7 +179,7 @@ class NetworkService: NetworkServiceProtocol {
         request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         
         return urlSession.dataTaskPublisher(for: request)
-            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.main)
+            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.global(qos: .userInitiated))
             .map(\.data)
             .tryMap { data in
                 let searchResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
@@ -209,7 +218,7 @@ class NetworkService: NetworkServiceProtocol {
         request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         
         return urlSession.dataTaskPublisher(for: request)
-            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.main)
+            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.global(qos: .userInitiated))
             .map(\.data)
             .mapError { error -> Error in
                 return error as Error
@@ -217,8 +226,10 @@ class NetworkService: NetworkServiceProtocol {
             .eraseToAnyPublisher()
     }
     
-    private func isValidLanguageCode(_ code: String) -> Bool {
-        return !code.isEmpty && code.count >= 2 && code.allSatisfy { $0.isLetter || $0 == "-" }
+    // MARK: - Validation
+    
+    private func isValidLanguageCode(_ languageCode: String) -> Bool {
+        return SecureURLBuilder.isValidLanguageCode(languageCode)
     }
     
     private func mapError(_ error: Error) -> NetworkError {
