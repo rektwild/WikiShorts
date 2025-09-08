@@ -1,6 +1,6 @@
 import Foundation
 
-struct WikipediaArticle: Identifiable, Codable {
+struct WikipediaArticle: Identifiable, Codable, Equatable {
     let id = UUID()
     let title: String
     let extract: String
@@ -35,6 +35,10 @@ struct WikipediaArticle: Identifiable, Codable {
         self.pageId = pageId
         self.imageURL = imageURL
         self.fullURL = fullURL
+    }
+    
+    static func == (lhs: WikipediaArticle, rhs: WikipediaArticle) -> Bool {
+        return lhs.pageId == rhs.pageId
     }
 }
 
