@@ -52,7 +52,7 @@ struct FeedView: View {
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 #endif
                 .ignoresSafeArea()
-                .onChange(of: currentIndex) { _, newIndex in
+                .onChange(of: currentIndex) { newIndex in
                     let feedItems = createFeedItems()
                     if newIndex >= feedItems.count - 2 {
                         wikipediaService.loadMoreArticles()

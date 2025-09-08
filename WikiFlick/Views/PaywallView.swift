@@ -38,7 +38,7 @@ struct PaywallView: View {
         } message: {
             Text(alertMessage)
         }
-        .onChange(of: storeManager.errorMessage) { _, errorMessage in
+        .onChange(of: storeManager.errorMessage) { errorMessage in
             if !errorMessage.isEmpty {
                 alertMessage = errorMessage
                 showingAlert = true
