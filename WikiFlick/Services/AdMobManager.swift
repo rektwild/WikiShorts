@@ -6,7 +6,7 @@ import Combine
 
 final class GlobalAdConfig {
     static let shared = GlobalAdConfig()
-    var nonPersonalizedExtras: GADExtras?
+    var nonPersonalizedExtras: Extras?
     
     private init() {}
 }
@@ -18,20 +18,20 @@ class AdMobManager: NSObject, ObservableObject {
     private let storeManager: StoreManager
     
     // Interstitial Ads
-    private var interstitialAd: GADInterstitialAd?
+    private var interstitialAd: InterstitialAd?
     private let interstitialAdUnitID: String
     
     // Native Ads
-    private var nativeAd: GADNativeAd?
+    private var nativeAd: NativeAd?
     private let nativeAdUnitID: String
     
     // Rewarded Ads
-    private var rewardedAd: GADRewardedAd?
+    private var rewardedAd: RewardedAd?
     private let rewardedAdUnitID: String
     
     @Published var isAdLoaded = false
     @Published var isNativeAdLoaded = false
-    @Published var currentNativeAd: GADNativeAd?
+    @Published var currentNativeAd: NativeAd?
     @Published var isRewardedAdLoaded = false
     
     // UI refresh trigger for premium status changes
@@ -178,7 +178,7 @@ class AdMobManager: NSObject, ObservableObject {
             return
         }
         
-        GADMobileAds.sharedInstance().start { [weak self] _ in
+        MobileAds.shared.start { [weak self] (initializationStatus: InitializationStatus) in
             print("✅ AdMob initialized successfully")
             self?.isAdMobInitialized = true
             self?.loadAllAds()
@@ -208,7 +208,7 @@ class AdMobManager: NSObject, ObservableObject {
     
     private func configureAdSettings(for attStatus: ATTStatus) {
         if attStatus != .authorized {
-            let extras = GADExtras()
+            let extras = Extras()
             extras.additionalParameters = ["npa": "1"]
             GlobalAdConfig.shared.nonPersonalizedExtras = extras
         } else {
@@ -216,8 +216,8 @@ class AdMobManager: NSObject, ObservableObject {
         }
     }
     
-    private func makeAdRequest() -> GADRequest {
-        let request = GADRequest()
+    private func makeAdRequest() -> Request {
+        let request = Request()
         if let extras = GlobalAdConfig.shared.nonPersonalizedExtras {
             request.register(extras)
         }
@@ -238,7 +238,7 @@ class AdMobManager: NSObject, ObservableObject {
         
         let request = makeAdRequest()
         
-        GADInterstitialAd.load(withAdUnitID: interstitialAdUnitID, request: request) { [weak self] ad, error in
+        InterstitialAd.load(with: interstitialAdUnitID, request: request) { [weak self] ad, error in
             DispatchQueue.main.async {
                 if let error = error {
                     print("❌ Failed to load interstitial ad: \(error.localizedDescription)")
@@ -266,7 +266,7 @@ class AdMobManager: NSObject, ObservableObject {
             return
         }
         
-        let adLoader = GADAdLoader(adUnitID: nativeAdUnitID, rootViewController: nil, adTypes: [.native], options: nil)
+        let adLoader = AdLoader(adUnitID: nativeAdUnitID, rootViewController: nil, adTypes: [.native], options: nil)
         adLoader.delegate = self
         adLoader.load(makeAdRequest())
     }
@@ -342,7 +342,7 @@ class AdMobManager: NSObject, ObservableObject {
                 return
             }
             
-            interstitialAd.present(fromRootViewController: rootViewController)
+            interstitialAd.present(from: rootViewController)
         }
     }
     
@@ -360,7 +360,7 @@ class AdMobManager: NSObject, ObservableObject {
         
         let request = makeAdRequest()
         
-        GADRewardedAd.load(withAdUnitID: rewardedAdUnitID, request: request) { [weak self] ad, error in
+        RewardedAd.load(with: rewardedAdUnitID, request: request) { [weak self] ad, error in
             DispatchQueue.main.async {
                 if let error = error {
                     print("❌ Failed to load rewarded ad: \(error.localizedDescription)")
@@ -392,10 +392,10 @@ class AdMobManager: NSObject, ObservableObject {
                 return
             }
             
-            rewardedAd.present(fromRootViewController: rootViewController) { [weak self] in
+            rewardedAd.present(from: rootViewController, userDidEarnRewardHandler: { [weak self] in
                 // Start 10-minute ad-free period
                 self?.startAdFreePeriod()
-            }
+            })
         }
     }
     
@@ -460,41 +460,41 @@ class AdMobManager: NSObject, ObservableObject {
     #endif
 }
 
-extension AdMobManager: GADFullScreenContentDelegate {
-    nonisolated func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+extension AdMobManager: FullScreenContentDelegate {
+    nonisolated func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         Task { @MainActor in
-            if ad is GADInterstitialAd {
+            if ad is InterstitialAd {
                 loadInterstitialAd()
-            } else if ad is GADRewardedAd {
+            } else if ad is RewardedAd {
                 loadRewardedAd()
             }
         }
     }
     
-    nonisolated func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+    nonisolated func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         Task { @MainActor in
-            if ad is GADInterstitialAd {
+            if ad is InterstitialAd {
                 loadInterstitialAd()
-            } else if ad is GADRewardedAd {
+            } else if ad is RewardedAd {
                 loadRewardedAd()
             }
         }
     }
     
-    nonisolated func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    nonisolated func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
     }
 }
 
-extension AdMobManager: GADAdLoaderDelegate {
-    nonisolated func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: Error) {
+extension AdMobManager: AdLoaderDelegate {
+    nonisolated func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
         Task { @MainActor in
             isNativeAdLoaded = false
         }
     }
 }
 
-extension AdMobManager: GADNativeAdLoaderDelegate {
-    nonisolated func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADNativeAd) {
+extension AdMobManager: NativeAdLoaderDelegate {
+    nonisolated func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         Task { @MainActor in
             self.nativeAd = nativeAd
             self.currentNativeAd = nativeAd

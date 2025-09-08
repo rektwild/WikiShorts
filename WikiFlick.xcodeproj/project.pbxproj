@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85519E902E51F01000A8685B /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 85519D7A2E50DFB800A8685B /* GoogleMobileAds */; };
+		85B38DD92E6F2B02003FFBE1 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 85B38DD82E6F2B02003FFBE1 /* GoogleMobileAds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85519E902E51F01000A8685B /* GoogleMobileAds in Frameworks */,
+				85B38DD92E6F2B02003FFBE1 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +117,7 @@
 			);
 			name = WikiFlick;
 			packageProductDependencies = (
-				85519D7A2E50DFB800A8685B /* GoogleMobileAds */,
+				85B38DD82E6F2B02003FFBE1 /* GoogleMobileAds */,
 			);
 			productName = WikiFlick;
 			productReference = 85519D4E2E50DFB600A8685B /* WikiFlick.app */;
@@ -284,7 +284,7 @@
 			mainGroup = 85519D452E50DFB600A8685B;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				85519D792E50DFB800A8685B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				85B38DD72E6F2B02003FFBE1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 85519D4F2E50DFB600A8685B /* Products */;
@@ -703,20 +703,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		85519D792E50DFB800A8685B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+		85B38DD72E6F2B02003FFBE1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 11.0.0;
+				minimumVersion = 12.10.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		85519D7A2E50DFB800A8685B /* GoogleMobileAds */ = {
+		85B38DD82E6F2B02003FFBE1 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 85519D792E50DFB800A8685B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			package = 85B38DD72E6F2B02003FFBE1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */

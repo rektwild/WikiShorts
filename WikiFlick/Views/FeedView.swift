@@ -9,8 +9,8 @@ extension Array {
 
 enum FeedItem {
     case article(WikipediaArticle)
-    case nativeAd(GADNativeAd)
-    case feedAd(GADNativeAd)
+    case nativeAd(NativeAd)
+    case feedAd(NativeAd)
 }
 
 struct FeedView: View {

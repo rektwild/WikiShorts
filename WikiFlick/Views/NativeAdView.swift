@@ -2,19 +2,19 @@ import SwiftUI
 import GoogleMobileAds
 
 struct NativeAdView: UIViewRepresentable {
-    let nativeAd: GADNativeAd
+    let nativeAd: NativeAd
     
-    func makeUIView(context: Context) -> GADNativeAdView {
-        let adView = GADNativeAdView()
+    func makeUIView(context: Context) -> GoogleMobileAds.NativeAdView {
+        let adView = GoogleMobileAds.NativeAdView()
         setupAdView(adView)
         return adView
     }
     
-    func updateUIView(_ uiView: GADNativeAdView, context: Context) {
+    func updateUIView(_ uiView: GoogleMobileAds.NativeAdView, context: Context) {
         uiView.nativeAd = nativeAd
     }
     
-    private func setupAdView(_ adView: GADNativeAdView) {
+    private func setupAdView(_ adView: GoogleMobileAds.NativeAdView) {
         adView.backgroundColor = UIColor.black
         adView.layer.cornerRadius = 12
         adView.clipsToBounds = true
@@ -114,7 +114,7 @@ struct NativeAdView: UIViewRepresentable {
 }
 
 struct NativeAdCardView: View {
-    let nativeAd: GADNativeAd
+    let nativeAd: NativeAd
     @State private var imageLoaded = false
     @State private var imageScale: CGFloat = 0.8
     @State private var imageOpacity: Double = 0.0
@@ -174,7 +174,7 @@ struct NativeAdCardView: View {
     
     private func imageContent(_ geometry: GeometryProxy) -> some View {
         VStack {
-            GADMediaViewWrapper(mediaContent: nativeAd.mediaContent)
+            MediaViewWrapper(mediaContent: nativeAd.mediaContent)
                 .frame(width: geometry.size.width - 10, height: geometry.size.height * 0.55)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .scaleEffect(imageScale)
@@ -365,7 +365,7 @@ struct NativeAdCardView: View {
 }
 
 struct FeedAdView: View {
-    let nativeAd: GADNativeAd
+    let nativeAd: NativeAd
     @State private var imageScale: CGFloat = 0.8
     @State private var imageOpacity: Double = 0.0
     
@@ -656,16 +656,16 @@ struct FeedAdView: View {
     }
 }
 
-struct GADMediaViewWrapper: UIViewRepresentable {
-    let mediaContent: GADMediaContent
+struct MediaViewWrapper: UIViewRepresentable {
+    let mediaContent: MediaContent
     
-    func makeUIView(context: Context) -> GADMediaView {
-        let mediaView = GADMediaView()
+    func makeUIView(context: Context) -> MediaView {
+        let mediaView = MediaView()
         mediaView.mediaContent = mediaContent
         return mediaView
     }
     
-    func updateUIView(_ uiView: GADMediaView, context: Context) {
+    func updateUIView(_ uiView: MediaView, context: Context) {
         uiView.mediaContent = mediaContent
     }
 }
