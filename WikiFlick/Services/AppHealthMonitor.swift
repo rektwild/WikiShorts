@@ -19,7 +19,10 @@ final class AppHealthMonitor {
         checkNetworkConfiguration()
         checkCacheHealth()
         checkSecurityConfiguration()
-        checkCriticalServices()
+        
+        Task { @MainActor in
+            checkCriticalServices()
+        }
         
         LoggingService.shared.logInfo("✅ App health check completed", category: .general)
         #endif
@@ -138,6 +141,7 @@ final class AppHealthMonitor {
     
     // MARK: - Critical Services
     
+    @MainActor
     private func checkCriticalServices() {
         // Check ATT Manager
         let attManager = ATTManager.shared

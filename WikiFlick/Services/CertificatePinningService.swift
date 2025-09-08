@@ -11,20 +11,22 @@ class CertificatePinningService: NSObject {
     
     // Wikipedia SSL certificate public key hashes (updated December 2024)
     // These need to be updated when Wikipedia changes certificates
+    #if DEBUG
+    private let wikipediaCertificateHashes: Set<String> = [
+        // Development: Allow any certificate for testing
+        "DEVELOPMENT_BYPASS_HASH_PLACEHOLDER_DO_NOT_USE_IN_PRODUCTION"
+    ]
+    #else
     private let wikipediaCertificateHashes: Set<String> = [
         // CRITICAL: Replace these with actual Wikipedia certificate hashes
         // To get real hashes, use: openssl s_client -connect en.wikipedia.org:443 -servername en.wikipedia.org
         // Then extract public key and compute SHA-256 hash
-        #if DEBUG
-        // Development: Allow any certificate for testing
-        "DEVELOPMENT_BYPASS_HASH_PLACEHOLDER_DO_NOT_USE_IN_PRODUCTION"
-        #else
         // Production: These MUST be replaced with real Wikipedia certificate hashes
         "REPLACE_WITH_REAL_WIKIPEDIA_PRIMARY_CERT_HASH",
         "REPLACE_WITH_REAL_WIKIPEDIA_BACKUP_CERT_HASH", 
         "REPLACE_WITH_REAL_WIKIPEDIA_ROOT_CERT_HASH"
-        #endif
     ]
+    #endif
     
     private let pinnedDomains: Set<String> = [
         "wikipedia.org",
@@ -50,26 +52,31 @@ class CertificatePinningService: NSObject {
     
     private func validatePinnedCertificate(_ serverTrust: SecTrust) -> Bool {
         // Evaluate server trust
-        var result: SecTrustResultType = .invalid
-        let status = SecTrustEvaluate(serverTrust, &result)
+        var error: CFError?
+        let isValid = SecTrustEvaluateWithError(serverTrust, &error)
         
-        guard status == errSecSuccess else {
-            print("🚨 Certificate validation failed with status: \(status)")
+        guard isValid else {
+            if let error = error {
+                print("🚨 Certificate validation failed with error: \(error)")
+            } else {
+                print("🚨 Certificate validation failed")
+            }
             return false
         }
         
         // Extract certificate chain
-        let certificateCount = SecTrustGetCertificateCount(serverTrust)
-        guard certificateCount > 0 else {
+        guard let certificateChain = SecTrustCopyCertificateChain(serverTrust) as? [SecCertificate] else {
+            print("🚨 Failed to get certificate chain")
+            return false
+        }
+        
+        guard !certificateChain.isEmpty else {
             print("🚨 No certificates in trust chain")
             return false
         }
         
         // Check each certificate in the chain
-        for i in 0..<certificateCount {
-            guard let certificate = SecTrustGetCertificateAtIndex(serverTrust, i) else {
-                continue
-            }
+        for certificate in certificateChain {
             
             // Get public key and compute hash
             if let publicKeyHash = getPublicKeyHash(from: certificate) {
@@ -94,11 +101,8 @@ class CertificatePinningService: NSObject {
     }
     
     private func evaluateDefaultTrust(_ serverTrust: SecTrust) -> Bool {
-        var result: SecTrustResultType = .invalid
-        let status = SecTrustEvaluate(serverTrust, &result)
-        
-        return status == errSecSuccess && 
-               (result == .unspecified || result == .proceed)
+        var error: CFError?
+        return SecTrustEvaluateWithError(serverTrust, &error)
     }
     
     private func getPublicKeyHash(from certificate: SecCertificate) -> String? {
@@ -113,7 +117,7 @@ class CertificatePinningService: NSObject {
         // Create SHA-256 hash of public key
         let data = publicKeyData as Data
         var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
-        data.withUnsafeBytes { bytes in
+        _ = data.withUnsafeBytes { bytes in
             CC_SHA256(bytes.baseAddress, CC_LONG(data.count), &hash)
         }
         

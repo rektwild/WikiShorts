@@ -111,7 +111,8 @@ final class LoggingService {
         if let host = urlComponents.host {
             sanitized += host
         }
-        if let path = urlComponents.path, !path.isEmpty {
+        let path = urlComponents.path
+        if !path.isEmpty {
             // Only show the first few path components
             let pathComponents = path.components(separatedBy: "/").prefix(3)
             sanitized += "/" + pathComponents.joined(separator: "/")

@@ -119,10 +119,6 @@ struct SecureURLBuilder {
 // MARK: - NetworkError Extension
 
 extension NetworkError {
-    static var invalidLanguageCode: NetworkError {
-        return .invalidURL
-    }
-    
     static var invalidSearchQuery: NetworkError {
         return .invalidURL
     }
