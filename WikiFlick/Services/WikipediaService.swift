@@ -41,6 +41,7 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     private let errorHandler = ErrorHandlingService.shared
     private let retryManager = RetryManager()
     private let searchHistoryManager = SearchHistoryManager.shared
+    private let topicNormalizationService = TopicNormalizationService.shared
     private var currentLanguage: String = ""
     private var currentTopics: [String] = []
     
@@ -53,11 +54,11 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         
         // Initialize current settings from the same sources as onboarding/settings
         currentLanguage = articleLanguageManager.languageCode
-        currentTopics = selectedTopics
+        currentTopics = normalizedSelectedTopics
         
         setupNotificationObservers()
         
-        print("🚀 WikipediaService initialized with language: \(articleLanguageManager.displayName) (\(articleLanguageManager.languageCode)) and topics: \(selectedTopics)")
+        print("🚀 WikipediaService initialized with language: \(articleLanguageManager.displayName) (\(articleLanguageManager.languageCode)) and topics: \(normalizedSelectedTopics)")
     }
     
     private func setupNotificationObservers() {
@@ -84,6 +85,10 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     
     private var selectedTopics: [String] {
         UserDefaults.standard.array(forKey: "selectedTopics") as? [String] ?? ["All Topics"]
+    }
+
+    private var normalizedSelectedTopics: [String] {
+        topicNormalizationService.getNormalizedTopicsFromUserDefaults()
     }
     
     var languageCode: String {
@@ -165,7 +170,7 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
                     maxAttempts: 3
                 ) {
                     try await self.articleRepository.fetchTopicBasedArticles(
-                        topics: self.selectedTopics,
+                        topics: self.normalizedSelectedTopics,
                         count: count,
                         languageCode: self.languageCode
                     ).async()
@@ -213,8 +218,8 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     }
     
     private func checkForTopicsChangeAndRefresh() {
-        let newTopics = selectedTopics
-        
+        let newTopics = normalizedSelectedTopics
+
         if newTopics != currentTopics {
             print("🔄 Topics changed: \(currentTopics) -> \(newTopics)")
             currentTopics = newTopics
@@ -223,7 +228,7 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     }
     
     private func refreshArticles() {
-        print("🔄 Refreshing articles for language: \(articleLanguageManager.displayName) (\(articleLanguageManager.languageCode)), topics: \(selectedTopics)")
+        print("🔄 Refreshing articles for language: \(articleLanguageManager.displayName) (\(articleLanguageManager.languageCode)), topics: \(normalizedSelectedTopics)")
         
         // Reset state first
         resetState()
@@ -245,7 +250,7 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         Task {
             let newArticles = await articleRepository.preloadArticles(
                 count: 5,
-                topics: selectedTopics,
+                topics: normalizedSelectedTopics,
                 languageCode: languageCode
             )
             

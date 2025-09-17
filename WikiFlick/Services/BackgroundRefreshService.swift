@@ -20,6 +20,7 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
     // Dependencies
     private let articleRepository: ArticleRepositoryProtocol
     private let articleLanguageManager = ArticleLanguageManager.shared
+    private let topicNormalizationService = TopicNormalizationService.shared
     
     // Settings
     private var isBackgroundRefreshEnabled: Bool {
@@ -76,9 +77,9 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
     func handleBackgroundRefresh() async {
         print("🔄 Starting background refresh...")
         
-        let selectedTopics = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] ?? ["All Topics"]
+        let selectedTopics = topicNormalizationService.getNormalizedTopicsFromUserDefaults()
         let languageCode = articleLanguageManager.languageCode
-        
+
         // Preload articles for better user experience
         let articles = await articleRepository.preloadArticles(
             count: 5,
