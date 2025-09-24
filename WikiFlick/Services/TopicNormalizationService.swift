@@ -25,6 +25,24 @@ class TopicNormalizationService {
         "technology_and_applied_sciences": "Technology and Applied Sciences"
     ]
 
+    /// Mapping from canonical topic labels to Wikipedia category names
+    private let categoryMap: [String: [String]] = [
+        "All Topics": [], // Special case - handled separately
+        "General Reference": ["Reference works", "Encyclopedias", "Dictionaries", "Reference"],
+        "Culture and the Arts": ["Arts", "Culture", "Music", "Visual arts", "Literature", "Film"],
+        "Geography and Places": ["Geography", "Countries", "Cities", "Continents", "Oceans", "Mountains"],
+        "Health and Fitness": ["Health", "Medicine", "Fitness", "Nutrition", "Diseases", "Healthcare"],
+        "History and Events": ["History", "Wars", "Historical events", "Ancient history", "Medieval history"],
+        "Human Activities": ["Sports", "Games", "Recreation", "Entertainment", "Festivals", "Competition"],
+        "Mathematics and Logic": ["Mathematics", "Logic", "Statistics", "Geometry", "Algebra", "Mathematical analysis"],
+        "Natural and Physical Sciences": ["Science", "Physics", "Chemistry", "Biology", "Nature", "Animals"],
+        "People and Self": ["Biographies", "People", "Scientists", "Artists", "Leaders", "Writers"],
+        "Philosophy and Thinking": ["Philosophy", "Ethics", "Philosophical movements", "Philosophers", "Logic"],
+        "Religion and Belief Systems": ["Religion", "Christianity", "Islam", "Buddhism", "Hinduism", "Religious texts"],
+        "Society and Social Sciences": ["Society", "Politics", "Government", "Law", "Economics", "Social issues"],
+        "Technology and Applied Sciences": ["Technology", "Computing", "Engineering", "Internet", "Software", "Innovation"]
+    ]
+
     /// Normalizes topic selections to canonical English labels that ArticleRepository understands
     /// - Parameter rawTopics: Array of topics from UserDefaults (may contain mix of English labels and localization keys)
     /// - Returns: Array of canonical English topic labels
@@ -68,7 +86,11 @@ class TopicNormalizationService {
     /// - Returns: Array of canonical English topic labels
     func getNormalizedTopicsFromUserDefaults() -> [String] {
         let rawTopics = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] ?? []
-        return normalizeTopics(rawTopics)
+        // If we have topic keys, convert them to display names first
+        let displayTopics = rawTopics.map { topic in
+            TopicManager.keyToDisplayMap[topic] ?? topic
+        }
+        return normalizeTopics(displayTopics)
     }
 
     /// Validates if a topic is supported by the ArticleRepository
@@ -94,5 +116,25 @@ class TopicNormalizationService {
             }
         }
         return canonicalTopic
+    }
+
+    /// Gets Wikipedia categories for a canonical topic
+    /// - Parameter topic: The canonical English topic label
+    /// - Returns: Array of Wikipedia category names
+    func getCategoriesForTopic(_ topic: String) -> [String] {
+        return categoryMap[topic] ?? []
+    }
+
+    /// Gets all Wikipedia categories for multiple topics
+    /// - Parameter topics: Array of canonical English topic labels
+    /// - Returns: Array of all Wikipedia category names
+    func getCategoriesForTopics(_ topics: [String]) -> [String] {
+        let allCategories = topics.flatMap { getCategoriesForTopic($0) }
+        // Remove duplicates while preserving order
+        return allCategories.reduce(into: [String]()) { result, category in
+            if !result.contains(category) {
+                result.append(category)
+            }
+        }
     }
 }

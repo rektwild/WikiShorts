@@ -58,10 +58,10 @@ struct FeedView: View {
                 #endif
                 .ignoresSafeArea()
                 .onChange(of: currentIndex) { newIndex in
-                    if newIndex >= feedItems.count - 2 && !isLoadingMore {
+                    if newIndex >= feedItems.count - 3 && !isLoadingMore {
                         loadMoreContent()
                     }
-                    
+
                     // Only count articles, not ads, for interstitial logic
                     if case .article(_) = feedItems[safe: newIndex] {
                         if adMobManager.shouldShowInterstitialAd() {
@@ -105,41 +105,33 @@ struct FeedView: View {
     }
     
     private func refreshFeed() {
+        // Clear all state
         wikipediaService.articles.removeAll()
         feedItems.removeAll()
         currentIndex = 0
         isLoadingMore = false
         adMobManager.resetArticleCount()
-        wikipediaService.fetchTopicBasedArticles()
+
+        // Small delay to ensure UI updates properly
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            wikipediaService.fetchTopicBasedArticles()
+        }
     }
     
     private func loadMoreContent() {
-        guard !isLoadingMore else { 
+        guard !isLoadingMore else {
             LoggingService.shared.logInfo("Load more already in progress, skipping", category: .general)
-            return 
+            return
         }
-        
+
         isLoadingMore = true
         LoggingService.shared.logInfo("Starting load more content", category: .general)
-        
-        Task {
-            // Small delay to prevent rapid-fire requests
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-            
-            let initialArticleCount = await MainActor.run { wikipediaService.articles.count }
-            
-            await MainActor.run {
-                wikipediaService.loadMoreArticles()
-            }
-            
-            // Wait a bit more for the articles to actually load, then reset
-            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
-            
-            await MainActor.run {
-                let finalArticleCount = wikipediaService.articles.count
-                LoggingService.shared.logInfo("Load more completed: \(initialArticleCount) -> \(finalArticleCount) articles", category: .general)
-                self.isLoadingMore = false
-            }
+
+        wikipediaService.loadMoreArticles()
+
+        // Reset loading flag after a short delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.isLoadingMore = false
         }
     }
     

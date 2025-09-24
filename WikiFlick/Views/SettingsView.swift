@@ -1,8 +1,8 @@
 import SwiftUI
+import StoreKit
 
 extension Notification.Name {
     static let settingsChanged = Notification.Name("settingsChanged")
-    static let topicsChanged = Notification.Name("topicsChanged")
 }
 
 struct SettingsView: View {
@@ -11,29 +11,14 @@ struct SettingsView: View {
     @StateObject private var notificationManager = NotificationManager.shared
     @StateObject private var articleLanguageManager = ArticleLanguageManager.shared
     @State private var showingLanguageSelection = false
-    @State private var selectedTopics: Set<String> = ["all_topics"]
+    @State private var selectedTopics: Set<String> = []
     @State private var showingTopicSelection = false
     @State private var showingArticleLanguageSelection = false
     @State private var showingPaywall = false
     @StateObject private var storeManager = StoreManager()
     
     private let languages = ["English", "Türkçe", "Deutsch", "Français", "Italiano", "中文"]
-    private let topics = [
-        "All Topics",
-        "General Reference", 
-        "Culture and the Arts",
-        "Geography and Places",
-        "Health and Fitness",
-        "History and Events",
-        "Human Activities",
-        "Mathematics and Logic",
-        "Natural and Physical Sciences",
-        "People and Self",
-        "Philosophy and Thinking",
-        "Religion and Belief Systems",
-        "Society and Social Sciences",
-        "Technology and Applied Sciences"
-    ]
+    private let topics = TopicManager.topicDisplayNames
     
     var body: some View {
         NavigationView {
@@ -169,14 +154,19 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
                     
-                    HStack {
-                        Image(systemName: "star")
-                        Text(languageManager.localizedString(key: "rate_app"))
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.secondary)
-                            .font(.caption)
+                    Button(action: {
+                        requestAppReview()
+                    }) {
+                        HStack {
+                            Image(systemName: "star")
+                            Text(languageManager.localizedString(key: "rate_app"))
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                        }
                     }
+                    .foregroundColor(.primary)
                 }
             }
             .navigationTitle(languageManager.localizedString(key: "settings"))
@@ -214,19 +204,13 @@ struct SettingsView: View {
     }
     
     private func loadSettings() {
-        if let topicsArray = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] {
-            selectedTopics = Set(topicsArray)
-        }
-        
-        if selectedTopics.isEmpty {
-            selectedTopics = ["all_topics"]
-        }
+        // Load saved topics using TopicManager
+        selectedTopics = TopicManager.getSavedTopicsAsKeys()
     }
     
     private func saveSettings() {
-        UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
-        
-        // No general notification needed - specific notifications are sent when needed
+        // Save topics using TopicManager
+        TopicManager.saveTopicsFromKeys(selectedTopics)
     }
     
     private func getTopicDisplayText() -> String {
@@ -235,6 +219,11 @@ struct SettingsView: View {
         } else {
             return "\(selectedTopics.count) \(languageManager.localizedString(key: "selected"))"
         }
+    }
+
+    private func requestAppReview() {
+        // Use the ReviewRequestManager for immediate review request
+        ReviewRequestManager.shared.requestReviewImmediately()
     }
 }
 
@@ -313,22 +302,7 @@ struct TopicSelectionView: View {
     @Binding var selectedTopics: Set<String>
     @StateObject private var languageManager = AppLanguageManager.shared
     
-    private let topicKeys = [
-        "all_topics",
-        "general_reference", 
-        "culture_and_arts",
-        "geography_and_places",
-        "health_and_fitness",
-        "history_and_events",
-        "human_activities",
-        "mathematics_and_logic",
-        "natural_and_physical_sciences",
-        "people_and_self",
-        "philosophy_and_thinking",
-        "religion_and_belief_systems",
-        "society_and_social_sciences",
-        "technology_and_applied_sciences"
-    ]
+    private let topicKeys = TopicManager.topicKeys
     
     private var localizedTopics: [(key: String, display: String)] {
         return topicKeys.map { key in
@@ -342,23 +316,29 @@ struct TopicSelectionView: View {
                 ForEach(localizedTopics, id: \.key) { topic in
                     Button(action: {
                         if topic.key == "all_topics" {
+                            // Toggle All Topics selection
                             if selectedTopics.contains("all_topics") {
-                                selectedTopics.removeAll()
+                                selectedTopics = ["all_topics"]  // Keep at least All Topics selected
                             } else {
-                                selectedTopics = Set(topicKeys)
+                                selectedTopics = ["all_topics"]  // Select only All Topics
                             }
                         } else {
-                            selectedTopics.remove("all_topics")
-                            if selectedTopics.contains(topic.key) {
-                                selectedTopics.remove(topic.key)
-                            } else {
+                            // If All Topics is selected, clear it and select the new topic
+                            if selectedTopics.contains("all_topics") {
+                                selectedTopics.removeAll()
                                 selectedTopics.insert(topic.key)
-                            }
-                            
-                            if selectedTopics.isEmpty {
-                                selectedTopics.insert("all_topics")
-                            } else if selectedTopics.count == topicKeys.count - 1 {
-                                selectedTopics.insert("all_topics")
+                            } else if selectedTopics.contains(topic.key) {
+                                // Remove the topic
+                                selectedTopics.remove(topic.key)
+                                // If no topics selected, default to All Topics
+                                if selectedTopics.isEmpty {
+                                    selectedTopics.insert("all_topics")
+                                }
+                            } else {
+                                // Check if we've reached the limit of 5 topics
+                                if selectedTopics.count < TopicManager.maxTopicSelection {
+                                    selectedTopics.insert(topic.key)
+                                }
                             }
                         }
                     }) {
@@ -379,9 +359,16 @@ struct TopicSelectionView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(AppLanguageManager.shared.localizedString(key: "done")) {
-                        UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
-                        NotificationCenter.default.post(name: .topicsChanged, object: nil)
+                        TopicManager.saveTopicsFromKeys(selectedTopics)
                         dismiss()
+                    }
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if !selectedTopics.contains("all_topics") && selectedTopics.count > 0 {
+                        Text("\(selectedTopics.count)/\(TopicManager.maxTopicSelection)")
+                            .foregroundColor(selectedTopics.count >= TopicManager.maxTopicSelection ? .orange : .secondary)
+                            .font(.system(size: 14))
                     }
                 }
             }

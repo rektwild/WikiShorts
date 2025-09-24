@@ -6,6 +6,7 @@ protocol NetworkServiceProtocol {
     func searchArticle(searchTerm: String, languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError>
     func fetchArticleDetails(from searchResult: SearchResult, languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError>
     func searchWikipedia(query: String, languageCode: String) -> AnyPublisher<[SearchResult], NetworkError>
+    func fetchCategoryMembers(category: String, languageCode: String, limit: Int) -> AnyPublisher<[SearchResult], NetworkError>
 }
 
 enum NetworkError: Error, LocalizedError {
@@ -206,7 +207,66 @@ class NetworkService: NetworkServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
-    
+
+    func fetchCategoryMembers(category: String, languageCode: String, limit: Int = 10) -> AnyPublisher<[SearchResult], NetworkError> {
+        guard SecureURLBuilder.isValidLanguageCode(languageCode) else {
+            return Fail(error: NetworkError.invalidLanguageCode)
+                .eraseToAnyPublisher()
+        }
+
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "\(languageCode).wikipedia.org"
+        components.path = "/w/api.php"
+        components.queryItems = [
+            URLQueryItem(name: "action", value: "query"),
+            URLQueryItem(name: "format", value: "json"),
+            URLQueryItem(name: "list", value: "categorymembers"),
+            URLQueryItem(name: "cmtitle", value: "Category:\(category)"),
+            URLQueryItem(name: "cmlimit", value: String(min(limit, 50))),
+            URLQueryItem(name: "cmnamespace", value: "0"), // Main namespace only
+            URLQueryItem(name: "cmprop", value: "ids|title"),
+            URLQueryItem(name: "cmdir", value: "desc") // Most recent first
+        ]
+
+        guard let url = components.url else {
+            return Fail(error: NetworkError.invalidURL)
+                .eraseToAnyPublisher()
+        }
+
+        var request = URLRequest(url: url)
+        request.timeoutInterval = requestTimeout
+        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+
+        return urlSession.dataTaskPublisher(for: request)
+            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.global(qos: .userInitiated))
+            .map(\.data)
+            .tryMap { data in
+                let categoryResponse = try JSONDecoder().decode(CategoryMembersResponse.self, from: data)
+
+                guard let members = categoryResponse.query?.categorymembers, !members.isEmpty else {
+                    return []
+                }
+
+                let results = members.compactMap { member -> SearchResult? in
+                    return SearchResult(
+                        title: member.title,
+                        description: "Article from \(category) category",
+                        url: "https://\(languageCode).wikipedia.org/wiki/\(member.title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")",
+                        thumbnail: nil,
+                        pageId: member.pageid,
+                        imageURL: nil
+                    )
+                }
+
+                return results
+            }
+            .mapError { error in
+                self.mapError(error)
+            }
+            .eraseToAnyPublisher()
+    }
+
     private func performRequest(urlString: String) -> AnyPublisher<Data, Error> {
         guard let url = URL(string: urlString) else {
             return Fail(error: NetworkError.invalidURL)
@@ -280,4 +340,19 @@ struct SearchThumbnail: Codable {
     let source: String
     let width: Int?
     let height: Int?
+}
+
+// MARK: - Category Members API Response Models
+
+struct CategoryMembersResponse: Codable {
+    let query: CategoryQuery?
+}
+
+struct CategoryQuery: Codable {
+    let categorymembers: [CategoryMember]?
+}
+
+struct CategoryMember: Codable {
+    let pageid: Int
+    let title: String
 }

@@ -72,6 +72,9 @@ struct ArticleCardView: View {
             Task {
                 await storeManager.loadProducts()
             }
+
+            // Track article read for review request purposes
+            ReviewRequestManager.shared.incrementArticleReadCount()
         }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PremiumStatusChanged"))) { notification in
             // Premium status changed, trigger UI refresh
