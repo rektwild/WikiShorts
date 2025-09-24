@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 extension Notification.Name {
     static let settingsChanged = Notification.Name("settingsChanged")
@@ -153,14 +154,19 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
                     
-                    HStack {
-                        Image(systemName: "star")
-                        Text(languageManager.localizedString(key: "rate_app"))
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(.secondary)
-                            .font(.caption)
+                    Button(action: {
+                        requestAppReview()
+                    }) {
+                        HStack {
+                            Image(systemName: "star")
+                            Text(languageManager.localizedString(key: "rate_app"))
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                        }
                     }
+                    .foregroundColor(.primary)
                 }
             }
             .navigationTitle(languageManager.localizedString(key: "settings"))
@@ -213,6 +219,11 @@ struct SettingsView: View {
         } else {
             return "\(selectedTopics.count) \(languageManager.localizedString(key: "selected"))"
         }
+    }
+
+    private func requestAppReview() {
+        // Use the ReviewRequestManager for immediate review request
+        ReviewRequestManager.shared.requestReviewImmediately()
     }
 }
 

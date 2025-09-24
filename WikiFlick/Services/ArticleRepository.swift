@@ -161,13 +161,10 @@ class ArticleRepository: ArticleRepositoryProtocol {
     func preloadArticles(count: Int, topics: [String], languageCode: String) async -> [WikipediaArticle] {
         var articles: [WikipediaArticle] = []
 
-        print("📚 preloadArticles called with topics: \(topics)")
-
         // Check for both "All Topics" and "all_topics"
         let hasAllTopics = topics.contains("All Topics") || topics.contains("all_topics")
 
         if hasAllTopics || topics.isEmpty {
-            print("   ➜ Fetching random articles (hasAllTopics: \(hasAllTopics), isEmpty: \(topics.isEmpty))")
             // Fetch random articles
             for _ in 0..<count {
                 do {
@@ -180,7 +177,6 @@ class ArticleRepository: ArticleRepositoryProtocol {
                 }
             }
         } else {
-            print("   ➜ Fetching topic-based articles for: \(topics)")
             // Fetch topic-based articles
             for topic in topics.prefix(3) {
                 let searchTerms = getSearchTermsForTopic(topic)
@@ -210,10 +206,7 @@ class ArticleRepository: ArticleRepositoryProtocol {
     func preloadCategoryBasedArticles(count: Int, categories: [String], languageCode: String) async -> [WikipediaArticle] {
         var articles: [WikipediaArticle] = []
 
-        print("📚 preloadCategoryBasedArticles called with categories: \(categories)")
-
         if categories.isEmpty {
-            print("   ➜ No categories, fetching random articles")
             // If no categories, fall back to random articles
             for _ in 0..<count {
                 do {
@@ -226,7 +219,6 @@ class ArticleRepository: ArticleRepositoryProtocol {
                 }
             }
         } else {
-            print("   ➜ Fetching from categories: \(categories)")
             // Fetch from categories
             for category in categories.prefix(min(3, categories.count)) {
                 let articlesPerCategory = max(1, count / min(categories.count, 3))

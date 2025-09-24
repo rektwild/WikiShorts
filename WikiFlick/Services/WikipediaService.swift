@@ -310,8 +310,6 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
             // Use the same logic as fetchTopicBasedArticles for consistency
             let categories = topicNormalizationService.getCategoriesForTopics(normalizedSelectedTopics)
 
-            print("🔄 Preloading articles - Topics: \(normalizedSelectedTopics), Categories: \(categories)")
-
             let newArticles: [WikipediaArticle]
             if !categories.isEmpty && !normalizedSelectedTopics.contains("All Topics") {
                 // Use category-based preloading
