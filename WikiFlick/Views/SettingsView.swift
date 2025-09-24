@@ -150,7 +150,7 @@ struct SettingsView: View {
                         Image(systemName: "info.circle")
                         Text(languageManager.localizedString(key: "app_version"))
                         Spacer()
-                        Text("1.0.0")
+                        Text("1.1")
                             .foregroundColor(.secondary)
                     }
                     
