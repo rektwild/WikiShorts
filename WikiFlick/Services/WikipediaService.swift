@@ -26,13 +26,14 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     @Published var hasError = false
     @Published var searchResults: [SearchResult] = []
     @Published var isSearching = false
-    
+
     private var cancellables = Set<AnyCancellable>()
     private var searchTask: Task<Void, Never>?
     private var preloadedArticles: [WikipediaArticle] = []
     private var isPreloading = false
     private var retryCount = 0
     private let maxRetries = 3
+    private var fetchedArticleIds: Set<Int> = []  // Track fetched article IDs to prevent duplicates
     
     // Dependencies
     private let articleRepository: ArticleRepositoryProtocol
@@ -121,7 +122,15 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
                 await MainActor.run {
                     self.setLoadingState(false)
                     if !articles.isEmpty {
-                        self.articles.append(contentsOf: articles)
+                        // Filter out duplicates before adding
+                        let uniqueArticles = articles.filter { article in
+                            !self.fetchedArticleIds.contains(article.pageId)
+                        }
+
+                        // Add unique articles and track their IDs
+                        self.articles.append(contentsOf: uniqueArticles)
+                        uniqueArticles.forEach { self.fetchedArticleIds.insert($0.pageId) }
+
                         self.clearErrorState()
                         self.preloadArticlesInBackground()
                     } else {
@@ -147,39 +156,85 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     func loadMoreArticles() {
         // Use preloaded articles if available
         if !preloadedArticles.isEmpty {
-            let articlesToAdd = Array(preloadedArticles.prefix(5))
-            preloadedArticles.removeFirst(min(5, preloadedArticles.count))
-            articles.append(contentsOf: articlesToAdd)
-            
-            // Preload more articles in background
+            // Filter out duplicates from preloaded articles
+            let uniquePreloaded = preloadedArticles.filter { article in
+                !fetchedArticleIds.contains(article.pageId)
+            }
+
+            let articlesToAdd = Array(uniquePreloaded.prefix(5))
+
+            if !articlesToAdd.isEmpty {
+                // Remove used articles from preloaded cache
+                preloadedArticles.removeAll { article in
+                    articlesToAdd.contains { $0.pageId == article.pageId }
+                }
+
+                // Add unique articles and track their IDs
+                articles.append(contentsOf: articlesToAdd)
+                articlesToAdd.forEach { fetchedArticleIds.insert($0.pageId) }
+            }
+
+            // Always try to preload more articles in background
             preloadArticlesInBackground()
+
+            // If we couldn't add any unique articles from preloaded, fetch new ones
+            if articlesToAdd.isEmpty {
+                fetchTopicBasedArticles(count: 10)
+            }
         } else {
-            fetchTopicBasedArticles(count: 5)
+            fetchTopicBasedArticles(count: 10)
         }
     }
     
     func fetchTopicBasedArticles(count: Int = 10) {
         guard !isLoading else { return }
-        
+
         setLoadingState(true)
-        
+
         Task {
             do {
-                let articles = try await retryManager.executeWithRetry(
-                    id: "fetchTopicBasedArticles",
-                    maxAttempts: 3
-                ) {
-                    try await self.articleRepository.fetchTopicBasedArticles(
-                        topics: self.normalizedSelectedTopics,
-                        count: count,
-                        languageCode: self.languageCode
-                    ).async()
+                // Try category-based articles first
+                let categories = topicNormalizationService.getCategoriesForTopics(normalizedSelectedTopics)
+
+                let articles: [WikipediaArticle]
+                if !categories.isEmpty && !normalizedSelectedTopics.contains("All Topics") {
+                    // Use category-based fetching
+                    articles = try await retryManager.executeWithRetry(
+                        id: "fetchCategoryBasedArticles",
+                        maxAttempts: 3
+                    ) {
+                        try await self.articleRepository.fetchCategoryBasedArticles(
+                            categories: categories,
+                            count: count,
+                            languageCode: self.languageCode
+                        ).async()
+                    }
+                } else {
+                    // Fall back to topic-based search
+                    articles = try await retryManager.executeWithRetry(
+                        id: "fetchTopicBasedArticles",
+                        maxAttempts: 3
+                    ) {
+                        try await self.articleRepository.fetchTopicBasedArticles(
+                            topics: self.normalizedSelectedTopics,
+                            count: count,
+                            languageCode: self.languageCode
+                        ).async()
+                    }
                 }
-                
+
                 await MainActor.run {
                     self.setLoadingState(false)
                     if !articles.isEmpty {
-                        self.articles.append(contentsOf: articles)
+                        // Filter out duplicates before adding
+                        let uniqueArticles = articles.filter { article in
+                            !self.fetchedArticleIds.contains(article.pageId)
+                        }
+
+                        // Add unique articles and track their IDs
+                        self.articles.append(contentsOf: uniqueArticles)
+                        uniqueArticles.forEach { self.fetchedArticleIds.insert($0.pageId) }
+
                         self.clearErrorState()
                         self.preloadArticlesInBackground()
                     } else {
@@ -209,10 +264,12 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     
     private func checkForLanguageChangeAndRefresh() {
         let newLanguage = articleLanguageManager.languageCode
-        
+
         if newLanguage != currentLanguage {
             print("🔄 Language changed: \(currentLanguage) -> \(newLanguage)")
             currentLanguage = newLanguage
+            // Clear the tracked IDs when language changes to avoid conflicts
+            fetchedArticleIds.removeAll()
             refreshArticles()
         }
     }
@@ -223,6 +280,8 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         if newTopics != currentTopics {
             print("🔄 Topics changed: \(currentTopics) -> \(newTopics)")
             currentTopics = newTopics
+            // Clear the tracked IDs when topics change to get fresh content
+            fetchedArticleIds.removeAll()
             refreshArticles()
         }
     }
@@ -243,22 +302,42 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     }
     
     private func preloadArticlesInBackground() {
-        guard !isPreloading && preloadedArticles.count < 10 else { return }
-        
+        guard !isPreloading && preloadedArticles.count < 20 else { return }  // Increased buffer size
+
         isPreloading = true
-        
+
         Task {
-            let newArticles = await articleRepository.preloadArticles(
-                count: 5,
-                topics: normalizedSelectedTopics,
-                languageCode: languageCode
-            )
-            
+            // Use the same logic as fetchTopicBasedArticles for consistency
+            let categories = topicNormalizationService.getCategoriesForTopics(normalizedSelectedTopics)
+
+            print("🔄 Preloading articles - Topics: \(normalizedSelectedTopics), Categories: \(categories)")
+
+            let newArticles: [WikipediaArticle]
+            if !categories.isEmpty && !normalizedSelectedTopics.contains("All Topics") {
+                // Use category-based preloading
+                newArticles = await articleRepository.preloadCategoryBasedArticles(
+                    count: 15,  // Fetch more at once
+                    categories: categories,
+                    languageCode: languageCode
+                )
+            } else {
+                // Use topic-based preloading
+                newArticles = await articleRepository.preloadArticles(
+                    count: 15,  // Fetch more at once
+                    topics: normalizedSelectedTopics,
+                    languageCode: languageCode
+                )
+            }
+
             await MainActor.run {
-                self.preloadedArticles.append(contentsOf: newArticles)
+                // Only add articles that haven't been fetched yet
+                let uniqueArticles = newArticles.filter { article in
+                    !self.fetchedArticleIds.contains(article.pageId)
+                }
+                self.preloadedArticles.append(contentsOf: uniqueArticles)
                 self.isPreloading = false
             }
-            
+
             // Preload images for the fetched articles
             await articleRepository.preloadImages(for: newArticles)
         }
@@ -373,6 +452,7 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     private func resetState() {
         articles.removeAll()
         preloadedArticles.removeAll()
+        fetchedArticleIds.removeAll()  // Clear tracked IDs when resetting
         isLoading = false
         isPreloading = false
         hasError = false

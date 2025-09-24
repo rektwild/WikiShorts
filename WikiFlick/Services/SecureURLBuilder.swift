@@ -89,7 +89,10 @@ struct SecureURLBuilder {
             "fur", "lad", "an", "ast", "ext", "mwl", "mihr", "nap", "scn",
             "vec", "lmo", "pms", "rgn", "lij", "eml", "frp", "oc", "pcd",
             "wa", "nrm", "vls", "li", "zea", "fy", "stq", "nds", "de-at",
-            "de-ch", "bar", "ksh", "pfl", "als", "gsw", "lb", "nl-be"
+            "de-ch", "bar", "ksh", "pfl", "als", "gsw", "lb", "nl-be",
+            // Additional languages from AppLanguage enum
+            "ceb", "arz", "war", "fa", "id", "sr", "ce", "ms", "uz", "el",
+            "az", "ka", "bn", "yue", "sh", "ta", "eo"
         ]
         
         return supportedLanguages.contains(languageCode.lowercased())

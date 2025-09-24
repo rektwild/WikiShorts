@@ -4,7 +4,7 @@ struct OnboardingView: View {
     @State private var currentStep = 0
     @State private var selectedAppLanguage: AppLanguage = .english
     @State private var selectedArticleLanguage: AppLanguage = .english
-    @State private var selectedTopics: Set<String> = ["All Topics"]
+    @State private var selectedTopics: Set<String> = []
     @State private var notificationPermissionGranted = false
     @State private var appLanguageSearchText = ""
     @State private var articleLanguageSearchText = ""
@@ -36,22 +36,7 @@ struct OnboardingView: View {
             }
         }
     }
-    private let topics = [
-        "All Topics",
-        "General Reference", 
-        "Culture and the Arts",
-        "Geography and Places",
-        "Health and Fitness",
-        "History and Events",
-        "Human Activities",
-        "Mathematics and Logic",
-        "Natural and Physical Sciences",
-        "People and Self",
-        "Philosophy and Thinking",
-        "Religion and Belief Systems",
-        "Society and Social Sciences",
-        "Technology and Applied Sciences"
-    ]
+    private let topics = TopicManager.topicDisplayNames
     
     var body: some View {
         ZStack {
@@ -76,11 +61,9 @@ struct OnboardingView: View {
         // Initialize with current language manager settings
         selectedAppLanguage = appLanguageManager.currentLanguage
         selectedArticleLanguage = articleLanguageManager.selectedLanguage
-        
-        // Initialize topics from UserDefaults if available
-        if let savedTopics = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] {
-            selectedTopics = Set(savedTopics)
-        }
+
+        // Initialize topics from UserDefaults using TopicManager
+        selectedTopics = TopicManager.getSavedTopicsAsDisplayNames()
     }
     
     private func AppLanguageSelectionScreen() -> some View {
@@ -317,10 +300,16 @@ struct OnboardingView: View {
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                 
-                Text("Select topics you're interested in")
+                Text("Select topics you're interested in (max 5)")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(.white.opacity(0.8))
                     .multilineTextAlignment(.center)
+
+                if selectedTopics.count > 0 && !selectedTopics.contains("All Topics") {
+                    Text("\(selectedTopics.count)/5 selected")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.white.opacity(0.6))
+                }
             }
             
             VStack(spacing: 12) {
@@ -503,23 +492,29 @@ struct OnboardingView: View {
     
     private func toggleTopic(_ topic: String) {
         if topic == "All Topics" {
+            // Toggle All Topics selection
             if selectedTopics.contains("All Topics") {
-                selectedTopics.removeAll()
+                selectedTopics = ["All Topics"]  // Keep at least All Topics selected
             } else {
-                selectedTopics = Set(topics)
+                selectedTopics = ["All Topics"]  // Select only All Topics
             }
         } else {
-            selectedTopics.remove("All Topics")
-            if selectedTopics.contains(topic) {
-                selectedTopics.remove(topic)
-            } else {
+            // If All Topics is selected, clear it and select the new topic
+            if selectedTopics.contains("All Topics") {
+                selectedTopics.removeAll()
                 selectedTopics.insert(topic)
-            }
-            
-            if selectedTopics.isEmpty {
-                selectedTopics.insert("All Topics")
-            } else if selectedTopics.count == topics.count - 1 {
-                selectedTopics.insert("All Topics")
+            } else if selectedTopics.contains(topic) {
+                // Remove the topic
+                selectedTopics.remove(topic)
+                // If no topics selected, default to All Topics
+                if selectedTopics.isEmpty {
+                    selectedTopics.insert("All Topics")
+                }
+            } else {
+                // Check if we've reached the limit of 5 topics
+                if selectedTopics.count < 5 {
+                    selectedTopics.insert(topic)
+                }
             }
         }
     }
@@ -527,16 +522,16 @@ struct OnboardingView: View {
     private func completeOnboarding() {
         // Apply app language selection to AppLanguageManager
         appLanguageManager.currentLanguage = selectedAppLanguage
-        
+
         // Apply article language selection to ArticleLanguageManager
         articleLanguageManager.selectLanguage(selectedArticleLanguage)
-        
-        // Save topics selection
-        UserDefaults.standard.set(Array(selectedTopics), forKey: "selectedTopics")
-        
+
+        // Save topics selection using TopicManager
+        TopicManager.saveTopics(displayNames: selectedTopics)
+
         // Mark onboarding as completed
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
-        
+
         showOnboarding = false
     }
 }
