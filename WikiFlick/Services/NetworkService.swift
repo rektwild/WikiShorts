@@ -45,15 +45,17 @@ class NetworkService: NetworkServiceProtocol {
     private let urlSession: URLSession
     private let requestTimeout: TimeInterval = 8.0
     private let userAgent = "WikiFlick/1.0"
-    private let certificatePinningService = CertificatePinningService.shared
-    
+
     init(urlSession: URLSession? = nil) {
         if let urlSession = urlSession {
             // Use provided session (useful for testing)
             self.urlSession = urlSession
         } else {
-            // Use secure session with certificate pinning for production
-            self.urlSession = certificatePinningService.createSecureURLSession()
+            // Use default URLSession configuration
+            let configuration = URLSessionConfiguration.default
+            configuration.timeoutIntervalForRequest = 30
+            configuration.timeoutIntervalForResource = 60
+            self.urlSession = URLSession(configuration: configuration)
         }
     }
     

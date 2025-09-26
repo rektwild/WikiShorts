@@ -18,7 +18,6 @@ final class AppHealthMonitor {
         checkThreadingIssues()
         checkNetworkConfiguration()
         checkCacheHealth()
-        checkSecurityConfiguration()
         
         Task { @MainActor in
             checkCriticalServices()
@@ -84,11 +83,6 @@ final class AppHealthMonitor {
         if !SecureURLBuilder.isValidLanguageCode("en") {
             LoggingService.shared.logError("URL builder validation failed for basic language code", category: .security)
         }
-        
-        // Check certificate pinning configuration
-        #if DEBUG
-        CertificatePinningService.shared.validateConfiguration()
-        #endif
     }
     
     // MARK: - Cache Health
