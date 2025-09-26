@@ -13,10 +13,22 @@ enum FeedItem {
     case feedAd(NativeAd)
 }
 
+struct VerticalPageTabViewStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 17.0, *) {
+            content
+                .scrollTargetBehavior(.paging)
+        } else {
+            content
+        }
+    }
+}
+
 struct FeedView: View {
     @StateObject private var wikipediaService = WikipediaService()
     @State private var currentIndex = 0
     @State private var feedItems: [FeedItem] = []
+    @Binding var selectedSearchArticle: WikipediaArticle?
     private let adMobManager = AdMobManager.shared
     
     var body: some View {
@@ -35,37 +47,92 @@ struct FeedView: View {
                     refreshFeed()
                 }
             } else {
-                TabView(selection: $currentIndex) {
-                    ForEach(Array(feedItems.enumerated()), id: \.offset) { index, item in
-                        Group {
-                            switch item {
-                            case .article(let article):
-                                ArticleCardView(article: article, onNavigateToTop: {
-                                    currentIndex = 0
-                                })
-                            case .nativeAd(let nativeAd):
-                                NativeAdCardView(nativeAd: nativeAd)
-                            case .feedAd(let nativeAd):
-                                FeedAdView(nativeAd: nativeAd)
+                GeometryReader { geometry in
+                    // Show search result if available, otherwise show feed
+                    if let searchArticle = selectedSearchArticle {
+                        // Show selected search article in full screen
+                        ArticleCardView(article: searchArticle, onNavigateToTop: nil)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                    } else if #available(iOS 17.0, *) {
+                        // iOS 17+ - Use ScrollView with paging
+                        ScrollView(.vertical, showsIndicators: false) {
+                            LazyVStack(spacing: 0) {
+                                ForEach(Array(feedItems.enumerated()), id: \.offset) { index, item in
+                                    Group {
+                                        switch item {
+                                        case .article(let article):
+                                            ArticleCardView(article: article, onNavigateToTop: {
+                                                currentIndex = 0
+                                            })
+                                        case .nativeAd(let nativeAd):
+                                            NativeAdCardView(nativeAd: nativeAd)
+                                        case .feedAd(let nativeAd):
+                                            FeedAdView(nativeAd: nativeAd)
+                                        }
+                                    }
+                                    .frame(width: geometry.size.width, height: geometry.size.height)
+                                    .onAppear {
+                                        currentIndex = index
+
+                                        if index >= feedItems.count - 3 {
+                                            loadMoreContent()
+                                        }
+
+                                        // Only count articles, not ads, for interstitial logic
+                                        if case .article(_) = feedItems[safe: index] {
+                                            if adMobManager.shouldShowInterstitialAd() {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                    adMobManager.showInterstitialAd()
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
-                        .tag(index)
-                    }
-                }
-                #if os(iOS)
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                #endif
-                .ignoresSafeArea()
-                .onChange(of: currentIndex) { newIndex in
-                    if newIndex >= feedItems.count - 3 {
-                        loadMoreContent()
-                    }
+                        .scrollTargetBehavior(.paging)
+                        .ignoresSafeArea()
+                    } else {
+                        // iOS 16 and earlier - Use TabView
+                        TabView(selection: $currentIndex) {
+                            ForEach(Array(feedItems.enumerated()), id: \.offset) { index, item in
+                                Group {
+                                    switch item {
+                                    case .article(let article):
+                                        ArticleCardView(article: article, onNavigateToTop: {
+                                            currentIndex = 0
+                                        })
+                                    case .nativeAd(let nativeAd):
+                                        NativeAdCardView(nativeAd: nativeAd)
+                                    case .feedAd(let nativeAd):
+                                        FeedAdView(nativeAd: nativeAd)
+                                    }
+                                }
+                                .tag(index)
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .rotationEffect(.degrees(-90))
+                            }
+                        }
+                        .frame(
+                            width: geometry.size.height,
+                            height: geometry.size.width
+                        )
+                        .rotationEffect(.degrees(90), anchor: .topLeading)
+                        .offset(x: geometry.size.width, y: 0)
+                        .tabViewStyle(.page(indexDisplayMode: .never))
+                        .ignoresSafeArea()
+                        .onChange(of: currentIndex) { newIndex in
+                            if newIndex >= feedItems.count - 3 {
+                                loadMoreContent()
+                            }
 
-                    // Only count articles, not ads, for interstitial logic
-                    if case .article(_) = feedItems[safe: newIndex] {
-                        if adMobManager.shouldShowInterstitialAd() {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                adMobManager.showInterstitialAd()
+                            // Only count articles, not ads, for interstitial logic
+                            if case .article(_) = feedItems[safe: newIndex] {
+                                if adMobManager.shouldShowInterstitialAd() {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        adMobManager.showInterstitialAd()
+                                    }
+                                }
                             }
                         }
                     }
@@ -230,5 +297,5 @@ struct ErrorStateView: View {
 }
 
 #Preview {
-    FeedView()
+    FeedView(selectedSearchArticle: .constant(nil))
 }
