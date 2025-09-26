@@ -29,18 +29,12 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
 
     private var cancellables = Set<AnyCancellable>()
     private var searchTask: Task<Void, Never>?
-    private var preloadedArticles: [WikipediaArticle] = []
-    private var isPreloading = false
-    private var retryCount = 0
-    private let maxRetries = 3
-    private var fetchedArticleIds: Set<Int> = []  // Track fetched article IDs to prevent duplicates
+    private var feedLoadingManager: FeedLoadingManager!
     
     // Dependencies
     private let articleRepository: ArticleRepositoryProtocol
     private let articleLanguageManager = ArticleLanguageManager.shared
     private let imageLoadingService: ImageLoadingServiceProtocol
-    private let errorHandler = ErrorHandlingService.shared
-    private let retryManager = RetryManager()
     private let searchHistoryManager = SearchHistoryManager.shared
     private let topicNormalizationService = TopicNormalizationService.shared
     private var currentLanguage: String = ""
@@ -56,10 +50,50 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         // Initialize current settings from the same sources as onboarding/settings
         currentLanguage = articleLanguageManager.languageCode
         currentTopics = normalizedSelectedTopics
-        
+
         setupNotificationObservers()
-        
+
+        Task { @MainActor in
+            self.feedLoadingManager = FeedLoadingManager.shared
+            syncWithFeedManager()
+        }
+
         print("🚀 WikipediaService initialized with language: \(articleLanguageManager.displayName) (\(articleLanguageManager.languageCode)) and topics: \(normalizedSelectedTopics)")
+    }
+
+    private func syncWithFeedManager() {
+        Task { @MainActor in
+            // Sync articles from FeedLoadingManager
+            feedLoadingManager.$articles
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] articles in
+                    self?.articles = articles
+                }
+                .store(in: &cancellables)
+
+            // Sync loading state
+            feedLoadingManager.$isLoading
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] isLoading in
+                    self?.isLoading = isLoading
+                }
+                .store(in: &cancellables)
+
+            // Sync error state
+            feedLoadingManager.$hasError
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] hasError in
+                    self?.hasError = hasError
+                }
+                .store(in: &cancellables)
+
+            feedLoadingManager.$errorMessage
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] errorMessage in
+                    self?.errorMessage = errorMessage
+                }
+                .store(in: &cancellables)
+        }
     }
     
     private func setupNotificationObservers() {
@@ -103,156 +137,24 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     }
     
     func fetchRandomArticles(count: Int = 10) {
-        guard !isLoading else { return }
-        
-        setLoadingState(true)
-        
-        Task {
-            do {
-                let articles = try await retryManager.executeWithRetry(
-                    id: "fetchRandomArticles",
-                    maxAttempts: 3
-                ) {
-                    try await self.articleRepository.fetchRandomArticles(
-                        count: count,
-                        languageCode: self.languageCode
-                    ).async()
-                }
-                
-                await MainActor.run {
-                    self.setLoadingState(false)
-                    if !articles.isEmpty {
-                        // Filter out duplicates before adding
-                        let uniqueArticles = articles.filter { article in
-                            !self.fetchedArticleIds.contains(article.pageId)
-                        }
-
-                        // Add unique articles and track their IDs
-                        self.articles.append(contentsOf: uniqueArticles)
-                        uniqueArticles.forEach { self.fetchedArticleIds.insert($0.pageId) }
-
-                        self.clearErrorState()
-                        self.preloadArticlesInBackground()
-                    } else {
-                        self.handleEmptyResult()
-                    }
-                }
-            } catch {
-                await MainActor.run {
-                    self.setLoadingState(false)
-                    if let repositoryError = error as? RepositoryError {
-                        self.handleRepositoryError(repositoryError)
-                    } else {
-                        let appError = self.errorHandler.handle(error: error, context: "fetchRandomArticles")
-                        self.hasError = true
-                        self.errorMessage = appError.localizedDescription
-                    }
-                }
-            }
+        // Delegate to FeedLoadingManager for centralized loading
+        Task { @MainActor in
+            feedLoadingManager.loadArticles(isInitialLoad: true)
         }
     }
     
     
     func loadMoreArticles() {
-        // Use preloaded articles if available
-        if !preloadedArticles.isEmpty {
-            // Filter out duplicates from preloaded articles
-            let uniquePreloaded = preloadedArticles.filter { article in
-                !fetchedArticleIds.contains(article.pageId)
-            }
-
-            let articlesToAdd = Array(uniquePreloaded.prefix(5))
-
-            if !articlesToAdd.isEmpty {
-                // Remove used articles from preloaded cache
-                preloadedArticles.removeAll { article in
-                    articlesToAdd.contains { $0.pageId == article.pageId }
-                }
-
-                // Add unique articles and track their IDs
-                articles.append(contentsOf: articlesToAdd)
-                articlesToAdd.forEach { fetchedArticleIds.insert($0.pageId) }
-            }
-
-            // Always try to preload more articles in background
-            preloadArticlesInBackground()
-
-            // If we couldn't add any unique articles from preloaded, fetch new ones
-            if articlesToAdd.isEmpty {
-                fetchTopicBasedArticles(count: 10)
-            }
-        } else {
-            fetchTopicBasedArticles(count: 10)
+        // Delegate to FeedLoadingManager for centralized loading
+        Task { @MainActor in
+            feedLoadingManager.loadArticles(isInitialLoad: false)
         }
     }
     
     func fetchTopicBasedArticles(count: Int = 10) {
-        guard !isLoading else { return }
-
-        setLoadingState(true)
-
-        Task {
-            do {
-                // Try category-based articles first
-                let categories = topicNormalizationService.getCategoriesForTopics(normalizedSelectedTopics)
-
-                let articles: [WikipediaArticle]
-                if !categories.isEmpty && !normalizedSelectedTopics.contains("All Topics") {
-                    // Use category-based fetching
-                    articles = try await retryManager.executeWithRetry(
-                        id: "fetchCategoryBasedArticles",
-                        maxAttempts: 3
-                    ) {
-                        try await self.articleRepository.fetchCategoryBasedArticles(
-                            categories: categories,
-                            count: count,
-                            languageCode: self.languageCode
-                        ).async()
-                    }
-                } else {
-                    // Fall back to topic-based search
-                    articles = try await retryManager.executeWithRetry(
-                        id: "fetchTopicBasedArticles",
-                        maxAttempts: 3
-                    ) {
-                        try await self.articleRepository.fetchTopicBasedArticles(
-                            topics: self.normalizedSelectedTopics,
-                            count: count,
-                            languageCode: self.languageCode
-                        ).async()
-                    }
-                }
-
-                await MainActor.run {
-                    self.setLoadingState(false)
-                    if !articles.isEmpty {
-                        // Filter out duplicates before adding
-                        let uniqueArticles = articles.filter { article in
-                            !self.fetchedArticleIds.contains(article.pageId)
-                        }
-
-                        // Add unique articles and track their IDs
-                        self.articles.append(contentsOf: uniqueArticles)
-                        uniqueArticles.forEach { self.fetchedArticleIds.insert($0.pageId) }
-
-                        self.clearErrorState()
-                        self.preloadArticlesInBackground()
-                    } else {
-                        self.handleEmptyResult()
-                    }
-                }
-            } catch {
-                await MainActor.run {
-                    self.setLoadingState(false)
-                    if let repositoryError = error as? RepositoryError {
-                        self.handleRepositoryError(repositoryError)
-                    } else {
-                        let appError = self.errorHandler.handle(error: error, context: "fetchTopicBasedArticles")
-                        self.hasError = true
-                        self.errorMessage = appError.localizedDescription
-                    }
-                }
-            }
+        // Delegate to FeedLoadingManager for centralized loading
+        Task { @MainActor in
+            feedLoadingManager.loadArticles(isInitialLoad: true)
         }
     }
     
@@ -268,9 +170,9 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         if newLanguage != currentLanguage {
             print("🔄 Language changed: \(currentLanguage) -> \(newLanguage)")
             currentLanguage = newLanguage
-            // Clear the tracked IDs when language changes to avoid conflicts
-            fetchedArticleIds.removeAll()
-            refreshArticles()
+            Task { @MainActor in
+                feedLoadingManager.handleLanguageChange()
+            }
         }
     }
     
@@ -280,66 +182,19 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         if newTopics != currentTopics {
             print("🔄 Topics changed: \(currentTopics) -> \(newTopics)")
             currentTopics = newTopics
-            // Clear the tracked IDs when topics change to get fresh content
-            fetchedArticleIds.removeAll()
-            refreshArticles()
+            Task { @MainActor in
+                feedLoadingManager.handleTopicsChange()
+            }
         }
     }
     
     private func refreshArticles() {
         print("🔄 Refreshing articles for language: \(articleLanguageManager.displayName) (\(articleLanguageManager.languageCode)), topics: \(normalizedSelectedTopics)")
-        
-        // Reset state first
-        resetState()
-        
-        // Cancel any existing requests
-        cancellables.removeAll()
-        
-        // Small delay to ensure UI updates properly
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.fetchTopicBasedArticles()
+        Task { @MainActor in
+            feedLoadingManager.refresh()
         }
     }
     
-    private func preloadArticlesInBackground() {
-        guard !isPreloading && preloadedArticles.count < 20 else { return }  // Increased buffer size
-
-        isPreloading = true
-
-        Task {
-            // Use the same logic as fetchTopicBasedArticles for consistency
-            let categories = topicNormalizationService.getCategoriesForTopics(normalizedSelectedTopics)
-
-            let newArticles: [WikipediaArticle]
-            if !categories.isEmpty && !normalizedSelectedTopics.contains("All Topics") {
-                // Use category-based preloading
-                newArticles = await articleRepository.preloadCategoryBasedArticles(
-                    count: 15,  // Fetch more at once
-                    categories: categories,
-                    languageCode: languageCode
-                )
-            } else {
-                // Use topic-based preloading
-                newArticles = await articleRepository.preloadArticles(
-                    count: 15,  // Fetch more at once
-                    topics: normalizedSelectedTopics,
-                    languageCode: languageCode
-                )
-            }
-
-            await MainActor.run {
-                // Only add articles that haven't been fetched yet
-                let uniqueArticles = newArticles.filter { article in
-                    !self.fetchedArticleIds.contains(article.pageId)
-                }
-                self.preloadedArticles.append(contentsOf: uniqueArticles)
-                self.isPreloading = false
-            }
-
-            // Preload images for the fetched articles
-            await articleRepository.preloadImages(for: newArticles)
-        }
-    }
     
     
     
@@ -434,77 +289,15 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
     
     // MARK: - Private Helper Methods
     
-    private func setLoadingState(_ loading: Bool) {
-        isLoading = loading
-        if loading {
-            hasError = false
-            errorMessage = nil
-        }
-    }
-    
-    private func clearErrorState() {
-        hasError = false
-        errorMessage = nil
-    }
     
     private func resetState() {
-        articles.removeAll()
-        preloadedArticles.removeAll()
-        fetchedArticleIds.removeAll()  // Clear tracked IDs when resetting
-        isLoading = false
-        isPreloading = false
-        hasError = false
-        errorMessage = nil
-        retryCount = 0
-    }
-    
-    private func handleRepositoryError(_ error: RepositoryError) {
-        let appError = errorHandler.handle(error: error, context: "WikipediaService")
-        hasError = true
-        errorMessage = appError.localizedDescription
-        
-        print("🚨 Repository error: \(appError)")
-        
-        // Try fallback to English if not already using it and it's a language-related error
-        if languageCode != "en", case .networkError(.notFound) = error {
-            fallbackToEnglish()
+        Task { @MainActor in
+            feedLoadingManager.reset()
         }
     }
     
     
-    private func handleEmptyResult() {
-        print("⚠️ No articles found for language '\(articleLanguageManager.displayName)' (\(languageCode))")
-        
-        setLoadingState(false)
-        errorMessage = "No articles found for \(articleLanguageManager.displayName)"
-        hasError = true
-        
-        // Try fallback to English if we're not already using English
-        if languageCode != "en" && articleLanguageManager.isLanguageSupported(.english) {
-            print("🔄 No articles found, attempting fallback to English...")
-            fallbackToEnglish()
-        } else {
-            print("❌ Already using English or English not available")
-            errorMessage = "No articles available. Please try again later."
-        }
-    }
     
-    private func fallbackToEnglish() {
-        // Temporarily override language to English
-        let originalLanguage = articleLanguageManager.selectedLanguage
-        
-        // Set English as fallback
-        articleLanguageManager.selectedLanguage = .english
-        
-        // Fetch articles in English
-        setLoadingState(true)
-        fetchRandomArticles(count: 5)
-        
-        // Restore original language setting after 2 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.articleLanguageManager.selectedLanguage = originalLanguage
-        }
-    }
     
     private func preloadSearchResultImages(_ results: [SearchResult]) {
         Task {

@@ -17,7 +17,6 @@ struct FeedView: View {
     @StateObject private var wikipediaService = WikipediaService()
     @State private var currentIndex = 0
     @State private var feedItems: [FeedItem] = []
-    @State private var isLoadingMore = false
     private let adMobManager = AdMobManager.shared
     
     var body: some View {
@@ -58,7 +57,7 @@ struct FeedView: View {
                 #endif
                 .ignoresSafeArea()
                 .onChange(of: currentIndex) { newIndex in
-                    if newIndex >= feedItems.count - 3 && !isLoadingMore {
+                    if newIndex >= feedItems.count - 3 {
                         loadMoreContent()
                     }
 
@@ -109,7 +108,6 @@ struct FeedView: View {
         wikipediaService.articles.removeAll()
         feedItems.removeAll()
         currentIndex = 0
-        isLoadingMore = false
         adMobManager.resetArticleCount()
 
         // Small delay to ensure UI updates properly
@@ -119,20 +117,9 @@ struct FeedView: View {
     }
     
     private func loadMoreContent() {
-        guard !isLoadingMore else {
-            LoggingService.shared.logInfo("Load more already in progress, skipping", category: .general)
-            return
-        }
-
-        isLoadingMore = true
-        LoggingService.shared.logInfo("Starting load more content", category: .general)
-
+        // The FeedLoadingManager now handles preventing concurrent loads
+        LoggingService.shared.logInfo("Requesting more content", category: .general)
         wikipediaService.loadMoreArticles()
-
-        // Reset loading flag after a short delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.isLoadingMore = false
-        }
     }
     
     private func updateFeedItems() {
