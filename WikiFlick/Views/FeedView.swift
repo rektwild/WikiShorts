@@ -78,9 +78,9 @@ struct FeedView: View {
                                             loadMoreContent()
                                         }
 
-                                        // Only count articles, not ads, for interstitial logic
+                                        // Track page views and show ad every 10 pages
                                         if case .article(_) = feedItems[safe: index] {
-                                            if adMobManager.shouldShowInterstitialAd() {
+                                            if adMobManager.incrementPageViewAndCheckAd() {
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                                     adMobManager.showInterstitialAd()
                                                 }
@@ -93,7 +93,7 @@ struct FeedView: View {
                         .scrollTargetBehavior(.paging)
                         .ignoresSafeArea()
                     } else {
-                        // iOS 16 and earlier - Use TabView
+                        // iOS 16 and earlier - Optimized TabView without rotation
                         TabView(selection: $currentIndex) {
                             ForEach(Array(feedItems.enumerated()), id: \.offset) { index, item in
                                 Group {
@@ -110,25 +110,19 @@ struct FeedView: View {
                                 }
                                 .tag(index)
                                 .frame(width: geometry.size.width, height: geometry.size.height)
-                                .rotationEffect(.degrees(-90))
                             }
                         }
-                        .frame(
-                            width: geometry.size.height,
-                            height: geometry.size.width
-                        )
-                        .rotationEffect(.degrees(90), anchor: .topLeading)
-                        .offset(x: geometry.size.width, y: 0)
                         .tabViewStyle(.page(indexDisplayMode: .never))
+                        .indexViewStyle(.page(backgroundDisplayMode: .never))
                         .ignoresSafeArea()
                         .onChange(of: currentIndex) { newIndex in
                             if newIndex >= feedItems.count - 3 {
                                 loadMoreContent()
                             }
 
-                            // Only count articles, not ads, for interstitial logic
+                            // Track page views and show ad every 10 pages
                             if case .article(_) = feedItems[safe: newIndex] {
-                                if adMobManager.shouldShowInterstitialAd() {
+                                if adMobManager.incrementPageViewAndCheckAd() {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                         adMobManager.showInterstitialAd()
                                     }
@@ -200,18 +194,13 @@ struct FeedView: View {
     
     private func createFeedItems() -> [FeedItem] {
         var feedItems: [FeedItem] = []
-        
-        for (index, article) in wikipediaService.articles.enumerated() {
+
+        for (_, article) in wikipediaService.articles.enumerated() {
             feedItems.append(.article(article))
-            
-            // Add feed ad every 5 articles (instead of native ad)
-            if adMobManager.shouldShowFeedAd(forArticleIndex: index) {
-                if let nativeAd = adMobManager.currentNativeAd {
-                    feedItems.append(.feedAd(nativeAd))
-                }
-            }
+            // No feed ads mixed in with articles anymore
+            // Ads will be shown based on page views instead
         }
-        
+
         return feedItems
     }
 }

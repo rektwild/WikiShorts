@@ -44,7 +44,7 @@ enum AppLanguage: String, CaseIterable {
     case thai = "th"
     case bangla = "bn"
     case croatian = "hr"
-    case cantonese = "yue"
+    // case cantonese = "yue"  // REMOVED - API issues
     case serboCroatian = "sh"
     case slovak = "sk"
     case tamil = "ta"
@@ -64,18 +64,18 @@ enum AppLanguage: String, CaseIterable {
     case galician = "gl"
     case armenian = "hy"
     case belarusian = "be"
-    case wu = "wuu"
+    // case wu = "wuu"  // REMOVED - Limited content
     case tagalog = "tl"
     case norwegianNynorsk = "nn"
     case telugu = "te"
     case asturian = "ast"
-    case oldEnglish = "ang"
+    // case oldEnglish = "ang"  // REMOVED - Very limited content
     case latvian = "lv"
     case burmese = "my"
     case macedonian = "mk"
     case scots = "sco"
     case alemannic = "als"
-    case literaryChinese = "lzh"
+    // case literaryChinese = "lzh"  // REMOVED - Returns empty results
     case icelandic = "is"
     case welsh = "cy"
     case irish = "ga"
@@ -170,8 +170,8 @@ enum AppLanguage: String, CaseIterable {
             return "বাংলা"
         case .croatian:
             return "Hrvatski"
-        case .cantonese:
-            return "粵語"
+        // case .cantonese:
+        //     return "粵語"
         case .serboCroatian:
             return "Srpskohrvatski"
         case .slovak:
@@ -210,8 +210,8 @@ enum AppLanguage: String, CaseIterable {
             return "Հայերեն"
         case .belarusian:
             return "Беларуская"
-        case .wu:
-            return "吳語"
+        // case .wu:
+        //     return "吳語"
         case .tagalog:
             return "Tagalog"
         case .norwegianNynorsk:
@@ -220,8 +220,8 @@ enum AppLanguage: String, CaseIterable {
             return "తెలుగు"
         case .asturian:
             return "Asturianu"
-        case .oldEnglish:
-            return "Ænglisc"
+        // case .oldEnglish:
+        //     return "Ænglisc"
         case .latvian:
             return "Latviešu"
         case .burmese:
@@ -232,8 +232,8 @@ enum AppLanguage: String, CaseIterable {
             return "Scots"
         case .alemannic:
             return "Alemannisch"
-        case .literaryChinese:
-            return "文言"
+        // case .literaryChinese:
+        //     return "文言"
         case .icelandic:
             return "Íslenska"
         case .welsh:
@@ -337,8 +337,8 @@ enum AppLanguage: String, CaseIterable {
             return "🇧🇩"
         case .croatian:
             return "🇭🇷"
-        case .cantonese:
-            return "🇭🇰"
+        // case .cantonese:
+        //     return "🇭🇰"
         case .serboCroatian:
             return "🏳️"
         case .slovak:
@@ -377,8 +377,8 @@ enum AppLanguage: String, CaseIterable {
             return "🇦🇲"
         case .belarusian:
             return "🇧🇾"
-        case .wu:
-            return "🇨🇳"
+        // case .wu:
+        //     return "🇨🇳"
         case .tagalog:
             return "🇵🇭"
         case .norwegianNynorsk:
@@ -387,8 +387,8 @@ enum AppLanguage: String, CaseIterable {
             return "🇮🇳"
         case .asturian:
             return "🏴"
-        case .oldEnglish:
-            return "🏛️"
+        // case .oldEnglish:
+        //     return "🏛️"
         case .latvian:
             return "🇱🇻"
         case .burmese:
@@ -399,8 +399,8 @@ enum AppLanguage: String, CaseIterable {
             return "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
         case .alemannic:
             return "🇨🇭"
-        case .literaryChinese:
-            return "🇨🇳"
+        // case .literaryChinese:
+        //     return "🇨🇳"
         case .icelandic:
             return "🇮🇸"
         case .welsh:
@@ -419,9 +419,9 @@ enum AppLanguage: String, CaseIterable {
     }
     
     var isWorkingWikipedia: Bool {
-        // These languages have been tested and don't work with Wikipedia API
-        let failedLanguages: Set<String> = ["lzh", "yue"]
-        return !failedLanguages.contains(self.rawValue)
+        // All languages in the enum are now tested and working
+        // Non-working languages have been commented out/removed
+        return true
     }
     
     static var workingLanguages: [AppLanguage] {

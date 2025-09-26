@@ -38,8 +38,8 @@ class AdMobManager: NSObject, ObservableObject {
     @Published var premiumStatusChanged = false
     @Published var isPremiumUser = false
     
-    private var articleCount = 0
-    private let interstitialAdFrequency = 5
+    private var pageViewCount = 0
+    private let interstitialAdFrequency = 10  // Show ad every 10 page views
     private let nativeAdFrequency = 5
     private let feedAdFrequency = 5
     private let feedAdStartsFromIndex = 4 // Start showing feed ads from 5th article (index 4)
@@ -276,15 +276,33 @@ class AdMobManager: NSObject, ObservableObject {
         if shouldSkipAdsForPremium() {
             return false
         }
-        
+
         // Don't show ads during ad-free period
         if isInAdFreePeriod() {
             return false
         }
-        
-        articleCount += 1
-        
-        if articleCount % interstitialAdFrequency == 0 && isAdLoaded {
+
+        // Don't increment here - use incrementPageView() instead
+        return false
+    }
+
+    // New method to track page views and check if ad should be shown
+    func incrementPageViewAndCheckAd() -> Bool {
+        // Premium users never see ads
+        if shouldSkipAdsForPremium() {
+            return false
+        }
+
+        // Don't show ads during ad-free period
+        if isInAdFreePeriod() {
+            return false
+        }
+
+        pageViewCount += 1
+        print("📄 Page view: \(pageViewCount)")
+
+        if pageViewCount % interstitialAdFrequency == 0 && isAdLoaded {
+            print("🎯 Showing ad after \(pageViewCount) page views")
             return true
         }
         return false
@@ -400,7 +418,11 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     func resetArticleCount() {
-        articleCount = 0
+        pageViewCount = 0
+    }
+
+    func resetPageViewCount() {
+        pageViewCount = 0
     }
     
     // MARK: - Ad-free period methods

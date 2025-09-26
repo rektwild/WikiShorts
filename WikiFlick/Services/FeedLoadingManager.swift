@@ -48,22 +48,47 @@ class FeedLoadingManager: ObservableObject {
 
     /// Clear all articles and reset state
     func reset() {
+        // Cancel tasks gracefully
         activeFetchTask?.cancel()
         preloadTask?.cancel()
 
-        articles.removeAll()
-        preloadedArticles.removeAll()
-        fetchedArticleIds.removeAll()
-        isLoading = false
-        isPreloading = false
-        hasError = false
-        errorMessage = nil
+        // Wait a tiny bit for cancellation to complete
+        Task {
+            try? await Task.sleep(nanoseconds: 50_000_000) // 0.05 seconds
+
+            articles.removeAll()
+            preloadedArticles.removeAll()
+            fetchedArticleIds.removeAll()
+            isLoading = false
+            isPreloading = false
+            hasError = false
+            errorMessage = nil
+        }
     }
 
     /// Refresh feed with new content
     func refresh() {
-        reset()
-        loadArticles(isInitialLoad: true)
+        // Cancel existing tasks
+        activeFetchTask?.cancel()
+        preloadTask?.cancel()
+
+        // Create new task for refresh
+        Task {
+            // Small delay to ensure cancellation completes
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+
+            // Clear state
+            articles.removeAll()
+            preloadedArticles.removeAll()
+            fetchedArticleIds.removeAll()
+            isLoading = false
+            isPreloading = false
+            hasError = false
+            errorMessage = nil
+
+            // Load new articles
+            loadArticles(isInitialLoad: true)
+        }
     }
 
     // MARK: - Private Methods
@@ -80,6 +105,12 @@ class FeedLoadingManager: ObservableObject {
         errorMessage = nil
 
         do {
+            // Check for task cancellation
+            if Task.isCancelled {
+                isLoading = false
+                return
+            }
+
             // First, try to use preloaded articles if available
             if !isInitialLoad && !preloadedArticles.isEmpty {
                 let addedCount = addPreloadedArticles()
@@ -92,8 +123,20 @@ class FeedLoadingManager: ObservableObject {
                 }
             }
 
+            // Check for task cancellation before API call
+            if Task.isCancelled {
+                isLoading = false
+                return
+            }
+
             // Fetch new articles from API
             let newArticles = try await fetchArticlesFromAPI()
+
+            // Check for task cancellation after API call
+            if Task.isCancelled {
+                isLoading = false
+                return
+            }
 
             // Filter and add unique articles
             let uniqueArticles = newArticles.filter { article in
@@ -114,8 +157,13 @@ class FeedLoadingManager: ObservableObject {
             ensurePreloadBuffer()
 
         } catch {
-            isLoading = false
-            handleError(error)
+            // Don't handle error if task was cancelled
+            if !Task.isCancelled {
+                isLoading = false
+                handleError(error)
+            } else {
+                isLoading = false
+            }
         }
     }
 
@@ -189,6 +237,12 @@ class FeedLoadingManager: ObservableObject {
         isPreloading = true
 
         do {
+            // Check for task cancellation
+            if Task.isCancelled {
+                isPreloading = false
+                return
+            }
+
             let languageCode = articleLanguageManager.languageCode
             let topics = topicNormalizationService.getNormalizedTopicsFromUserDefaults()
             let categories = topicNormalizationService.getCategoriesForTopics(topics)
@@ -209,6 +263,12 @@ class FeedLoadingManager: ObservableObject {
                 )
             }
 
+            // Check for task cancellation after fetching
+            if Task.isCancelled {
+                isPreloading = false
+                return
+            }
+
             // Filter unique articles
             let uniqueArticles = newArticles.filter { article in
                 !fetchedArticleIds.contains(article.pageId)
@@ -218,11 +278,16 @@ class FeedLoadingManager: ObservableObject {
 
             LoggingService.shared.logInfo("📦 Preloaded \(uniqueArticles.count) articles (buffer: \(preloadedArticles.count))", category: .general)
 
-            // Preload images for better UX
-            await articleRepository.preloadImages(for: uniqueArticles)
+            // Preload images for better UX (only if not cancelled)
+            if !Task.isCancelled {
+                await articleRepository.preloadImages(for: uniqueArticles)
+            }
 
         } catch {
-            LoggingService.shared.logError("Preload failed: \(error)", category: .general)
+            // Don't log error if task was cancelled
+            if !Task.isCancelled {
+                LoggingService.shared.logError("Preload failed: \(error)", category: .general)
+            }
         }
 
         isPreloading = false

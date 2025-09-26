@@ -60,7 +60,27 @@ class NetworkService: NetworkServiceProtocol {
     }
     
     func fetchRandomArticle(languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError> {
-        guard let url = SecureURLBuilder.randomArticleURL(languageCode: languageCode) else {
+        // Validate and potentially fix language code
+        let validLanguageCode = isValidLanguageCode(languageCode) ? languageCode : "en"
+
+        guard let url = SecureURLBuilder.randomArticleURL(languageCode: validLanguageCode) else {
+            // Fallback to English if URL building fails
+            if let englishURL = SecureURLBuilder.randomArticleURL(languageCode: "en") {
+                print("⚠️ Language code '\(languageCode)' failed, falling back to English")
+                return performRequest(urlString: englishURL.absoluteString)
+                    .decode(type: RandomArticleResponse.self, decoder: JSONDecoder())
+                    .map { response in
+                        WikipediaArticle(
+                            title: response.title,
+                            extract: response.extract,
+                            pageId: response.pageId,
+                            imageURL: response.thumbnail?.source,
+                            fullURL: response.contentURLs.desktop.page
+                        )
+                    }
+                    .mapError { self.mapError($0) }
+                    .eraseToAnyPublisher()
+            }
             return Fail(error: NetworkError.invalidLanguageCode)
                 .eraseToAnyPublisher()
         }
