@@ -5,17 +5,9 @@ import Foundation
 final class SecureConfigManager {
     static let shared = SecureConfigManager()
     
-    private let configBundle: Bundle
-    
     private init() {
         // In production, consider using encrypted configuration or Keychain
-        guard let path = Bundle.main.path(forResource: "AdMobConfig", ofType: "plist"),
-              let bundle = Bundle(path: path) else {
-            self.configBundle = Bundle.main
-            print("⚠️ Warning: AdMobConfig.plist not found, using main bundle")
-            return
-        }
-        self.configBundle = bundle
+        // Configuration is loaded directly from Bundle.main in getConfigValue
     }
     
     // MARK: - AdMob Configuration

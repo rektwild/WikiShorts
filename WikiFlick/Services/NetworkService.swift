@@ -7,6 +7,7 @@ protocol NetworkServiceProtocol {
     func fetchArticleDetails(from searchResult: SearchResult, languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError>
     func searchWikipedia(query: String, languageCode: String) -> AnyPublisher<[SearchResult], NetworkError>
     func fetchCategoryMembers(category: String, languageCode: String, limit: Int) -> AnyPublisher<[SearchResult], NetworkError>
+    func fetchOnThisDayEvents(month: Int, day: Int, languageCode: String) -> AnyPublisher<OnThisDayResponse, NetworkError>
 }
 
 enum NetworkError: Error, LocalizedError {
@@ -288,7 +289,43 @@ class NetworkService: NetworkServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
-
+    
+    func fetchOnThisDayEvents(month: Int, day: Int, languageCode: String) -> AnyPublisher<OnThisDayResponse, NetworkError> {
+        guard SecureURLBuilder.isValidLanguageCode(languageCode) else {
+            return Fail(error: NetworkError.invalidLanguageCode)
+                .eraseToAnyPublisher()
+        }
+        
+        // Format month and day with leading zeros
+        let monthString = String(format: "%02d", month)
+        let dayString = String(format: "%02d", day)
+        
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "\(languageCode).wikipedia.org"
+        components.path = "/api/rest_v1/feed/onthisday/all/\(monthString)/\(dayString)"
+        
+        guard let url = components.url else {
+            return Fail(error: NetworkError.invalidURL)
+                .eraseToAnyPublisher()
+        }
+        
+        var request = URLRequest(url: url)
+        request.timeoutInterval = requestTimeout
+        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.global(qos: .userInitiated))
+            .map(\.data)
+            .tryMap { data in
+                return try JSONDecoder().decode(OnThisDayResponse.self, from: data)
+            }
+            .mapError { error in
+                self.mapError(error)
+            }
+            .eraseToAnyPublisher()
+    }
+    
     private func performRequest(urlString: String) -> AnyPublisher<Data, Error> {
         guard let url = URL(string: urlString) else {
             return Fail(error: NetworkError.invalidURL)

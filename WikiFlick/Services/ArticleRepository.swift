@@ -12,6 +12,7 @@ protocol ArticleRepositoryProtocol {
     func preloadCategoryBasedArticles(count: Int, categories: [String], languageCode: String) async -> [WikipediaArticle]
     func getCachedImage(for urlString: String) -> UIImage?
     func preloadImages(for articles: [WikipediaArticle]) async
+    func fetchOnThisDayEvents(month: Int, day: Int, languageCode: String) -> AnyPublisher<[OnThisDayEvent], RepositoryError>
 }
 
 enum RepositoryError: Error, LocalizedError {
@@ -384,6 +385,13 @@ class ArticleRepository: ArticleRepositoryProtocol {
             return ["Random", "Knowledge", "Information", "Learning", "Education", "Facts", "Discovery", "Research",
                     "Theory", "Practice", "Study", "Analysis", "Exploration", "Understanding", "Insight"]
         }
+    }
+    
+    func fetchOnThisDayEvents(month: Int, day: Int, languageCode: String) -> AnyPublisher<[OnThisDayEvent], RepositoryError> {
+        return networkService.fetchOnThisDayEvents(month: month, day: day, languageCode: languageCode)
+            .mapError { RepositoryError.networkError($0) }
+            .map { $0.events }
+            .eraseToAnyPublisher()
     }
 }
 

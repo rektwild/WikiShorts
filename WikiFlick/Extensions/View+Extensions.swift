@@ -1,5 +1,11 @@
 import SwiftUI
 
+extension String {
+    var localized: String {
+        return AppLanguageManager.shared.localizedString(key: self)
+    }
+}
+
 extension View {
     @ViewBuilder
     func searchableResponsive(text: Binding<String>, isPresented: Binding<Bool>, prompt: String) -> some View {

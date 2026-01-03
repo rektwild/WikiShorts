@@ -42,7 +42,7 @@ struct WikipediaArticle: Identifiable, Codable, Equatable {
     }
 }
 
-struct Thumbnail: Codable {
+struct Thumbnail: Codable, Hashable {
     let source: String
     let width: Int
     let height: Int

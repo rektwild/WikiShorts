@@ -74,3 +74,15 @@
 "search" = "Ara";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Yeni ilginç Wikipedia makalelerini keşfet!";
+"today" = "Bugün";
+"on_this_day" = "Bugün Tarihinde";
+"today_title" = "Bugün Tarihinde";
+"today_subtitle" = "Bugün yaşanan tarihi olaylar";
+"loading_events" = "Olaylar yükleniyor...";
+"no_events_today" = "Bugün için olay bulunamadı";
+"no_events_description" = "Tarihi olaylar için daha sonra tekrar kontrol edin";
+"error_loading_events" = "Olaylar yüklenemedi";
+"related_pages" = "İlgili Sayfalar";
+"close" = "Kapat";
+"showing_cached_data" = "Önbelleklenmiş veriler gösteriliyor";
+"offline_mode" = "Çevrimdışı mod";
