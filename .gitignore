@@ -1,0 +1,133 @@
+# ===================================
+# Xcode / iOS / Swift .gitignore
+# ===================================
+
+# Build generated
+build/
+DerivedData/
+
+# Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+# Other Xcode files
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# Xcode schemes
+# (Uncomment if you want to keep schemes private)
+# *.xcscheme
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+Package.pins
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+
+# CocoaPods
+# (Uncomment if you use CocoaPods)
+# Pods/
+# Podfile.lock
+# *.xcworkspace
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+
+# Accio dependency manager
+Dependencies/
+.accio/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# Code Injection
+iOSInjectionProject/
+
+# ===================================
+# macOS specific
+# ===================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# ===================================
+# VS Code / Cursor
+# ===================================
+.vscode/
+.cursor/
+
+# ===================================
+# JetBrains IDEs
+# ===================================
+.idea/
+*.iml
+
+# ===================================
+# Miscellaneous
+# ===================================
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Crash logs
+*.crash
+*.ips
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# ===================================
+# App specific
+# ===================================
+
+# User-specific StoreKit configuration
+# *.storekit
+
+# Debugging reports (if auto-generated)
+# DEBUGGING_REPORT.md
