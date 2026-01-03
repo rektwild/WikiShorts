@@ -5,19 +5,7 @@ struct SecureURLBuilder {
     
     // MARK: - Wikipedia API URLs
     
-    static func randomArticleURL(languageCode: String) -> URL? {
-        guard isValidLanguageCode(languageCode) else {
-            print("⚠️ Invalid language code: \(languageCode)")
-            return nil
-        }
-        
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "\(languageCode).wikipedia.org"
-        components.path = "/api/rest_v1/page/random/summary"
-        
-        return components.url
-    }
+
     
     static func topicsURL(languageCode: String) -> URL? {
         guard isValidLanguageCode(languageCode) else {

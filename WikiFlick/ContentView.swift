@@ -19,7 +19,6 @@ struct ContentView: View {
     @State private var isSearching = false
     @State private var isSearchFocused = false
     @StateObject private var storeManager = StoreManager()
-    @StateObject private var wikipediaService = WikipediaService()
     @StateObject private var languageManager = AppLanguageManager.shared
     @StateObject private var searchHistoryManager = SearchHistoryManager.shared
 

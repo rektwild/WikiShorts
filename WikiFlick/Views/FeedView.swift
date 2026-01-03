@@ -25,7 +25,7 @@ struct VerticalPageTabViewStyle: ViewModifier {
 }
 
 struct FeedView: View {
-    @StateObject private var wikipediaService = WikipediaService()
+    @ObservedObject private var feedManager = FeedLoadingManager.shared
     @State private var currentIndex = 0
     @State private var feedItems: [FeedItem] = []
     @Binding var selectedSearchArticle: WikipediaArticle?
@@ -35,14 +35,14 @@ struct FeedView: View {
         ZStack {
             Color.black.ignoresSafeArea()
             
-            if wikipediaService.articles.isEmpty && wikipediaService.isLoading {
+            if feedManager.articles.isEmpty && feedManager.isLoading {
                 FeedLoadingView()
                     .transition(.opacity.combined(with: .scale(scale: 0.95)))
-            } else if wikipediaService.hasError {
-                ErrorStateView(errorMessage: wikipediaService.errorMessage) {
+            } else if feedManager.hasError {
+                ErrorStateView(errorMessage: feedManager.errorMessage) {
                     refreshFeed()
                 }
-            } else if wikipediaService.articles.isEmpty && !wikipediaService.isLoading {
+            } else if feedManager.articles.isEmpty && !feedManager.isLoading {
                 EmptyStateView {
                     refreshFeed()
                 }
@@ -135,11 +135,11 @@ struct FeedView: View {
             }
         }
         .onAppear {
-            if wikipediaService.articles.isEmpty {
-                wikipediaService.fetchTopicBasedArticles()
+            if feedManager.articles.isEmpty {
+                feedManager.loadArticles(isInitialLoad: true)
             }
         }
-        .onChange(of: wikipediaService.articles) { newArticles in
+        .onChange(of: feedManager.articles) { newArticles in
             updateFeedItems()
         }
         .refreshable {
@@ -167,21 +167,21 @@ struct FeedView: View {
     
     private func refreshFeed() {
         // Clear all state
-        wikipediaService.articles.removeAll()
+        feedManager.reset()
         feedItems.removeAll()
         currentIndex = 0
         adMobManager.resetArticleCount()
 
         // Small delay to ensure UI updates properly
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            wikipediaService.fetchTopicBasedArticles()
+            feedManager.loadArticles(isInitialLoad: true)
         }
     }
     
     private func loadMoreContent() {
         // The FeedLoadingManager now handles preventing concurrent loads
         LoggingService.shared.logInfo("Requesting more content", category: .general)
-        wikipediaService.loadMoreArticles()
+        feedManager.loadArticles(isInitialLoad: false)
     }
     
     private func updateFeedItems() {
@@ -196,7 +196,7 @@ struct FeedView: View {
     private func createFeedItems() -> [FeedItem] {
         var feedItems: [FeedItem] = []
 
-        for (_, article) in wikipediaService.articles.enumerated() {
+        for (_, article) in feedManager.articles.enumerated() {
             feedItems.append(.article(article))
             // No feed ads mixed in with articles anymore
             // Ads will be shown based on page views instead

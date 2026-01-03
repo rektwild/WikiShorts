@@ -3,7 +3,7 @@ import Combine
 import UIKit
 
 protocol ArticleRepositoryProtocol {
-    func fetchRandomArticles(count: Int, languageCode: String) -> AnyPublisher<[WikipediaArticle], RepositoryError>
+
     func fetchTopicBasedArticles(topics: [String], count: Int, languageCode: String) -> AnyPublisher<[WikipediaArticle], RepositoryError>
     func fetchCategoryBasedArticles(categories: [String], count: Int, languageCode: String) -> AnyPublisher<[WikipediaArticle], RepositoryError>
     func searchArticles(query: String, languageCode: String) -> AnyPublisher<[SearchResult], RepositoryError>
@@ -67,25 +67,7 @@ class ArticleRepository: ArticleRepositoryProtocol {
         usedSearchTerms.removeAll()
     }
     
-    func fetchRandomArticles(count: Int, languageCode: String) -> AnyPublisher<[WikipediaArticle], RepositoryError> {
-        guard count > 0 else {
-            return Just([])
-                .setFailureType(to: RepositoryError.self)
-                .eraseToAnyPublisher()
-        }
-        
-        let publishers = (0..<count).map { _ in
-            networkService.fetchRandomArticle(languageCode: languageCode)
-                .mapError { RepositoryError.networkError($0) }
-                .handleEvents(receiveOutput: { [weak self] article in
-                    self?.cacheManager.cacheArticle(article)
-                })
-        }
-        
-        return Publishers.MergeMany(publishers)
-            .collect()
-            .eraseToAnyPublisher()
-    }
+
     
     func fetchTopicBasedArticles(topics: [String], count: Int, languageCode: String) -> AnyPublisher<[WikipediaArticle], RepositoryError> {
         guard !topics.isEmpty, count > 0 else {
@@ -94,12 +76,11 @@ class ArticleRepository: ArticleRepositoryProtocol {
                 .eraseToAnyPublisher()
         }
         
-        if topics.contains("All Topics") || topics.isEmpty {
-            return fetchRandomArticles(count: count, languageCode: languageCode)
-        }
+        // If "All Topics" is selected, just use it as a keyword provider
+        // No more random API fallback
         
         let publishers = topics.prefix(3).map { topic in
-            fetchArticlesForTopic(topic: topic, count: max(1, count / topics.count), languageCode: languageCode)
+            fetchArticlesForTopicDSL(topic: topic, count: max(1, count / topics.count), languageCode: languageCode)
         }
         
         return Publishers.MergeMany(publishers)
@@ -118,13 +99,16 @@ class ArticleRepository: ArticleRepositoryProtocol {
                 .eraseToAnyPublisher()
         }
 
-        // If "All Topics" is selected, fall back to random articles
-        if categories.contains("All Topics") {
-            return fetchRandomArticles(count: count, languageCode: languageCode)
+        // If "All Topics" is selected/exists in categories list, ignore it or handle as empty
+        // In this case we just rely on the other categories or fallback to topic fetching if empty
+        let filteredCategories = categories.filter { $0 != "All Topics" }
+        
+        if filteredCategories.isEmpty {
+             return fetchTopicBasedArticles(topics: ["All Topics"], count: count, languageCode: languageCode)
         }
 
-        let publishers = categories.prefix(3).map { category in
-            fetchArticlesFromCategory(category: category, count: max(1, count / categories.count), languageCode: languageCode)
+        let publishers = filteredCategories.prefix(3).map { category in
+            fetchArticlesFromCategory(category: category, count: max(1, count / filteredCategories.count), languageCode: languageCode)
         }
 
         return Publishers.MergeMany(publishers)
@@ -164,39 +148,52 @@ class ArticleRepository: ArticleRepositoryProtocol {
 
         // Check for both "All Topics" and "all_topics"
         let hasAllTopics = topics.contains("All Topics") || topics.contains("all_topics")
+        let effectiveTopics = (hasAllTopics || topics.isEmpty) ? ["All Topics"] : topics
 
-        if hasAllTopics || topics.isEmpty {
-            // Fetch random articles
-            for _ in 0..<count {
-                do {
-                    let article = try await networkService.fetchRandomArticle(languageCode: languageCode)
-                        .async()
-                    articles.append(article)
-                    cacheManager.cacheArticle(article)
-                } catch {
-                    print("Failed to preload random article: \(error)")
-                }
+        for topic in effectiveTopics.prefix(3) {
+            let searchTerms = getSearchTermsForTopic(topic)
+            // Filter out already used search terms and shuffle for variety
+            let availableTerms = searchTerms.filter { !usedSearchTerms.contains($0) }.shuffled()
+            let termsToUse = availableTerms.isEmpty ? searchTerms.shuffled() : availableTerms
+
+            let articlesPerTopic = max(1, count / effectiveTopics.count)
+            let termsForThisTopic = termsToUse.prefix(articlesPerTopic)
+            
+            // Mark as used
+            termsForThisTopic.forEach { usedSearchTerms.insert($0) }
+            
+            // Batch fetch for this topic's terms
+            // 1. Search for each term to get pageIds
+            // 2. Collate IDs and fetch details
+            var pageIds: [Int] = []
+            
+            // Note: We can't easily batch the *searches* (different queries), but we can batch the *details*
+            // However, since we are iterating terms, we are still doing N searches.
+            // Optimization: Maybe search for combined terms "Term A | Term B"? Wikipedia support might be limited.
+            // For now, let's keep N searches but batch the detail fetch if possible.
+            // Actually, `searchArticle` (singular) was 1 search -> 1 detail fetch.
+            // Now we want: N searches -> N results -> 1 detail fetch (batch).
+            
+            for searchTerm in termsForThisTopic {
+                 do {
+                     // Using searchWikipedia (plural) but limit 1
+                     if let result = try await networkService.searchWikipedia(query: searchTerm, languageCode: languageCode).async().first {
+                         if let pageId = result.pageId {
+                             pageIds.append(pageId)
+                         }
+                     }
+                 } catch {
+                     print("Failed to search term: \(searchTerm)")
+                 }
             }
-        } else {
-            // Fetch topic-based articles
-            for topic in topics.prefix(3) {
-                let searchTerms = getSearchTermsForTopic(topic)
-                // Filter out already used search terms and shuffle for variety
-                let availableTerms = searchTerms.filter { !usedSearchTerms.contains($0) }.shuffled()
-                let termsToUse = availableTerms.isEmpty ? searchTerms.shuffled() : availableTerms
-
-                let articlesPerTopic = max(1, count / topics.count)
-
-                for searchTerm in termsToUse.prefix(articlesPerTopic) {
-                    usedSearchTerms.insert(searchTerm)  // Mark as used
-                    do {
-                        let article = try await networkService.searchArticle(searchTerm: searchTerm, languageCode: languageCode)
-                            .async()
-                        articles.append(article)
-                        cacheManager.cacheArticle(article)
-                    } catch {
-                        print("Failed to preload topic article: \(error)")
-                    }
+            
+            if !pageIds.isEmpty {
+                do {
+                    let fetchedArticles = try await networkService.fetchArticles(pageIds: pageIds, languageCode: languageCode).async()
+                    articles.append(contentsOf: fetchedArticles)
+                    fetchedArticles.forEach { cacheManager.cacheArticle($0) }
+                } catch {
+                     print("Failed to batch fetch details: \(error)")
                 }
             }
         }
@@ -206,23 +203,16 @@ class ArticleRepository: ArticleRepositoryProtocol {
 
     func preloadCategoryBasedArticles(count: Int, categories: [String], languageCode: String) async -> [WikipediaArticle] {
         var articles: [WikipediaArticle] = []
+        
+        let effectiveCategories = categories.filter { $0 != "All Topics" }
 
-        if categories.isEmpty {
-            // If no categories, fall back to random articles
-            for _ in 0..<count {
-                do {
-                    let article = try await networkService.fetchRandomArticle(languageCode: languageCode)
-                        .async()
-                    articles.append(article)
-                    cacheManager.cacheArticle(article)
-                } catch {
-                    print("Failed to preload random article: \(error)")
-                }
-            }
+        if effectiveCategories.isEmpty {
+            // Fallback to topic preload
+             return await preloadArticles(count: count, topics: ["All Topics"], languageCode: languageCode)
         } else {
             // Fetch from categories
-            for category in categories.prefix(min(3, categories.count)) {
-                let articlesPerCategory = max(1, count / min(categories.count, 3))
+            for category in effectiveCategories.prefix(min(3, effectiveCategories.count)) {
+                let articlesPerCategory = max(1, count / min(effectiveCategories.count, 3))
 
                 do {
                     let categoryMembers = try await networkService.fetchCategoryMembers(
@@ -232,18 +222,12 @@ class ArticleRepository: ArticleRepositoryProtocol {
                     ).async()
 
                     let selectedMembers = Array(categoryMembers.shuffled().prefix(articlesPerCategory))
-
-                    for searchResult in selectedMembers {
-                        do {
-                            let article = try await networkService.fetchArticleDetails(
-                                from: searchResult,
-                                languageCode: languageCode
-                            ).async()
-                            articles.append(article)
-                            cacheManager.cacheArticle(article)
-                        } catch {
-                            print("Failed to preload category article: \(error)")
-                        }
+                    let pageIds = selectedMembers.compactMap { $0.pageId }
+                    
+                    if !pageIds.isEmpty {
+                         let fetchedArticles = try await networkService.fetchArticles(pageIds: pageIds, languageCode: languageCode).async()
+                         articles.append(contentsOf: fetchedArticles)
+                         fetchedArticles.forEach { cacheManager.cacheArticle($0) }
                     }
                 } catch {
                     print("Failed to fetch category members for \(category): \(error)")
@@ -272,30 +256,44 @@ class ArticleRepository: ArticleRepositoryProtocol {
     
     // MARK: - Private Methods
     
-    private func fetchArticlesForTopic(topic: String, count: Int, languageCode: String) -> AnyPublisher<[WikipediaArticle], RepositoryError> {
-        // Handle both display names and keys
-        let normalizedTopic = TopicManager.keyToDisplayMap[topic] ?? topic
 
-        if normalizedTopic == "All Topics" || topic == "all_topics" {
-            return fetchRandomArticles(count: count, languageCode: languageCode)
-        }
 
+    private func fetchArticlesForTopicDSL(topic: String, count: Int, languageCode: String) -> AnyPublisher<[WikipediaArticle], RepositoryError> {
         let searchTerms = getSearchTermsForTopic(topic)
         // Filter out already used search terms and shuffle for variety
         let availableTerms = searchTerms.filter { !usedSearchTerms.contains($0) }.shuffled()
         let termsToUse = availableTerms.isEmpty ? searchTerms.shuffled() : availableTerms
-
-        let publishers = termsToUse.prefix(count).map { searchTerm in
-            usedSearchTerms.insert(searchTerm)  // Mark as used
-            return networkService.searchArticle(searchTerm: searchTerm, languageCode: languageCode)
-                .mapError { RepositoryError.networkError($0) }
-                .handleEvents(receiveOutput: { [weak self] article in
-                    self?.cacheManager.cacheArticle(article)
-                })
+        let selectedTerms = Array(termsToUse.prefix(count))
+        
+        selectedTerms.forEach { usedSearchTerms.insert($0) }
+        
+        // 1. Convert terms to search publishers
+        let searchPublishers = selectedTerms.map { term in
+             networkService.searchWikipedia(query: term, languageCode: languageCode)
+                 .mapError { RepositoryError.networkError($0) }
+                 .map { results in results.first } // Take top result only
+                 .replaceError(with: nil)
+                 .setFailureType(to: RepositoryError.self)
         }
         
-        return Publishers.MergeMany(publishers)
+        // 2. Run searches, collect IDs, then batch fetch details
+        return Publishers.MergeMany(searchPublishers)
             .collect()
+            .flatMap { searchResults -> AnyPublisher<[WikipediaArticle], RepositoryError> in
+                let validResults = searchResults.compactMap { $0 }
+                let pageIds = validResults.compactMap { $0.pageId }
+                
+                if pageIds.isEmpty {
+                    return Just([]).setFailureType(to: RepositoryError.self).eraseToAnyPublisher()
+                }
+                
+                return self.networkService.fetchArticles(pageIds: pageIds, languageCode: languageCode)
+                    .mapError { RepositoryError.networkError($0) }
+                    .handleEvents(receiveOutput: { [weak self] articles in
+                         articles.forEach { self?.cacheManager.cacheArticle($0) }
+                    })
+                    .eraseToAnyPublisher()
+            }
             .eraseToAnyPublisher()
     }
 
@@ -304,18 +302,22 @@ class ArticleRepository: ArticleRepositoryProtocol {
             .mapError { RepositoryError.networkError($0) }
             .flatMap { searchResults -> AnyPublisher<[WikipediaArticle], RepositoryError> in
                 guard !searchResults.isEmpty else {
-                    // If category is empty, fall back to random articles
-                    return self.fetchRandomArticles(count: count, languageCode: languageCode)
+                   return Just([]).setFailureType(to: RepositoryError.self).eraseToAnyPublisher()
                 }
 
-                // Take a subset of results and fetch full article details
+                // Take a subset of results and fetch full article details using BATCH fetch
                 let selectedResults = Array(searchResults.shuffled().prefix(count))
-                let publishers = selectedResults.map { searchResult in
-                    self.fetchArticleDetails(from: searchResult, languageCode: languageCode)
+                let pageIds = selectedResults.compactMap { $0.pageId }
+                
+                guard !pageIds.isEmpty else {
+                    return Just([]).setFailureType(to: RepositoryError.self).eraseToAnyPublisher()
                 }
 
-                return Publishers.MergeMany(publishers)
-                    .collect()
+                return self.networkService.fetchArticles(pageIds: pageIds, languageCode: languageCode)
+                    .mapError { RepositoryError.networkError($0) }
+                    .handleEvents(receiveOutput: { [weak self] articles in
+                        articles.forEach { self?.cacheManager.cacheArticle($0) }
+                    })
                     .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
@@ -400,16 +402,21 @@ extension Publisher {
     func async() async throws -> Output {
         try await withCheckedThrowingContinuation { continuation in
             var cancellable: AnyCancellable?
+            var hasReceivedValue = false
+            
             cancellable = first()
                 .sink(receiveCompletion: { completion in
                     switch completion {
                     case .failure(let error):
                         continuation.resume(throwing: error)
                     case .finished:
-                        break
+                        if !hasReceivedValue {
+                            continuation.resume(throwing: NetworkError.noData)
+                        }
                     }
                     cancellable?.cancel()
                 }, receiveValue: { value in
+                    hasReceivedValue = true
                     continuation.resume(returning: value)
                 })
         }

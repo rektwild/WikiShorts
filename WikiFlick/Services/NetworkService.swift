@@ -2,11 +2,12 @@ import Foundation
 import Combine
 
 protocol NetworkServiceProtocol {
-    func fetchRandomArticle(languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError>
+
     func searchArticle(searchTerm: String, languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError>
     func fetchArticleDetails(from searchResult: SearchResult, languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError>
     func searchWikipedia(query: String, languageCode: String) -> AnyPublisher<[SearchResult], NetworkError>
     func fetchCategoryMembers(category: String, languageCode: String, limit: Int) -> AnyPublisher<[SearchResult], NetworkError>
+    func fetchArticles(pageIds: [Int], languageCode: String) -> AnyPublisher<[WikipediaArticle], NetworkError>
     func fetchOnThisDayEvents(month: Int, day: Int, languageCode: String) -> AnyPublisher<OnThisDayResponse, NetworkError>
 }
 
@@ -60,55 +61,7 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func fetchRandomArticle(languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError> {
-        // Validate and potentially fix language code
-        let validLanguageCode = isValidLanguageCode(languageCode) ? languageCode : "en"
 
-        guard let url = SecureURLBuilder.randomArticleURL(languageCode: validLanguageCode) else {
-            // Fallback to English if URL building fails
-            if let englishURL = SecureURLBuilder.randomArticleURL(languageCode: "en") {
-                print("⚠️ Language code '\(languageCode)' failed, falling back to English")
-                return performRequest(urlString: englishURL.absoluteString)
-                    .decode(type: RandomArticleResponse.self, decoder: JSONDecoder())
-                    .map { response in
-                        WikipediaArticle(
-                            title: response.title,
-                            extract: response.extract,
-                            pageId: response.pageId,
-                            imageURL: response.thumbnail?.source,
-                            fullURL: response.contentURLs.desktop.page
-                        )
-                    }
-                    .mapError { self.mapError($0) }
-                    .eraseToAnyPublisher()
-            }
-            return Fail(error: NetworkError.invalidLanguageCode)
-                .eraseToAnyPublisher()
-        }
-        
-        let urlString = url.absoluteString
-        
-        return performRequest(urlString: urlString)
-            .decode(type: RandomArticleResponse.self, decoder: JSONDecoder())
-            .map { response in
-                WikipediaArticle(
-                    title: response.title,
-                    extract: response.extract,
-                    pageId: response.pageId,
-                    imageURL: response.thumbnail?.source,
-                    fullURL: response.contentURLs.desktop.page
-                )
-            }
-            .catch { error -> AnyPublisher<WikipediaArticle, NetworkError> in
-                if languageCode != "en" {
-                    return self.fetchRandomArticle(languageCode: "en")
-                } else {
-                    return Fail(error: self.mapError(error))
-                        .eraseToAnyPublisher()
-                }
-            }
-            .eraseToAnyPublisher()
-    }
     
     func searchArticle(searchTerm: String, languageCode: String) -> AnyPublisher<WikipediaArticle, NetworkError> {
         guard isValidLanguageCode(languageCode) else {
@@ -129,8 +82,8 @@ class NetworkService: NetworkServiceProtocol {
                     fullURL: response.contentURLs.desktop.page
                 )
             }
-            .catch { _ in
-                self.fetchRandomArticle(languageCode: languageCode)
+            .mapError { error in
+                self.mapError(error)
             }
             .eraseToAnyPublisher()
     }
@@ -289,6 +242,74 @@ class NetworkService: NetworkServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
+
+    func fetchArticles(pageIds: [Int], languageCode: String) -> AnyPublisher<[WikipediaArticle], NetworkError> {
+        guard !pageIds.isEmpty else {
+            return Just([])
+                .setFailureType(to: NetworkError.self)
+                .eraseToAnyPublisher()
+        }
+
+        guard isValidLanguageCode(languageCode) else {
+            return Fail(error: NetworkError.invalidLanguageCode)
+                .eraseToAnyPublisher()
+        }
+
+        let pageIdsString = pageIds.map(String.init).joined(separator: "|")
+        
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "\(languageCode).wikipedia.org"
+        components.path = "/w/api.php"
+        components.queryItems = [
+            URLQueryItem(name: "action", value: "query"),
+            URLQueryItem(name: "format", value: "json"),
+            URLQueryItem(name: "pageids", value: pageIdsString),
+            URLQueryItem(name: "prop", value: "extracts|pageimages|info"),
+            URLQueryItem(name: "exintro", value: "true"),
+            URLQueryItem(name: "explaintext", value: "true"),
+            URLQueryItem(name: "exsentences", value: "5"),
+            URLQueryItem(name: "piprop", value: "original|thumbnail"),
+            URLQueryItem(name: "pithumbsize", value: "600"),
+            URLQueryItem(name: "inprop", value: "url")
+        ]
+        
+        guard let url = components.url else {
+            return Fail(error: NetworkError.invalidURL)
+                .eraseToAnyPublisher()
+        }
+        
+        var request = URLRequest(url: url)
+        request.timeoutInterval = requestTimeout
+        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .timeout(.seconds(Int(requestTimeout)), scheduler: DispatchQueue.global(qos: .userInitiated))
+            .map(\.data)
+            .tryMap { data in
+                let searchResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
+                
+                var articles: [WikipediaArticle] = []
+                if let pages = searchResponse.query?.pages {
+                    for (_, page) in pages {
+                        let article = WikipediaArticle(
+                            title: page.title,
+                            extract: page.extract ?? "No description available",
+                            pageId: page.pageid,
+                            imageURL: page.original?.source ?? page.thumbnail?.source,
+                            fullURL: page.fullurl ?? "https://\(languageCode).wikipedia.org/wiki/\(page.title.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")"
+                        )
+                        articles.append(article)
+                    }
+                }
+                
+                return articles
+            }
+            .mapError { error in
+                self.mapError(error)
+            }
+            .eraseToAnyPublisher()
+    }
     
     func fetchOnThisDayEvents(month: Int, day: Int, languageCode: String) -> AnyPublisher<OnThisDayResponse, NetworkError> {
         guard SecureURLBuilder.isValidLanguageCode(languageCode) else {
@@ -388,10 +409,11 @@ struct SearchPage: Codable {
     let title: String
     let extract: String?
     let thumbnail: SearchThumbnail?
+    let original: SearchThumbnail?
     let fullurl: String?
     
     enum CodingKeys: String, CodingKey {
-        case pageid, title, extract, thumbnail, fullurl
+        case pageid, title, extract, thumbnail, original, fullurl
     }
 }
 
