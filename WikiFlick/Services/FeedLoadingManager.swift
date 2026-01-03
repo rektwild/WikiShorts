@@ -170,31 +170,35 @@ class FeedLoadingManager: ObservableObject {
     private func fetchArticlesFromAPI() async throws -> [WikipediaArticle] {
         let languageCode = articleLanguageManager.languageCode
         let topics = topicNormalizationService.getNormalizedTopicsFromUserDefaults()
-        let categories = topicNormalizationService.getCategoriesForTopics(topics)
+        var categories = topicNormalizationService.getCategoriesForTopics(topics)
+        
+        // Ensure minimum 5 categories for better variety
+        let minimumCategories = 5
+        if categories.count < minimumCategories || topics.contains("All Topics") {
+            // Get all available categories from all topics
+            let allTopics = topicNormalizationService.getAllSupportedTopics()
+            let allCategories = topicNormalizationService.getCategoriesForTopics(allTopics)
+            
+            // Add random categories to reach minimum
+            let additionalNeeded = minimumCategories - categories.count
+            let availableToAdd = allCategories.filter { !categories.contains($0) }
+            let randomAdditions = Array(availableToAdd.shuffled().prefix(additionalNeeded))
+            categories.append(contentsOf: randomAdditions)
+        }
+        
+        // Always shuffle categories for randomness
+        categories = Array(categories.shuffled())
 
-        // Try category-based fetch first, then fall back to topic-based
-        if !categories.isEmpty && !topics.contains("All Topics") {
-            return try await retryManager.executeWithRetry(
-                id: "fetchCategoryArticles",
-                maxAttempts: 3
-            ) {
-                try await self.articleRepository.fetchCategoryBasedArticles(
-                    categories: categories,
-                    count: self.articlesPerBatch,
-                    languageCode: languageCode
-                ).async()
-            }
-        } else {
-            return try await retryManager.executeWithRetry(
-                id: "fetchTopicArticles",
-                maxAttempts: 3
-            ) {
-                try await self.articleRepository.fetchTopicBasedArticles(
-                    topics: topics,
-                    count: self.articlesPerBatch,
-                    languageCode: languageCode
-                ).async()
-            }
+        // Always use category-based fetch for better variety
+        return try await retryManager.executeWithRetry(
+            id: "fetchCategoryArticles",
+            maxAttempts: 3
+        ) {
+            try await self.articleRepository.fetchCategoryBasedArticles(
+                categories: categories,
+                count: self.articlesPerBatch,
+                languageCode: languageCode
+            ).async()
         }
     }
 
@@ -245,23 +249,29 @@ class FeedLoadingManager: ObservableObject {
 
             let languageCode = articleLanguageManager.languageCode
             let topics = topicNormalizationService.getNormalizedTopicsFromUserDefaults()
-            let categories = topicNormalizationService.getCategoriesForTopics(topics)
-
-            let newArticles: [WikipediaArticle]
-
-            if !categories.isEmpty && !topics.contains("All Topics") {
-                newArticles = await articleRepository.preloadCategoryBasedArticles(
-                    count: preloadBatchSize,
-                    categories: categories,
-                    languageCode: languageCode
-                )
-            } else {
-                newArticles = await articleRepository.preloadArticles(
-                    count: preloadBatchSize,
-                    topics: topics,
-                    languageCode: languageCode
-                )
+            var categories = topicNormalizationService.getCategoriesForTopics(topics)
+            
+            // Ensure minimum 5 categories for better variety
+            let minimumCategories = 5
+            if categories.count < minimumCategories || topics.contains("All Topics") {
+                let allTopics = topicNormalizationService.getAllSupportedTopics()
+                let allCategories = topicNormalizationService.getCategoriesForTopics(allTopics)
+                
+                let additionalNeeded = minimumCategories - categories.count
+                let availableToAdd = allCategories.filter { !categories.contains($0) }
+                let randomAdditions = Array(availableToAdd.shuffled().prefix(additionalNeeded))
+                categories.append(contentsOf: randomAdditions)
             }
+            
+            // Always shuffle for randomness
+            categories = Array(categories.shuffled())
+
+            // Always use category-based preload for better variety
+            let newArticles = await articleRepository.preloadCategoryBasedArticles(
+                count: preloadBatchSize,
+                categories: categories,
+                languageCode: languageCode
+            )
 
             // Check for task cancellation after fetching
             if Task.isCancelled {

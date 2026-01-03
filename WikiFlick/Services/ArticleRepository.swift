@@ -136,8 +136,9 @@ class ArticleRepository: ArticleRepositoryProtocol {
              return fetchTopicBasedArticles(topics: ["All Topics"], count: count, languageCode: languageCode)
         }
 
-        let publishers = filteredCategories.prefix(3).map { category in
-            fetchArticlesFromCategory(category: category, count: max(1, count / filteredCategories.count), languageCode: languageCode)
+        // Use up to 5 categories for better variety
+        let publishers = filteredCategories.prefix(5).map { category in
+            fetchArticlesFromCategory(category: category, count: max(1, count / min(filteredCategories.count, 5)), languageCode: languageCode)
         }
 
         return Publishers.MergeMany(publishers)
@@ -241,9 +242,9 @@ class ArticleRepository: ArticleRepositoryProtocol {
             // Fallback to topic preload
              return await preloadArticles(count: count, topics: ["All Topics"], languageCode: languageCode)
         } else {
-            // Fetch from categories
-            for category in effectiveCategories.prefix(min(3, effectiveCategories.count)) {
-                let articlesPerCategory = max(1, count / min(effectiveCategories.count, 3))
+            // Fetch from up to 5 categories for better variety
+            for category in effectiveCategories.prefix(min(5, effectiveCategories.count)) {
+                let articlesPerCategory = max(1, count / min(effectiveCategories.count, 5))
 
                 do {
                     let categoryMembers = try await networkService.fetchCategoryMembers(
