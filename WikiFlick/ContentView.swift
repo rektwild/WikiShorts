@@ -15,7 +15,9 @@ struct ContentView: View {
     @State private var selectedSearchArticle: WikipediaArticle?
     @State private var showingRewardAlert = false
     @State private var showingNoAdAlert = false
+
     @State private var isSearching = false
+    @State private var isSearchFocused = false
     @StateObject private var storeManager = StoreManager()
     @StateObject private var wikipediaService = WikipediaService()
     @StateObject private var languageManager = AppLanguageManager.shared
@@ -63,7 +65,7 @@ struct ContentView: View {
         if #available(iOS 16.0, *) {
             NavigationStack {
                 mainContentView
-                    .navigationTitle("WikiFlick")
+                    .navigationTitle("")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbarBackground(.visible, for: .navigationBar)
                     .toolbarBackground(Color.black.opacity(0.9), for: .navigationBar)
@@ -72,9 +74,9 @@ struct ContentView: View {
                         leadingToolbarItems
                         trailingToolbarItems
                     }
-                    .searchable(
+                    .searchableResponsive(
                         text: $searchText,
-                        placement: .navigationBarDrawer(displayMode: .always),
+                        isPresented: $isSearchFocused,
                         prompt: languageManager.localizedString(key: "search_wikipedia")
                     )
                     .onChange(of: searchText) { newValue in
@@ -94,7 +96,7 @@ struct ContentView: View {
         } else {
             NavigationView {
                 mainContentView
-                    .navigationTitle("WikiFlick")
+                    .navigationTitle("")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         leadingToolbarItems
@@ -139,6 +141,7 @@ struct ContentView: View {
     private var trailingToolbarItems: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             HStack(spacing: 8) {
+                searchButton
                 if !storeManager.isPurchased("wiki_m") {
                     giftButton
                 }
@@ -146,7 +149,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     private var searchResultsOverlay: some View {
         VStack(spacing: 0) {
             if wikipediaService.isSearching {
@@ -226,23 +229,27 @@ struct ContentView: View {
         }
     }
 
+    private var searchButton: some View {
+        Button(action: {
+            isSearchFocused = true
+        }) {
+            Image(systemName: "magnifyingglass")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.white)
+        }
+    }
+
     private var removeAdsButton: some View {
         Button(action: {
             showingPaywall = true
         }) {
             HStack(spacing: 4) {
                 Text(languageManager.localizedString(key: "remove_ads"))
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.system(size: 14, weight: .semibold))
                 Image(systemName: "nosign")
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.system(size: 12, weight: .medium))
             }
             .foregroundColor(.white)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(
-                Capsule()
-                    .fill(Color.white.opacity(0.2))
-            )
         }
     }
 

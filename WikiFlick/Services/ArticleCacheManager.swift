@@ -22,8 +22,8 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     private let userAgent = "WikiFlick/1.0"
     
     // MARK: - Thread Safety
-    private let cacheQueue = DispatchQueue(label: "com.wikishorts.cache", qos: .utility, attributes: .concurrent)
-    private let imageQueue = DispatchQueue(label: "com.wikishorts.imageCache", qos: .utility, attributes: .concurrent)
+    private let cacheQueue = DispatchQueue(label: "com.wikishorts.cache", qos: .utility)
+    private let imageQueue = DispatchQueue(label: "com.wikishorts.imageCache", qos: .utility)
     
     // MARK: - Cache Configuration
     private let imageCacheLimit = 50
