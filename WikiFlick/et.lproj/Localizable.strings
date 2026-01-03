@@ -74,3 +74,5 @@
 "search" = "Otsi";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Avastage uusi põnevaid Vikipeedia artikleid!";
+"random_article" = "Random";
+"feed" = "Feed";

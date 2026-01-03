@@ -74,3 +74,5 @@
 "search" = "Keresés";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Fedezz fel új lenyűgöző Wikipédia cikkeket!";
+"random_article" = "Random";
+"feed" = "Feed";

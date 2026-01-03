@@ -74,3 +74,5 @@
 "search" = "Haku";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Löydä uusia kiehtovia Wikipedia-artikkeleita!";
+"random_article" = "Random";
+"feed" = "Feed";

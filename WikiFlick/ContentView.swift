@@ -51,6 +51,71 @@ struct ContentView: View {
                 }
             }
             
+            // Random Article Tab
+            if #available(iOS 16.0, *) {
+                NavigationStack {
+                    RandomArticleView()
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbarBackground(.visible, for: .navigationBar)
+                        .toolbarBackground(Color.black.opacity(0.9), for: .navigationBar)
+                        .toolbarColorScheme(.dark, for: .navigationBar)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                HStack(spacing: 8) {
+                                    Button(action: {
+                                        NotificationCenter.default.post(name: NSNotification.Name("RefreshRandomArticle"), object: nil)
+                                    }) {
+                                        Image(systemName: "shuffle")
+                                            .font(.system(size: 16, weight: .medium))
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button(action: {
+                                    showingSettings = true
+                                }) {
+                                    Image(systemName: "gearshape")
+                                        .font(.system(size: 16, weight: .medium))
+                                        .foregroundColor(.white)
+                                }
+                            }
+                        }
+                }
+                .tabItem {
+                    Label(languageManager.localizedString(key: "random_article"), systemImage: "shuffle")
+                }
+            } else {
+                NavigationView {
+                    RandomArticleView()
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button(action: {
+                                    NotificationCenter.default.post(name: NSNotification.Name("RefreshRandomArticle"), object: nil)
+                                }) {
+                                    Image(systemName: "shuffle")
+                                        .font(.system(size: 16, weight: .medium))
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button(action: {
+                                    showingSettings = true
+                                }) {
+                                    Image(systemName: "gearshape")
+                                        .font(.system(size: 16, weight: .medium))
+                                        .foregroundColor(.white)
+                                }
+                            }
+                        }
+                }
+                .navigationViewStyle(.stack)
+                .tabItem {
+                    Label(languageManager.localizedString(key: "random_article"), systemImage: "shuffle")
+                }
+            }
+            
             // Search Tab
             SearchView()
                 .tabItem {

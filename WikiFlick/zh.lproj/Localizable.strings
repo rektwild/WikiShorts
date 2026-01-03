@@ -74,3 +74,5 @@
 "search" = "搜索";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "发现精彩的维基百科新文章！";
+"random_article" = "随机";
+"feed" = "Feed";

@@ -74,3 +74,5 @@
 "search" = "Rechercher";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Découvrez de nouveaux articles Wikipedia fascinants!";
+"random_article" = "Aléatoire";
+"feed" = "Flux";

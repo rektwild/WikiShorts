@@ -74,3 +74,5 @@
 "search" = "Cari";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Temui artikel Wikipedia baru yang menarik!";
+"random_article" = "Random";
+"feed" = "Feed";

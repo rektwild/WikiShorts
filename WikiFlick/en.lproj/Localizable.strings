@@ -88,3 +88,5 @@
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
 "offline_mode" = "Offline mode";
+"random_article" = "Random";
+"feed" = "Feed";
