@@ -161,10 +161,10 @@ struct ContentView: View {
             showingPaywall = true
         }) {
             HStack(spacing: 4) {
-                Text(languageManager.localizedString(key: "remove_ads"))
-                    .font(.system(size: 14, weight: .semibold))
                 Image(systemName: "nosign")
                     .font(.system(size: 12, weight: .medium))
+                Text(languageManager.localizedString(key: "remove_ads"))
+                    .font(.system(size: 14, weight: .semibold))
             }
             .foregroundColor(.white)
         }
