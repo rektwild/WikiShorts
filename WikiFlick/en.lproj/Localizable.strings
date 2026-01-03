@@ -74,3 +74,5 @@
 "search" = "Search";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Discover new fascinating Wikipedia articles!";
+"select_app_language" = "Select App Language";
+"select_article_language" = "Select Article Language";

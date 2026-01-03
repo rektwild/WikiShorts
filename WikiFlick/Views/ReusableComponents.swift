@@ -329,65 +329,7 @@ struct SelectableListItem: View {
     }
 }
 
-// MARK: - Navigation Components
 
-struct NavigationHeader: View {
-    let title: String
-    let leftButton: (() -> Void)?
-    let rightButton: (() -> Void)?
-    let leftIcon: String
-    let rightIcon: String
-    
-    init(
-        title: String,
-        leftButton: (() -> Void)? = nil,
-        rightButton: (() -> Void)? = nil,
-        leftIcon: String = "chevron.left",
-        rightIcon: String = "ellipsis"
-    ) {
-        self.title = title
-        self.leftButton = leftButton
-        self.rightButton = rightButton
-        self.leftIcon = leftIcon
-        self.rightIcon = rightIcon
-    }
-    
-    var body: some View {
-        HStack {
-            if let leftButton = leftButton {
-                CircularButton(
-                    icon: leftIcon,
-                    action: leftButton,
-                    size: 36
-                )
-            } else {
-                Spacer()
-                    .frame(width: 36)
-            }
-            
-            Spacer()
-            
-            Text(title)
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(.white)
-            
-            Spacer()
-            
-            if let rightButton = rightButton {
-                CircularButton(
-                    icon: rightIcon,
-                    action: rightButton,
-                    size: 36
-                )
-            } else {
-                Spacer()
-                    .frame(width: 36)
-            }
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 10)
-    }
-}
 
 // MARK: - View Extensions
 

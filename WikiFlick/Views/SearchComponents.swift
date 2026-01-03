@@ -138,23 +138,23 @@ struct SearchBarView: View {
     let onCancel: () -> Void
     let onClear: () -> Void
     @StateObject private var languageManager = AppLanguageManager.shared
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         HStack(spacing: 12) {
             searchInputField
-            cancelButton
-            Spacer()
+            
+            if isActive || !searchText.isEmpty {
+                cancelButton
+                    .transition(.move(edge: .trailing))
+            }
         }
-        .transition(.asymmetric(
-            insertion: .move(edge: .leading).combined(with: .opacity),
-            removal: .move(edge: .trailing).combined(with: .opacity)
-        ))
     }
     
     private var searchInputField: some View {
-        HStack {
+        HStack(spacing: 6) {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.white.opacity(0.6))
+                .foregroundColor(.gray)
                 .font(.system(size: 16))
             
             TextField(
@@ -162,49 +162,30 @@ struct SearchBarView: View {
                 text: $searchText
             )
             .textFieldStyle(PlainTextFieldStyle())
-            .foregroundColor(.white)
-            .font(.system(size: 16))
-            .accentColor(.white)
-            .onAppear {
-                UITextField.appearance().attributedPlaceholder = NSAttributedString(
-                    string: languageManager.localizedString(key: "search_wikipedia"),
-                    attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
-                )
-            }
+            .foregroundColor(.primary)
+            .font(.system(size: 17))
             
             if !searchText.isEmpty {
                 Button(action: onClear) {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.white.opacity(0.6))
+                    Image(systemName: "multiply.circle.fill")
+                        .foregroundColor(.gray)
                         .font(.system(size: 16))
                 }
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(searchFieldBackground)
-    }
-    
-    private var searchFieldBackground: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .fill(Color.black.opacity(0.7))
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.gray.opacity(0.6), lineWidth: 1)
-            )
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(.systemGray6))
+        )
     }
     
     private var cancelButton: some View {
-        Button(action: onCancel) {
-            Image(systemName: "xmark")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.white.opacity(0.8))
-                .frame(width: 32, height: 32)
-                .background(
-                    Circle()
-                        .fill(Color.white.opacity(0.1))
-                )
+        Button(languageManager.localizedString(key: "cancel")) {
+            onCancel()
         }
+        .foregroundColor(.blue)
     }
 }
 

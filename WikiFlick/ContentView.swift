@@ -11,271 +11,144 @@ import StoreKit
 struct ContentView: View {
     @State private var showingSettings = false
     @State private var showingPaywall = false
-    @State private var isSearchActive = false
     @State private var searchText = ""
     @State private var selectedSearchArticle: WikipediaArticle?
     @State private var showingRewardAlert = false
     @State private var showingNoAdAlert = false
+    @State private var isSearching = false
     @StateObject private var storeManager = StoreManager()
     @StateObject private var wikipediaService = WikipediaService()
     @StateObject private var languageManager = AppLanguageManager.shared
     @StateObject private var searchHistoryManager = SearchHistoryManager.shared
 
     var body: some View {
-        ZStack {
-            // Main feed content
-            FeedView(selectedSearchArticle: $selectedSearchArticle)
-
-            // Fixed header overlay
-            VStack {
-                topHeaderView
-                Spacer()
+        mainNavigationView
+            .sheet(isPresented: $showingSettings) {
+                SettingsView()
             }
-
-            // Search overlays
-            if isSearchActive {
-                searchOverlays
+            .sheet(isPresented: $showingPaywall) {
+                PaywallView(isPresented: $showingPaywall)
             }
-        }
-        .ignoresSafeArea()
-        .sheet(isPresented: $showingSettings) {
-            SettingsView()
-        }
-        .sheet(isPresented: $showingPaywall) {
-            PaywallView(isPresented: $showingPaywall)
-        }
-        .alert(languageManager.localizedString(key: "rewarded_ad"), isPresented: $showingRewardAlert) {
-            Button(languageManager.localizedString(key: "watch_ad")) {
-                if AdMobManager.shared.isRewardedAdLoaded {
-                    AdMobManager.shared.showRewardedAd()
-                } else {
-                    showingNoAdAlert = true
+            .alert(languageManager.localizedString(key: "rewarded_ad"), isPresented: $showingRewardAlert) {
+                rewardAlertButtons
+            } message: {
+                Text(languageManager.localizedString(key: "ad_free_10_minutes"))
+            }
+            .alert(languageManager.localizedString(key: "no_ad_found"), isPresented: $showingNoAdAlert) {
+                Button(languageManager.localizedString(key: "ok")) { }
+            } message: {
+                Text(languageManager.localizedString(key: "try_again_later"))
+            }
+            .onAppear {
+                Task {
+                    await storeManager.loadProducts()
                 }
             }
-            Button(languageManager.localizedString(key: "cancel"), role: .cancel) { }
-        } message: {
-            Text(languageManager.localizedString(key: "ad_free_10_minutes"))
+    }
+    
+    @ViewBuilder
+    private var rewardAlertButtons: some View {
+        Button(languageManager.localizedString(key: "watch_ad")) {
+            if AdMobManager.shared.isRewardedAdLoaded {
+                AdMobManager.shared.showRewardedAd()
+            } else {
+                showingNoAdAlert = true
+            }
         }
-        .alert(languageManager.localizedString(key: "no_ad_found"), isPresented: $showingNoAdAlert) {
-            Button(languageManager.localizedString(key: "ok")) { }
-        } message: {
-            Text(languageManager.localizedString(key: "try_again_later"))
+        Button(languageManager.localizedString(key: "cancel"), role: .cancel) { }
+    }
+    
+    @ViewBuilder
+    private var mainNavigationView: some View {
+        if #available(iOS 16.0, *) {
+            NavigationStack {
+                mainContentView
+                    .navigationTitle("WikiFlick")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbarBackground(.visible, for: .navigationBar)
+                    .toolbarBackground(Color.black.opacity(0.9), for: .navigationBar)
+                    .toolbarColorScheme(.dark, for: .navigationBar)
+                    .toolbar {
+                        leadingToolbarItems
+                        trailingToolbarItems
+                    }
+                    .searchable(
+                        text: $searchText,
+                        placement: .navigationBarDrawer(displayMode: .always),
+                        prompt: languageManager.localizedString(key: "search_wikipedia")
+                    )
+                    .onChange(of: searchText) { newValue in
+                        isSearching = !newValue.isEmpty
+                        wikipediaService.searchWikipedia(query: newValue)
+                    }
+                    .onSubmit(of: .search) {
+                        if !searchText.isEmpty {
+                            searchHistoryManager.addSearchQuery(
+                                searchText,
+                                languageCode: wikipediaService.languageCode,
+                                resultCount: wikipediaService.searchResults.count
+                            )
+                        }
+                    }
+            }
+        } else {
+            NavigationView {
+                mainContentView
+                    .navigationTitle("WikiFlick")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        leadingToolbarItems
+                        trailingToolbarItems
+                    }
+                    .searchable(
+                        text: $searchText,
+                        prompt: languageManager.localizedString(key: "search_wikipedia")
+                    )
+                    .onChange(of: searchText) { newValue in
+                        isSearching = !newValue.isEmpty
+                        wikipediaService.searchWikipedia(query: newValue)
+                    }
+            }
+            .navigationViewStyle(.stack)
         }
-        .onAppear {
-            Task {
-                await storeManager.loadProducts()
+    }
+    
+    private var mainContentView: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            FeedView(selectedSearchArticle: $selectedSearchArticle)
+            if isSearching {
+                searchResultsOverlay
             }
         }
     }
-
-    private var topHeaderView: some View {
-        HStack(spacing: 8) {
-            profileButton
-
-            if isSearchActive {
-                searchBarView
-            } else {
+    
+    private var leadingToolbarItems: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            HStack(spacing: 8) {
+                profileButton
                 if selectedSearchArticle != nil {
                     backToFeedButton
                 } else if !storeManager.isPurchased("wiki_m") {
                     removeAdsButton
                 }
-                Spacer()
+            }
+        }
+    }
+    
+    private var trailingToolbarItems: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            HStack(spacing: 8) {
                 if !storeManager.isPurchased("wiki_m") {
-                    searchButton
                     giftButton
-                } else {
-                    searchButton
                 }
+                settingsButton
             }
-            settingsButton
-        }
-        .padding(.horizontal, 10)
-        .padding(.top, 60)
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color.black.opacity(0.8),
-                    Color.black.opacity(0.6),
-                    Color.clear
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: 150)
-            .ignoresSafeArea(edges: .top)
-        )
-    }
-
-    private var profileButton: some View {
-        Button(action: {
-            if selectedSearchArticle != nil {
-                selectedSearchArticle = nil
-            } else {
-                refreshFeed()
-            }
-        }) {
-            Image("WikiShorts-pre")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-                .background(
-                    Circle()
-                        .fill(Color.black.opacity(0.7))
-                )
-                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
         }
     }
-
-    private var backToFeedButton: some View {
-        Button(action: {
-            selectedSearchArticle = nil
-        }) {
-            HStack(spacing: 6) {
-                Image(systemName: "arrow.left")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white)
-
-                Text(languageManager.localizedString(key: "back_to_feed"))
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .foregroundColor(.white)
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.black.opacity(0.7))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.gray.opacity(0.6), lineWidth: 1)
-                    )
-            )
-            .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
-        }
-    }
-
-    private var searchButton: some View {
-        Button(action: {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                isSearchActive = true
-            }
-        }) {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(.white)
-                .frame(width: 44, height: 44)
-                .background(
-                    Circle()
-                        .fill(Color.black.opacity(0.7))
-                        .overlay(
-                            Circle()
-                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
-                        )
-                )
-                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
-        }
-    }
-
-    private var removeAdsButton: some View {
-        Button(action: {
-            showingPaywall = true
-        }) {
-            HStack(spacing: 6) {
-                Text(languageManager.localizedString(key: "remove_ads"))
-                    .font(.system(size: 18, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-
-                Image(systemName: "nosign")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white)
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.black.opacity(0.5))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.gray.opacity(0.6), lineWidth: 1)
-                    )
-            )
-            .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
-        }
-    }
-
-    private var giftButton: some View {
-        Button(action: {
-            if AdMobManager.shared.isRewardedAdLoaded {
-                showingRewardAlert = true
-            } else {
-                showingNoAdAlert = true
-            }
-        }) {
-            Image(systemName: "gift")
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(.white)
-                .frame(width: 44, height: 44)
-                .background(
-                    Circle()
-                        .fill(Color.black.opacity(0.7))
-                        .overlay(
-                            Circle()
-                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
-                        )
-                )
-                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
-        }
-    }
-
-    private var settingsButton: some View {
-        Button(action: {
-            showingSettings = true
-        }) {
-            Image(systemName: "gearshape")
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(.white)
-                .frame(width: 44, height: 44)
-                .background(
-                    Circle()
-                        .fill(Color.black.opacity(0.7))
-                        .overlay(
-                            Circle()
-                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
-                        )
-                )
-                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
-        }
-    }
-
-    private var searchBarView: some View {
-        SearchBarView(
-            searchText: $searchText,
-            isActive: $isSearchActive,
-            onCancel: {
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    isSearchActive = false
-                    searchText = ""
-                    wikipediaService.clearSearchResults()
-                }
-            },
-            onClear: {
-                searchText = ""
-                wikipediaService.clearSearchResults()
-            }
-        )
-        .onChange(of: searchText) { newValue in
-            wikipediaService.searchWikipedia(query: newValue)
-        }
-    }
-
-    private var searchOverlays: some View {
+    
+    private var searchResultsOverlay: some View {
         VStack(spacing: 0) {
-            // Top spacing to position results below search bar
-            Rectangle()
-                .fill(Color.clear)
-                .frame(height: 140)
-
             if wikipediaService.isSearching {
                 SearchResultsSkeletonView()
             } else if !wikipediaService.searchResults.isEmpty {
@@ -283,11 +156,11 @@ struct ContentView: View {
                     searchResults: wikipediaService.searchResults,
                     onResultSelected: { result in
                         selectedSearchArticle = result.wikipediaArticle
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            isSearchActive = false
-                            searchText = ""
-                            wikipediaService.clearSearchResults()
-                        }
+                        searchText = ""
+                        isSearching = false
+                        wikipediaService.clearSearchResults()
+                        // Dismiss keyboard
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
                 )
                 .padding(.horizontal, 20)
@@ -316,13 +189,85 @@ struct ContentView: View {
                     .shadow(color: .black.opacity(0.3), radius: 20, x: 0, y: 10)
                 }
             }
-
+            
             Spacer()
         }
-        .transition(.asymmetric(
-            insertion: .move(edge: .top).combined(with: .opacity),
-            removal: .move(edge: .top).combined(with: .opacity)
-        ))
+        .padding(.top, 8)
+        .background(Color.black.opacity(0.7))
+    }
+
+    private var profileButton: some View {
+        Button(action: {
+            if selectedSearchArticle != nil {
+                selectedSearchArticle = nil
+            } else {
+                refreshFeed()
+            }
+        }) {
+            Image("WikiShorts-pre")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 32, height: 32)
+                .clipShape(Circle())
+        }
+    }
+
+    private var backToFeedButton: some View {
+        Button(action: {
+            selectedSearchArticle = nil
+        }) {
+            HStack(spacing: 4) {
+                Image(systemName: "arrow.left")
+                    .font(.system(size: 12, weight: .medium))
+                Text(languageManager.localizedString(key: "back_to_feed"))
+                    .font(.system(size: 12, weight: .medium))
+            }
+            .foregroundColor(.white)
+        }
+    }
+
+    private var removeAdsButton: some View {
+        Button(action: {
+            showingPaywall = true
+        }) {
+            HStack(spacing: 4) {
+                Text(languageManager.localizedString(key: "remove_ads"))
+                    .font(.system(size: 12, weight: .semibold))
+                Image(systemName: "nosign")
+                    .font(.system(size: 10, weight: .medium))
+            }
+            .foregroundColor(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(
+                Capsule()
+                    .fill(Color.white.opacity(0.2))
+            )
+        }
+    }
+
+    private var giftButton: some View {
+        Button(action: {
+            if AdMobManager.shared.isRewardedAdLoaded {
+                showingRewardAlert = true
+            } else {
+                showingNoAdAlert = true
+            }
+        }) {
+            Image(systemName: "gift")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.white)
+        }
+    }
+
+    private var settingsButton: some View {
+        Button(action: {
+            showingSettings = true
+        }) {
+            Image(systemName: "gearshape")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.white)
+        }
     }
 
     private func refreshFeed() {
