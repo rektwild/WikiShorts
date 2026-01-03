@@ -39,7 +39,7 @@ struct ContentView: View {
                         .toolbarColorScheme(.dark, for: .navigationBar)
                 }
                 .tabItem {
-                    Label(languageManager.localizedString(key: "feed"), systemImage: "house")
+                    Label(languageManager.localizedString(key: "feed"), systemImage: "rectangle.stack")
                 }
             } else {
                 NavigationView {
@@ -47,7 +47,7 @@ struct ContentView: View {
                 }
                 .navigationViewStyle(.stack)
                 .tabItem {
-                    Label(languageManager.localizedString(key: "feed"), systemImage: "house")
+                    Label(languageManager.localizedString(key: "feed"), systemImage: "rectangle.stack")
                 }
             }
             
