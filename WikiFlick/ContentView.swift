@@ -86,7 +86,6 @@ struct ContentView: View {
     @ViewBuilder
     private var feedContent: some View {
         FeedView(selectedSearchArticle: $selectedSearchArticle)
-            .navigationTitle(languageManager.localizedString(key: "feed"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 leadingToolbarItems
