@@ -54,7 +54,7 @@ struct FeedView: View {
                         ArticleCardView(article: searchArticle, onNavigateToTop: nil)
                             .frame(width: geometry.size.width, height: geometry.size.height)
                     } else if #available(iOS 17.0, *) {
-                        // iOS 17+ - Use ScrollView with paging
+                        // iOS 17+ - Use ScrollView with containerRelativeFrame for perfect paging
                         ScrollView(.vertical, showsIndicators: false) {
                             LazyVStack(spacing: 0) {
                                 ForEach(Array(feedItems.enumerated()), id: \.offset) { index, item in
@@ -70,7 +70,7 @@ struct FeedView: View {
                                             FeedAdView(nativeAd: nativeAd)
                                         }
                                     }
-                                    .frame(width: geometry.size.width, height: geometry.size.height)
+                                    .containerRelativeFrame([.horizontal, .vertical])
                                     .onAppear {
                                         currentIndex = index
 
@@ -89,6 +89,7 @@ struct FeedView: View {
                                     }
                                 }
                             }
+                            .scrollTargetLayout()
                         }
                         .scrollTargetBehavior(.paging)
                         .ignoresSafeArea()

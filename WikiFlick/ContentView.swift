@@ -70,9 +70,12 @@ struct ContentView: View {
                     .toolbarBackground(.visible, for: .navigationBar)
                     .toolbarBackground(Color.black.opacity(0.9), for: .navigationBar)
                     .toolbarColorScheme(.dark, for: .navigationBar)
-                    .toolbar {
+                    .toolbarBackground(.hidden, for: .bottomBar)
+                    .toolbarColorScheme(.dark, for: .bottomBar)
+            .toolbar {
                         leadingToolbarItems
                         trailingToolbarItems
+                        bottomToolbarItems
                     }
                     .searchableResponsive(
                         text: $searchText,
@@ -101,6 +104,7 @@ struct ContentView: View {
                     .toolbar {
                         leadingToolbarItems
                         trailingToolbarItems
+                        bottomToolbarItems
                     }
                     .searchable(
                         text: $searchText,
@@ -146,6 +150,30 @@ struct ContentView: View {
                     giftButton
                 }
                 settingsButton
+            }
+        }
+    }
+    
+    private var bottomToolbarItems: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+            HStack {
+                Spacer()
+                Button(action: {
+                    if selectedSearchArticle != nil {
+                        selectedSearchArticle = nil
+                    } else {
+                        refreshFeed()
+                    }
+                }) {
+                    Image(systemName: "house.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(.black)
+                        .frame(width: 56, height: 56)
+                        .background(Color.white)
+                        .clipShape(Circle())
+                        .shadow(radius: 4)
+                }
+                Spacer()
             }
         }
     }
