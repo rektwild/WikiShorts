@@ -24,27 +24,73 @@ struct ContentView: View {
     @StateObject private var searchHistoryManager = SearchHistoryManager.shared
 
     var body: some View {
-        mainNavigationView
-            .sheet(isPresented: $showingSettings) {
-                SettingsView()
-            }
-            .sheet(isPresented: $showingPaywall) {
-                PaywallView(isPresented: $showingPaywall)
-            }
-            .alert(languageManager.localizedString(key: "rewarded_ad"), isPresented: $showingRewardAlert) {
-                rewardAlertButtons
-            } message: {
-                Text(languageManager.localizedString(key: "ad_free_10_minutes"))
-            }
-            .alert(languageManager.localizedString(key: "no_ad_found"), isPresented: $showingNoAdAlert) {
-                Button(languageManager.localizedString(key: "ok")) { }
-            } message: {
-                Text(languageManager.localizedString(key: "try_again_later"))
-            }
-            .onAppear {
-                Task {
-                    await storeManager.loadProducts()
+        TabView {
+            // Today Tab
+            TodayView()
+                .tabItem {
+                    Label(languageManager.localizedString(key: "today"), systemImage: "doc.text.image")
                 }
+            
+            // Feed Tab
+            if #available(iOS 16.0, *) {
+                NavigationStack {
+                    feedContent
+                        .toolbarBackground(.visible, for: .navigationBar)
+                        .toolbarBackground(Color.black.opacity(0.9), for: .navigationBar)
+                        .toolbarColorScheme(.dark, for: .navigationBar)
+                }
+                .tabItem {
+                    Label(languageManager.localizedString(key: "feed"), systemImage: "house")
+                }
+            } else {
+                NavigationView {
+                    feedContent
+                }
+                .navigationViewStyle(.stack)
+                .tabItem {
+                    Label(languageManager.localizedString(key: "feed"), systemImage: "house")
+                }
+            }
+            
+            // Search Tab
+            SearchView()
+                .tabItem {
+                    Label(languageManager.localizedString(key: "search"), systemImage: "magnifyingglass")
+                }
+        }
+        .accentColor(.white) // Ensure tab selection color fits dark theme
+        .preferredColorScheme(.dark) // Enforce dark mode as per app style
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+        }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView(isPresented: $showingPaywall)
+        }
+        .alert(languageManager.localizedString(key: "rewarded_ad"), isPresented: $showingRewardAlert) {
+            rewardAlertButtons
+        } message: {
+            Text(languageManager.localizedString(key: "ad_free_10_minutes"))
+        }
+        .alert(languageManager.localizedString(key: "no_ad_found"), isPresented: $showingNoAdAlert) {
+            Button(languageManager.localizedString(key: "ok")) { }
+        } message: {
+            Text(languageManager.localizedString(key: "try_again_later"))
+        }
+        .onAppear {
+            Task {
+                await storeManager.loadProducts()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var feedContent: some View {
+        FeedView(selectedSearchArticle: $selectedSearchArticle)
+            .navigationTitle(languageManager.localizedString(key: "feed"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                leadingToolbarItems
+                trailingToolbarItems
             }
     }
     
@@ -60,81 +106,13 @@ struct ContentView: View {
         Button(languageManager.localizedString(key: "cancel"), role: .cancel) { }
     }
     
-    @ViewBuilder
-    private var mainNavigationView: some View {
-        if #available(iOS 16.0, *) {
-            NavigationStack {
-                mainContentView
-                    .navigationTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbarBackground(.visible, for: .navigationBar)
-                    .toolbarBackground(Color.black.opacity(0.9), for: .navigationBar)
-                    .toolbarColorScheme(.dark, for: .navigationBar)
-                    .toolbarBackground(.hidden, for: .bottomBar)
-                    .toolbarColorScheme(.dark, for: .bottomBar)
-            .toolbar {
-                        leadingToolbarItems
-                        trailingToolbarItems
-                        bottomToolbarItems
-                    }
-                    .searchableResponsive(
-                        text: $searchText,
-                        isPresented: $isSearchFocused,
-                        prompt: languageManager.localizedString(key: "search_wikipedia")
-                    )
-                    .onChange(of: searchText) { newValue in
-                        isSearching = !newValue.isEmpty
-                        wikipediaService.searchWikipedia(query: newValue)
-                    }
-                    .onSubmit(of: .search) {
-                        if !searchText.isEmpty {
-                            searchHistoryManager.addSearchQuery(
-                                searchText,
-                                languageCode: wikipediaService.languageCode,
-                                resultCount: wikipediaService.searchResults.count
-                            )
-                        }
-                    }
-            }
-        } else {
-            NavigationView {
-                mainContentView
-                    .navigationTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        leadingToolbarItems
-                        trailingToolbarItems
-                        bottomToolbarItems
-                    }
-                    .searchable(
-                        text: $searchText,
-                        prompt: languageManager.localizedString(key: "search_wikipedia")
-                    )
-                    .onChange(of: searchText) { newValue in
-                        isSearching = !newValue.isEmpty
-                        wikipediaService.searchWikipedia(query: newValue)
-                    }
-            }
-            .navigationViewStyle(.stack)
-        }
-    }
-    
-    private var mainContentView: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            FeedView(selectedSearchArticle: $selectedSearchArticle)
-            if isSearching {
-                searchResultsOverlay
-            }
-        }
-    }
-    
     private var leadingToolbarItems: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             HStack(spacing: 8) {
                 profileButton
                 if selectedSearchArticle != nil {
-                    backToFeedButton
+                    // Back button logic if needed, usually handled by NavStack automatically for pushed views
+                    // But here selectedSearchArticle might be handling custom view switching within FeedView
                 } else if !storeManager.isPurchased("wiki_m") {
                     removeAdsButton
                 }
@@ -145,7 +123,7 @@ struct ContentView: View {
     private var trailingToolbarItems: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             HStack(spacing: 8) {
-                searchButton
+                // searchButton removed as we have a Search Tab now
                 if !storeManager.isPurchased("wiki_m") {
                     giftButton
                 }
@@ -154,78 +132,8 @@ struct ContentView: View {
         }
     }
     
-    private var bottomToolbarItems: some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
-            HStack {
-                Spacer()
-                Button(action: {
-                    if selectedSearchArticle != nil {
-                        selectedSearchArticle = nil
-                    } else {
-                        refreshFeed()
-                    }
-                }) {
-                    Image(systemName: "house.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(.black)
-                        .frame(width: 56, height: 56)
-                        .background(Color.white)
-                        .clipShape(Circle())
-                        .shadow(radius: 4)
-                }
-                Spacer()
-            }
-        }
-    }
-
-    private var searchResultsOverlay: some View {
-        VStack(spacing: 0) {
-            if wikipediaService.isSearching {
-                SearchResultsSkeletonView()
-            } else if !wikipediaService.searchResults.isEmpty {
-                SearchResultsListView(
-                    searchResults: wikipediaService.searchResults,
-                    onResultSelected: { result in
-                        selectedSearchArticle = result.wikipediaArticle
-                        searchText = ""
-                        isSearching = false
-                        wikipediaService.clearSearchResults()
-                        // Dismiss keyboard
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
-                )
-                .padding(.horizontal, 20)
-                .shadow(color: .black.opacity(0.3), radius: 20, x: 0, y: 10)
-            } else if !searchText.isEmpty {
-                EmptySearchStateView(query: searchText)
-            } else {
-                // Show search history when search text is empty
-                let recentSearches = searchHistoryManager.getRecentSearches(
-                    for: wikipediaService.languageCode,
-                    limit: 5
-                )
-
-                if !recentSearches.isEmpty {
-                    SearchHistoryView(
-                        searchHistory: recentSearches,
-                        onHistoryItemTap: { query in
-                            searchText = query
-                            wikipediaService.searchWikipedia(query: query)
-                        },
-                        onClearHistory: {
-                            searchHistoryManager.clearAllHistory()
-                        }
-                    )
-                    .padding(.horizontal, 20)
-                    .shadow(color: .black.opacity(0.3), radius: 20, x: 0, y: 10)
-                }
-            }
-            
-            Spacer()
-        }
-        .padding(.top, 8)
-        .background(Color.black.opacity(0.7))
-    }
+    // Removed bottomToolbarItems (custom home circle)
+    // Removed searchResultsOverlay and related subviews (SearchResultsSkeletonView, etc)
 
     private var profileButton: some View {
         Button(action: {
@@ -243,30 +151,11 @@ struct ContentView: View {
         }
     }
 
-    private var backToFeedButton: some View {
-        Button(action: {
-            selectedSearchArticle = nil
-        }) {
-            HStack(spacing: 4) {
-                Image(systemName: "arrow.left")
-                    .font(.system(size: 12, weight: .medium))
-                Text(languageManager.localizedString(key: "back_to_feed"))
-                    .font(.system(size: 12, weight: .medium))
-            }
-            .foregroundColor(.white)
-        }
-    }
-
-    private var searchButton: some View {
-        Button(action: {
-            isSearchFocused = true
-        }) {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.white)
-        }
-    }
-
+    // Removed backToFeedButton logic if it relied on custom overlay state, 
+    // but keeping it simpler for now. If FeedView handles navigation internally via selectedSearchArticle, 
+    // we might not need a manual back button in toolbar if we aren't overlaying.
+    // However, the original code had backToFeedButton in leadingToolbarItems.
+    
     private var removeAdsButton: some View {
         Button(action: {
             showingPaywall = true
