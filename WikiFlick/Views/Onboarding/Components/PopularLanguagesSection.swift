@@ -15,6 +15,7 @@ struct PopularLanguagesSection: View {
                 HStack(spacing: 12) {
                     ForEach(AppLanguage.popularLanguages, id: \.self) { language in
                         Button(action: {
+                            HapticManager.shared.itemSelected()
                             selectedLanguage = language
                         }) {
                             HStack(spacing: 8) {
@@ -24,8 +25,14 @@ struct PopularLanguagesSection: View {
                                     .font(.system(size: 14, weight: .semibold))
                                 
                                 if language == selectedLanguage {
-                                    Image(systemName: "checkmark")
-                                        .font(.system(size: 14, weight: .bold))
+                                    if #available(iOS 17.0, *) {
+                                        Image(systemName: "checkmark")
+                                            .font(.system(size: 14, weight: .bold))
+                                            .symbolEffect(.bounce, value: selectedLanguage)
+                                    } else {
+                                        Image(systemName: "checkmark")
+                                            .font(.system(size: 14, weight: .bold))
+                                    }
                                 }
                             }
                             .padding(.horizontal, 12)
@@ -44,6 +51,10 @@ struct PopularLanguagesSection: View {
                             .shadow(color: language == selectedLanguage ? Color.primaryBlue.opacity(0.2) : Color.clear, radius: 4, x: 0, y: 2)
                             .foregroundColor(language == selectedLanguage ? .white : (colorScheme == .dark ? .gray : .black.opacity(0.7)))
                         }
+                        .accessibilityLabel(language.englishName)
+                        .accessibilityHint(language == selectedLanguage ? "Selected" : "Double tap to select")
+                        .accessibilityAddTraits(language == selectedLanguage ? .isSelected : [])
+                        .buttonStyle(ScaleButtonStyle())
                     }
                 }
                 .padding(.horizontal, 16)

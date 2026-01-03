@@ -4,6 +4,7 @@ struct OnboardingArticleLanguageSelectionView: View {
     @Binding var selectedLanguage: AppLanguage
     let availableLanguages: [AppLanguage]
     @State private var searchText = ""
+    @FocusState private var isSearchFocused: Bool
     @Environment(\.colorScheme) var colorScheme
     let onContinue: () -> Void
     
@@ -19,35 +20,29 @@ struct OnboardingArticleLanguageSelectionView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            // Search Bar
-            OnboardingSearchBar(text: $searchText)
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
-                .padding(.bottom, 16)
-            
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    // Popular Section
-                    if searchText.isEmpty {
-                        PopularLanguagesSection(selectedLanguage: $selectedLanguage)
-                    }
-                    
-                    // All Languages Section
-                    OnboardingLanguageListSection(
-                        title: "All Languages",
-                        languages: filteredLanguages,
-                        selectedLanguage: $selectedLanguage
-                    )
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                // Popular Section
+                if searchText.isEmpty {
+                    PopularLanguagesSection(selectedLanguage: $selectedLanguage)
+                        .padding(.top, 16)
                 }
-                .padding(.bottom, 100) // Space for sticky footer
+                
+                // All Languages Section
+                OnboardingLanguageListSection(
+                    title: "All Languages",
+                    languages: filteredLanguages,
+                    selectedLanguage: $selectedLanguage
+                )
             }
+            .padding(.bottom, 100) // Space for sticky footer
         }
         .background(colorScheme == .dark ? Color.backgroundDark : Color.backgroundLight)
         .overlay(alignment: .bottom) {
             // Sticky Footer
             OnboardingStickyFooter(action: onContinue)
         }
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search languages")
     }
 }
 

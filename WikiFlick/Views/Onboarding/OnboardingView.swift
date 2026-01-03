@@ -20,84 +20,91 @@ struct OnboardingView: View {
             ZStack {
                 Color.black.ignoresSafeArea()
                 
-                if currentStep == 0 {
-                    AppLanguageSelectionView(
-                        selectedLanguage: $selectedAppLanguage,
-                        onContinue: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentStep = 1
-                            }
-                        }
-                    )
-                    .navigationTitle(appLanguageManager.localizedString(key: "select_app_language"))
-                    .navigationBarTitleDisplayMode(.large)
-                } else if currentStep == 1 {
-                    NotificationPermissionView(
-                        onAllow: {
-                            requestNotificationPermission()
-                        },
-                        onSkip: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentStep = 2
-                            }
-                        }
-                    )
-                    .navigationTitle("Stay Updated")
-                    .navigationBarTitleDisplayMode(.large)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button(action: {
-                                withAnimation { currentStep = 0 }
-                            }) {
-                                HStack(spacing: 4) {
-                                    Image(systemName: "chevron.left")
-                                    Text("Back")
+                VStack(spacing: 0) {
+
+                    // Content
+                    ZStack {
+                        if currentStep == 0 {
+                            AppLanguageSelectionView(
+                                selectedLanguage: $selectedAppLanguage,
+                                onContinue: {
+                                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                        currentStep = 1
+                                    }
+                                }
+                            )
+                            .navigationTitle(appLanguageManager.localizedString(key: "select_app_language"))
+                            .navigationBarTitleDisplayMode(.large)
+                        } else if currentStep == 1 {
+                            NotificationPermissionView(
+                                onAllow: {
+                                    requestNotificationPermission()
+                                }
+                            )
+                            .navigationTitle("Stay Updated")
+                            .navigationBarTitleDisplayMode(.large)
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button(action: {
+                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) { 
+                                            currentStep = 0 
+                                        }
+                                    }) {
+                                        HStack(spacing: 4) {
+                                            Image(systemName: "chevron.left")
+                                            Text("Back")
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                } else if currentStep == 2 {
-                    OnboardingArticleLanguageSelectionView(
-                        selectedLanguage: $selectedArticleLanguage,
-                        availableLanguages: articleLanguageManager.availableLanguages,
-                        onContinue: {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                currentStep = 3
-                            }
-                        }
-                    )
-                    .navigationTitle(appLanguageManager.localizedString(key: "select_article_language"))
-                    .navigationBarTitleDisplayMode(.large)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button(action: {
-                                withAnimation { currentStep = 1 }
-                            }) {
-                                HStack(spacing: 4) {
-                                    Image(systemName: "chevron.left")
-                                    Text("Back")
+                        } else if currentStep == 2 {
+                            OnboardingArticleLanguageSelectionView(
+                                selectedLanguage: $selectedArticleLanguage,
+                                availableLanguages: articleLanguageManager.availableLanguages,
+                                onContinue: {
+                                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                        currentStep = 3
+                                    }
+                                }
+                            )
+                            .navigationTitle(appLanguageManager.localizedString(key: "select_article_language"))
+                            .navigationBarTitleDisplayMode(.large)
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button(action: {
+                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) { 
+                                            currentStep = 1 
+                                        }
+                                    }) {
+                                        HStack(spacing: 4) {
+                                            Image(systemName: "chevron.left")
+                                            Text("Back")
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                } else {
-                    OnboardingTopicSelectionView(
-                        selectedTopics: $selectedTopics,
-                        topics: topics,
-                        onGetStarted: {
-                            completeOnboarding()
-                        }
-                    )
-                    .navigationTitle("Choose Topics")
-                    .navigationBarTitleDisplayMode(.large)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button(action: {
-                                withAnimation { currentStep = 2 }
-                            }) {
-                                HStack(spacing: 4) {
-                                    Image(systemName: "chevron.left")
-                                    Text("Back")
+                        } else {
+                            OnboardingTopicSelectionView(
+                                selectedTopics: $selectedTopics,
+                                topics: topics,
+                                onGetStarted: {
+                                    completeOnboarding()
+                                }
+                            )
+                            .navigationTitle("What interests you?")
+                            .navigationBarTitleDisplayMode(.large)
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button(action: {
+                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) { 
+                                            currentStep = 2 
+                                        }
+                                    }) {
+                                        HStack(spacing: 4) {
+                                            Image(systemName: "chevron.left")
+                                            Text("Back")
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -155,9 +162,9 @@ struct OnboardingView: View {
 // MARK: - Color Extensions
 extension Color {
     static let primaryBlue = Color(hex: "135bec")
-    static let backgroundLight = Color(hex: "f6f6f8")
-    static let backgroundDark = Color(hex: "101622")
-    static let surfaceDark = Color(hex: "232f48")
+    static let backgroundLight = Color(hex: "FFFFFF")
+    static let backgroundDark = Color(hex: "000000")
+    static let surfaceDark = Color(hex: "1C1C1E")
     
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

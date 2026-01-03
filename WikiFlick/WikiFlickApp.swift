@@ -31,8 +31,10 @@ struct WikiShortsApp: App {
         WindowGroup {
             if showOnboarding {
                 OnboardingView(showOnboarding: $showOnboarding)
+                    .preferredColorScheme(.dark)
             } else {
                 ContentView()
+                    .preferredColorScheme(.dark)
                     .onAppear {
                         // Uygulama her açıldığında bildirimleri yenile
                         NotificationManager.shared.refreshNotifications()

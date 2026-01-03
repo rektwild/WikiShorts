@@ -7,7 +7,6 @@ class TopicManager {
 
     // Topic display names (used in UI)
     static let topicDisplayNames = [
-        "All Topics",
         "General Reference",
         "Culture and the Arts",
         "Geography and Places",
@@ -25,7 +24,6 @@ class TopicManager {
 
     // Topic keys (used for storage and localization)
     static let topicKeys = [
-        "all_topics",
         "general_reference",
         "culture_and_arts",
         "geography_and_places",
@@ -50,7 +48,7 @@ class TopicManager {
         uniqueKeysWithValues: zip(topicKeys, topicDisplayNames)
     )
 
-    // Maximum number of topics that can be selected (excluding "All Topics")
+    // Maximum number of topics that can be selected
     static let maxTopicSelection = 5
 
     // Convert display names to keys
@@ -68,17 +66,17 @@ class TopicManager {
         if let savedKeys = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] {
             // Convert keys to display names
             let displayNames = convertKeysToDisplayNames(Set(savedKeys))
-            return displayNames.isEmpty ? ["All Topics"] : displayNames
+            return displayNames
         }
-        return ["All Topics"]
+        return ["General Reference", "Culture and the Arts", "History and Events"]
     }
 
     // Get saved topics from UserDefaults as keys
     static func getSavedTopicsAsKeys() -> Set<String> {
         if let savedKeys = UserDefaults.standard.array(forKey: "selectedTopics") as? [String] {
-            return Set(savedKeys).isEmpty ? ["all_topics"] : Set(savedKeys)
+            return Set(savedKeys)
         }
-        return ["all_topics"]
+        return ["general_reference", "culture_and_arts", "history_and_events"]
     }
 
     // Save topics to UserDefaults (always saves as keys)

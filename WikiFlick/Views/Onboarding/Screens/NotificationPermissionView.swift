@@ -2,21 +2,27 @@ import SwiftUI
 
 struct NotificationPermissionView: View {
     let onAllow: () -> Void
-    let onSkip: () -> Void
+
     
     var body: some View {
         VStack(spacing: 40) {
             Spacer()
             
             VStack(spacing: 16) {
-                Image(systemName: "bell.fill")
-                    .font(.system(size: 60))
-                    .foregroundColor(.white)
+                if #available(iOS 17.0, *) {
+                    Image(systemName: "bell.fill")
+                        .font(.system(size: 60))
+                        .foregroundColor(.white)
+                        .symbolEffect(.pulse.byLayer, options: .repeating)
+                        .accessibilityHidden(true)
+                } else {
+                    Image(systemName: "bell.fill")
+                        .font(.system(size: 60))
+                        .foregroundColor(.white)
+                        .accessibilityHidden(true)
+                }
                 
-                Text("Stay Updated")
-                    .font(.system(size: 32, weight: .bold))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
+
                 
                 Text("Get daily reminders to discover amazing Wikipedia articles")
                     .font(.system(size: 18, weight: .medium))
@@ -60,29 +66,12 @@ struct NotificationPermissionView: View {
             
             Spacer()
             
-            VStack(spacing: 12) {
-                Button(action: onAllow) {
-                    Text("Allow Notifications")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.white)
-                        )
-                }
-                
-                Button(action: onSkip) {
-                    Text("Skip")
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(.white.opacity(0.8))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                }
-            }
-            .padding(.horizontal, 40)
-            .padding(.bottom, 60)
+        }
+        .overlay(alignment: .bottom) {
+            OnboardingStickyFooter(action: {
+                HapticManager.shared.buttonPressed()
+                onAllow()
+            })
         }
     }
 }
@@ -91,8 +80,7 @@ struct NotificationPermissionView: View {
     ZStack {
         Color.black.ignoresSafeArea()
         NotificationPermissionView(
-            onAllow: {},
-            onSkip: {}
+            onAllow: {}
         )
     }
 }
