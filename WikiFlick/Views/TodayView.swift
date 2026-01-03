@@ -259,13 +259,12 @@ struct TimelineEventRow: View {
                     .font(.subheadline)
                     .foregroundColor(.primary)
                     .lineSpacing(4)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 // Thumbnail (small, right aligned if exists)
                 if thumbnailImage != nil || event.pages.first?.thumbnail?.source != nil {
                      thumbnailView
-                         .frame(width: 60, height: 60)
                 }
             }
             
@@ -317,27 +316,33 @@ struct TimelineEventRow: View {
     
     @ViewBuilder
     private var thumbnailView: some View {
-        if let image = thumbnailImage {
-            Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-        } else if let thumbnailURL = event.pages.first?.thumbnail?.source {
-            AsyncImage(url: URL(string: thumbnailURL)) { phase in
-                switch phase {
-                case .empty:
-                    Color.secondary.opacity(0.1)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                case .failure:
-                    Color.secondary.opacity(0.1)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                @unknown default:
-                    EmptyView()
+        Group {
+            if let image = thumbnailImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 70, height: 70)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            } else if let thumbnailURL = event.pages.first?.thumbnail?.source {
+                AsyncImage(url: URL(string: thumbnailURL)) { phase in
+                    switch phase {
+                    case .empty:
+                        Color.secondary.opacity(0.1)
+                            .frame(width: 70, height: 70)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 70, height: 70)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    case .failure:
+                        Color.secondary.opacity(0.1)
+                            .frame(width: 70, height: 70)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    @unknown default:
+                        EmptyView()
+                    }
                 }
             }
         }
