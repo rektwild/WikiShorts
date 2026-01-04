@@ -1,0 +1,32 @@
+
+// Türkçe (Türkiye) - tr
+
+// App Name (Uygulama Adı)
+WikiFlick
+
+// Subtitle (Alt Başlık)
+Her Gün Yeni Bilgi Keşfet
+
+// Promotional Text (Tanıtım Metni)
+Günün en ilginç Wikipedia makalelerini sizin için seçiyoruz! Merakınızı giderin ve genel kültürünüzü her gün zenginleştirin.
+
+// Description (Açıklama)
+Bilgiye ulaşmanın en keyifli yoluyla tanışın! WikiFlick, Wikipedia'nın sonsuz bilgi evrenini modern ve hızlı bir formatta parmaklarınızın ucuna getirir. Karmaşık ve uzun makaleler arasında kaybolmak yerine, her gün yeni ve şaşırtıcı bilgiler keşfedin.
+
+WikiFlick, öğrenmeyi bir alışkanlık haline getirmeniz için tasarlandı. İster beş dakikalık bir molada, ister yolculuk yaparken, genel kültürünüzü artırmak için her an yanınızda.
+
+TEMEL ÖZELLİKLER:
+
+• Günün Seçkileri: Editörlerimizin seçtiği en ilgi çekici konuları ve "günün makalesini" kaçırmayın.
+• Rastgele Keşif: Tek bir dokunuşla karşınıza çıkacak rastgele bir makaleyle kendinizi şaşırtın ve ufkunuzu genişletin.
+• Akıllı Arama: Merak ettiğiniz her konuya anında ulaşın ve ilgili makaleleri hızla bulun.
+• Favori Listesi: En sevdiğiniz veya daha sonra okumak istediğiniz makaleleri kolayca kaydedin ve kendi kişisel arşinizi oluşturun.
+
+Neden WikiFlick?
+
+Çünkü öğrenmek sıkıcı olmak zorunda değil. Bilimden sanata, tarihten teknolojiye kadar binlerce konuda hap bilgilere ulaşın. WikiFlick ile her gününüzü daha bilgili tamamlayın.
+
+Hemen indirin ve keşfetmeye başlayın!
+
+// Keywords (Anahtar Kelimeler)
+bilgi,genel kültür,eğitim,tarih,bilim,sanat,coğrafya,özet,keşfet,ansiklopedi,öğrenme,merak

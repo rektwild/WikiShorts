@@ -1,0 +1,32 @@
+
+// Cebuano (Philippines) - ceb
+
+// App Name
+WikiFlick
+
+// Subtitle
+Pagdiskobre og Kahibalo Kada Adlaw
+
+// Promotional Text
+Gipili namo para nimo ang labing makapaikag nga mga artikulo sa Wikipedia kada adlaw! Tagbawa ang imong kakuryuso ug pagkat-on og bag-o.
+
+// Description
+Ilha ang labing makalingaw nga paagi aron makakuha og kahibalo! Gidala sa WikiFlick ang walay katapusan nga uniberso sa Wikipedia sa imong mga tudlo sa usa ka moderno ug paspas nga pormat. Imbes nga mawala sa tag-as ug komplikado nga mga artikulo, pagdiskobre og bag-o ug katingalahang mga kamatuoran matag adlaw.
+
+Ang WikiFlick gidesinyo aron himuong inadlaw-adlaw nga batasan ang pagkat-on. Bisan kung naa ka sa lima ka minuto nga pahulay o nagbiyahe, kini ang hingpit nga kauban aron mapalapdan ang imong kinatibuk-ang kahibalo.
+
+PANGUNANG MGA ARTIKULO:
+
+• Mga Pinili sa Adlaw: Ayaw sipyata ang labing makaiikag nga mga hilisgutan ug ang "artikulo sa adlaw," nga gipili pag-ayo sa among mga editor.
+• Random nga Pagdiskobre: Sorpresaha ang imong kaugalingon sa usa ka random nga artikulo sa pagpindot sa usa ka buton ug palapdi ang imong mga panglantaw.
+• Maalamon nga Pagpangita: Diha-diha dayon i-access ang bisan unsang hilisgutan nga imong gikuryusoan ug pangitaa dayon ang mga may kalabutan nga artikulo.
+• Lista sa mga Paborito: Sayon nga i-save ang imong paborito nga mga artikulo o kadtong gusto nimong basahon sa ulahi aron matukod ang imong kaugalingon nga personal nga librarya.
+
+Nganong WikiFlick?
+
+Tungod kay ang pagkat-on dili kinahanglan nga makalaay. Pag-access sa gagmay nga kahibalo sa liboan ka mga hilisgutan, gikan sa siyensya ug arte hangtod sa kasaysayan ug teknolohiya. Himoa ang matag adlaw nga mas maalamon sa WikiFlick.
+
+I-download karon ug sugdi ang pagsuhid!
+
+// Keywords
+kahibalo,pagkat-on,edukasyon,kasaysayan,siyensya,arte,kamatuoran,diskobre,kuryusidad,summary

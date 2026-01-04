@@ -1,0 +1,32 @@
+
+// Portuguese (Portugal, Brazil) - pt
+
+// App Name
+WikiFlick
+
+// Subtitle
+Descubra Conhecimento a Cada Dia
+
+// Promotional Text
+Selecionamos para você os artigos mais interessantes da Wikipédia todos os dias! Satisfaça sua curiosidade e aprenda algo novo.
+
+// Description
+Conheça a maneira mais agradável de adquirir conhecimento! O WikiFlick traz o universo infinito da Wikipédia para a ponta dos seus dedos em um formato moderno e rápido. Em vez de se perder em artigos longos e complexos, descubra fatos novos e surpreendentes todos os dias.
+
+O WikiFlick foi projetado para tornar o aprendizado um hábito diário. Esteja você em uma pausa de cinco minutos ou no trânsito, é o companheiro perfeito para expandir sua cultura geral.
+
+PRINCIPAIS RECURSOS:
+
+• Seleções do Dia: Não perca os tópicos mais fascinantes e o "artigo do dia", cuidadosamente selecionados por nossos editores.
+• Descoberta Aleatória: Surpreenda-se com um artigo aleatório com o toque de um botão e amplie seus horizontes.
+• Pesquisa Inteligente: Acesse instantaneamente qualquer tópico pelo qual você tenha curiosidade e encontre rapidamente artigos relevantes.
+• Lista de Favoritos: Salve facilmente seus artigos preferidos ou aqueles que deseja ler mais tarde para construir sua própria biblioteca pessoal.
+
+Por que o WikiFlick?
+
+Porque aprender не трябва да е скучно. Tenha acesso a conhecimento conciso sobre milhares de tópicos, da ciência e arte à história e tecnologia. Torne cada dia um pouco mais inteligente com o WikiFlick.
+
+Baixe agora e comece a explorar!
+
+// Keywords
+conhecimento,aprender,educação,história,ciência,arte,fatos,descobrir,curiosidade,resumo

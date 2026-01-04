@@ -1,0 +1,32 @@
+
+// Italian (Italy) - it
+
+// App Name
+WikiFlick
+
+// Subtitle
+Scopri la Conoscenza Ogni Giorno
+
+// Promotional Text
+Scegliamo per te gli articoli più interessanti di Wikipedia ogni giorno! Soddisfa la tua curiosità e impara qualcosa di nuovo.
+
+// Description
+Incontra il modo più piacevole per acquisire conoscenza! WikiFlick porta l'infinito universo di Wikipedia a portata di mano in un formato moderno e veloce. Invece di perderti in articoli lunghi e complessi, scopri fatti nuovi e sorprendenti ogni giorno.
+
+WikiFlick è progettato per rendere l'apprendimento un'abitudine quotidiana. Che tu sia in una pausa di cinque minuti o in viaggio, è il compagno perfetto per ampliare la tua cultura generale.
+
+CARATTERISTICHE PRINCIPALI:
+
+• Selezioni del Giorno: Non perdere gli argomenti più affascinanti e l'"articolo del giorno", scelti con cura dai nostri redattori.
+• Scoperta Casuale: Sorprenditi con un articolo casuale con un semplice tocco e allarga i tuoi orizzonti.
+• Ricerca Intelligente: Accedi istantaneamente a qualsiasi argomento che ti incuriosisce e trova rapidamente gli articoli pertinenti.
+• Elenco Preferiti: Salva facilmente i tuoi articoli preferiti o quelli che vuoi leggere più tardi per costruire la tua biblioteca personale.
+
+Perché WikiFlick?
+
+Perché imparare non deve essere noioso. Accedi a pillole di conoscenza su migliaia di argomenti, dalla scienza e l'arte alla storia e la tecnologia. Rendi ogni giorno un po' più saggio con WikiFlick.
+
+Scaricala ora e inizia a esplorare!
+
+// Keywords
+conoscenza,imparare,istruzione,storia,scienza,arte,fatti,scoprire,curiosità,riassunto

@@ -1,0 +1,32 @@
+
+// Azerbaijani (Azerbaijan) - az
+
+// App Name
+WikiFlick
+
+// Subtitle
+Hər Gün Bilik Kəşf Edin
+
+// Promotional Text
+Hər gün sizin üçün Vikipediyadan ən maraqlı məqalələri seçirik! Marağınızı təmin edin və yeni bir şey öyrənin.
+
+// Description
+Bilik əldə etməyin ən əyləncəli yolu ilə tanış olun! WikiFlick, Vikipediyanın sonsuz kainatını müasir və sürətli formatda parmaklarınızın ucuna gətirir. Uzun və mürəkkəb məqalələrdə itmək əvəzinə, hər gün yeni və təəccüblü faktlar kəşf edin.
+
+WikiFlick, öyrənməyi gündəlik bir vərdişə çevirmək üçün hazırlanmışdır. İstər beş dəqiqəlik bir fasilədə, istərsə də səyahətdə olun, ümumi biliyinizi genişləndirmək üçün mükəmməl bir yoldaşdır.
+
+ƏSAS XÜSUSİYYƏTLƏR:
+
+• Günün Seçimi: Redaktorlarımız tərəfindən diqqətlə seçilmiş ən maraqlı mövzuları və "günün məqaləsini" qaçırmayın.
+• Təsadüfi Kəşf: Bir düyməyə basmaqla təsadüfi bir məqalə ilə özünüzü təəccübləndirin və üfüqlərinizi genişləndirin.
+• Ağıllı Axtarış: Sizi maraqlandıran hər hansı bir mövzuya dərhal daxil olun və əlaqəli məqalələri sürətlə tapın.
+• Sevimlilər Siyahısı: Şəxsi kitabxananızı yaratmaq üçün sevimli məqalələrinizi və ya daha sonra oxumaq istədiklərinizi asanlıqla yadda saxlayın.
+
+Niyə WikiFlick?
+
+Çünki öyrənmək darıxdırıcı olmamalıdır. Elm və sənətdən tarix və texnologiyaya qədər minlərlə mövzuya dair yığcam biliklər əldə edin. WikiFlick ilə hər gününüzü bir az daha ağıllı edin.
+
+İndi yükləyin və kəşf etməyə başlayın!
+
+// Keywords
+bilik,təhsil,tarix,elm,incəsənət,faktlar,kəşf et,maraq,xülasə,məqalə

@@ -1,0 +1,32 @@
+
+// Afrikaans (South Africa, Namibia) - af
+
+// App Name
+WikiFlick
+
+// Subtitle
+Ontdek Kennis Elke Dag
+
+// Promotional Text
+Ons kies elke dag die interessantste Wikipedia-artikels vir jou! Bevredig jou nuuskierigheid en leer iets nuuts.
+
+// Description
+Ontmoet die lekkerste manier om kennis op te doen! WikiFlick bring die eindelose heelal van Wikipedia na jou vingerpunte in 'n moderne en vinnige formaat. In plaas daarvan om te verdwaal in lang en ingewikkelde artikels, ontdek elke dag nuwe en verrassende feite.
+
+WikiFlick is ontwerp om leer 'n daaglikse gewoonte te maak. Of jy nou op 'n vyf-minuut pouse is of pendel, dit is die perfekte metgesel om jou algemene kennis uit te brei.
+
+SLEUTELKENMERKE:
+
+• Keuses van die Dag: Moenie die mees fassinerende onderwerpe en die "artikel van die dag" misloop nie, sorgvuldig gekies deur ons redakteurs.
+• Ewekansige Ontdekking: Verras jouself met 'n ewekansige artikel met die druk van 'n knoppie en verbreed jou horisonne.
+• Slim Soek: Kry onmiddellik toegang tot enige onderwerp waaroor jy nuuskierig is en vind vinnig relevante artikels.
+• Gunstelingelys: Stoor maklik jou gunsteling artikels of dié wat jy later wil lees om jou eie persoonlike biblioteek te bou.
+
+Hoekom WikiFlick?
+
+Want leer hoef nie vervelig te wees nie. Kry toegang tot happiegrootte kennis oor duisende onderwerpe, van wetenskap en kuns tot geskiedenis en tegnologie. Maak elke dag 'n bietjie slimmer met WikiFlick.
+
+Laai nou af en begin verken!
+
+// Keywords
+kennis,leer,opvoeding,geskiedenis,wetenskap,kuns,feite,ontdek,nuuskierigheid,opsomming

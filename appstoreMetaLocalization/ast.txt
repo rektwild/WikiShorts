@@ -1,0 +1,32 @@
+
+// Asturian (Asturias, Spain) - ast
+
+// App Name
+WikiFlick
+
+// Subtitle
+Descubre Conocencia A Diariu
+
+// Promotional Text
+¡Escoyemos pa ti los artículos más interesantes de la Wikipedia acaldía! Sacia'l to interés y deprende daqué nuevu.
+
+// Description
+¡Conoz la forma más entretenida d'adquirir conocencia! WikiFlick pon l'universu infinitu de la Wikipedia al to alcance nun formatu modernu y rápidu. En llugar de perdese n'artículos llargos y complexos, descubre fechos nuevos y sorprendentes acaldía.
+
+WikiFlick ta diseñáu pa convertir l'aprendizaxe nun vezu diariu. Yá seya nuna posa de cinco minutos o mientres un viaxe, ye'l compañeru perfectu p'ampliar la to cultura xeneral.
+
+CARACTERÍSTIQUES PRINCIPALES:
+
+• Esbilles del Día: Nun te pierdas los temes más fascinantes y el "artículu del día", escoyíos cuidadosamente polos nuesos editores.
+• Descubrimientu al Debalu: Sorpréndete con un artículu al azar con solo tocar un botón y amplía los tos horizontes.
+• Busca Intelixente: Accede al intre a cualquier tema que te xere interés y atopa rápido artículos relevantes.
+• Llista de Favoritos: Guarda fácilmente los tos artículos preferíos o los que quieras lleer más tarde pa construyir la to propia biblioteca personal.
+
+¿Por qué WikiFlick?
+
+Porque deprender nun tien por qué ser aburríu. Accede a conocencia concentrada sobre miles de temes, dende ciencia y arte hasta historia y teunoloxía. Fai que cada día seya un pocu más sabiu con WikiFlick.
+
+¡Descárgala agora y empieza a esplorar!
+
+// Keywords
+conocencia,deprender,educación,historia,ciencia,arte,fechos,descubrir,interés,resume

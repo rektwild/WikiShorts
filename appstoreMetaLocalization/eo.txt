@@ -1,0 +1,32 @@
+
+// Esperanto (Global) - eo
+
+// App Name
+WikiFlick
+
+// Subtitle
+Malkovru Scion Ĉiutage
+
+// Promotional Text
+Ni elektas por vi la plej interesajn artikolojn el Vikipedio ĉiutage! Kontentigu vian scivolemon kaj lernu ion novan.
+
+// Description
+Renkontu la plej agrablan manieron akiri scion! WikiFlick alportas la senfinan universon de Vikipedio al viaj fingroj en moderna kaj rapida formato. Anstataŭ perdiĝi en longaj kaj kompleksaj artikoloj, malkovru novajn kaj surprizajn faktojn ĉiutage.
+
+WikiFlick estas desegnita por fari lernadon ĉiutaga kutimo. Ĉu vi estas en kvin-minuta paŭzo aŭ vojaĝanta, ĝi estas la perfekta kunulo por plivastigi vian ĝeneralan scion.
+
+ĈEFAJ EZAĴOJ:
+
+• Elektoj de la Tago: Ne maltrafu la plej fascinajn temojn kaj la "artikolon de la tago", zorge elektitajn de niaj redaktoroj.
+• Hazarda Malkovro: Surprizu vin per hazarda artikolo per unu klako kaj plilarĝigu viajn horizontojn.
+• Inteligenta Serĉo: Tuj atingu ajnan temon, pri kiu vi scivolas, kaj rapide trovu rilatajn artikolojn.
+• Listo de Favoratoj: Facile konservu viajn plej ŝatatajn artikolojn aŭ tiujn, kiujn vi volas legi poste, por konstrui vian propran personan bibliotekon.
+
+Kial WikiFlick?
+
+Ĉar lernado ne devas esti enuiga. Aliru koncizan scion pri miloj da temoj, de scienco kaj arto ĝis historio kaj teknologio. Faru ĉiun tagon iom pli saĝa kun WikiFlick.
+
+Elŝutu nun kaj komencu esplori!
+
+// Keywords
+scio,lerni,eduko,historio,scienco,arto,faktoj,malkovri,scivolemo,resumo,artikoloj

@@ -1,0 +1,32 @@
+
+// Bosnian (Bosnia and Herzegovina) - bs
+
+// App Name
+WikiFlick
+
+// Subtitle
+Otkrijte Znanje Svaki Dan
+
+// Promotional Text
+Svaki dan biramo za vas najzanimljivije članke s Wikipedije! Zadovoljite svoju znatiželju i naučite nešto novo.
+
+// Description
+Upoznajte najugodniji način za stjecanje znanja! WikiFlick donosi beskrajni svemir Wikipedije na dohvat ruke u modernom i brzom formatu. Umjesto da se gubite u dugim i složenim člancima, otkrijte nove i iznenađujuće činjenice svaki dan.
+
+WikiFlick je dizajniran da učenje postane svakodnevna navika. Bilo da ste na pauzi od pet minuta ili putujete, savršen je pratilac za proširenje vašeg općeg znanja.
+
+GLAVNE KARAKTERISTIKE:
+
+• Izbor Dana: Ne propustite najfascinantnije teme i "članak dana", koje pažljivo biraju naši urednici.
+• Slučajno Otkriće: Iznenadite se slučajnim člankom pritiskom na dugme i proširite svoje vidike.
+• Pametna Pretraga: Trenutno pristupite bilo kojoj temi koja vas zanima i brzo pronađite relevantne članke.
+• Lista Favorita: Lako sačuvajte svoje omiljene članke ili one koje želite kasnije pročitati kako biste izgradili svoju ličnu biblioteku.
+
+Zašto WikiFlick?
+
+Zato što učenje ne mora biti dosadno. Pristupite sažetom znanju o hiljadama tema, od nauke i umjetnosti do historije i tehnologije. Učinite svaki dan pametnijim uz WikiFlick.
+
+Preuzmite sada i počnite istraživati!
+
+// Keywords
+znanje,učenje,obrazovanje,historija,nauka,umjetnost,činjenice,otkrij,znatiželja,sažetak

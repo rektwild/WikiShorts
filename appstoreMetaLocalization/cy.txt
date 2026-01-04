@@ -1,0 +1,32 @@
+
+// Welsh (Wales) - cy
+
+// App Name
+WikiFlick
+
+// Subtitle
+Darganfod Gwybodaeth Bob Dydd
+
+// Promotional Text
+Rydym yn dewis yr erthyglau Wicipedia mwyaf diddorol i chi bob dydd! Bodlonwch eich chwilfrydedd a dysgwch rywbeth newydd.
+
+// Description
+Dewch i gwrdd â'r ffordd fwyaf pleserus o ennill gwybodaeth! Mae WikiFlick yn dod â bydysawd anfeidrol Wicipedia i flaenau eich bysedd mewn fformat modern a chyflym. Yn lle mynd ar goll mewn erthyglau hir a chymhleth, darganfyddwch ffeithiau newydd a syndod bob dydd.
+
+Mae WikiFlick wedi'i gynllunio i wneud dysgu'n arferiad dyddiol. P'un a ydych ar egwyl pum munud neu'n teithio, dyma'r cydymaith perffaith i ehangu eich gwybodaeth gyffredinol.
+
+PRIF NODWEDDION:
+
+• Dewisiadau'r Dydd: Peidiwch â cholli'r pynciau mwyaf diddorol ac "erthygl y dydd", a ddewiswyd yn ofalus gan ein golygyddion.
+• Darganfyddiad ar Hap: Rhowch syndod i chi'ch hun ag erthygl ar hap trwy wasgu botwm ac ehangu eich gorwelion.
+• Chwiliad Clyfar: Cewch fynediad ar unwaith i unrhyw bwnc sy'n eich chwilfrydu a dewch o hyd i erthyglau perthnasol yn gyflym.
+• Rhestr Ffefrynnau: Cadwch eich hoff erthyglau yn hawdd neu'r rhai rydych chi am eu darllen yn nes ymlaen i adeiladu eich llyfrgell bersonol eich hun.
+
+Pam WikiFlick?
+
+Oherwydd nid oes rhaid i ddysgu fod yn ddiflas. Mynnwch fynediad at wybodaeth gryno ar filoedd o bynciau, o wyddoniaeth a chelf i hanes a thechnoleg. Gwnewch bob dydd ychydig yn gallach gyda WikiFlick.
+
+Lawrlwythwch nawr a dechreuwch archwilio!
+
+// Keywords
+gwybodaeth,dysgu,addysg,hanes,gwyddoniaeth,celf,ffeithiau,darganfod,chwilfrydedd,crynodeb

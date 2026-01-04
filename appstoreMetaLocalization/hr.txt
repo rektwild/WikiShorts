@@ -1,0 +1,32 @@
+
+// Croatian (Croatia) - hr
+
+// App Name
+WikiFlick
+
+// Subtitle
+Otkrijte Znanje Svaki Dan
+
+// Promotional Text
+Svaki dan biramo za vas najzanimljivije članke s Wikipedije! Zadovoljite svoju znatiželju i naučite nešto novo.
+
+// Description
+Upoznajte najugodniji način za stjecanje znanja! WikiFlick donosi beskrajni svemir Wikipedije na dohvat ruke u modernom i brzom formatu. Umjesto da se gubite u dugim i složenim člancima, otkrijte nove i iznenađujuće činjenice svaki dan.
+
+WikiFlick je dizajniran da učenje postane svakodnevna navika. Bilo da ste na pauzi od pet minuta ili putujete, savršen je pratilac za proširenje vaše opće kulture.
+
+GLAVNE ZNAČAJKE:
+
+• Izbor Dana: Ne propustite najfascinantnije teme i "članak dana", koje pažljivo biraju naši urednici.
+• Slučajno Otkriće: Iznenadite se slučajnim člankom pritiskom na gumb i proširite svoje vidike.
+• Pametna Pretraga: Trenutno pristupite bilo kojoj temi koja vas zanima i brzo pronađite relevantne članke.
+• Popis Favorita: Lako spremite svoje omiljene članke ili one koje želite kasnije pročitati kako biste izgradili svoju osobnu knjižnicu.
+
+Zašto WikiFlick?
+
+Zato što učenje ne mora biti dosadno. Pristupite sažetom znanju o tisućama tema, od znanosti i umjetnosti do povijesti i tehnologije. Učinite svaki dan pametnijim uz WikiFlick.
+
+Preuzmite sada i počnite istraživati!
+
+// Keywords
+znanje,učenje,obrazovanje,povijest,znanost,umjetnost,činjenice,otkrij,znatiželja,sažetak

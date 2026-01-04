@@ -1,0 +1,32 @@
+
+// Turkmen (Turkmenistan) - tk
+
+// App Name
+WikiFlick
+
+// Subtitle
+Her Gün Bilimi Açyň
+
+// Promotional Text
+Her gün siziň üçin Wikipediýadan iň gyzykly makalalary saýlaýarys! Bilesigelijiligiňizi kanagatlandyryň we täze bir zat öwreniň.
+
+// Description
+Bilim almagyň iň ýakymly usuly bilen tanyşyň! WikiFlick, Wikipediýanyň çäksiz älemini döwrebap we çalt formatda barmaklaryňyzyň ujuna getirýär. Uzyn we çylşyrymly makalalarda ýitirim bolmagyň ýerine, her gün täze we geň galdyryjy faktlary açyň.
+
+WikiFlick, öwrenmegi gündelik endige öwürmek üçin döredildi. Bäş minutlyk arakesmede bolsaňyzam, ýa-da ýolda bolsaňyzam, umumy bilimiňizi giňeltmek üçin iň oňat ýoldaşdyr.
+
+ESASY AÝRATYNLYKLARY:
+
+• Günüň Saýlananlary: Redaktorlarymyz tarapyndan üns bilen saýlanan iň täsirli temalary we "günüň makalasyny" sypdyrmaň.
+• Tötänleýin Açyş: Düwmä basmak bilen tötänleýin makala bilen özüňizi haýran galdyryň we gözýetimiňizi giňeldiň.
+• Akylly Gözleg: Sizi gyzyklandyrýan islendik tema derrew girip, degişli makalalary çalt tapyň.
+• Halanýanlaryň Sanawy: Şahsy kitaphananyzy döretmek üçin halanýan makalalaryňyzy ýa-da soň okamak isleýänleriňizi aňsatlyk bilen saklaň.
+
+Näme üçin WikiFlick?
+
+Sebäbi öwrenmek içgysgynç bolmaly däl. Ylym we sungatdan taryh we tehnologiýa çenli müňlerçe tema boýunça gysga bilimleri alyň. WikiFlick bilen her günüňizi birneme akylly ediň.
+
+Häzir göçürip alyň we öwrenip başlaň!
+
+// Keywords
+bilim,öwrenmek,taryh,ylym,sungat,faktlar,açmak,bilesigelijilik,gysgaça,makala

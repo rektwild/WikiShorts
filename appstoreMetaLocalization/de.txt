@@ -1,0 +1,32 @@
+
+// German (Germany) - de
+
+// App Name
+WikiFlick
+
+// Subtitle
+Täglich Neues Wissen entdecken
+
+// Promotional Text
+Wir wählen jeden Tag die interessantesten Wikipedia-Artikel für dich aus! Stille deine Neugier und erweitere dein Wissen.
+
+// Description
+Entdecke die angenehmste Art, Wissen zu erlangen! WikiFlick bringt das unendliche Universum von Wikipedia in einem modernen und schnellen Format direkt auf deine Finger. Anstatt dich in langen, komplexen Artikeln zu verlieren, entdecke jeden Tag neue und überraschende Fakten.
+
+WikiFlick wurde entwickelt, um das Lernen zur täglichen Gewohnheit zu machen. Ob in einer fünfminütigen Pause oder auf dem Weg zur Arbeit – es ist der perfekte Begleiter, um dein Allgemeinwissen zu erweitern.
+
+HAUPTFUNKTIONEN:
+
+• Tägliche Auswahl: Verpasse nicht die faszinierendsten Themen und den "Artikel des Tages", handverlesen von unseren Redakteuren.
+• Zufalls-Entdeckung: Überrasche dich selbst mit einem zufälligen Artikel per Knopfdruck und erweitere deinen Horizont.
+• Intelligente Suche: Greife sofort auf jedes Thema zu, das dich neugierig macht, und finde schnell relevante Artikel.
+• Favoritenliste: Speichere ganz einfach deine Lieblingsartikel oder die, die du später lesen möchtest, um deine persönliche Bibliothek aufzubauen.
+
+Warum WikiFlick?
+
+Weil Lernen keinen Spaß machen muss. Erhalte mundgerechtes Wissen zu Tausenden von Themen, von Wissenschaft und Kunst bis hin zu Geschichte und Technologie. Mache jeden Tag ein bisschen klüger mit WikiFlick.
+
+Lade die App jetzt herunter und beginne mit dem Entdecken!
+
+// Keywords
+wissen,lernen,bildung,fakten,allgemeinwissen,geschichte,wissenschaft,entdecken,neugier,lexikon

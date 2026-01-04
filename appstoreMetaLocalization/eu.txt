@@ -1,0 +1,32 @@
+
+// Basque (Basque Country) - eu
+
+// App Name
+WikiFlick
+
+// Subtitle
+Ezagutza Berria Egunero
+
+// Promotional Text
+Egunero Wikipediako artikulurik interesgarrienak aukeratzen ditugu zuretzat! Ase ezazu zure jakin-mina eta ikasi zerbait berria.
+
+// Description
+Ezagutza eskuratzeko modurik atseginena aurkeztu dizugu! WikiFlick-ek Wikipediaren unibertso zabala zure esku jartzen du formatu moderno eta azkar batean. Artikulu luze eta konplexuetan galdu beharrean, aurkitu datu berri eta harrigarriak egunero.
+
+WikiFlick ikaskuntza eguneroko ohitura bihurtzeko diseinatuta dago. Bost minutuko atsedenaldian edo joan-etorrian zaudela, zure kultura orokorra zabaltzeko lagun ezin hobea da.
+
+EZAUGARRI NAGUSIAK:
+
+• Eguneko Aukeraketak: Ez galdu gure editoreek arreta handiz hautatutako gairik liluragarrienak eta "eguneko artikulua".
+• Ausazko Aurkikuntza: Harritu zaitez ausazko artikulu batekin botoi bat sakatuz eta zabaldu zure zerumuga.
+• Bilaketa Adimenduna: Berehala atzitu interesatzen zaizun edozein gai eta aurkitu azkar artikulu garrantzitsuak.
+• Gogokoen Zerrenda: Gorde erraz zure artikulu gogokoenak edo geroago irakurri nahi dituzunak zure liburutegi pertsonala eraikitzeko.
+
+Zergatik WikiFlick?
+
+Ikasteak ez duelako aspergarria izan behar. Eskuratu milaka gairi buruzko ezagutza laburtua, zientziatik eta artetik hasi eta historiaraino eta teknologiaraino. Egin egun bakoitza apur bat adimentsuagoa WikiFlick-ekin.
+
+Deskargatu orain eta hasi esploratzen!
+
+// Keywords
+ezagutza,ikasi,hezkuntza,historia,zientzia,artea,datuak,aurkitu,jakin-mina,laburpena

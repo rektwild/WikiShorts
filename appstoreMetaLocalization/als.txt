@@ -1,0 +1,32 @@
+
+// Alemannic German (Switzerland, etc.) - als
+
+// App Name
+WikiFlick
+
+// Subtitle
+Täglich Neus Wüsse Entdecke
+
+// Promotional Text
+Mir sueched für di täglich die interessantischte Wikipedia-Artikel us! Still din Gwunder und lern öppis Neus.
+
+// Description
+Entdeck di schönscht Art, Wüsse z'erhalte! WikiFlick bringt s'riesige Universum vo de Wikipedia i modernem und schnellem Format uf dini Fenger. Anstatt di i lange und komplexe Artikel z'verlüre, entdecksch du täglich neui und überraschendi Fakte.
+
+WikiFlick isch entwicklet worde, um s'Lerne zu nere tägliche Gwohnheit z'mache. Egal ob i nere churze Pause oder underwägs, s'isch de perfekt Begleiter, um dis Allgmeinwüsse z'erwitere.
+
+HAUPTFUNKTIONE:
+
+• Uswahl vom Tag: Verpass nöd die faszinierendschte Theme und de "Artikel vom Tag", sorgfältig vo üsne Redakteure usgwählt.
+• Zuefälligi Entdeckig: Überrasch di mit eme zuefällige Artikel per Chnopfdruck und erwitere din Horizont.
+• Schlaui Suech: Find sofort jedes Thema, wo di gwundrig macht, und find schnell relevanti Artikel.
+• Favoritelischte: Speicher eifach dini Lieblingsartikel oder die, wo du spöter wetsch läse, um dini persönlechi Bibliothek z'baue.
+
+Warum WikiFlick?
+
+Will Lerne nöd langwilig mue si. Bekumm Wüsse i chline Portione über tusigi Theme, vo Wüsseschaft und Chunscht bis Gschicht und Technologie. Mach jede Tag e chli schlaue mit WikiFlick.
+
+Lad's jetzt abe und fang a z'entdecke!
+
+// Keywords
+wüsse,lerne,bildig,gschicht,wüsseschaft,fakte,entdecke,gwunder,zämefassig,allgmeinwüsse

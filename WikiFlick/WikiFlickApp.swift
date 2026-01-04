@@ -11,6 +11,7 @@ import AppTrackingTransparency
 @main
 struct WikiShortsApp: App {
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+    @State private var showInitialPaywall = false
     @StateObject private var backgroundManager = AppBackgroundManager()
     
     init() {
@@ -29,19 +30,30 @@ struct WikiShortsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if showOnboarding {
-                OnboardingView(showOnboarding: $showOnboarding)
-                    .preferredColorScheme(.dark)
-            } else {
-                ContentView()
-                    .preferredColorScheme(.dark)
-                    .onAppear {
-                        // Uygulama her açıldığında bildirimleri yenile
-                        NotificationManager.shared.refreshNotifications()
-                        // Background refresh'i planla
-                        backgroundManager.scheduleBackgroundRefresh()
-                    }
-                    .withErrorHandling()
+            Group {
+                if showOnboarding {
+                    OnboardingView(showOnboarding: $showOnboarding)
+                        .preferredColorScheme(.dark)
+                } else {
+                    ContentView()
+                        .preferredColorScheme(.dark)
+                        .onAppear {
+                            // Uygulama her açıldığında bildirimleri yenile
+                            NotificationManager.shared.refreshNotifications()
+                            // Background refresh'i planla
+                            backgroundManager.scheduleBackgroundRefresh()
+                        }
+                        .withErrorHandling()
+                }
+            }
+            .onChange(of: showOnboarding) { newValue in
+                if !newValue {
+                    showInitialPaywall = true
+                }
+            }
+            .fullScreenCover(isPresented: $showInitialPaywall) {
+                PaywallView(isPresented: $showInitialPaywall, isHardPaywall: true)
+                    .interactiveDismissDisabled()
             }
         }
     }

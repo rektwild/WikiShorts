@@ -1,0 +1,32 @@
+
+// Tagalog (Philippines) - tl
+
+// App Name
+WikiFlick
+
+// Subtitle
+Tuklasin ang Kaalaman Araw-araw
+
+// Promotional Text
+Pinipili namin para sa iyo ang mga pinakakawili-wiling artikulo sa Wikipedia araw-araw! Bigyang-kasiyahan ang iyong kuryusidad at matuto ng bago.
+
+// Description
+Tuklasin ang pinakamasayang paraan upang magkamit ng kaalaman! Inihahatid ng WikiFlick ang walang katapusang uniberso ng Wikipedia sa iyong mga kamay sa isang moderno at mabilis na format. Sa halip na maligaw sa mahahaba at kumplikadong mga artikulo, tuklasin ang mga bago at kamangha-manghang katotohanan araw-araw.
+
+Ang WikiFlick ay idinisenyo upang gawing pang-araw-araw na ugali ang pag-aaral. Kung ikaw man ay nasa limang minutong pahinga o naglalakbay, ito ang perpektong kasama upang palawakin ang iyong pangkalahatang kaalaman.
+
+PANGUNAHING MGA TAMPOK:
+
+• Mga Pinili ng Araw: Huwag palampasin ang mga pinakakahanga-hangang paksa at ang "artikulo ng araw," na maingat na pinili ng aming mga editor.
+• Random na Pagtuklas: Sorpresahin ang iyong sarili sa isang random na artikulo sa isang pindot lang at palawakin ang iyong mga pananaw.
+• Matalinong Paghahanap: Agad na i-access ang anumang paksa na iyong kinagigiliwan at mabilis na mahanap ang mga kaugnay na artikulo.
+• Listahan ng mga Paborito: Madaling i-save ang iyong mga paboritong artikulo o ang mga nais mong basahin sa ibang pagkakataon upang bumuo ng iyong sariling personal na aklatan.
+
+Bakit WikiFlick?
+
+Dahil ang pag-aaral ay hindi kailangang maging boring. Magkaroon ng access sa pinaikling kaalaman sa libu-libong paksa, mula sa agham at sining hanggang sa kasaysayan at teknolohiya. Gawing mas matalino ang bawat araw gamit ang WikiFlick.
+
+I-download na ngayon at simulang mag-explore!
+
+// Keywords
+kaalaman,matuto,edukasyon,kasaysayan,agham,sining,fakta,tuklasin,kuryusidad,buod,artikulo

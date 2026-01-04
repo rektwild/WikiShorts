@@ -1,0 +1,32 @@
+
+// Indonesian (Indonesia) - id
+
+// App Name
+WikiFlick
+
+// Subtitle
+Temukan Pengetahuan Setiap Hari
+
+// Promotional Text
+Setiap hari kami memilih artikel Wikipedia yang paling menarik untuk Anda! Puaskan rasa ingin tahu Anda dan pelajari sesuatu yang baru.
+
+// Description
+Temukan cara paling menyenangkan untuk mendapatkan pengetahuan! WikiFlick membawa alam semesta Wikipedia yang tak terbatas ke ujung jari Anda dalam format yang modern dan cepat. Daripada tersesat di artikel yang panjang dan rumit, temukan fakta baru dan mengejutkan setiap hari.
+
+WikiFlick dirancang untuk menjadikan belajar sebagai kebiasaan sehari-hari. Baik Anda sedang istirahat lima menit atau dalam perjalanan, ini adalah teman yang sempurna untuk memperluas pengetahuan umum Anda.
+
+FITUR UTAMA:
+
+• Pilihan Hari Ini: Jangan lewatkan topik paling menarik dan "artikel hari ini", yang dipilih dengan cermat oleh editor kami.
+• Penemuan Acak: Kejutkan diri Anda dengan artikel acak dengan menekan satu tombol dan perluas wawasan Anda.
+• Pencarian Cerdas: Akses instan ke topik apa pun yang membuat Anda penasaran dan temukan artikel relevan dengan cepat.
+• Daftar Favorit: Simpan dengan mudah artikel favorit Anda atau yang ingin Anda baca nanti untuk membangun perpustakaan pribadi Anda sendiri.
+
+Mengapa WikiFlick?
+
+Karena belajar tidak harus membosankan. Dapatkan akses ke pengetahuan singkat tentang ribuan topik, dari sains dan seni hingga sejarah dan teknologi. Jadikan setiap hari sedikit lebih cerdas dengan WikiFlick.
+
+Unduh sekarang dan mulailah menjelajah!
+
+// Keywords
+pengetahuan,belajar,pendidikan,sejarah,sains,seni,fakta,temukan,harian,ringkasan,artikel

@@ -1,0 +1,32 @@
+
+// Malay (Malaysia, etc.) - ms
+
+// App Name
+WikiFlick
+
+// Subtitle
+Temui Pengetahuan Setiap Hari
+
+// Promotional Text
+Kami memilih artikel Wikipedia yang paling menarik untuk anda setiap hari! Puaskan rasa ingin tahu anda dan pelajari sesuatu yang baru.
+
+// Description
+Temui cara yang paling menyeronokkan untuk menimba ilmu! WikiFlick membawa alam Wikipedia yang luas ke hujung jari anda dalam format moden dan pantas. Daripada tersesat dalam artikel yang panjang dan rumit, temui fakta baharu dan mengejutkan setiap hari.
+
+WikiFlick direka untuk menjadikan pembelajaran sebagai tabiat harian. Sama ada anda sedang berehat selama lima minit atau dalam perjalanan, ia adalah teman yang sempurna untuk meluaskan pengetahuan am anda.
+
+CIRI-CIRI UTAMA:
+
+• Pilihan Harian: Jangan ketinggalan topik yang paling menarik dan "artikel hari ini", yang dipilih susun oleh editor kami.
+• Penemuan Rawak: Kejutkan diri anda dengan artikel rawak dengan menekan satu butang dan luaskan ufuk anda.
+• Carian Pintar: Akses serta-merta mana-mana topik yang anda ingin tahu dan cari artikel yang berkaitan dengan pantas.
+• Senarai Kegemaran: Simpan artikel kegemaran anda dengan mudah atau artikel yang ingin anda baca kemudian untuk membina perpustakaan peribadi anda.
+
+Mengapa WikiFlick?
+
+Kerana belajar tidak semestinya membosankan. Dapatkan akses kepada pengetahuan ringkas mengenai ribuan topik, daripada sains dan seni kepada sejarah dan teknologi. Jadikan setiap hari lebih bijak dengan WikiFlick.
+
+Muat turun sekarang dan mulakan penerokaan!
+
+// Keywords
+pengetahuan,belajar,pendidikan,sejarah,sains,seni,fakta,temui,harian,ringkasan,artikel

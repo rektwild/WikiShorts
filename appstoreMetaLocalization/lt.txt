@@ -1,0 +1,32 @@
+
+// Lithuanian (Lithuania) - lt
+
+// App Name
+WikiFlick
+
+// Subtitle
+Atrask Žinias Kiekvieną Dieną
+
+// Promotional Text
+Kiekvieną dieną mes Jums parenkame įdomiausius Vikipedijos straipsnius! Patenkinkite savo smalsumą ir sužinokite ką nors naujo.
+
+// Description
+Susipažinkite su maloniausiu būdu įgyti žinių! „WikiFlick“ Vikipedijos begalinę visatą pateikia po ranka moderniu ir greitu formatu. Užuot pasiklydę ilguose ir sudėtinguose straipsniuose, kiekvieną dieną atraskite naujų ir stebinančių faktų.
+
+„WikiFlick“ sukurtas taip, kad mokymasis taptų kasdieniu įpročiu. Nesvarbu, ar darote penkių minučių pertrauką, ar keliaujate, tai puikus kompanionas, norint praplėsti savo bendrąsias žinias.
+
+PAGRINDINĖS FUNKCIJOS:
+
+• Dienos Pasirinkimai: Nepraleiskite pačių įdomiausių temų ir „dienos straipsnio“, kruopščiai atrinktų mūsų redaktorių.
+• Atsitiktinis Atradimas: Nustebinkite save atsitiktiniu straipsniu paspaudę mygtuką ir praplėskite savo akiratį.
+• Išmanioji Paieška: Iškart pasiekite bet kokią jus dominančią temą ir greitai raskite susijusius straipsnius.
+• Mėgstamiausių Sąrašas: Lengvai išsaugokite mėgstamus straipsnius ar tuos, kuriuos norite perskaityti vėliau, kad sukurtumėte savo asmeninę biblioteką.
+
+Kodėl „WikiFlick“?
+
+Nes mokytis neturi būti nuobodu. Gaukite prieigą prie koncentruotų žinių tūkstančiais temų, nuo mokslo ir meno iki istorijos ir technologijų. Su „WikiFlick“ kiekvieną dieną tapkite šiek tiek išmintingesni.
+
+Atsisiųskite dabar ir pradėkite tyrinėti!
+
+// Keywords
+žinios,mokytis,švietimas,istorija,mokslas,menas,faktai,atrask,smalsumas,santrumpa,straipsniai

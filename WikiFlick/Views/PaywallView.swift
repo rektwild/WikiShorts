@@ -3,6 +3,7 @@ import StoreKit
 
 struct PaywallView: View {
     @Binding var isPresented: Bool
+    var isHardPaywall: Bool = false
     @StateObject private var storeManager = StoreManager()
     @StateObject private var languageManager = AppLanguageManager.shared
     @State private var showingAlert = false
@@ -32,6 +33,18 @@ struct PaywallView: View {
                 VStack(spacing: 16) {
                     subscribeButton
                         .padding(.horizontal, 24)
+                    
+                    if isHardPaywall {
+                        Button(action: {
+                            isPresented = false
+                        }) {
+                            Text(languageManager.localizedString(key: "continue_without_pro"))
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(.white.opacity(0.5))
+                                .underline()
+                        }
+                        .padding(.top, 4)
+                    }
                     
                     footerSection
                 }
@@ -67,21 +80,23 @@ struct PaywallView: View {
     private var closeButton: some View {
         HStack {
             Spacer()
-            Button(action: {
-                isPresented = false
-            }) {
-                Image(systemName: "xmark")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white.opacity(0.6))
-                    .frame(width: 32, height: 32)
-                    .background(
-                        Circle()
-                            .fill(Color.white.opacity(0.1))
-                    )
+            if !isHardPaywall {
+                Button(action: {
+                    isPresented = false
+                }) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.white.opacity(0.6))
+                        .frame(width: 32, height: 32)
+                        .background(
+                            Circle()
+                                .fill(Color.white.opacity(0.1))
+                        )
+                }
             }
-            .padding(.trailing, 20)
-            .padding(.top, 10)
         }
+        .padding(.trailing, 20)
+        .padding(.top, 10)
     }
     
     private var headerSection: some View {
@@ -143,8 +158,8 @@ struct PaywallView: View {
             Spacer()
             
             Text("...")
-                .font(.system(size: 20, weight: .bold))
-                .foregroundColor(.white.opacity(0.7))
+            .font(.system(size: 20, weight: .bold))
+            .foregroundColor(.white.opacity(0.7))
         }
         .padding(20)
         .background(
@@ -226,11 +241,6 @@ struct PaywallView: View {
                 .disabled(storeManager.isLoading)
             }
             
-            Text(languageManager.localizedString(key: "subscription_disclaimer"))
-                .font(.system(size: 10))
-                .foregroundColor(.white.opacity(0.4))
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
         }
     }
 }

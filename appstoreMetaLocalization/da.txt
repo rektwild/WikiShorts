@@ -1,0 +1,32 @@
+
+// Danish (Denmark) - da
+
+// App Name
+WikiFlick
+
+// Subtitle
+Opdag Viden Hver Dag
+
+// Promotional Text
+Vi udvælger de mest interessante Wikipedia-artikler til dig hver dag! Tilfredsstil din nysgerrighed og lær noget nyt.
+
+// Description
+Mød den mest underholdende måde at tilegne sig viden på! WikiFlick bringer det uendelige univers af Wikipedia til dine fingerspidser i et moderne og hurtigt format. I stedet for at fare vild i lange og komplekse artikler, kan du opdage nye og overraskende fakta hver eneste dag.
+
+WikiFlick er designet til at gøre læring til en daglig vane. Uanset om du har en fem minutters pause eller er på farten, er det den perfekte ledsager til at udvide din almene viden.
+
+NØGLEFUNKTIONER:
+
+• Dagens Udvalgte: Gå ikke glip af de mest fascinerende emner og "dagens artikel", nøje udvalgt af vores redaktører.
+• Tilfældig Opdagelse: Overrask dig selv med en tilfældig artikel med et tryk på en knap og udvid din horisont.
+• Smart Søgning: Få øjeblikkelig adgang til ethvert emne, du er nysgerrig efter, og find hurtigt relevante artikler.
+• Favoritliste: Gem nemt dine yndlingsartikler eller dem, du vil læse senere, for at opbygge dit eget personlige bibliotek.
+
+Hvorfor WikiFlick?
+
+Fordi læring ikke behøver at være kedeligt. Få adgang til viden i små bidder om tusindvis af emner, fra videnskab og kunst til historie og teknologi. Gør hver dag lidt klogere med WikiFlick.
+
+Download nu og begynd at udforske!
+
+// Keywords
+viden,lær,uddannelse,historie,videnskab,kunst,fakta,opdag,nysgerrighed,resumé,artikler

@@ -1,0 +1,32 @@
+
+// Icelandic (Iceland) - is
+
+// App Name
+WikiFlick
+
+// Subtitle
+Uppgötvaðu Þekkingu Daglega
+
+// Promotional Text
+Við veljum fyrir þig áhugaverðustu Wikipedia greinarnar á hverjum degi! Svalaðu forvitni þinni og lærðu eitthvað nýtt.
+
+// Description
+Kynntu þér skemmtilegustu leiðina til að afla þér þekkingar! WikiFlick færir þér hinn óendanlega heim Wikipedia á fingurgómana í nútímalegu og hröðu formi. Í stað þess að týnast í löngum og flóknum greinum, uppgötvaðu nýjar og óvæntar staðreyndir á hverjum degi.
+
+WikiFlick er hannað til að gera nám að daglegum vana. Hvort sem þú ert í fimm mínútna pásu eða á ferðinni, þá er það fullkominn félagi til að auka almenna þekkingu þína.
+
+HELSTU EIGINLEIKAR:
+
+• Val Dagsins: Ekki missa af heillandi umfjöllunarefnum og "grein dagsins", vandlega valin af ritstjórum okkar.
+• Handahófskennd Uppgötvun: Komdu sjálfum/sjálfri þér á óvart með handahófskenndri grein með því að smella á hnapp og víkkaðu sjóndeildarhringinn.
+• Snjöll Leit: Fáðu strax aðgang að hvaða efni sem vekur forvitni þína og finndu fljótt viðeigandi greinar.
+• Uppáhaldslisti: Vistaðu auðveldlega uppáhalds greinarnar þínar eða þær sem þú vilt lesa síðar til að byggja upp þitt eigið persónulega safn.
+
+Hvers vegna WikiFlick?
+
+Vegna þess að nám þarf ekki að vera leiðinlegt. Fáðu aðgang að hnitmiðuðum upplýsingum um þúsundir efna, allt frá vísindum og listum til sögu og tækni. Gerðu hvern dag aðeins vitrari með WikiFlick.
+
+Sæktu appið núna og byrjaðu að skoða!
+
+// Keywords
+þekking,læra,menntun,saga,vísindi,list,staðreyndir,uppgötva,forvitni,samantekt

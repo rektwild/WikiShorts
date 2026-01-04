@@ -1,0 +1,32 @@
+
+// Uzbek (Latin) - uz
+
+// App Name
+WikiFlick
+
+// Subtitle
+Har Kuni Bilim Oling
+
+// Promotional Text
+Biz siz uchun har kuni Vikipediyadan eng qiziqarli maqolalarni tanlaymiz! Qiziquvchanligingizni qondiring va yangi narsalarni o'rganing.
+
+// Description
+Bilim olishning eng yoqimli usuli bilan tanishing! WikiFlick Vikipediyaning cheksiz olamini zamonaviy va tezkor formatda barmoqlaringiz uchiga olib keladi. Uzun va murakkab maqolalarda adashib qolish o'rniga, har kuni yangi va hayratlanarli faktlarni kashf eting.
+
+WikiFlick o'rganishni kundalik odatga aylantirish uchun mo'ljallangan. Besh daqiqalik tanaffusda bo'lasizmi yoki yo'lda bo'lasizmi, bu sizning umumiy bilimingizni kengaytirish uchun mukammal hamrohdir.
+
+ASOSIY XUSUSIYATLAR:
+
+• Kun Tanlovlari: Bizning tahririyatimiz tomonidan sinchkovlik bilan tanlangan eng qiziqarli mavzularni va "kun maqolasini" o'tkazib yubormang.
+• Tasodifiy Kashfiyot: Tugmani bosish orqali tasodifiy maqola bilan o'zingizni hayratda qoldiring va dunyoqarashingizni kengaytiring.
+• Aqlli Qidiruv: Sizni qiziqtirgan har qanday mavzuga bir zumda kiring va tegishli maqolalarni tezda toping.
+• Sevimlilar Roʻyxati: O'zingizning shaxsiy kutubxonangizni yaratish uchun sevimli maqolalaringizni yoki keyinroq o'qishni xohlaganlaringizni osongina saqlang.
+
+Nima uchun WikiFlick?
+
+Chunki o'rganish zerikarli bo'lishi shart emas. Fan va san'atdan tortib tarix va texnologiyagacha bo'lgan minglab mavzular bo'yicha qisqacha bilimlarga ega bo'ling. WikiFlick bilan har bir kuningizni biroz aqlliroq qiling.
+
+Hozir yuklab oling va kashf qilishni boshlang!
+
+// Keywords
+bilim,o'rganish,ta'lim,tarix,fan,san'at,faktlar,kashf eting,qiziquvchanlik,maqola

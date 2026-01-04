@@ -1,0 +1,32 @@
+
+// Catalan (Spain) - ca
+
+// App Name
+WikiFlick
+
+// Subtitle
+Descobreix Coneixement Cada Dia
+
+// Promotional Text
+Seleccionem per a tu els articles més interessants de la Viquipèdia cada dia! Satisfà la teva curiositat i aprèn alguna cosa nova.
+
+// Description
+Descobreix la manera més agradable d'adquirir coneixement! WikiFlick porta l'univers infinit de la Viquipèdia al teu abast en un format modern i ràpid. En lloc de perdre't en articles llargs i complexos, descobreix fets nous i sorprenents cada dia.
+
+WikiFlick està dissenyat per fer de l'aprenentatge un hàbit diari. Tant si estàs en una pausa de cinc minuts com si estàs de viatge, és el company perfecte per ampliar la teva cultura general.
+
+CARACTERÍSTIQUES PRINCIPALS:
+
+• Seleccions del Dia: No et perdis els temes més fascinants i l'"article del dia", seleccionats amb cura pels nostres editors.
+• Descobriment Aleatori: Sorprèn-te amb un article a l'atzar amb només prémer un botó i amplia els teus horitzons.
+• Cerca Intel·ligent: Accedeix a l'instant a qualsevol tema que t'interessi i troba ràpidament articles rellevants.
+• Llista de Favorits: Desa fàcilment els teus articles preferits o aquells que vulguis llegir més tard per construir la teva pròpia biblioteca personal.
+
+Per què WikiFlick?
+
+Perquè aprendre no ha de ser avorrit. Accedeix a coneixement concentrat sobre milers de temes, des de ciència i art fins a història i tecnologia. Fes que cada dia sigui una mica més savi amb WikiFlick.
+
+Descarrega-la ara i comença a explorar!
+
+// Keywords
+coneixement,aprendre,educació,història,ciència,art,fets,descobreix,curiositat,resum

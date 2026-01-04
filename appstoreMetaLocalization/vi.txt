@@ -1,0 +1,32 @@
+
+// Vietnamese (Vietnam) - vi
+
+// App Name
+WikiFlick
+
+// Subtitle
+Khám Phá Tri Thức Mỗi Ngày
+
+// Promotional Text
+Chúng tôi chọn lọc những bài viết Wikipedia thú vị nhất cho bạn mỗi ngày! Thỏa mãn sự tò mò và học hỏi điều mới.
+
+// Description
+Hãy khám phá cách tiếp thu kiến thức thú vị nhất! WikiFlick mang vũ trụ vô tận của Wikipedia đến trong tầm tay bạn dưới định dạng hiện đại và nhanh chóng. Thay vì lạc lối trong các bài viết dài và phức tạp, hãy khám phá những sự thật mới và đáng ngạc nhiên mỗi ngày.
+
+WikiFlick được thiết kế để biến việc học thành một thói quen hàng ngày. Dù bạn đang nghỉ giải lao năm phút hay đang di chuyển, đây là người bạn đồng hành hoàn hảo để mở rộng kiến thức phổ thông của bạn.
+
+TÍNH NĂNG CHÍNH:
+
+• Lựa chọn của Ngày: Đừng bỏ lỡ các chủ đề hấp dẫn nhất và "bài viết của ngày", được các biên tập viên của chúng tôi lựa chọn cẩn thận.
+• Khám phá Ngẫu nhiên: Gây bất ngờ cho bản thân bằng một bài viết ngẫu nhiên chỉ bằng một nút bấm và mở rộng tầm nhìn của bạn.
+• Tìm kiếm Thông minh: Truy cập ngay lập- tức bất kỳ chủ đề nào bạn tò mò và nhanh chóng tìm thấy các bài viết liên quan.
+• Danh sách Yêu thích: Dễ dàng lưu các bài viết yêu thích của bạn hoặc những bài bạn muốn đọc sau để xây dựng thư viện cá nhân của riêng bạn.
+
+Tại sao chọn WikiFlick?
+
+Bởi vì học tập không nhất thiết phải nhàm chán. Tiếp cận kiến thức cô đọng về hàng ngàn chủ đề, từ khoa học và nghệ thuật đến lịch sử và công nghệ. Làm cho mỗi ngày trở nên thông thái hơn một chút với WikiFlick.
+
+Tải xuống ngay và bắt đầu khám phá!
+
+// Keywords
+kiến thức,học tập,giáo dục,lịch sử,khoa học,nghệ thuật,sự thật,khám phá,tò mò,tóm tắt

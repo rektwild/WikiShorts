@@ -1,0 +1,32 @@
+
+// Estonian (Estonia) - et
+
+// App Name
+WikiFlick
+
+// Subtitle
+Avasta Teadmisi Iga Päev
+
+// Promotional Text
+Valime sinu jaoks iga päev välja kõige huvitavamad Vikipeedia artiklid! Rahusta oma uudishimu ja õpi midagi uut.
+
+// Description
+Avastage kõige nauditavam viis teadmiste omandamiseks! WikiFlick toob Vikipeedia lõputu universumi teie käeulatusse kaasaegses ja kiires formaadis. Selle asemel, et eksida pikkadesse ja keerulistesse artiklitesse, avastage iga päev uusi ja üllatavaid fakte.
+
+WikiFlick on loodud selleks, et muuta õppimine igapäevaseks harjumuseks. Olenemata sellest, kas olete viieminutilisel pausil või reisil, on see ideaalne kaaslane oma üldteadmiste laiendamiseks.
+
+PÕHIOMADUSED:
+
+• Päeva Valikud: Ärge magage maha kõige paeluvamaid teemasid ja "päeva artiklit", mille on hoolikalt valinud meie toimetajad.
+• Juhuslik Avastus: Üllatage ennast juhusliku artikliga ühe nupuvajutusega ja laiendage oma silmaringi.
+• Nutikas Otsing: Saate kohe juurdepääsu mis tahes teemale, mis teid huvitab, ja leiate kiiresti asjakohased artiklid.
+• Lemmikute Nimekiri: Salvestage hõlpsalt oma lemmikartiklid või need, mida soovite hiljem lugeda, et luua oma isiklik raamatukogu.
+
+Miks WikiFlick?
+
+Sest õppimine ei pea olema igav. Saate lühikest teavet tuhandete teemade kohta, alates teadusest ja kunstist kuni ajaloo ja tehnoloogiani. Muutke iga päev WikiFlickiga natuke targemaks.
+
+Laadige kohe alla ja alustage avastamist!
+
+// Keywords
+teadmised,õppimine,haridus,ajalugu,teadus,kunst,faktid,avasta,uudishimu,kokkuvõte

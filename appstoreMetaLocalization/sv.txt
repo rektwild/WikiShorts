@@ -1,0 +1,32 @@
+
+// Swedish (Sweden, Finland) - sv
+
+// App Name
+WikiFlick
+
+// Subtitle
+Upptäck Kunskap Varje Dag
+
+// Promotional Text
+Vi väljer de mest intressanta Wikipedia-artiklarna åt dig varje dag! Stilla din nyfikenhet och lär dig något nytt.
+
+// Description
+Möt det roligaste sättet att få kunskap! WikiFlick för det oändliga universumet av Wikipedia till dina fingertoppar i ett modernt och snabbt format. Istället för att gå vilse i långa och komplexa artiklar, upptäck nya och överraskande fakta varje dag.
+
+WikiFlick är utformad för att göra lärande till en daglig vana. Oavsett om du tar en fem minuters paus eller pendlar, är det den perfekta följeslagaren för att utöka din allmänbildning.
+
+HUVUDFUNKTIONER:
+
+• Dagens Val: Missa inte de mest fascinerande ämnena och "dagens artikel", noggrant utvalda av våra redaktörer.
+• Slumpmässig Upptäckt: Överraska dig själv med en slumpmässig artikel med ett knapptryck och vidga dina vyer.
+• Smart Sökning: Få omedelbar tillgång till vilket ämne som helst som gör dig nyfiken och hitta snabbt relevanta artiklar.
+• Favoritlista: Spara enkelt dina favoritartiklar eller de du vill läsa senare för att bygga ditt eget personliga bibliotek.
+
+Varför WikiFlick?
+
+För att lärande inte behöver vara tråkigt. Få tillgång till kunskap i lagom stora bitar om tusentals ämnen, från vetenskap och konst till historia och teknik. Gör varje dag lite smartare med WikiFlick.
+
+Ladda ner nu och börja utforska!
+
+// Keywords
+kunskap,lära,utbildning,historia,vetenskap,konst,fakta,upptäck,nyfikenhet,sammanfattning

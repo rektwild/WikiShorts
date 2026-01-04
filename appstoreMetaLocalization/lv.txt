@@ -1,0 +1,32 @@
+
+// Latvian (Latvia) - lv
+
+// App Name
+WikiFlick
+
+// Subtitle
+Atklāj Zināšanas Katru Dienu
+
+// Promotional Text
+Mēs katru dienu izvēlamies jums interesantākos Vikipēdijas rakstus! Apmieriniet savu zinātkāri un iemācieties ko jaunu.
+
+// Description
+Iepazīstieties ar patīkamāko veidu, kā iegūt zināšanas! WikiFlick ienes bezgalīgo Vikipēdijas visumu jūsu pirkstu galos modernā un ātrā formātā. Tā vietā, lai apmaldītos garos un sarežģītos rakstos, katru dienu atklājiet jaunus un pārsteidzošus faktus.
+
+WikiFlick ir izstrādāts, lai padarītu mācīšanos par ikdienas ieradumu. Neatkarīgi no tā, vai esat piecu minūšu pārtraukumā vai ceļā, tas ir ideāls pavadonis, lai paplašinātu jūsu vispārējās zināšanas.
+
+GALVENĀS IEZĪMES:
+
+• Dienas Izlase: Nepalaidiet garām aizraujošākās tēmas un "dienas rakstu", ko rūpīgi atlasījuši mūsu redaktori.
+• Nejaušs Atklājums: Pārsteidziet sevi ar nejaušu rakstu, nospiežot pogu, un paplašiniet savu redzesloku.
+• Viedā Meklēšana: Nekavējoties piekļūstiet jebkurai tēmai, kas jūs interesē, un ātri atrodiet atbilstošos rakstus.
+• Izlases Saraksts: Viegli saglabājiet savus iecienītākos rakstus vai tos, kurus vēlaties izlasīt vēlāk, lai izveidotu savu personīgo bibliotēku.
+
+Kāpēc WikiFlick?
+
+Jo mācīšanās nav jābūt garlaicīgai. Piekļūstiet īsām zināšanām par tūkstošiem tēmu, no zinātnes un mākslas līdz vēsturei un tehnoloģijām. Padariet katru dienu nedaudz gudrāku ar WikiFlick.
+
+Lejupielādējiet tūlīt un sāciet atklāt!
+
+// Keywords
+zināšanas,mācīties,izglītība,vēsture,zinātne,māksla,fakti,atklāj,zinātkāre,kopsavilkums

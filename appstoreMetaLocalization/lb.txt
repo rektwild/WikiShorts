@@ -1,0 +1,32 @@
+
+// Luxembourgish (Luxembourg) - lb
+
+// App Name
+WikiFlick
+
+// Subtitle
+All Dag Neit Wëssen Entdecken
+
+// Promotional Text
+Mir sichen all Dag déi interessantst Wikipedia-Artikele fir dech eraus! Zefridden däi Virwëtz a léier eppes Neies.
+
+// Description
+Entdeck de schéinste Wee, fir Wëssen ze kréien! WikiFlick bréngt dat riesegt Universum vu Wikipedia an engem modernen a séiere Format op deng Fangeren. Amplaz dech a laangen a komplexe Artikelen ze verléieren, entdeck all Dag nei an iwwerraschend Fakten.
+
+WikiFlick ass entwéckelt, fir d'Léieren zu enger deeglecher Gewunnecht ze maachen. Egal ob's de an enger fënnef-Minutte Paus bass oder ënnerwee, et ass de perfekte Begleeder, fir däin Allgemengwëssen auszebauen.
+
+HAAPTFUNKTIOUNEN:
+
+• Auswiel vum Dag: Verpass net déi faszinéierendst Themen an den "Artikel vum Dag", suergfälteg vun eise Redakteren erausgesicht.
+• Zoufälleg Entdeckung: Iwwerrasch dech selwer mat engem zoufällegen Artikel op Knäppchendrock an erweider däin Horizont.
+• Smart Sich: Kritt direkt Zougrëff op all Thema, dat dech virwëtzeg mécht, a fann séier relevant Artikelen.
+• Favoritelëscht: Späicher einfach deng Liiblingsartikelen oder déi, déi's de méi spéit liese wëlls, fir deng perséinlech Bibliothéik opzebauen.
+
+Firwat WikiFlick?
+
+Well léieren net langweileg muss sinn. Kritt Wëssen a klenge Portiounen iwwer Dausende vun Themen, vu Wëssenschaft a Konscht bis Geschicht an Technologie. Maach all Dag e bësse méi schlau mat WikiFlick.
+
+Lued et elo erof a fänk un ze entdecken!
+
+// Keywords
+wëssen,léieren,bildung,geschicht,wëssenschaft,fakten,entdecken,virwëtz,resumé,allgemengwëssen

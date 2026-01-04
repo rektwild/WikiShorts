@@ -1,0 +1,32 @@
+
+// Norwegian Nynorsk (Norway) - nn
+
+// App Name
+WikiFlick
+
+// Subtitle
+Oppdag Kunnskap Kvar Dag
+
+// Promotional Text
+Kvar dag vel vi ut dei mest interessante Wikipedia-artiklane for deg! Still nysgjerrigheita di og lær noko nytt.
+
+// Description
+Møt den mest morosame måten å få kunnskap på! WikiFlick bringar det uendelege universet til Wikipedia til fingertuppane dine i eit moderne og raskt format. I staden for å gå deg vill i lange og komplekse artiklar, kan du oppdage nye og overraskande fakta kvar einaste dag.
+
+WikiFlick er utforma for å gjere læring til ein dagleg vane. Anten du har ein fem-minutts pause eller pendlar, er det den perfekte følgjesveinen for å utvide allmennkunnskapen din.
+
+HOVUDFUNKSJONAR:
+
+• Dagens Utval: Gå ikkje glipp av dei mest fascinerande emna og "dagens artikkel", nøye utvalt av redaktørane våre.
+• Tilfeldig Oppdaging: Overrask deg sjølv med ein tilfeldig artikkel med eit knappetrykk og utvid horisonten din.
+• Smart Søk: Få umiddelbar tilgang til kva som helst emne du er nysgjerrig på, og finn raskt relevante artiklar.
+• Favorittliste: Lagre enkelt favorittartiklane dine eller dei du vil lese seinare for å byggje ditt eige personlege bibliotek.
+
+Kvifor WikiFlick?
+
+Fordi læring ikkje treng å vere keisamt. Få tilgang til kunnskap i små bitar om tusenvis av emne, frå vitskap og kunst til historie og teknologi. Gjer kvar dag litt smartare med WikiFlick.
+
+Last ned no og byrja å utforske!
+
+// Keywords
+kunnskap,lære,utdanning,historie,vitskap,kunst,fakta,oppdag,nysgjerrig,samandrag,artiklar

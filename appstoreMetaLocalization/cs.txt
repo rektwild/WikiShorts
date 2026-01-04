@@ -1,0 +1,32 @@
+
+// Czech (Czech Republic) - cs
+
+// App Name
+WikiFlick
+
+// Subtitle
+Objevujte Vědomosti Každý Den
+
+// Promotional Text
+Každý den pro vás vybíráme nejzajímavější články z Wikipedie! Ukojte svou zvědavost a naučte se něco nového.
+
+// Description
+Seznamte se s nejpříjemnějším způsobem získávání znalostí! WikiFlick přináší nekonečný vesmír Wikipedie na dosah ruky v moderním a rychlém formátu. Místo toho, abyste se ztráceli v dlouhých a složitých článcích, objevujte každý den nová a překvapivá fakta.
+
+WikiFlick je navržen tak, aby se učení stalo každodenním zvykem. Ať už jste na pětiminutové přestávce nebo na cestách, je to ideální společník pro rozšíření vašeho všeobecného přehledu.
+
+HLAVNÍ FUNKCE:
+
+• Výběr Dne: Nenechte si ujít nejzajímavější témata a "článek dne", pečlivě vybrané našimi redaktory.
+• Náhodný Objev: Překvapte se náhodným článkem stisknutím tlačítka a rozšiřte si obzory.
+• Chytré Vyhledávání: Okamžitě přistupujte k jakémukoli tématu, které vás zajímá, a rychle najděte relevantní články.
+• Seznam Oblíbených: Snadno si uložte své oblíbené články nebo ty, které si chcete přečíst později, a vytvořte si svou osobní knihovnu.
+
+Proč WikiFlick?
+
+Protože učení nemusí být nuda. Získejte přístup ke stručným znalostem o tisících témat, od vědy a umění po historii a technologii. Udělejte každý den o něco chytřejším s WikiFlickem.
+
+Stáhněte si nyní a začněte objevovat!
+
+// Keywords
+znalosti,učení,vzdělávání,historie,věda,umění,fakta,objevovat,zvědavost,shrnutí,články
