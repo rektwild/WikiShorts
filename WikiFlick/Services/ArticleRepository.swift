@@ -275,13 +275,12 @@ class ArticleRepository: ArticleRepositoryProtocol {
     }
     
     func preloadImages(for articles: [WikipediaArticle]) async {
-        await withTaskGroup(of: Void.self) { group in
-            for article in articles {
-                if let imageURLString = article.imageURL {
-                    group.addTask { [weak self] in
-                        _ = await self?.cacheManager.preloadImage(from: imageURLString)
-                    }
-                }
+        // Sequential loading with throttling to avoid rate limiting (429 errors)
+        for article in articles {
+            if let imageURLString = article.imageURL {
+                _ = await cacheManager.preloadImage(from: imageURLString)
+                // Small delay between requests to avoid rate limiting
+                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
             }
         }
     }

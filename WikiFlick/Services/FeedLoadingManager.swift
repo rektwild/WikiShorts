@@ -153,6 +153,13 @@ class FeedLoadingManager: ObservableObject {
 
             isLoading = false
 
+            // Preload images for newly fetched articles in background
+            if !uniqueArticles.isEmpty {
+                Task {
+                    await articleRepository.preloadImages(for: uniqueArticles)
+                }
+            }
+
             // Start preloading in background
             ensurePreloadBuffer()
 

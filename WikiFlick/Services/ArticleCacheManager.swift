@@ -116,28 +116,76 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
         }
         
         guard let url = URL(string: urlString) else {
+            print("📸 Invalid URL: \(urlString)")
             return nil
         }
         
-        do {
-            var request = URLRequest(url: url)
-            request.timeoutInterval = 10.0
-            request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
-            
-            let (data, _) = try await URLSession.shared.data(for: request)
-            
-            guard let image = UIImage(data: data) else {
-                return nil
+        // Retry logic with exponential backoff for rate limiting
+        let maxRetries = 3
+        var currentRetry = 0
+        
+        while currentRetry <= maxRetries {
+            do {
+                // Add small delay between requests to avoid rate limiting
+                if currentRetry > 0 {
+                    let delay = UInt64(pow(2.0, Double(currentRetry))) * 1_000_000_000 // 2^retry seconds
+                    try await Task.sleep(nanoseconds: delay)
+                }
+                
+                var request = URLRequest(url: url)
+                request.timeoutInterval = 20.0
+                request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+                request.cachePolicy = .returnCacheDataElseLoad
+                
+                let (data, response) = try await URLSession.shared.data(for: request)
+                
+                // Check HTTP response
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 429 {
+                        // Rate limited - retry with backoff
+                        currentRetry += 1
+                        if currentRetry <= maxRetries {
+                            print("📸 Rate limited (429), retry \(currentRetry)/\(maxRetries) for: \(urlString.prefix(60))...")
+                            continue
+                        } else {
+                            print("📸 Rate limited, max retries reached for: \(urlString.prefix(60))...")
+                            return nil
+                        }
+                    }
+                    
+                    guard (200...299).contains(httpResponse.statusCode) else {
+                        print("📸 HTTP error \(httpResponse.statusCode) for: \(urlString)")
+                        return nil
+                    }
+                }
+                
+                guard !data.isEmpty else {
+                    print("📸 Empty data for: \(urlString)")
+                    return nil
+                }
+                
+                guard let image = UIImage(data: data) else {
+                    print("📸 Failed to create UIImage from data (\(data.count) bytes) for: \(urlString)")
+                    return nil
+                }
+                
+                // Cache the image
+                cacheImage(image, for: urlString)
+                return image
+                
+            } catch {
+                if Task.isCancelled {
+                    return nil
+                }
+                print("📸 Failed to preload image: \(urlString.prefix(60))... - \(error.localizedDescription)")
+                currentRetry += 1
+                if currentRetry > maxRetries {
+                    return nil
+                }
             }
-            
-            // Cache the image
-            cacheImage(image, for: urlString)
-            return image
-            
-        } catch {
-            print("📸 Failed to preload image: \(urlString) - \(error)")
-            return nil
         }
+        
+        return nil
     }
     
     // MARK: - Cache Management

@@ -72,7 +72,6 @@ struct AsyncImageView: View {
     
     @State private var image: UIImage?
     @State private var isLoading = true
-    @State private var hasAppeared = false
     
     init(
         urlString: String?,
@@ -101,32 +100,39 @@ struct AsyncImageView: View {
                 placeholder
             }
         }
-        .onAppear {
-            if !hasAppeared {
-                hasAppeared = true
-                loadImage()
-            }
+        .task(id: urlString) {
+            await loadImage()
         }
     }
     
-    private func loadImage() {
+    @MainActor
+    private func loadImage() async {
         guard let urlString = urlString else {
             isLoading = false
             return
         }
         
-        imageLoadingService.loadImage(from: urlString)
-            .receive(on: DispatchQueue.main)
-            .sink { loadedImage in
-                withAnimation(.easeOut(duration: 0.3)) {
-                    self.image = loadedImage
-                    self.isLoading = false
-                }
+        isLoading = true
+        
+        // Check cache first
+        if let cachedImage = imageLoadingService.getCachedImage(for: urlString) {
+            withAnimation(.easeOut(duration: 0.3)) {
+                self.image = cachedImage
+                self.isLoading = false
             }
-            .store(in: &cancellables)
+            return
+        }
+        
+        // Load from network
+        let loadedImage = await imageLoadingService.preloadImage(from: urlString)
+        
+        if !Task.isCancelled {
+            withAnimation(.easeOut(duration: 0.3)) {
+                self.image = loadedImage
+                self.isLoading = false
+            }
+        }
     }
-    
-    @State private var cancellables = Set<AnyCancellable>()
 }
 
 // MARK: - Progressive Loading View Modifier
