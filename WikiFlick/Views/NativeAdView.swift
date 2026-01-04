@@ -230,7 +230,7 @@ struct NativeAdCardView: View {
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.yellow)
             
-            Text(nativeAd.headline ?? "🌟 Featured Content")
+            Text(nativeAd.headline ?? AppLanguageManager.shared.localizedString(key: "featured_content"))
                 .font(.system(size: 28, weight: .bold, design: .default))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.leading)
@@ -242,7 +242,7 @@ struct NativeAdCardView: View {
     
     private var descriptionView: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(nativeAd.body ?? "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.")
+            Text(nativeAd.body ?? AppLanguageManager.shared.localizedString(key: "discover_amazing_content_body"))
                 .font(.system(size: 16, weight: .regular, design: .default))
                 .foregroundColor(.white.opacity(0.95))
                 .multilineTextAlignment(.leading)
@@ -353,7 +353,7 @@ struct NativeAdCardView: View {
         Button(action: {
             // CTA action handled by AdMob
         }) {
-            Text(nativeAd.callToAction ?? "Discover Now")
+            Text(nativeAd.callToAction ?? AppLanguageManager.shared.localizedString(key: "discover_now"))
                 .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.horizontal, 16)
@@ -523,7 +523,7 @@ struct FeedAdView: View {
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.yellow)
             
-            Text(nativeAd.headline ?? "🌟 Featured Content")
+            Text(nativeAd.headline ?? AppLanguageManager.shared.localizedString(key: "featured_content"))
                 .font(.system(size: 28, weight: .bold, design: .default))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.leading)
@@ -535,7 +535,7 @@ struct FeedAdView: View {
     
     private var descriptionView: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(nativeAd.body ?? "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.")
+            Text(nativeAd.body ?? AppLanguageManager.shared.localizedString(key: "discover_amazing_content_body"))
                 .font(.system(size: 16, weight: .regular, design: .default))
                 .foregroundColor(.white.opacity(0.95))
                 .multilineTextAlignment(.leading)
@@ -645,7 +645,7 @@ struct FeedAdView: View {
         Button(action: {
             // CTA action handled by AdMob
         }) {
-            Text(nativeAd.callToAction ?? "Discover Now")
+            Text(nativeAd.callToAction ?? AppLanguageManager.shared.localizedString(key: "discover_now"))
                 .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.horizontal, 16)

@@ -14,7 +14,9 @@ struct AppLanguageSelectionView: View {
         } else {
             return allLanguages.filter { language in
                 language.displayName.localizedCaseInsensitiveContains(searchText) ||
-                language.rawValue.localizedCaseInsensitiveContains(searchText)
+                language.rawValue.localizedCaseInsensitiveContains(searchText) ||
+                language.localizedName.localizedCaseInsensitiveContains(searchText) ||
+                language.englishName.localizedCaseInsensitiveContains(searchText)
             }
         }
     }

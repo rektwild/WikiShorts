@@ -57,8 +57,8 @@ struct OnboardingLanguageListSection: View {
             )
         }
         .buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle for better tap handling
-        .accessibilityLabel("\(language.displayName), \(language.englishName)")
-        .accessibilityHint(language == selectedLanguage ? "Selected" : "Double tap to select")
+        .accessibilityLabel("\(language.displayName), \(language.localizedName)")
+        .accessibilityHint(language == selectedLanguage ? AppLanguageManager.shared.localizedString(key: "selected_accessibility_hint") : AppLanguageManager.shared.localizedString(key: "double_tap_to_select"))
         .accessibilityAddTraits(language == selectedLanguage ? .isSelected : [])
     }
     
@@ -80,7 +80,7 @@ struct OnboardingLanguageListSection: View {
             Text(language.displayName)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(language == selectedLanguage ? Color.primaryBlue : (colorScheme == .dark ? .white : .black))
-            Text(language.englishName)
+            Text(language.localizedName)
                 .font(.system(size: 12))
                 .foregroundColor(language == selectedLanguage ? Color.primaryBlue.opacity(0.7) : .gray)
         }

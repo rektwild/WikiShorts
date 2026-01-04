@@ -26,8 +26,8 @@ struct OnboardingStickyFooter: View {
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
                 .tint(.white)
-                .accessibilityLabel("Continue to next step")
-                .accessibilityHint("Proceeds to the next onboarding step")
+                .accessibilityLabel(AppLanguageManager.shared.localizedString(key: "continue_next_step"))
+                .accessibilityHint(AppLanguageManager.shared.localizedString(key: "proceeds_next_step"))
             }
             .padding(.horizontal, 16)
             .padding(.bottom, 10)

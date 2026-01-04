@@ -132,3 +132,11 @@
 "random_article" = "Satunnainen";
 
 "continue_without_pro" = "Jatka ilman WikiShorts Pro:ta";
+
+"selected_accessibility_hint" = "Selected";
+"double_tap_to_select" = "Double tap to select";
+"continue_next_step" = "Continue to next step";
+"proceeds_next_step" = "Proceeds to the next onboarding step";
+"featured_content" = "Featured Content";
+"discover_amazing_content_body" = "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.";
+"discover_now" = "Discover Now";

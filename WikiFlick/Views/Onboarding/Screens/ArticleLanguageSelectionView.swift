@@ -14,7 +14,9 @@ struct OnboardingArticleLanguageSelectionView: View {
         } else {
             return availableLanguages.filter { language in
                 language.displayName.localizedCaseInsensitiveContains(searchText) ||
-                language.rawValue.localizedCaseInsensitiveContains(searchText)
+                language.rawValue.localizedCaseInsensitiveContains(searchText) ||
+                language.localizedName.localizedCaseInsensitiveContains(searchText) ||
+                language.englishName.localizedCaseInsensitiveContains(searchText)
             }
         }
     }

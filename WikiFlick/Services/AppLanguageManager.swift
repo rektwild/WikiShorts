@@ -517,6 +517,15 @@ enum AppLanguage: String, CaseIterable {
     static var popularLanguages: [AppLanguage] {
         return [.english, .spanish, .french, .german, .chinese]
     }
+    
+    var localizedName: String {
+        let currentLangCode = AppLanguageManager.shared.currentLanguage.rawValue
+        let locale = Locale(identifier: currentLangCode)
+        if let name = locale.localizedString(forLanguageCode: self.rawValue) {
+            return name.capitalized
+        }
+        return self.englishName
+    }
 }
 
 class AppLanguageManager: ObservableObject {

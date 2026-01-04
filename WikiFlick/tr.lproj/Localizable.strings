@@ -132,3 +132,11 @@
 "random_article" = "Rastgele";
 
 "continue_without_pro" = "WikiShorts Pro olmadan devam et";
+
+"selected_accessibility_hint" = "Seçildi";
+"double_tap_to_select" = "Seçmek için iki kez dokun";
+"continue_next_step" = "Sonraki adıma devam et";
+"proceeds_next_step" = "Sonraki tanıtım adımına geçer";
+"featured_content" = "Öne Çıkan İçerik";
+"discover_amazing_content_body" = "Sizin için özel olarak hazırlanmış harika içerikleri keşfedin! Bu sponsorlu içerik, size en iyi önerileri ve heyecan verici yeni keşifleri getiriyor.";
+"discover_now" = "Şimdi Keşfet";

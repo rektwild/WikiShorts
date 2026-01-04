@@ -22,7 +22,7 @@ struct PopularLanguagesSection: View {
                             HStack(spacing: 8) {
                                 Text(language.flag)
                                     .font(.system(size: 24))
-                                Text(language.englishName)
+                                Text(language.localizedName)
                                     .font(.system(size: 14, weight: .semibold))
                                 
                                 if language == selectedLanguage {
@@ -52,8 +52,8 @@ struct PopularLanguagesSection: View {
                             .shadow(color: language == selectedLanguage ? Color.primaryBlue.opacity(0.2) : Color.clear, radius: 4, x: 0, y: 2)
                             .foregroundColor(language == selectedLanguage ? .white : (colorScheme == .dark ? .gray : .black.opacity(0.7)))
                         }
-                        .accessibilityLabel(language.englishName)
-                        .accessibilityHint(language == selectedLanguage ? "Selected" : "Double tap to select")
+                        .accessibilityLabel(language.localizedName)
+                        .accessibilityHint(language == selectedLanguage ? languageManager.localizedString(key: "selected_accessibility_hint") : languageManager.localizedString(key: "double_tap_to_select"))
                         .accessibilityAddTraits(language == selectedLanguage ? .isSelected : [])
                         .buttonStyle(ScaleButtonStyle())
                     }
