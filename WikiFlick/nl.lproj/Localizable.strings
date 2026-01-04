@@ -1,4 +1,4 @@
-/* Dutch Localizations */
+/* nl Localizations */
 
 "remove_ads" = "Advertentievrij";
 "settings" = "Instellingen";
@@ -14,7 +14,6 @@
 "ok" = "OK";
 "no_ad_available" = "Geen advertenties beschikbaar op dit moment, probeer het later opnieuw.";
 "try_again_later" = "Probeer het later opnieuw";
-"back_to_feed" = "Terug naar feed";
 "learn_more" = "Meer informatie";
 "sponsored_content" = "Gesponsorde inhoud";
 "ad" = "Advertentie";
@@ -74,31 +73,60 @@
 "search" = "Zoeken";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Ontdek nieuwe fascinerende Wikipedia-artikelen!";
-"random_article" = "Willekeurig";
-"feed" = "Feed";
-
+"select_app_language" = "Select App Language";
+"select_article_language" = "Select Article Language";
+"today" = "Vandaag";
+"on_this_day" = "On This Day";
 "today_title" = "Op deze dag";
 "today_subtitle" = "Historische gebeurtenissen die op deze dag plaatsvonden";
-"today" = "Vandaag";
+"loading_events" = "Loading events...";
+"no_events_today" = "No events found for today";
+"no_events_description" = "Check back later for historical events";
+"error_loading_events" = "Failed to load events";
+"related_pages" = "Related Pages";
+"close" = "Close";
+"showing_cached_data" = "Showing cached data";
+"offline_mode" = "Offline mode";
 "favorites" = "Favorieten";
 "no_favorites" = "Nog Geen Favorieten";
-"no_favorites_description" = "Tik op het hartpictogram op een artikel om het op te slaan in je favorieten";
-
 "no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
-
+"lifetime" = "Lifetime";
+"one_time_payment" = "One-time payment";
+"one_week" = "1 Week";
+"weekly" = "Weekly";
+"per_week" = "/week";
+"back" = "Terug";
+"searching" = "Zoeken...";
+"no_results" = "Geen resultaten gevonden";
+"try_different_search" = "Probeer een andere zoekterm";
+"recent_searches" = "Recente zoekopdrachten";
+"brief_article_summary" = "Korte artikelsamenvatting...";
 "cache" = "Cache";
 "image_cache" = "Afbeeldingencache";
 "article_cache" = "Artikelcache";
 "memory_limit" = "Geheugenlimiet";
 "clear_all_cache" = "Alle cache wissen";
 "cache_items" = "items";
-
+"popular" = "Popular";
+"continue" = "Continue";
+"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
+"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
+"notifications_language" = "Notifications in your selected language";
+"disable_anytime" = "You can disable this anytime in Settings";
+"sponsored_recommended" = "Sponsored · Recommended for You";
+"premium_pick" = "Premium Pick";
+"discover_amazing_content" = "Discover Amazing Content";
+"subscription_disclaimer" = "Subscriptions automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Your account will be charged for renewal within 24-hours prior to the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.";
+"report_issue" = "Report Issue";
+"report_alert_title" = "Report Article";
+"report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
 "search_wikipedia_title" = "Zoeken in Wikipedia";
 "search_description" = "Vind artikelen, onderwerpen en meer";
-"searching" = "Zoeken...";
-"no_results" = "Geen resultaten gevonden";
-"try_different_search" = "Probeer een andere zoekterm";
-"recent_searches" = "Recente zoekopdrachten";
-"brief_article_summary" = "Korte artikelsamenvatting...";
 "clear" = "Wissen";
-"back" = "Terug";
+"no_description" = "No description available";
+"pro" = "PRO";
+"free" = "FREE";
+"stay_updated" = "Stay Updated";
+"all_languages" = "All Languages";
+"search_languages" = "Search languages";
+"random_article" = "Willekeurig";

@@ -1,4 +1,4 @@
-/* Turkish Localizations */
+/* tr Localizations */
 
 "remove_ads" = "Reklamsız";
 "settings" = "Ayarlar";
@@ -73,6 +73,8 @@
 "search" = "Ara";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Yeni ilginç Wikipedia makalelerini keşfet!";
+"select_app_language" = "Uygulama Dilini Seç";
+"select_article_language" = "Makale Dilini Seç";
 "today" = "Bugün";
 "on_this_day" = "Bugün Tarihinde";
 "today_title" = "Bugün Tarihinde";
@@ -85,17 +87,14 @@
 "close" = "Kapat";
 "showing_cached_data" = "Önbelleklenmiş veriler gösteriliyor";
 "offline_mode" = "Çevrimdışı mod";
-"random_article" = "Rastgele";
 "favorites" = "Favoriler";
 "no_favorites" = "Henüz Favori Yok";
 "no_favorites_description" = "Herhangi bir makaleyi favorilerinize eklemek için kalp ikonuna dokunun";
-
 "lifetime" = "Ömür Boyu";
 "one_time_payment" = "Tek seferlik ödeme";
 "one_week" = "1 Hafta";
 "weekly" = "Haftalık";
 "per_week" = "/hafta";
-
 "back" = "Geri";
 "searching" = "Aranıyor...";
 "no_results" = "Sonuç bulunamadı";
@@ -117,13 +116,10 @@
 "sponsored_recommended" = "Sponsorlu · Senin İçin Önerilen";
 "premium_pick" = "Premium Seçimi";
 "discover_amazing_content" = "İnanılmaz İçerikleri Keşfet";
-
 "subscription_disclaimer" = "Abonelikler, geçerli dönemin bitiminden en az 24 saat önce otomatik yenileme kapatılmadığı sürece otomatik olarak yenilenir. Hesabınızdan, geçerli dönemin bitiminden önceki 24 saat içinde yenileme ücreti tahsil edilecektir. Ödeme, satın alma onayının ardından iTunes Hesabından tahsil edilecektir. Satın alma işleminden sonra Hesap Ayarlarınıza giderek aboneliğinizi yönetebilir ve otomatik yenilemeyi kapatabilirsiniz.";
-
 "report_issue" = "Sorun Bildir";
 "report_alert_title" = "Makaleyi Bildir";
 "report_alert_message" = "Bu içeriği bildirdiğiniz için teşekkürler. En kısa sürede inceleyeceğiz.";
-
 "search_wikipedia_title" = "Wikipedia'da Ara";
 "search_description" = "Makaleler, konular ve daha fazlasını bul";
 "clear" = "Temizle";
@@ -133,3 +129,4 @@
 "stay_updated" = "Güncel Kalın";
 "all_languages" = "Tüm Diller";
 "search_languages" = "Dillerde ara";
+"random_article" = "Rastgele";

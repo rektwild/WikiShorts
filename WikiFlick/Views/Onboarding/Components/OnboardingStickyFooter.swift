@@ -18,7 +18,7 @@ struct OnboardingStickyFooter: View {
                     HapticManager.shared.stepCompleted()
                     action()
                 }) {
-                    Text("Continue")
+                    Text(AppLanguageManager.shared.localizedString(key: "continue"))
                         .font(.headline)
                         .foregroundStyle(.black)
                         .frame(maxWidth: .infinity)
@@ -44,9 +44,4 @@ struct OnboardingStickyFooter: View {
     }
 }
 
-#Preview {
-    ZStack {
-        Color.gray
-        OnboardingStickyFooter(action: {})
-    }
-}
+

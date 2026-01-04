@@ -1,4 +1,4 @@
-/* Ukrainian Localizations */
+/* uk Localizations */
 
 "remove_ads" = "Без реклами";
 "settings" = "Налаштування";
@@ -14,7 +14,6 @@
 "ok" = "OK";
 "no_ad_available" = "Реклама недоступна зараз, спробуйте пізніше.";
 "try_again_later" = "Спробуйте пізніше";
-"back_to_feed" = "Назад до стрічки";
 "learn_more" = "Дізнатися більше";
 "sponsored_content" = "Спонсорський контент";
 "ad" = "Реклама";
@@ -74,29 +73,60 @@
 "search" = "Пошук";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Відкрийте для себе нові захоплюючі статті Вікіпедії!";
-"random_article" = "Random";
-"feed" = "Feed";
-
+"select_app_language" = "Select App Language";
+"select_article_language" = "Select Article Language";
+"today" = "Сьогодні";
+"on_this_day" = "On This Day";
 "today_title" = "Цього дня";
 "today_subtitle" = "Історичні події, що сталися цього дня";
-"today" = "Сьогодні";
+"loading_events" = "Loading events...";
+"no_events_today" = "No events found for today";
+"no_events_description" = "Check back later for historical events";
+"error_loading_events" = "Failed to load events";
+"related_pages" = "Related Pages";
+"close" = "Close";
+"showing_cached_data" = "Showing cached data";
+"offline_mode" = "Offline mode";
 "favorites" = "Обране";
 "no_favorites" = "Поки Що Немає Обраного";
 "no_favorites_description" = "Натисніть на значок серця на будь-якій статті, щоб зберегти її в обране";
-
+"lifetime" = "Lifetime";
+"one_time_payment" = "One-time payment";
+"one_week" = "1 Week";
+"weekly" = "Weekly";
+"per_week" = "/week";
+"back" = "Назад";
+"searching" = "Пошук...";
+"no_results" = "Результатів не знайдено";
+"try_different_search" = "Спробуйте інший пошуковий запит";
+"recent_searches" = "Нещодавні пошуки";
+"brief_article_summary" = "Короткий зміст статті...";
 "cache" = "Кеш";
 "image_cache" = "Кеш зображень";
 "article_cache" = "Кеш статей";
 "memory_limit" = "Ліміт пам'яті";
 "clear_all_cache" = "Очистити весь кеш";
 "cache_items" = "елементів";
-
+"popular" = "Popular";
+"continue" = "Continue";
+"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
+"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
+"notifications_language" = "Notifications in your selected language";
+"disable_anytime" = "You can disable this anytime in Settings";
+"sponsored_recommended" = "Sponsored · Recommended for You";
+"premium_pick" = "Premium Pick";
+"discover_amazing_content" = "Discover Amazing Content";
+"subscription_disclaimer" = "Subscriptions automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Your account will be charged for renewal within 24-hours prior to the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.";
+"report_issue" = "Report Issue";
+"report_alert_title" = "Report Article";
+"report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
 "search_wikipedia_title" = "Пошук у Вікіпедії";
 "search_description" = "Знайти статті, теми та інше";
-"searching" = "Пошук...";
-"no_results" = "Результатів не знайдено";
-"try_different_search" = "Спробуйте інший пошуковий запит";
-"recent_searches" = "Нещодавні пошуки";
-"brief_article_summary" = "Короткий зміст статті...";
 "clear" = "Очистити";
-"back" = "Назад";
+"no_description" = "No description available";
+"pro" = "PRO";
+"free" = "FREE";
+"stay_updated" = "Stay Updated";
+"all_languages" = "All Languages";
+"search_languages" = "Search languages";
+"random_article" = "Random";

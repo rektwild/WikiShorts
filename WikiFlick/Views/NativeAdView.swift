@@ -254,7 +254,7 @@ struct NativeAdCardView: View {
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.blue.opacity(0.8))
                 
-                Text("Sponsored · Recommended for You")
+                Text(AppLanguageManager.shared.localizedString(key: "sponsored_recommended"))
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.blue.opacity(0.8))
                 
@@ -265,7 +265,7 @@ struct NativeAdCardView: View {
                         .font(.system(size: 12))
                         .foregroundColor(.red.opacity(0.8))
                     
-                    Text("Premium Pick")
+                    Text(AppLanguageManager.shared.localizedString(key: "premium_pick"))
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.white.opacity(0.7))
                 }
@@ -547,7 +547,7 @@ struct FeedAdView: View {
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.blue.opacity(0.8))
                 
-                Text("Sponsored · Recommended for You")
+                Text(AppLanguageManager.shared.localizedString(key: "sponsored_recommended"))
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.blue.opacity(0.8))
                 
@@ -558,7 +558,7 @@ struct FeedAdView: View {
                         .font(.system(size: 12))
                         .foregroundColor(.red.opacity(0.8))
                     
-                    Text("Premium Pick")
+                    Text(AppLanguageManager.shared.localizedString(key: "premium_pick"))
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.white.opacity(0.7))
                 }
@@ -626,7 +626,7 @@ struct FeedAdView: View {
         VStack {
             HStack {
                 Spacer()
-                Text("Ad")
+                Text(AppLanguageManager.shared.localizedString(key: "ad"))
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.black)
                     .padding(.horizontal, 8)

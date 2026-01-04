@@ -118,7 +118,7 @@ struct SettingsView: View {
                             Text(languageManager.localizedString(key: "memory_limit"))
                             Spacer()
                             let stats = ArticleCacheManager.shared.getCacheStatistics()
-                            Text("\(stats.imageCacheCostLimit / (1024 * 1024))MB")
+                            Text(ByteCountFormatter.string(fromByteCount: Int64(stats.imageCacheCostLimit), countStyle: .memory))
                                 .foregroundColor(.secondary)
                                 .font(.caption)
                         }
@@ -177,7 +177,8 @@ struct SettingsView: View {
                         Image(systemName: "info.circle")
                         Text(languageManager.localizedString(key: "app_version"))
                         Spacer()
-                        Text("1.1")
+                        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+                        Text(version)
                             .foregroundColor(.secondary)
                     }
                     

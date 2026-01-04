@@ -1,4 +1,4 @@
-/* Japanese Localizations */
+/* ja Localizations */
 
 "remove_ads" = "広告なし";
 "settings" = "設定";
@@ -14,7 +14,6 @@
 "ok" = "OK";
 "no_ad_available" = "現在利用可能な広告がありません。後でもう一度お試しください。";
 "try_again_later" = "後でもう一度お試しください";
-"back_to_feed" = "フィードに戻る";
 "learn_more" = "詳細を見る";
 "sponsored_content" = "スポンサーコンテンツ";
 "ad" = "広告";
@@ -74,42 +73,60 @@
 "search" = "検索";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "魅力的な新しいWikipedia記事を発見しよう！";
-"random_article" = "ランダム";
-"feed" = "Feed";
-
+"select_app_language" = "アプリの言語";
+"select_article_language" = "記事の言語";
+"today" = "今日";
+"on_this_day" = "今日は何の日";
 "today_title" = "今日は何の日";
 "today_subtitle" = "この日に起きた歴史的な出来事";
-"today" = "今日";
+"loading_events" = "読み込み中...";
+"no_events_today" = "イベントなし";
+"no_events_description" = "後で確認してください";
+"error_loading_events" = "読み込み失敗";
+"related_pages" = "関連ページ";
+"close" = "閉じる";
+"showing_cached_data" = "キャッシュを表示中";
+"offline_mode" = "オフライン";
 "favorites" = "お気に入り";
 "no_favorites" = "お気に入りはまだありません";
 "no_favorites_description" = "記事のハートアイコンをタップして、お気に入りに保存します";
-
+"lifetime" = "ライフタイム";
+"one_time_payment" = "1回限りのお支払い";
+"one_week" = "1週間";
+"weekly" = "週間";
+"per_week" = "/週";
+"back" = "戻る";
 "searching" = "検索中...";
 "no_results" = "結果が見つかりません";
 "try_different_search" = "別の検索語を試してください";
 "recent_searches" = "最近の検索";
 "brief_article_summary" = "短い記事の要約...";
-"search_wikipedia_title" = "ウィキペディアを検索";
-"search_description" = "記事、トピックなどを検索";
-"clear" = "クリア";
-
 "cache" = "キャッシュ";
 "image_cache" = "画像キャッシュ";
 "article_cache" = "記事キャッシュ";
 "memory_limit" = "メモリ制限";
 "clear_all_cache" = "すべてのキャッシュを削除";
 "cache_items" = "件";
-
-"lifetime" = "ライフタイム";
-"one_time_payment" = "1回限りのお支払い";
-"one_week" = "1週間";
-"weekly" = "週間";
-"per_week" = "/週";
-
+"popular" = "人気";
+"continue" = "次へ";
+"daily_reminders_setup" = "毎日通知を受け取る";
+"daily_reminders_detail" = "8時, 13時, 18時, 23時に通知";
+"notifications_language" = "選択した言語で通知";
+"disable_anytime" = "設定でいつでも変更可能";
+"sponsored_recommended" = "おすすめ・PR";
+"premium_pick" = "プレミアム";
+"discover_amazing_content" = "発見";
 "subscription_disclaimer" = "サブスクリプションは、現在の期間が終了する少なくとも24時間前に自動更新をオフにしない限り、自動的に更新されます。現在の期間が終了する24時間以内に、更新料金がアカウントに請求されます。支払いは購入確認時にiTunesアカウントに請求されます。購入後、アカウント設定に移動してサブスクリプションを管理し、自動更新をオフにすることができます。";
-
 "report_issue" = "問題を報告";
 "report_alert_title" = "記事を報告";
 "report_alert_message" = "このコンテンツを報告していただきありがとうございます。できるだけ早く確認します。";
-
-"back" = "戻る";
+"search_wikipedia_title" = "ウィキペディアを検索";
+"search_description" = "記事、トピックなどを検索";
+"clear" = "クリア";
+"no_description" = "説明なし";
+"pro" = "プロ";
+"free" = "無料";
+"stay_updated" = "最新情報";
+"all_languages" = "すべての言語";
+"search_languages" = "言語を検索";
+"random_article" = "ランダム";

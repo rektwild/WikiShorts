@@ -1,0 +1,5 @@
+/* fr InfoPlist Strings */
+
+"NSUserTrackingUsageDescription" = "Cette app utilise des identifiants pour vous proposer des publicités pertinentes.";
+"CFBundleDisplayName" = "WikiShorts";
+"CFBundleName" = "WikiShorts";

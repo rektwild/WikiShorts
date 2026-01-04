@@ -1,0 +1,5 @@
+/* es InfoPlist Strings */
+
+"NSUserTrackingUsageDescription" = "Esta app usa identificadores para mostrarte anuncios más relevantes.";
+"CFBundleDisplayName" = "WikiShorts";
+"CFBundleName" = "WikiShorts";

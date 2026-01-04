@@ -1,4 +1,4 @@
-/* Korean Localizations */
+/* ko Localizations */
 
 "remove_ads" = "광고 없음";
 "settings" = "설정";
@@ -14,7 +14,6 @@
 "ok" = "확인";
 "no_ad_available" = "현재 사용 가능한 광고가 없습니다. 나중에 다시 시도하세요.";
 "try_again_later" = "나중에 다시 시도";
-"back_to_feed" = "피드로 돌아가기";
 "learn_more" = "더 알아보기";
 "sponsored_content" = "후원 콘텐츠";
 "ad" = "광고";
@@ -74,39 +73,60 @@
 "search" = "검색";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "새로운 흥미진진한 위키백과 기사를 발견하세요!";
-"random_article" = "랜덤";
-"feed" = "Feed";
-
+"select_app_language" = "Select App Language";
+"select_article_language" = "Select Article Language";
+"today" = "오늘";
+"on_this_day" = "On This Day";
 "today_title" = "오늘의 역사";
 "today_subtitle" = "오늘 일어난 역사적인 사건들";
-"today" = "오늘";
+"loading_events" = "Loading events...";
+"no_events_today" = "No events found for today";
+"no_events_description" = "Check back later for historical events";
+"error_loading_events" = "Failed to load events";
+"related_pages" = "Related Pages";
+"close" = "Close";
+"showing_cached_data" = "Showing cached data";
+"offline_mode" = "Offline mode";
 "favorites" = "즐겨찾기";
 "no_favorites" = "아직 즐겨찾기 없음";
-"no_favorites_description" = "즐겨찾기에 저장하려면 모든 기사의 하트 아이콘을 탭하세요";
-
 "no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
-
+"lifetime" = "평생";
+"one_time_payment" = "일회성 결제";
+"one_week" = "1주";
+"weekly" = "주간";
+"per_week" = "/주";
+"back" = "뒤로";
+"searching" = "검색 중...";
+"no_results" = "결과를 찾을 수 없습니다";
+"try_different_search" = "다른 검색어로 시도해보세요";
+"recent_searches" = "최근 검색";
+"brief_article_summary" = "문서 요약...";
 "cache" = "캐시";
 "image_cache" = "이미지 캐시";
 "article_cache" = "기사 캐시";
 "memory_limit" = "메모리 제한";
 "clear_all_cache" = "모든 캐시 삭제";
 "cache_items" = "개";
-
-"lifetime" = "평생";
-"one_time_payment" = "일회성 결제";
-"one_week" = "1주";
-"weekly" = "주간";
-"per_week" = "/주";
-
+"popular" = "Popular";
+"continue" = "Continue";
+"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
+"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
+"notifications_language" = "Notifications in your selected language";
+"disable_anytime" = "You can disable this anytime in Settings";
+"sponsored_recommended" = "Sponsored · Recommended for You";
+"premium_pick" = "Premium Pick";
+"discover_amazing_content" = "Discover Amazing Content";
 "subscription_disclaimer" = "현재 기간 종료 최소 24시간 전에 자동 갱신을 끄지 않으면 구독이 자동으로 갱신됩니다. 현재 기간 종료 24시간 이내에 귀하의 계정으로 갱신 요금이 청구됩니다. 구매 확인 시 iTunes 계정으로 결제됩니다. 구매 후 계정 설정에서 구독을 관리하고 자동 갱신을 끌 수 있습니다.";
-
+"report_issue" = "Report Issue";
+"report_alert_title" = "Report Article";
+"report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
 "search_wikipedia_title" = "위키백과 검색";
 "search_description" = "문서, 주제 등 찾기";
-"searching" = "검색 중...";
-"no_results" = "결과를 찾을 수 없습니다";
-"try_different_search" = "다른 검색어로 시도해보세요";
-"recent_searches" = "최근 검색";
-"brief_article_summary" = "문서 요약...";
 "clear" = "지우기";
-"back" = "뒤로";
+"no_description" = "No description available";
+"pro" = "PRO";
+"free" = "FREE";
+"stay_updated" = "Stay Updated";
+"all_languages" = "All Languages";
+"search_languages" = "Search languages";
+"random_article" = "랜덤";

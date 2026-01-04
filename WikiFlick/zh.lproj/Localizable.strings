@@ -1,4 +1,4 @@
-/* Chinese Localizations */
+/* zh Localizations */
 
 "remove_ads" = "无广告";
 "settings" = "设置";
@@ -14,7 +14,6 @@
 "ok" = "确定";
 "no_ad_available" = "目前没有可用的广告，请稍后再试。";
 "try_again_later" = "请稍后再试";
-"back_to_feed" = "返回动态";
 "learn_more" = "了解更多";
 "sponsored_content" = "赞助内容";
 "ad" = "广告";
@@ -74,38 +73,60 @@
 "search" = "搜索";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "发现精彩的维基百科新文章！";
-"random_article" = "随机";
-"feed" = "Feed";
-
+"select_app_language" = "应用语言";
+"select_article_language" = "文章语言";
+"today" = "今天";
+"on_this_day" = "历史上的今天";
 "today_title" = "历史上的今天";
 "today_subtitle" = "这一天发生的历史事件";
-"today" = "今天";
+"loading_events" = "加载事件...";
+"no_events_today" = "今天无事件";
+"no_events_description" = "稍后回来查看";
+"error_loading_events" = "加载失败";
+"related_pages" = "相关页面";
+"close" = "关闭";
+"showing_cached_data" = "显示缓存数据";
+"offline_mode" = "离线模式";
 "favorites" = "收藏夹";
 "no_favorites" = "尚无收藏";
 "no_favorites_description" = "点击任何文章上的心形图标以将其保存到您的收藏夹";
-
+"lifetime" = "终身";
+"one_time_payment" = "一次性付款";
+"one_week" = "1周";
+"weekly" = "每周";
+"per_week" = "/周";
+"back" = "返回";
 "searching" = "搜索中...";
 "no_results" = "未找到结果";
 "try_different_search" = "尝试其他搜索词";
 "recent_searches" = "最近搜索";
 "brief_article_summary" = "文章简介...";
-"search_wikipedia_title" = "搜索维基百科";
-"search_description" = "查找文章、主题等";
-"clear" = "清除";
-
 "cache" = "缓存";
 "image_cache" = "图片缓存";
 "article_cache" = "文章缓存";
 "memory_limit" = "内存限制";
 "clear_all_cache" = "清除所有缓存";
 "cache_items" = "项";
-
-"lifetime" = "终身";
-"one_time_payment" = "一次性付款";
-"one_week" = "1周";
-"weekly" = "每周";
-"per_week" = "/周";
-
+"popular" = "热门";
+"continue" = "继续";
+"daily_reminders_setup" = "获取每日提醒";
+"daily_reminders_detail" = "每天 8, 13, 18, 23 点";
+"notifications_language" = "使用所选语言接收通知";
+"disable_anytime" = "随时在设置中关闭";
+"sponsored_recommended" = "赞助 · 推荐";
+"premium_pick" = "精选";
+"discover_amazing_content" = "发现精彩";
 "subscription_disclaimer" = "除非在当前期间结束前至少24小时关闭自动续订，否则订阅将自动续订。您的账户将在当前期间结束前24小时内收取续订费用。付款将在确认购买时从iTunes账户中扣除。购买后，您可以通过访问账户设置来管理您的订阅并关闭自动续订。";
-
-"back" = "返回";
+"report_issue" = "报告问题";
+"report_alert_title" = "报告文章";
+"report_alert_message" = "感谢反馈，我们会尽快审核。";
+"search_wikipedia_title" = "搜索维基百科";
+"search_description" = "查找文章、主题等";
+"clear" = "清除";
+"no_description" = "无描述";
+"pro" = "专业版";
+"free" = "免费";
+"stay_updated" = "保持更新";
+"all_languages" = "所有语言";
+"search_languages" = "搜索语言";
+"random_article" = "随机";

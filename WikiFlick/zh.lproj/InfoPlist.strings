@@ -1,0 +1,5 @@
+/* zh InfoPlist Strings */
+
+"NSUserTrackingUsageDescription" = "此应用使用设备标识符为您提供更相关的广告。";
+"CFBundleDisplayName" = "WikiShorts";
+"CFBundleName" = "WikiShorts";

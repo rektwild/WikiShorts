@@ -1,4 +1,4 @@
-/* German Localizations */
+/* te Localizations */
 
 "remove_ads" = "Werbefrei";
 "settings" = "Einstellungen";
@@ -14,7 +14,6 @@
 "ok" = "OK";
 "no_ad_available" = "Derzeit ist keine Werbung verfügbar, versuchen Sie es später erneut.";
 "try_again_later" = "Später erneut versuchen";
-"back_to_feed" = "Zurück zum Feed";
 "learn_more" = "Mehr erfahren";
 "sponsored_content" = "Gesponserte Inhalte";
 "ad" = "Werbung";
@@ -74,25 +73,60 @@
 "search" = "Suchen";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
-"random_article" = "Random";
-"feed" = "Feed";
-
+"select_app_language" = "Select App Language";
+"select_article_language" = "Select Article Language";
+"today" = "ఈ రోజు";
+"on_this_day" = "On This Day";
 "today_title" = "ఈ రోజు";
 "today_subtitle" = "ఈ రోజు జరిగిన చారిత్రక సంఘటనలు";
-"today" = "ఈ రోజు";
+"loading_events" = "Loading events...";
+"no_events_today" = "No events found for today";
+"no_events_description" = "Check back later for historical events";
+"error_loading_events" = "Failed to load events";
+"related_pages" = "Related Pages";
+"close" = "Close";
+"showing_cached_data" = "Showing cached data";
+"offline_mode" = "Offline mode";
 "favorites" = "ఇష్టమైనవి";
 "no_favorites" = "ఇంకా ఇష్టమైనవి లేవు";
-"no_favorites_description" = "మీ ఇష్టమైనవాట్లో సేవ్ చేయడానికి ఏ ఆర్టికల్‌పైనైనా గుండె చిహ్నంపై నొక్కండి";
-
 "no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
-
-
-"search_wikipedia_title" = "Search Wikipedia";
-"search_description" = "Find articles, topics, and more";
+"lifetime" = "Lifetime";
+"one_time_payment" = "One-time payment";
+"one_week" = "1 Week";
+"weekly" = "Weekly";
+"per_week" = "/week";
+"back" = "Back";
 "searching" = "Searching...";
 "no_results" = "No results found";
 "try_different_search" = "Try a different search term";
 "recent_searches" = "Recent Searches";
 "brief_article_summary" = "Brief article summary...";
+"cache" = "Cache";
+"image_cache" = "Image Cache";
+"article_cache" = "Article Cache";
+"memory_limit" = "Memory Limit";
+"clear_all_cache" = "Clear All Cache";
+"cache_items" = "items";
+"popular" = "Popular";
+"continue" = "Continue";
+"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
+"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
+"notifications_language" = "Notifications in your selected language";
+"disable_anytime" = "You can disable this anytime in Settings";
+"sponsored_recommended" = "Sponsored · Recommended for You";
+"premium_pick" = "Premium Pick";
+"discover_amazing_content" = "Discover Amazing Content";
+"subscription_disclaimer" = "Subscriptions automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Your account will be charged for renewal within 24-hours prior to the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.";
+"report_issue" = "Report Issue";
+"report_alert_title" = "Report Article";
+"report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
+"search_wikipedia_title" = "Search Wikipedia";
+"search_description" = "Find articles, topics, and more";
 "clear" = "Clear";
-"back" = "Back";
+"no_description" = "No description available";
+"pro" = "PRO";
+"free" = "FREE";
+"stay_updated" = "Stay Updated";
+"all_languages" = "All Languages";
+"search_languages" = "Search languages";
+"random_article" = "Random";

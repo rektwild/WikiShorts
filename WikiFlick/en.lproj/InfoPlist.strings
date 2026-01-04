@@ -1,10 +1,4 @@
-/* 
-  InfoPlist.strings
-  WikiShorts
-
-  Created by WikiShorts Team.
-  
-*/
+/* en InfoPlist Strings */
 
 "NSUserTrackingUsageDescription" = "This app uses device identifiers to deliver more relevant ads to you.";
 "CFBundleDisplayName" = "WikiShorts";

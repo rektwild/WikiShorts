@@ -1,4 +1,4 @@
-/* Russian Localizations */
+/* ru Localizations */
 
 "remove_ads" = "Без рекламы";
 "settings" = "Настройки";
@@ -14,7 +14,6 @@
 "ok" = "ОК";
 "no_ad_available" = "Реклама недоступна в данный момент, попробуйте позже.";
 "try_again_later" = "Попробуйте позже";
-"back_to_feed" = "Назад к ленте";
 "learn_more" = "Узнать больше";
 "sponsored_content" = "Спонсорский контент";
 "ad" = "Реклама";
@@ -69,43 +68,65 @@
 "restore_purchases" = "Восстановить покупки";
 "free_trial_then_price" = "2 недели бесплатно, затем 349₽/месяц";
 "error" = "Ошибка";
+"rewarded_ad" = "Вознаграждающая реклама";
+"no_ad_found" = "Реклама недоступна";
 "search" = "Поиск";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Откройте для себя новые увлекательные статьи Википедии!";
-"rewarded_ad" = "Вознаграждающая реклама";
-"no_ad_found" = "Реклама недоступна";
-"random_article" = "Случайная";
-"feed" = "Feed";
-
+"select_app_language" = "Select App Language";
+"select_article_language" = "Select Article Language";
+"today" = "Сегодня";
+"on_this_day" = "On This Day";
 "today_title" = "В этот день";
 "today_subtitle" = "Исторические события, произошедшие в этот день";
-"today" = "Сегодня";
+"loading_events" = "Loading events...";
+"no_events_today" = "No events found for today";
+"no_events_description" = "Check back later for historical events";
+"error_loading_events" = "Failed to load events";
+"related_pages" = "Related Pages";
+"close" = "Close";
+"showing_cached_data" = "Showing cached data";
+"offline_mode" = "Offline mode";
 "favorites" = "Избранное";
 "no_favorites" = "Пока Нет Избранного";
 "no_favorites_description" = "Нажмите на значок сердца на любой статье, чтобы сохранить её в избранное";
-
+"lifetime" = "Навсегда";
+"one_time_payment" = "Единоразовый платёж";
+"one_week" = "1 Неделя";
+"weekly" = "Еженедельно";
+"per_week" = "/неделя";
+"back" = "Назад";
 "searching" = "Поиск...";
 "no_results" = "Результаты не найдены";
 "try_different_search" = "Попробуйте другой поисковый запрос";
 "recent_searches" = "Недавние поиски";
 "brief_article_summary" = "Краткое описание статьи...";
-"search_wikipedia_title" = "Поиск в Википедии";
-"search_description" = "Найти статьи, темы и многое другое";
-"clear" = "Очистить";
-
 "cache" = "Кэш";
 "image_cache" = "Кэш изображений";
 "article_cache" = "Кэш статей";
 "memory_limit" = "Лимит памяти";
 "clear_all_cache" = "Очистить весь кэш";
 "cache_items" = "элементов";
-
-"lifetime" = "Навсегда";
-"one_time_payment" = "Единоразовый платёж";
-"one_week" = "1 Неделя";
-"weekly" = "Еженедельно";
-"per_week" = "/неделя";
-
+"popular" = "Popular";
+"continue" = "Continue";
+"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
+"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
+"notifications_language" = "Notifications in your selected language";
+"disable_anytime" = "You can disable this anytime in Settings";
+"sponsored_recommended" = "Sponsored · Recommended for You";
+"premium_pick" = "Premium Pick";
+"discover_amazing_content" = "Discover Amazing Content";
 "subscription_disclaimer" = "Подписки автоматически продлеваются, если автопродление не отключено как минимум за 24 часа до окончания текущего периода. Плата за продление будет списана с вашего счета в течение 24 часов до окончания текущего периода. Платёж будет списан с учётной записи iTunes при подтверждении покупки. Вы можете управлять подпиской и отключить автопродление в Настройках учетной записи после покупки.";
-
-"back" = "Назад";
+"report_issue" = "Report Issue";
+"report_alert_title" = "Report Article";
+"report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
+"search_wikipedia_title" = "Поиск в Википедии";
+"search_description" = "Найти статьи, темы и многое другое";
+"clear" = "Очистить";
+"no_description" = "No description available";
+"pro" = "PRO";
+"free" = "FREE";
+"stay_updated" = "Stay Updated";
+"all_languages" = "All Languages";
+"search_languages" = "Search languages";
+"random_article" = "Случайная";

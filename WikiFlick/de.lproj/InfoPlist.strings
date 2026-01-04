@@ -1,0 +1,5 @@
+/* de InfoPlist Strings */
+
+"NSUserTrackingUsageDescription" = "Diese App nutzt Kennungen, um relevantere Werbung anzuzeigen.";
+"CFBundleDisplayName" = "WikiShorts";
+"CFBundleName" = "WikiShorts";

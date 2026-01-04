@@ -1,4 +1,4 @@
-/* Spanish Localizations */
+/* es Localizations */
 
 "remove_ads" = "Sin Ads";
 "settings" = "Configuración";
@@ -14,7 +14,6 @@
 "ok" = "OK";
 "no_ad_available" = "No hay anuncios disponibles en este momento, inténtalo más tarde.";
 "try_again_later" = "Inténtalo más tarde";
-"back_to_feed" = "Volver al feed";
 "learn_more" = "Saber más";
 "sponsored_content" = "Contenido patrocinado";
 "ad" = "Anuncio";
@@ -74,38 +73,60 @@
 "search" = "Buscar";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "¡Descubre nuevos artículos fascinantes de Wikipedia!";
-"random_article" = "Aleatorio";
-"feed" = "Feed";
-
+"select_app_language" = "Idioma de App";
+"select_article_language" = "Idioma de Artículos";
+"today" = "Hoy";
+"on_this_day" = "Tal Día Como Hoy";
 "today_title" = "Tal día como hoy";
 "today_subtitle" = "Eventos históricos que sucedieron en este día";
-"today" = "Hoy";
+"loading_events" = "Cargando eventos...";
+"no_events_today" = "Sin eventos";
+"no_events_description" = "Vuelve más tarde";
+"error_loading_events" = "Error al cargar";
+"related_pages" = "Páginas Relacionadas";
+"close" = "Cerrar";
+"showing_cached_data" = "Datos en caché";
+"offline_mode" = "Modo offline";
 "favorites" = "Favoritos";
 "no_favorites" = "Aún No Hay Favoritos";
 "no_favorites_description" = "Toca el ícono del corazón en cualquier artículo para guardarlo en tus favoritos";
-
+"lifetime" = "De por vida";
+"one_time_payment" = "Pago único";
+"one_week" = "1 Semana";
+"weekly" = "Semanal";
+"per_week" = "/semana";
+"back" = "Atrás";
 "searching" = "Buscando...";
 "no_results" = "No se encontraron resultados";
 "try_different_search" = "Intenta con otro término de búsqueda";
 "recent_searches" = "Búsquedas recientes";
 "brief_article_summary" = "Breve resumen del artículo...";
-"search_wikipedia_title" = "Buscar en Wikipedia";
-"search_description" = "Encuentra artículos, temas y más";
-"clear" = "Borrar";
-
 "cache" = "Caché";
 "image_cache" = "Caché de imágenes";
 "article_cache" = "Caché de artículos";
 "memory_limit" = "Límite de memoria";
 "clear_all_cache" = "Borrar toda la caché";
 "cache_items" = "elementos";
-
-"lifetime" = "De por vida";
-"one_time_payment" = "Pago único";
-"one_week" = "1 Semana";
-"weekly" = "Semanal";
-"per_week" = "/semana";
-
+"popular" = "Popular";
+"continue" = "Continuar";
+"daily_reminders_setup" = "Recibe recordatorios diarios";
+"daily_reminders_detail" = "A las 8, 13, 18 y 23h";
+"notifications_language" = "Notificaciones en tu idioma";
+"disable_anytime" = "Desactiva en ajustes";
+"sponsored_recommended" = "Patrocinado · Recomendado";
+"premium_pick" = "Selección Premium";
+"discover_amazing_content" = "Descubrir";
 "subscription_disclaimer" = "Las suscripciones se renuevan automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual. Se le cobrará a su cuenta la renovación dentro de las 24 horas anteriores al final del período actual. El pago se cargará a la cuenta de iTunes en la confirmación de la compra. Puede administrar su suscripción y desactivar la renovación automática yendo a la Configuración de su cuenta después de la compra.";
-
-"back" = "Atrás";
+"report_issue" = "Reportar";
+"report_alert_title" = "Reportar Artículo";
+"report_alert_message" = "Gracias, lo revisaremos.";
+"search_wikipedia_title" = "Buscar en Wikipedia";
+"search_description" = "Encuentra artículos, temas y más";
+"clear" = "Borrar";
+"no_description" = "Sin descripción";
+"pro" = "PRO";
+"free" = "GRATIS";
+"stay_updated" = "Mantente al día";
+"all_languages" = "Todos";
+"search_languages" = "Buscar idiomas";
+"random_article" = "Aleatorio";

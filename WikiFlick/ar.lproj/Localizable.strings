@@ -1,4 +1,4 @@
-/* Arabic Localizations */
+/* ar Localizations */
 
 "remove_ads" = "بدون إعلانات";
 "settings" = "الإعدادات";
@@ -14,7 +14,6 @@
 "ok" = "موافق";
 "no_ad_available" = "لا توجد إعلانات متاحة حالياً، حاول مرة أخرى لاحقاً.";
 "try_again_later" = "حاول مرة أخرى لاحقاً";
-"back_to_feed" = "العودة إلى الصفحة الرئيسية";
 "learn_more" = "معرفة المزيد";
 "sponsored_content" = "محتوى مدعوم";
 "ad" = "إعلان";
@@ -74,37 +73,60 @@
 "search" = "بحث";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "اكتشف مقالات ويكيبيديا جديدة ومثيرة!";
-"random_article" = "عشوائي";
-"feed" = "Feed";
-
+"select_app_language" = "Select App Language";
+"select_article_language" = "Select Article Language";
+"today" = "اليوم";
+"on_this_day" = "On This Day";
 "today_title" = "في مثل هذا اليوم";
 "today_subtitle" = "أحداث تاريخية وقعت في مثل هذا اليوم";
-"today" = "اليوم";
+"loading_events" = "Loading events...";
+"no_events_today" = "No events found for today";
+"no_events_description" = "Check back later for historical events";
+"error_loading_events" = "Failed to load events";
+"related_pages" = "Related Pages";
+"close" = "Close";
+"showing_cached_data" = "Showing cached data";
+"offline_mode" = "Offline mode";
 "favorites" = "المفضلة";
 "no_favorites" = "لا توجد مفضلات بعد";
 "no_favorites_description" = "انقر على أيقونة القلب في أي مقال لحفظه في المفضلة";
-
+"lifetime" = "مدى الحياة";
+"one_time_payment" = "دفعة واحدة";
+"one_week" = "أسبوع واحد";
+"weekly" = "أسبوعي";
+"per_week" = "/أسبوع";
+"back" = "عودة";
+"searching" = "جارٍ البحث...";
+"no_results" = "لم يتم العثور على نتائج";
+"try_different_search" = "جرب مصطلح بحث مختلف";
+"recent_searches" = "عمليات البحث الأخيرة";
+"brief_article_summary" = "ملخص موجز للمقال...";
 "cache" = "الذاكرة المؤقتة";
 "image_cache" = "ذاكرة الصور";
 "article_cache" = "ذاكرة المقالات";
 "memory_limit" = "حد الذاكرة";
 "clear_all_cache" = "مسح كل الذاكرة المؤقتة";
 "cache_items" = "عنصر";
-
-"lifetime" = "مدى الحياة";
-"one_time_payment" = "دفعة واحدة";
-"one_week" = "أسبوع واحد";
-"weekly" = "أسبوعي";
-"per_week" = "/أسبوع";
-
+"popular" = "Popular";
+"continue" = "Continue";
+"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
+"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
+"notifications_language" = "Notifications in your selected language";
+"disable_anytime" = "You can disable this anytime in Settings";
+"sponsored_recommended" = "Sponsored · Recommended for You";
+"premium_pick" = "Premium Pick";
+"discover_amazing_content" = "Discover Amazing Content";
 "subscription_disclaimer" = "يتم تجديد الاشتراكات تلقائيًا ما لم يتم إيقاف التجديد التلقائي قبل 24 ساعة على الأقل من نهاية الفترة الحالية. سيتم تحميل رسوم التجديد على حسابك خلال 24 ساعة قبل نهاية الفترة الحالية. سيتم تحميل الدفعة على حساب iTunes عند تأكيد الشراء. يمكنك إدارة اشتراكك وإيقاف التجديد التلقائي بالذهاب إلى إعدادات الحساب بعد الشراء.";
-
+"report_issue" = "Report Issue";
+"report_alert_title" = "Report Article";
+"report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
 "search_wikipedia_title" = "البحث في ويكيبيديا";
 "search_description" = "ابحث عن المقالات والمواضيع والمزيد";
-"searching" = "جارٍ البحث...";
-"no_results" = "لم يتم العثور على نتائج";
-"try_different_search" = "جرب مصطلح بحث مختلف";
-"recent_searches" = "عمليات البحث الأخيرة";
-"brief_article_summary" = "ملخص موجز للمقال...";
 "clear" = "مسح";
-"back" = "عودة";
+"no_description" = "No description available";
+"pro" = "PRO";
+"free" = "FREE";
+"stay_updated" = "Stay Updated";
+"all_languages" = "All Languages";
+"search_languages" = "Search languages";
+"random_article" = "عشوائي";

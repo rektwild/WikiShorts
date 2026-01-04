@@ -1,4 +1,4 @@
-/* Swedish Localizations */
+/* sv Localizations */
 
 "remove_ads" = "Reklamfri";
 "settings" = "Inställningar";
@@ -14,7 +14,6 @@
 "ok" = "OK";
 "no_ad_available" = "Inga annonser tillgängliga just nu, försök igen senare.";
 "try_again_later" = "Försök igen senare";
-"back_to_feed" = "Tillbaka till flödet";
 "learn_more" = "Läs mer";
 "sponsored_content" = "Sponsrat innehåll";
 "ad" = "Annons";
@@ -74,31 +73,60 @@
 "search" = "Sök";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Upptäck nya fascinerande Wikipedia-artiklar!";
-"random_article" = "Slumpmässig";
-"feed" = "Feed";
-
+"select_app_language" = "Select App Language";
+"select_article_language" = "Select Article Language";
+"today" = "Idag";
+"on_this_day" = "On This Day";
 "today_title" = "Denna dag";
 "today_subtitle" = "Historiska händelser som inträffade denna dag";
-"today" = "Idag";
+"loading_events" = "Loading events...";
+"no_events_today" = "No events found for today";
+"no_events_description" = "Check back later for historical events";
+"error_loading_events" = "Failed to load events";
+"related_pages" = "Related Pages";
+"close" = "Close";
+"showing_cached_data" = "Showing cached data";
+"offline_mode" = "Offline mode";
 "favorites" = "Favoriter";
 "no_favorites" = "Inga Favoriter Ännu";
-"no_favorites_description" = "Tryck på hjärtikonnet på valfri artikel för att spara den till dina favoriter";
-
 "no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
-
+"lifetime" = "Lifetime";
+"one_time_payment" = "One-time payment";
+"one_week" = "1 Week";
+"weekly" = "Weekly";
+"per_week" = "/week";
+"back" = "Tillbaka";
+"searching" = "Söker...";
+"no_results" = "Inga resultat hittades";
+"try_different_search" = "Prova en annan sökterm";
+"recent_searches" = "Senaste sökningar";
+"brief_article_summary" = "Kort artikelsammanfattning...";
 "cache" = "Cache";
 "image_cache" = "Bildcache";
 "article_cache" = "Artikelcache";
 "memory_limit" = "Minnesgräns";
 "clear_all_cache" = "Rensa all cache";
 "cache_items" = "objekt";
-
+"popular" = "Popular";
+"continue" = "Continue";
+"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
+"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
+"notifications_language" = "Notifications in your selected language";
+"disable_anytime" = "You can disable this anytime in Settings";
+"sponsored_recommended" = "Sponsored · Recommended for You";
+"premium_pick" = "Premium Pick";
+"discover_amazing_content" = "Discover Amazing Content";
+"subscription_disclaimer" = "Subscriptions automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Your account will be charged for renewal within 24-hours prior to the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.";
+"report_issue" = "Report Issue";
+"report_alert_title" = "Report Article";
+"report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
 "search_wikipedia_title" = "Sök på Wikipedia";
 "search_description" = "Hitta artiklar, ämnen och mer";
-"searching" = "Söker...";
-"no_results" = "Inga resultat hittades";
-"try_different_search" = "Prova en annan sökterm";
-"recent_searches" = "Senaste sökningar";
-"brief_article_summary" = "Kort artikelsammanfattning...";
 "clear" = "Rensa";
-"back" = "Tillbaka";
+"no_description" = "No description available";
+"pro" = "PRO";
+"free" = "FREE";
+"stay_updated" = "Stay Updated";
+"all_languages" = "All Languages";
+"search_languages" = "Search languages";
+"random_article" = "Slumpmässig";

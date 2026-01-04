@@ -1,4 +1,4 @@
-/* English Localizations */
+/* en Localizations */
 
 "remove_ads" = "Remove Ads";
 "settings" = "Settings";
@@ -13,7 +13,6 @@
 "cancel" = "Cancel";
 "ok" = "OK";
 "no_ad_available" = "No ads available right now, please try again later.";
-"try_again_later" = "Try again later";
 "try_again_later" = "Try again later";
 "learn_more" = "Learn More";
 "sponsored_content" = "Sponsored Content";
@@ -91,13 +90,11 @@
 "favorites" = "Favorites";
 "no_favorites" = "No Favorites Yet";
 "no_favorites_description" = "Tap the heart icon on any article to save it to your favorites";
-
 "lifetime" = "Lifetime";
 "one_time_payment" = "One-time payment";
 "one_week" = "1 Week";
 "weekly" = "Weekly";
 "per_week" = "/week";
-
 "back" = "Back";
 "searching" = "Searching...";
 "no_results" = "No results found";
@@ -119,13 +116,10 @@
 "sponsored_recommended" = "Sponsored · Recommended for You";
 "premium_pick" = "Premium Pick";
 "discover_amazing_content" = "Discover Amazing Content";
-
 "subscription_disclaimer" = "Subscriptions automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period. Your account will be charged for renewal within 24-hours prior to the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.";
-
 "report_issue" = "Report Issue";
 "report_alert_title" = "Report Article";
 "report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
-
 "search_wikipedia_title" = "Search Wikipedia";
 "search_description" = "Find articles, topics, and more";
 "clear" = "Clear";
@@ -135,3 +129,4 @@
 "stay_updated" = "Stay Updated";
 "all_languages" = "All Languages";
 "search_languages" = "Search languages";
+"random_article" = "Random";

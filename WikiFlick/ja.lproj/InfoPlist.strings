@@ -1,0 +1,5 @@
+/* ja InfoPlist Strings */
+
+"NSUserTrackingUsageDescription" = "適切な広告を表示するために識別子を使用します。";
+"CFBundleDisplayName" = "WikiShorts";
+"CFBundleName" = "WikiShorts";
