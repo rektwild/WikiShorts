@@ -15,7 +15,18 @@ final class GlobalAdConfig {
 class AdMobManager: NSObject, ObservableObject {
     static let shared = AdMobManager()
     
+    // MARK: - Constants
+    private enum Constants {
+        static let premiumProductID = "wiki_m"
+        static let interstitialAdFrequency = 10
+        static let nativeAdFrequency = 5
+        static let feedAdFrequency = 5
+        static let feedAdStartsFromIndex = 4
+        static let adFreeDuration: TimeInterval = 10 * 60
+    }
+    
     private let storeManager: StoreManager
+    private var cancellables = Set<AnyCancellable>()
     
     // Interstitial Ads
     private var interstitialAd: InterstitialAd?
@@ -29,6 +40,9 @@ class AdMobManager: NSObject, ObservableObject {
     private var rewardedAd: RewardedAd?
     private let rewardedAdUnitID: String
     
+    // Banner Ads
+    let bannerAdUnitID: String
+    
     @Published var isAdLoaded = false
     @Published var isNativeAdLoaded = false
     @Published var currentNativeAd: NativeAd?
@@ -39,20 +53,11 @@ class AdMobManager: NSObject, ObservableObject {
     @Published var isPremiumUser = false
     
     private var pageViewCount = 0
-    private let interstitialAdFrequency = 10  // Show ad every 10 page views
-    private let nativeAdFrequency = 5
-    private let feedAdFrequency = 5
-    private let feedAdStartsFromIndex = 4 // Start showing feed ads from 5th article (index 4)
-    
     private var hasATTPermission = false
     private var isAdMobInitialized = false
     
-    // Subscription monitoring
-    private var subscriptionCancellable: AnyCancellable?
-    
     // Ad-free period tracking
     private var adFreeStartTime: Date?
-    private let adFreeDurationMinutes: TimeInterval = 10 * 60 // 10 minutes in seconds
     
     override init() {
         self.storeManager = StoreManager()
@@ -62,11 +67,12 @@ class AdMobManager: NSObject, ObservableObject {
         self.interstitialAdUnitID = config.interstitialAdUnitID
         self.nativeAdUnitID = config.nativeAdUnitID
         self.rewardedAdUnitID = config.rewardedAdUnitID
+        self.bannerAdUnitID = config.bannerAdUnitID
         
         super.init()
         
         // Set initial premium status
-        self.isPremiumUser = storeManager.isPurchased("wiki_m")
+        self.isPremiumUser = storeManager.isPurchased(Constants.premiumProductID)
         
         #if DEBUG
         validateAdConfiguration()
@@ -77,16 +83,17 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     private func setupSubscriptionMonitoring() {
-        subscriptionCancellable = storeManager.$purchasedProducts
+        storeManager.$purchasedProducts
             .receive(on: DispatchQueue.main)
             .sink { [weak self] purchasedProducts in
                 self?.handleSubscriptionChange(purchasedProducts: purchasedProducts)
             }
+            .store(in: &cancellables)
     }
     
     private func handleSubscriptionChange(purchasedProducts: Set<String>) {
         let wasPremium = isPremiumUser
-        let isPremiumNow = purchasedProducts.contains("wiki_m")
+        let isPremiumNow = purchasedProducts.contains(Constants.premiumProductID)
         
         // Update published properties
         self.isPremiumUser = isPremiumNow
@@ -99,7 +106,7 @@ class AdMobManager: NSObject, ObservableObject {
                 print("🏆 User became premium - stopping all ads and refreshing UI")
                 stopAllAds()
                 
-                // Force UI refresh with a slight delay to ensure state propagation
+                // Force UI refresh with a slight delay
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.premiumStatusChanged.toggle()
                     
@@ -116,7 +123,6 @@ class AdMobManager: NSObject, ObservableObject {
                     loadAllAds()
                 }
                 
-                // Send notification for immediate page refresh
                 NotificationCenter.default.post(
                     name: NSNotification.Name("PremiumStatusChanged"),
                     object: nil,
@@ -127,13 +133,11 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     private func stopAllAds() {
-        // Clear all loaded ads
         interstitialAd = nil
         nativeAd = nil
         currentNativeAd = nil
         rewardedAd = nil
         
-        // Update published properties
         isAdLoaded = false
         isNativeAdLoaded = false
         isRewardedAdLoaded = false
@@ -141,26 +145,18 @@ class AdMobManager: NSObject, ObservableObject {
         print("🏆 All ads stopped for premium user")
     }
     
-    deinit {
-        subscriptionCancellable?.cancel()
-    }
-    
     private func setupATTNotificationListener() {
-        // Listen for ATT permission updates
-        NotificationCenter.default.addObserver(
-            forName: NSNotification.Name("ATTPermissionUpdated"),
-            object: nil,
-            queue: .main
-        ) { [weak self] notification in
-            if let status = notification.userInfo?["status"] as? ATTStatus {
+        // Listen for ATT permission updates using Combine
+        NotificationCenter.default.publisher(for: NSNotification.Name("ATTPermissionUpdated"))
+            .compactMap { $0.userInfo?["status"] as? ATTStatus }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
                 print("🔐 ATT Permission updated: \(status)")
-                Task { @MainActor in
-                    self?.hasATTPermission = true
-                    self?.configureAdSettings(for: status)
-                    self?.initializeAdMob()
-                }
+                self?.hasATTPermission = true
+                self?.configureAdSettings(for: status)
+                self?.initializeAdMob()
             }
-        }
+            .store(in: &cancellables)
         
         // Check if ATT has already been determined
         let currentStatus = ATTManager.shared.getCurrentStatus()
@@ -179,12 +175,14 @@ class AdMobManager: NSObject, ObservableObject {
         }
         
         MobileAds.shared.start { [weak self] (initializationStatus: InitializationStatus) in
-            print("✅ AdMob initialized successfully")
-            self?.isAdMobInitialized = true
-            self?.loadAllAds()
+            Task { @MainActor [weak self] in
+                print("✅ AdMob initialized successfully")
+                self?.isAdMobInitialized = true
+                self?.loadAllAds()
+            }
         }
     }
-    
+
     private func loadAllAds() {
         guard isAdMobInitialized else { return }
         loadInterstitialAd()
@@ -195,15 +193,7 @@ class AdMobManager: NSObject, ObservableObject {
     // MARK: - Premium Subscription Control
     
     private func isPremiumActive() -> Bool {
-        return storeManager.isPurchased("wiki_m")
-    }
-    
-    private func shouldSkipAdsForPremium() -> Bool {
-        let isPremium = isPremiumActive()
-        if isPremium {
-            print("🏆 Premium user - skipping ads")
-        }
-        return isPremium
+        return storeManager.isPurchased(Constants.premiumProductID)
     }
     
     private func configureAdSettings(for attStatus: ATTStatus) {
@@ -225,13 +215,9 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     func loadInterstitialAd() {
-        guard hasATTPermission && isAdMobInitialized else {
-            print("⏳ Cannot load interstitial ad - waiting for ATT permission or AdMob initialization")
-            return
-        }
+        guard hasATTPermission && isAdMobInitialized else { return }
         
-        guard !shouldSkipAdsForPremium() else {
-            print("🏆 Premium user - skipping interstitial ad loading")
+        guard !isPremiumActive() else {
             isAdLoaded = false
             return
         }
@@ -239,7 +225,7 @@ class AdMobManager: NSObject, ObservableObject {
         let request = makeAdRequest()
         
         InterstitialAd.load(with: interstitialAdUnitID, request: request) { [weak self] ad, error in
-            DispatchQueue.main.async {
+            Task { @MainActor [weak self] in
                 if let error = error {
                     print("❌ Failed to load interstitial ad: \(error.localizedDescription)")
                     self?.isAdLoaded = false
@@ -254,13 +240,9 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     func loadNativeAd() {
-        guard hasATTPermission && isAdMobInitialized else {
-            print("⏳ Cannot load native ad - waiting for ATT permission or AdMob initialization")
-            return
-        }
+        guard hasATTPermission && isAdMobInitialized else { return }
         
-        guard !shouldSkipAdsForPremium() else {
-            print("🏆 Premium user - skipping native ad loading")
+        guard !isPremiumActive() else {
             isNativeAdLoaded = false
             currentNativeAd = nil
             return
@@ -270,38 +252,14 @@ class AdMobManager: NSObject, ObservableObject {
         adLoader.delegate = self
         adLoader.load(makeAdRequest())
     }
-    
-    func shouldShowInterstitialAd() -> Bool {
-        // Premium users never see ads
-        if shouldSkipAdsForPremium() {
-            return false
-        }
 
-        // Don't show ads during ad-free period
-        if isInAdFreePeriod() {
-            return false
-        }
-
-        // Don't increment here - use incrementPageView() instead
-        return false
-    }
-
-    // New method to track page views and check if ad should be shown
     func incrementPageViewAndCheckAd() -> Bool {
-        // Premium users never see ads
-        if shouldSkipAdsForPremium() {
-            return false
-        }
-
-        // Don't show ads during ad-free period
-        if isInAdFreePeriod() {
-            return false
-        }
+        if isPremiumActive() || isInAdFreePeriod() { return false }
 
         pageViewCount += 1
         print("📄 Page view: \(pageViewCount)")
 
-        if pageViewCount % interstitialAdFrequency == 0 && isAdLoaded {
+        if pageViewCount % Constants.interstitialAdFrequency == 0 && isAdLoaded {
             print("🎯 Showing ad after \(pageViewCount) page views")
             return true
         }
@@ -309,69 +267,45 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     func shouldShowNativeAd(forArticleIndex index: Int) -> Bool {
-        // Premium users never see ads
-        if shouldSkipAdsForPremium() {
-            return false
-        }
-        
-        // Don't show ads during ad-free period
-        if isInAdFreePeriod() {
-            return false
-        }
+        if isPremiumActive() || isInAdFreePeriod() { return false }
         
         let articleNumber = index + 1
-        return articleNumber % nativeAdFrequency == 0 && isNativeAdLoaded
+        return articleNumber % Constants.nativeAdFrequency == 0 && isNativeAdLoaded
     }
     
     func shouldShowFeedAd(forArticleIndex index: Int) -> Bool {
-        // Premium users never see ads
-        if shouldSkipAdsForPremium() {
-            return false
-        }
+        if isPremiumActive() || isInAdFreePeriod() { return false }
         
-        // Don't show ads during ad-free period
-        if isInAdFreePeriod() {
-            return false
-        }
-        
-        // Don't show feed ads until we reach the starting index
-        if index < feedAdStartsFromIndex {
-            return false
-        }
+        if index < Constants.feedAdStartsFromIndex { return false }
         
         let articleNumber = index + 1
-        let shouldShow = articleNumber % feedAdFrequency == 0 && isNativeAdLoaded
-        
-        if shouldShow {
-            print("🎯 Showing feed ad at article index: \(index) (article number: \(articleNumber))")
-        }
-        
-        return shouldShow
+        return articleNumber % Constants.feedAdFrequency == 0 && isNativeAdLoaded
+    }
+    
+    private var activeWindowScene: UIWindowScene? {
+        UIApplication.shared.connectedScenes
+            .first { $0.activationState == .foregroundActive } as? UIWindowScene
+            ?? UIApplication.shared.connectedScenes.first as? UIWindowScene
+    }
+    
+    private var rootViewController: UIViewController? {
+        activeWindowScene?.windows.first { $0.isKeyWindow }?.rootViewController
+            ?? activeWindowScene?.windows.first?.rootViewController
     }
     
     func showInterstitialAd() {
-        guard let interstitialAd = interstitialAd else {
+        guard let interstitialAd = interstitialAd,
+              let rootViewController = rootViewController else {
             return
         }
-        
-        DispatchQueue.main.async {
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let rootViewController = windowScene.windows.first?.rootViewController else {
-                return
-            }
-            
-            interstitialAd.present(from: rootViewController)
-        }
+         
+        interstitialAd.present(from: rootViewController)
     }
     
     func loadRewardedAd() {
-        guard hasATTPermission && isAdMobInitialized else {
-            print("⏳ Cannot load rewarded ad - waiting for ATT permission or AdMob initialization")
-            return
-        }
+        guard hasATTPermission && isAdMobInitialized else { return }
         
-        guard !shouldSkipAdsForPremium() else {
-            print("🏆 Premium user - skipping rewarded ad loading")
+        guard !isPremiumActive() else {
             isRewardedAdLoaded = false
             return
         }
@@ -379,7 +313,7 @@ class AdMobManager: NSObject, ObservableObject {
         let request = makeAdRequest()
         
         RewardedAd.load(with: rewardedAdUnitID, request: request) { [weak self] ad, error in
-            DispatchQueue.main.async {
+            Task { @MainActor [weak self] in
                 if let error = error {
                     print("❌ Failed to load rewarded ad: \(error.localizedDescription)")
                     self?.isRewardedAdLoaded = false
@@ -394,33 +328,17 @@ class AdMobManager: NSObject, ObservableObject {
     }
     
     func showRewardedAd() {
-        // Premium users don't need rewarded ads (they already have ad-free experience)
-        guard !shouldSkipAdsForPremium() else {
-            print("🏆 Premium user - rewarded ad not needed")
+        guard !isPremiumActive(),
+              let rewardedAd = rewardedAd,
+              let rootViewController = rootViewController else {
             return
         }
         
-        guard let rewardedAd = rewardedAd else {
-            return
-        }
-        
-        DispatchQueue.main.async {
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let rootViewController = windowScene.windows.first?.rootViewController else {
-                return
-            }
-            
-            rewardedAd.present(from: rootViewController, userDidEarnRewardHandler: { [weak self] in
-                // Start 10-minute ad-free period
-                self?.startAdFreePeriod()
-            })
-        }
+        rewardedAd.present(from: rootViewController, userDidEarnRewardHandler: { [weak self] in
+            self?.startAdFreePeriod()
+        })
     }
     
-    func resetArticleCount() {
-        pageViewCount = 0
-    }
-
     func resetPageViewCount() {
         pageViewCount = 0
     }
@@ -433,25 +351,24 @@ class AdMobManager: NSObject, ObservableObject {
     
     private func isInAdFreePeriod() -> Bool {
         guard let startTime = adFreeStartTime else { return false }
-        let elapsedTime = Date().timeIntervalSince(startTime)
-        return elapsedTime < adFreeDurationMinutes
+        return Date().timeIntervalSince(startTime) < Constants.adFreeDuration
     }
     
     func getRemainingAdFreeTime() -> TimeInterval? {
         guard let startTime = adFreeStartTime else { return nil }
         let elapsedTime = Date().timeIntervalSince(startTime)
-        let remainingTime = adFreeDurationMinutes - elapsedTime
+        let remainingTime = Constants.adFreeDuration - elapsedTime
         return remainingTime > 0 ? remainingTime : nil
     }
     
     // MARK: - Feed Ad Configuration
     
     func getFeedAdFrequency() -> Int {
-        return feedAdFrequency
+        return Constants.feedAdFrequency
     }
     
     func getFeedAdStartIndex() -> Int {
-        return feedAdStartsFromIndex
+        return Constants.feedAdStartsFromIndex
     }
     
     func isCurrentNativeAdValid() -> Bool {
@@ -468,16 +385,10 @@ class AdMobManager: NSObject, ObservableObject {
             issues.forEach { print("  - \($0)") }
         }
         
-        // Additional validation
-        if interstitialAdUnitID.isEmpty {
-            print("🚨 CRITICAL: Interstitial Ad Unit ID is empty!")
-        }
-        if nativeAdUnitID.isEmpty {
-            print("🚨 CRITICAL: Native Ad Unit ID is empty!")
-        }
-        if rewardedAdUnitID.isEmpty {
-            print("🚨 CRITICAL: Rewarded Ad Unit ID is empty!")
-        }
+        if interstitialAdUnitID.isEmpty { print("🚨 CRITICAL: Interstitial Ad Unit ID is empty!") }
+        if nativeAdUnitID.isEmpty { print("🚨 CRITICAL: Native Ad Unit ID is empty!") }
+        if rewardedAdUnitID.isEmpty { print("🚨 CRITICAL: Rewarded Ad Unit ID is empty!") }
+        if bannerAdUnitID.isEmpty { print("🚨 CRITICAL: Banner Ad Unit ID is empty!") }
     }
     #endif
 }
@@ -501,9 +412,6 @@ extension AdMobManager: FullScreenContentDelegate {
                 loadRewardedAd()
             }
         }
-    }
-    
-    nonisolated func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
     }
 }
 

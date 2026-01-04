@@ -388,6 +388,13 @@ struct EventDetailView: View {
                         eventThumbnail(thumbnailURL)
                     }
                     
+                    // Banner Ad
+                    if !AdMobManager.shared.isPremiumUser {
+                        BannerAdView(adUnitID: AdMobManager.shared.bannerAdUnitID)
+                            .frame(height: 50)
+                            .frame(maxWidth: .infinity)
+                    }
+                    
                     // Event text
                     eventText
                     

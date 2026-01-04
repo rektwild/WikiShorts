@@ -48,6 +48,15 @@ struct ArticleCardView: View {
     private func mainContent(_ geometry: GeometryProxy) -> some View {
         VStack(spacing: 0) {
             imageArea(geometry, article: article)
+            
+            // Banner Ad
+            if !AdMobManager.shared.isPremiumUser {
+                BannerAdView(adUnitID: AdMobManager.shared.bannerAdUnitID)
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 8)
+            }
+            
             Spacer()
             bottomContent(article: article)
         }

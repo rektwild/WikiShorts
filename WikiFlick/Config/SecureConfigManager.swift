@@ -13,15 +13,19 @@ final class SecureConfigManager {
     // MARK: - AdMob Configuration
     
     var interstitialAdUnitID: String {
-        return getConfigValue(for: "InterstitialAdUnitID") ?? ""
+        return getConfigValue(for: "InterstitialAdUnitID") ?? "ca-app-pub-3940256099942544/4411468910" // Test ID
     }
     
     var nativeAdUnitID: String {
-        return getConfigValue(for: "NativeAdUnitID") ?? ""
+        return getConfigValue(for: "NativeAdUnitID") ?? "ca-app-pub-3940256099942544/3986624511" // Test ID
     }
     
     var rewardedAdUnitID: String {
-        return getConfigValue(for: "RewardedAdUnitID") ?? ""
+        return getConfigValue(for: "RewardedAdUnitID") ?? "ca-app-pub-3940256099942544/1712485313" // Test ID
+    }
+    
+    var bannerAdUnitID: String {
+        return getConfigValue(for: "BannerAdUnitID") ?? "ca-app-pub-3940256099942544/2934735716" // Test ID
     }
     
     // MARK: - Private Helpers

@@ -170,7 +170,7 @@ struct FeedView: View {
         feedManager.reset()
         feedItems.removeAll()
         currentIndex = 0
-        adMobManager.resetArticleCount()
+        adMobManager.resetPageViewCount()
 
         // Small delay to ensure UI updates properly
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

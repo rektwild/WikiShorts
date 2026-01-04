@@ -141,7 +141,7 @@ struct RandomArticleView: View {
         randomManager.reset()
         feedItems.removeAll()
         currentIndex = 0
-        adMobManager.resetArticleCount()
+        adMobManager.resetPageViewCount()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             randomManager.loadArticles(isInitialLoad: true)
