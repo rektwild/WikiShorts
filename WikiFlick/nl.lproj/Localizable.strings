@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Advertentievrije ervaring";
 "ad_free_experience_desc" = "Geniet van ononderbroken lezen zonder advertenties";
-"free_trial" = "2 weken gratis proberen";
+"free_trial" = "2 weken gratis";
 "free_trial_desc" = "Probeer alle premiumfuncties volledig gratis";
 "faster_loading" = "Sneller laden";
 "faster_loading_desc" = "Premiumservers voor razendsnel laden van artikelen";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Op deze dag";
 "today_subtitle" = "Historische gebeurtenissen die op deze dag plaatsvonden";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Evenementen laden...";
+"no_events_today" = "Geen evenementen vandaag";
+"no_events_description" = "Kom later terug voor historische gebeurtenissen";
+"error_loading_events" = "Laden mislukt";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";

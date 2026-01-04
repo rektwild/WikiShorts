@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Reklamsız Deneyim";
 "ad_free_experience_desc" = "Hiçbir reklam olmadan kesintisiz okuma deneyimi yaşayın";
-"free_trial" = "2 hafta ücretsiz deneme";
+"free_trial" = "2 hafta ücretsiz";
 "free_trial_desc" = "Tüm premium özellikleri tamamen ücretsiz deneyin";
 "faster_loading" = "Daha Hızlı Yükleme";
 "faster_loading_desc" = "Yıldırım hızında makale yükleme için premium sunucular";
@@ -79,10 +79,10 @@
 "on_this_day" = "Bugün Tarihinde";
 "today_title" = "Bugün Tarihinde";
 "today_subtitle" = "Bugün yaşanan tarihi olaylar";
-"loading_events" = "Olaylar yükleniyor...";
-"no_events_today" = "Bugün için olay bulunamadı";
+"loading_events" = "Etkinlikler yükleniyor...";
+"no_events_today" = "Bugün için etkinlik bulunamadı";
 "no_events_description" = "Tarihi olaylar için daha sonra tekrar kontrol edin";
-"error_loading_events" = "Olaylar yüklenemedi";
+"error_loading_events" = "Etkinlikler yüklenemedi";
 "related_pages" = "İlgili Sayfalar";
 "close" = "Kapat";
 "showing_cached_data" = "Önbelleklenmiş veriler gösteriliyor";
@@ -104,7 +104,7 @@
 "cache" = "Önbellek";
 "image_cache" = "Görsel Önbelleği";
 "article_cache" = "Makale Önbelleği";
-"memory_limit" = "Bellek Sınırı";
+"memory_limit" = "Bellek Limiti";
 "clear_all_cache" = "Önbelleği Temizle";
 "cache_items" = "öğe";
 "popular" = "Popüler";

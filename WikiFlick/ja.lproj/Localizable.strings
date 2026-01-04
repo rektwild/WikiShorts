@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "広告なし体験";
 "ad_free_experience_desc" = "広告なしで中断されない読書をお楽しみください";
-"free_trial" = "2週間無料トライアル";
+"free_trial" = "2週間無料";
 "free_trial_desc" = "すべてのプレミアム機能を完全無料で試用";
 "faster_loading" = "高速読み込み";
 "faster_loading_desc" = "記事の超高速読み込みのためのプレミアムサーバー";
@@ -79,10 +79,10 @@
 "on_this_day" = "今日は何の日";
 "today_title" = "今日は何の日";
 "today_subtitle" = "この日に起きた歴史的な出来事";
-"loading_events" = "読み込み中...";
-"no_events_today" = "イベントなし";
-"no_events_description" = "後で確認してください";
-"error_loading_events" = "読み込み失敗";
+"loading_events" = "イベントを読み込み中...";
+"no_events_today" = "今日のイベントは見つかりませんでした";
+"no_events_description" = "歴史的なイベントについては後でもう一度確認してください";
+"error_loading_events" = "イベントの読み込みに失敗しました";
 "related_pages" = "関連ページ";
 "close" = "閉じる";
 "showing_cached_data" = "キャッシュを表示中";

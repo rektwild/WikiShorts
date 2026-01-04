@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Experiência sem anúncios";
 "ad_free_experience_desc" = "Desfrute de leitura ininterrupta sem anúncios";
-"free_trial" = "2 semanas de teste grátis";
+"free_trial" = "2 semanas grátis";
 "free_trial_desc" = "Experimente todos os recursos premium completamente grátis";
 "faster_loading" = "Carregamento mais rápido";
 "faster_loading_desc" = "Servidores premium para carregamento ultrarrápido de artigos";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Neste dia";
 "today_subtitle" = "Eventos históricos que aconteceram neste dia";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Carregando eventos...";
+"no_events_today" = "Nenhum evento hoje";
+"no_events_description" = "Verifique mais tarde para eventos históricos";
+"error_loading_events" = "Falha ao carregar";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Breve resumo do artigo...";
 "cache" = "Cache";
 "image_cache" = "Cache de imagens";
-"article_cache" = "Cache de Artigos";
-"memory_limit" = "Limite de Memória";
+"article_cache" = "Cache de artigos";
+"memory_limit" = "Limite de memória";
 "clear_all_cache" = "Limpar cache";
 "cache_items" = "itens";
 "popular" = "Popular";

@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Reklámmentes élmény";
 "ad_free_experience_desc" = "Élvezd a zavartalan olvasást hirdetések nélkül";
-"free_trial" = "2 hét ingyenes próbaidő";
+"free_trial" = "2 hét ingyen";
 "free_trial_desc" = "Próbáld ki az összes prémium funkciót teljesen ingyen";
 "faster_loading" = "Gyorsabb betöltés";
 "faster_loading_desc" = "Prémium szerverek villámgyors cikk betöltéshez";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Ezen a napon";
 "today_subtitle" = "Történelmi események, amelyek ezen a napon történtek";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Események betöltése...";
+"no_events_today" = "Ma nem található esemény";
+"no_events_description" = "Nézzen vissza később történelmi eseményekért";
+"error_loading_events" = "Hiba az események betöltésekor";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "Gyorsítótár";
 "image_cache" = "Kép gyorsítótár";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "Cikk gyorsítótár";
+"memory_limit" = "Memória korlát";
 "clear_all_cache" = "Gyorsítótár törlése";
 "cache_items" = "items";
 "popular" = "Népszerű";

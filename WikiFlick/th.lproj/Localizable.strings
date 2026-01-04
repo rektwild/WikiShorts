@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "ในวันนี้";
 "today_subtitle" = "เหตุการณ์ทางประวัติศาสตร์ที่เกิดขึ้นในวันนี้";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "กำลังโหลดเหตุการณ์...";
+"no_events_today" = "ไม่มีเหตุการณ์วันนี้";
+"no_events_description" = "ตรวจสอบภายหลังสำหรับเหตุการณ์ประวัติศาสตร์";
+"error_loading_events" = "โหลดล้มเหลว";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";

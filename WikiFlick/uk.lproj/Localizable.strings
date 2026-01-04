@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Цього дня";
 "today_subtitle" = "Історичні події, що сталися цього дня";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Завантаження подій...";
+"no_events_today" = "Сьогодні подій немає";
+"no_events_description" = "Перевірте пізніше історичні події";
+"error_loading_events" = "Помилка завантаження";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";

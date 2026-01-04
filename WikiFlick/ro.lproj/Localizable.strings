@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Experiență fără reclame";
 "ad_free_experience_desc" = "Bucurați-vă de lectură neintreruptă fără reclame";
-"free_trial" = "2 săptămâni de încercare gratuită";
+"free_trial" = "2 săptămâni gratuit";
 "free_trial_desc" = "Testați toate funcțiile premium complet gratuit";
 "faster_loading" = "Încărcare mai rapidă";
 "faster_loading_desc" = "Servere premium pentru încărcarea rapidă a articolelor";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "În această zi";
 "today_subtitle" = "Evenimente istorice care au avut loc în această zi";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Se încarcă evenimente...";
+"no_events_today" = "Niciun eveniment azi";
+"no_events_description" = "Verificați mai târziu pentru evenimente istorice";
+"error_loading_events" = "Încărcare eșuată";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -101,10 +101,10 @@
 "try_different_search" = "Try a different search term";
 "recent_searches" = "Căutări recente";
 "brief_article_summary" = "Brief article summary...";
-"cache" = "Memorie cache";
+"cache" = "Cache";
 "image_cache" = "Cache imagini";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "Cache articole";
+"memory_limit" = "Limită de memorie";
 "clear_all_cache" = "Șterge cache";
 "cache_items" = "items";
 "popular" = "Popular";

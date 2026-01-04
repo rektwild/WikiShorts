@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Werbefreies Erlebnis";
 "ad_free_experience_desc" = "Genießen Sie unterbrechungsfreies Lesen ohne Werbung";
-"free_trial" = "2 Wochen kostenlos testen";
+"free_trial" = "2 Wochen kostenlos";
 "free_trial_desc" = "Testen Sie alle Premium-Funktionen völlig kostenlos";
 "faster_loading" = "Schnelleres Laden";
 "faster_loading_desc" = "Premium-Server für blitzschnelles Laden von Artikeln";
@@ -79,10 +79,10 @@
 "on_this_day" = "An diesem Tag";
 "today_title" = "An diesem Tag";
 "today_subtitle" = "Historische Ereignisse, die an diesem Tag stattfanden";
-"loading_events" = "Lade Ereignisse...";
-"no_events_today" = "Keine Ereignisse";
-"no_events_description" = "Schau später vorbei";
-"error_loading_events" = "Ladefehler";
+"loading_events" = "Ereignisse werden geladen...";
+"no_events_today" = "Keine Ereignisse für heute gefunden";
+"no_events_description" = "Schauen Sie später wieder vorbei";
+"error_loading_events" = "Fehler beim Laden der Ereignisse";
 "related_pages" = "Ähnliche Seiten";
 "close" = "Schließen";
 "showing_cached_data" = "Cache-Daten";
@@ -101,7 +101,7 @@
 "try_different_search" = "Versuchen Sie einen anderen Suchbegriff";
 "recent_searches" = "Letzte Suchanfragen";
 "brief_article_summary" = "Kurze Artikelzusammenfassung...";
-"cache" = "Zwischenspeicher";
+"cache" = "Cache";
 "image_cache" = "Bild-Cache";
 "article_cache" = "Artikel-Cache";
 "memory_limit" = "Speicherlimit";

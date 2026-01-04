@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Reklamefri opplevelse";
 "ad_free_experience_desc" = "Nyt uforstyrret lesing uten annonser";
-"free_trial" = "2 ukers gratis prøveperiode";
+"free_trial" = "2 uker gratis";
 "free_trial_desc" = "Prøv alle premium-funksjoner helt gratis";
 "faster_loading" = "Raskere lasting";
 "faster_loading_desc" = "Premium-servere for lynrask artikkelasting";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "På denne dag";
 "today_subtitle" = "Historiske hendelser som skjedde på denne dag";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Laster hendelser...";
+"no_events_today" = "Ingen hendelser i dag";
+"no_events_description" = "Sjekk senere for historiske hendelser";
+"error_loading_events" = "Feilet ved lasting";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "Cache";
 "image_cache" = "Bildebuffer";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "Artikkelbuffer";
+"memory_limit" = "Minnegrense";
 "clear_all_cache" = "Tøm cache";
 "cache_items" = "items";
 "popular" = "Populært";

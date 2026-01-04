@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Tego dnia";
 "today_subtitle" = "Wydarzenia historyczne, które miały miejsce tego dnia";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Wczytywanie wydarzeń...";
+"no_events_today" = "Brak wydarzeń na dzisiaj";
+"no_events_description" = "Sprawdź później wydarzenia historyczne";
+"error_loading_events" = "Błąd wczytywania";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";

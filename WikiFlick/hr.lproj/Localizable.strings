@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Na današnji dan";
 "today_subtitle" = "Povijesni događaji koji su se dogodili na današnji dan";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Učitavanje događaja...";
+"no_events_today" = "Nema događaja za danas";
+"no_events_description" = "Vratite se kasnije za povijesne događaje";
+"error_loading_events" = "Neuspjelo učitavanje događaja";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "Predmemorija";
 "image_cache" = "Predmemorija slika";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "Predmemorija članaka";
+"memory_limit" = "Ograničenje memorije";
 "clear_all_cache" = "Očisti predmemoriju";
 "cache_items" = "items";
 "popular" = "Popularno";

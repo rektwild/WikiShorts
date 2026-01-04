@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "В этот день";
 "today_subtitle" = "Исторические события, произошедшие в этот день";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Загрузка событий...";
+"no_events_today" = "Событий сегодня нет";
+"no_events_description" = "Зайдите позже для исторических событий";
+"error_loading_events" = "Ошибка загрузки";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";

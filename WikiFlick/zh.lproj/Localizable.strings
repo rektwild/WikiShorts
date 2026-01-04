@@ -79,9 +79,9 @@
 "on_this_day" = "历史上的今天";
 "today_title" = "历史上的今天";
 "today_subtitle" = "这一天发生的历史事件";
-"loading_events" = "加载事件...";
+"loading_events" = "加载事件中...";
 "no_events_today" = "今天无事件";
-"no_events_description" = "稍后回来查看";
+"no_events_description" = "稍后查看历史事件";
 "error_loading_events" = "加载失败";
 "related_pages" = "相关页面";
 "close" = "关闭";

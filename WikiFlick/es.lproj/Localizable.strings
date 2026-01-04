@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Experiencia sin anuncios";
 "ad_free_experience_desc" = "Disfruta de lectura ininterrumpida sin ningún anuncio";
-"free_trial" = "2 semanas de prueba gratis";
+"free_trial" = "2 semanas gratis";
 "free_trial_desc" = "Prueba todas las funciones premium completamente gratis";
 "faster_loading" = "Carga más rápida";
 "faster_loading_desc" = "Servidores premium para carga ultra-rápida de artículos";
@@ -80,9 +80,9 @@
 "today_title" = "Tal día como hoy";
 "today_subtitle" = "Eventos históricos que sucedieron en este día";
 "loading_events" = "Cargando eventos...";
-"no_events_today" = "Sin eventos";
-"no_events_description" = "Vuelve más tarde";
-"error_loading_events" = "Error al cargar";
+"no_events_today" = "No se encontraron eventos hoy";
+"no_events_description" = "Vuelve más tarde para ver eventos históricos";
+"error_loading_events" = "Error al cargar eventos";
 "related_pages" = "Páginas Relacionadas";
 "close" = "Cerrar";
 "showing_cached_data" = "Datos en caché";

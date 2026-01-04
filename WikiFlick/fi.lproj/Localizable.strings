@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Mainosvapaa kokemus";
 "ad_free_experience_desc" = "Nauti keskeytyksettömästä lukemisesta ilman mainoksia";
-"free_trial" = "2 viikon ilmainen kokeilu";
+"free_trial" = "2 viikkoa ilmaiseksi";
 "free_trial_desc" = "Kokeile kaikkia premium-ominaisuuksia täysin ilmaiseksi";
 "faster_loading" = "Nopeampi lataus";
 "faster_loading_desc" = "Premium-palvelimet salamannopeaan artikkelien lataamiseen";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Tänä päivänä";
 "today_subtitle" = "Historiallisia tapahtumia, jotka tapahtuivat tänä päivänä";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Ladataan tapahtumia...";
+"no_events_today" = "Tälle päivälle ei löytynyt tapahtumia";
+"no_events_description" = "Tarkista myöhemmin historialliset tapahtumat";
+"error_loading_events" = "Tapahtumien lataus epäonnistui";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "Välimuisti";
 "image_cache" = "Kuvavälimuisti";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "Artikkelivälimuisti";
+"memory_limit" = "Muistiraja";
 "clear_all_cache" = "Tyhjennä välimuisti";
 "cache_items" = "items";
 "popular" = "Suositut";

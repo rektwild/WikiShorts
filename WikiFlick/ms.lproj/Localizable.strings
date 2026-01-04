@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Pengalaman tanpa iklan";
 "ad_free_experience_desc" = "Nikmati pembacaan tanpa gangguan iklan";
-"free_trial" = "Percubaan percuma 2 minggu";
+"free_trial" = "2 minggu percuma";
 "free_trial_desc" = "Cuba semua ciri premium secara percuma sepenuhnya";
 "faster_loading" = "Pemuatan lebih pantas";
 "faster_loading_desc" = "Pelayan premium untuk pemuatan artikel secepat kilat";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Pada Hari Ini";
 "today_subtitle" = "Peristiwa bersejarah yang berlaku pada hari ini";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Memuatkan acara...";
+"no_events_today" = "Tiada acara hari ini";
+"no_events_description" = "Semak kemudian untuk peristiwa bersejarah";
+"error_loading_events" = "Gagal memuatkan";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "Cache";
 "image_cache" = "Cache Imej";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "Cache Artikel";
+"memory_limit" = "Had Memori";
 "clear_all_cache" = "Kosongkan Cache";
 "cache_items" = "items";
 "popular" = "Popular";

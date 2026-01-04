@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "V tento den";
 "today_subtitle" = "Historické události, které se staly v tento den";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Načítání událostí...";
+"no_events_today" = "Pro dnešek nebyly nalezeny žádné události";
+"no_events_description" = "Zkontrolujte později historické události";
+"error_loading_events" = "Načítání událostí selhalo";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "Mezipaměť";
 "image_cache" = "Mezipaměť obrázků";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "Mezipaměť článků";
+"memory_limit" = "Limit paměti";
 "clear_all_cache" = "Vymazat mezipaměť";
 "cache_items" = "items";
 "popular" = "Populární";

@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "تجربة بدون إعلانات";
 "ad_free_experience_desc" = "استمتع بالقراءة بدون انقطاع أو إعلانات";
-"free_trial" = "تجربة مجانية لمدة أسبوعين";
+"free_trial" = "تجربة لمدة أسبوعين";
 "free_trial_desc" = "جرب جميع الميزات المميزة مجاناً تماماً";
 "faster_loading" = "تحميل أسرع";
 "faster_loading_desc" = "خوادم مميزة لتحميل سريع للمقالات";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "في مثل هذا اليوم";
 "today_subtitle" = "أحداث تاريخية وقعت في مثل هذا اليوم";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "جارٍ التحميل...";
+"no_events_today" = "لا توجد أحداث اليوم";
+"no_events_description" = "تحقق لاحقاً";
+"error_loading_events" = "فشل التحميل";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -102,10 +102,10 @@
 "recent_searches" = "عمليات البحث الأخيرة";
 "brief_article_summary" = "ملخص موجز للمقال...";
 "cache" = "ذاكرة التخزين المؤقت";
-"image_cache" = "ذاكرة تخزين الصور";
+"image_cache" = "ذاكرة الصور";
 "article_cache" = "ذاكرة المقالات";
 "memory_limit" = "حد الذاكرة";
-"clear_all_cache" = "مسح ذاكرة التخزين";
+"clear_all_cache" = "مسح الذاكرة";
 "cache_items" = "عنصر";
 "popular" = "شائع";
 "continue" = "متابعة";
@@ -126,7 +126,7 @@
 "no_description" = "لا يوجد وصف";
 "pro" = "PRO";
 "free" = "مجاني";
-"stay_updated" = "أبق على اطلاع";
+"stay_updated" = "ابق على اطلاع";
 "all_languages" = "كل اللغات";
 "search_languages" = "بحث عن لغات";
 "random_article" = "عشوائي";

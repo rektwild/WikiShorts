@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "חוויה ללא פרסומות";
 "ad_free_experience_desc" = "תיהנה מקריאה ללא הפרעות וללא פרסומות";
-"free_trial" = "שבועיים ניסיון חינם";
+"free_trial" = "שבועיים חינם";
 "free_trial_desc" = "נסה את כל התכונות הפרמיום בחינם לחלוטין";
 "faster_loading" = "טעינה מהירה יותר";
 "faster_loading_desc" = "שרתי פרמיום לטעינת מאמרים במהירות ברק";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "היום בהיסטוריה";
 "today_subtitle" = "אירועים היסטוריים שהתרחשו ביום זה";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "טוען אירועים...";
+"no_events_today" = "לא נמצאו אירועים להיום";
+"no_events_description" = "בדוק שוב מאוחר יותר לאירועים היסטוריים";
+"error_loading_events" = "טעינת האירועים נכשלה";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "מטמון";
 "image_cache" = "מטמון תמונות";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "מטמון מאמרים";
+"memory_limit" = "מגבלת זיכרון";
 "clear_all_cache" = "נקה מטמון";
 "cache_items" = "items";
 "popular" = "פופולרי";

@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "در این روز";
 "today_subtitle" = "رویدادهای تاریخی که در این روز رخ دادند";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "در حال بارگیری رویدادها...";
+"no_events_today" = "هیچ رویدادی برای امروز یافت نشد";
+"no_events_description" = "برای رویدادهای تاریخی بعدا دوباره بررسی کنید";
+"error_loading_events" = "بارگیری رویدادها ناموفق بود";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "حافظه پنهان";
 "image_cache" = "حافظه پنهان تصاویر";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "حافظه پنهان مقالات";
+"memory_limit" = "محدودیت حافظه";
 "clear_all_cache" = "پاک کردن حافظه پنهان";
 "cache_items" = "items";
 "popular" = "Popular";

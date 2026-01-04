@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Reklamfri upplevelse";
 "ad_free_experience_desc" = "Njut av oavbruten läsning utan annonser";
-"free_trial" = "2 veckor gratis provperiod";
+"free_trial" = "2 veckor gratis";
 "free_trial_desc" = "Prova alla premiumfunktioner helt gratis";
 "faster_loading" = "Snabbare laddning";
 "faster_loading_desc" = "Premiumservrar för blixtsnabb artikelladdning";
@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "Denna dag";
 "today_subtitle" = "Historiska händelser som inträffade denna dag";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Laddar händelser...";
+"no_events_today" = "Inga händelser idag";
+"no_events_description" = "Kom tillbaka senare för historiska händelser";
+"error_loading_events" = "Kunde inte ladda";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";

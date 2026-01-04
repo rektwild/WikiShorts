@@ -79,10 +79,10 @@
 "on_this_day" = "On This Day";
 "today_title" = "V tento deň";
 "today_subtitle" = "Historické udalosti, ktoré sa stali v tento deň";
-"loading_events" = "Loading events...";
-"no_events_today" = "No events found for today";
-"no_events_description" = "Check back later for historical events";
-"error_loading_events" = "Failed to load events";
+"loading_events" = "Načítavanie udalostí...";
+"no_events_today" = "Dnes žiadne udalosti";
+"no_events_description" = "Skontrolujte neskôr historické udalosti";
+"error_loading_events" = "Načítanie zlyhalo";
 "related_pages" = "Related Pages";
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
@@ -103,8 +103,8 @@
 "brief_article_summary" = "Brief article summary...";
 "cache" = "Vyrovnávacia pamäť";
 "image_cache" = "Vyrovnávacia pamäť obrázkov";
-"article_cache" = "Article Cache";
-"memory_limit" = "Memory Limit";
+"article_cache" = "Vyrovnávacia pamäť článkov";
+"memory_limit" = "Limit pamäte";
 "clear_all_cache" = "Vymazať pamäť";
 "cache_items" = "items";
 "popular" = "Popular";
