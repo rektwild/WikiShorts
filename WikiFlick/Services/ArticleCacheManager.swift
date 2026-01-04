@@ -114,11 +114,9 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     }
     
     func preloadImage(from urlString: String) async -> UIImage? {
-        // Check if already cached - THREAD SAFE
-        let cachedImage = imageQueue.sync { [weak self] in
-            self?.getCachedImage(for: urlString)
-        }
-        if let cachedImage = cachedImage {
+        // Check if already cached - access NSCache directly (NSCache is thread-safe)
+        let key = NSString(string: urlString)
+        if let cachedImage = imageCache.object(forKey: key) {
             return cachedImage
         }
         
@@ -284,11 +282,13 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
 // MARK: - Cache Statistics
 extension ArticleCacheManager {
     func getCacheStatistics() -> CacheStatistics {
-        return CacheStatistics(
-            imageCacheCount: imageCache.countLimit,
-            imageCacheCostLimit: imageCache.totalCostLimit,
-            articleCacheCount: articleCache.count
-        )
+        return cacheQueue.sync {
+            CacheStatistics(
+                imageCacheCount: imageCache.countLimit,
+                imageCacheCostLimit: imageCache.totalCostLimit,
+                articleCacheCount: articleCache.count
+            )
+        }
     }
 }
 

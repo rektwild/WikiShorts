@@ -228,6 +228,7 @@ struct SearchResultsSkeletonView: View {
 
 struct SearchLoadingIndicator: View {
     @State private var animationPhase: CGFloat = 0
+    @StateObject private var languageManager = AppLanguageManager.shared
     
     var body: some View {
         HStack(spacing: 8) {

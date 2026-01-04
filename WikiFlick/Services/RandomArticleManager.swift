@@ -53,34 +53,32 @@ class RandomArticleManager: ObservableObject {
         activeFetchTask?.cancel()
         preloadTask?.cancel()
         
-        Task {
-            try? await Task.sleep(nanoseconds: 50_000_000)
-            
-            articles.removeAll()
-            preloadedArticles.removeAll()
-            fetchedArticleIds.removeAll()
-            isLoading = false
-            isPreloading = false
-            hasError = false
-            errorMessage = nil
-        }
+        // Reset state immediately on main actor
+        articles.removeAll()
+        preloadedArticles.removeAll()
+        fetchedArticleIds.removeAll()
+        isLoading = false
+        isPreloading = false
+        hasError = false
+        errorMessage = nil
     }
     
     func refresh() {
         activeFetchTask?.cancel()
         preloadTask?.cancel()
         
+        // Reset state immediately on main actor
+        articles.removeAll()
+        preloadedArticles.removeAll()
+        fetchedArticleIds.removeAll()
+        isLoading = false
+        isPreloading = false
+        hasError = false
+        errorMessage = nil
+        
+        // Load articles after a short delay
         Task {
             try? await Task.sleep(nanoseconds: 100_000_000)
-            
-            articles.removeAll()
-            preloadedArticles.removeAll()
-            fetchedArticleIds.removeAll()
-            isLoading = false
-            isPreloading = false
-            hasError = false
-            errorMessage = nil
-            
             loadArticles(isInitialLoad: true)
         }
     }
@@ -209,42 +207,35 @@ class RandomArticleManager: ObservableObject {
         
         isPreloading = true
         
-        do {
-            if Task.isCancelled {
-                isPreloading = false
-                return
-            }
-            
-            let languageCode = articleLanguageManager.languageCode
-            
-            // Always use "All Topics" for truly random content
-            let newArticles = await articleRepository.preloadArticles(
-                count: preloadBatchSize,
-                topics: ["All Topics"],
-                languageCode: languageCode
-            )
-            
-            if Task.isCancelled {
-                isPreloading = false
-                return
-            }
-            
-            let uniqueArticles = newArticles.filter { article in
-                !fetchedArticleIds.contains(article.pageId)
-            }
-            
-            preloadedArticles.append(contentsOf: uniqueArticles)
-            
-            LoggingService.shared.logInfo("📦 Preloaded \(uniqueArticles.count) random articles (buffer: \(preloadedArticles.count))", category: .general)
-            
-            if !Task.isCancelled {
-                await articleRepository.preloadImages(for: uniqueArticles)
-            }
-            
-        } catch {
-            if !Task.isCancelled {
-                LoggingService.shared.logError("Random preload failed: \(error)", category: .general)
-            }
+        if Task.isCancelled {
+            isPreloading = false
+            return
+        }
+        
+        let languageCode = articleLanguageManager.languageCode
+        
+        // Always use "All Topics" for truly random content
+        let newArticles = await articleRepository.preloadArticles(
+            count: preloadBatchSize,
+            topics: ["All Topics"],
+            languageCode: languageCode
+        )
+        
+        if Task.isCancelled {
+            isPreloading = false
+            return
+        }
+        
+        let uniqueArticles = newArticles.filter { article in
+            !fetchedArticleIds.contains(article.pageId)
+        }
+        
+        preloadedArticles.append(contentsOf: uniqueArticles)
+        
+        LoggingService.shared.logInfo("📦 Preloaded \(uniqueArticles.count) random articles (buffer: \(preloadedArticles.count))", category: .general)
+        
+        if !Task.isCancelled {
+            await articleRepository.preloadImages(for: uniqueArticles)
         }
         
         isPreloading = false
