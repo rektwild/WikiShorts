@@ -90,7 +90,53 @@ struct SettingsView: View {
                     .foregroundColor(.primary)
                 }
                 
+                // Cache Statistics Section
+                Section(header: Text("Cache")) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Image(systemName: "internaldrive")
+                            Text("Image Cache")
+                            Spacer()
+                            let stats = ArticleCacheManager.shared.getCacheStatistics()
+                            Text("\(stats.imageCacheCount) items")
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                        }
+                        
+                        HStack {
+                            Image(systemName: "doc.text")
+                            Text("Article Cache")
+                            Spacer()
+                            let stats = ArticleCacheManager.shared.getCacheStatistics()
+                            Text("\(stats.articleCacheCount) items")
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                        }
+                        
+                        HStack {
+                            Image(systemName: "cylinder")
+                            Text("Memory Limit")
+                            Spacer()
+                            let stats = ArticleCacheManager.shared.getCacheStatistics()
+                            Text("\(stats.imageCacheCostLimit / (1024 * 1024))MB")
+                                .foregroundColor(.secondary)
+                                .font(.caption)
+                        }
+                    }
                     
+                    Button(action: {
+                        ArticleCacheManager.shared.clearImageCache()
+                        ArticleCacheManager.shared.clearArticleCache()
+                    }) {
+                        HStack {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                            Text("Clear All Cache")
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                    }
+                }
                 
                 Section(languageManager.localizedString(key: "legal")) {
                     Button(action: {

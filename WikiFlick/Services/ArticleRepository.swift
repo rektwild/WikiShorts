@@ -275,13 +275,29 @@ class ArticleRepository: ArticleRepositoryProtocol {
     }
     
     func preloadImages(for articles: [WikipediaArticle]) async {
-        // Sequential loading with throttling to avoid rate limiting (429 errors)
-        for article in articles {
-            if let imageURLString = article.imageURL {
-                _ = await cacheManager.preloadImage(from: imageURLString)
-                // Small delay between requests to avoid rate limiting
-                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+        // Concurrent loading with throttling to avoid rate limiting
+        // Limit to 5 concurrent tasks to prevent 429 errors
+        await withTaskGroup(of: Void.self) { group in
+            var activeTaskCount = 0
+            let maxConcurrentTasks = 5
+            
+            for article in articles {
+                // Wait if we've hit the concurrent task limit
+                if activeTaskCount >= maxConcurrentTasks {
+                    await group.next()
+                    activeTaskCount -= 1
+                }
+                
+                if let imageURLString = article.imageURL {
+                    group.addTask {
+                        _ = await self.cacheManager.preloadImage(from: imageURLString)
+                    }
+                    activeTaskCount += 1
+                }
             }
+            
+            // Wait for remaining tasks
+            await group.waitForAll()
         }
     }
     
