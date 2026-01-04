@@ -10,7 +10,7 @@ struct ProductCard: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(languageManager.localizedString(key: "wikishorts_pro"))
+                Text(getTitleText())
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.white)
                 
@@ -67,5 +67,12 @@ struct ProductCard: View {
             return "/week"
         }
         return ""
+    }
+    
+    private func getTitleText() -> String {
+        if product.id == "wiki_life" {
+            return languageManager.localizedString(key: "lifetime")
+        }
+        return languageManager.localizedString(key: "weekly")
     }
 }
