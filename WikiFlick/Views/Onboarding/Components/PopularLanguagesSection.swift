@@ -22,7 +22,7 @@ struct PopularLanguagesSection: View {
                             HStack(spacing: 8) {
                                 Text(language.flag)
                                     .font(.system(size: 24))
-                                Text(language.localizedName)
+                                Text(language.displayName)
                                     .font(.system(size: 14, weight: .semibold))
                                 
                                 if language == selectedLanguage {
