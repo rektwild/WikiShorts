@@ -84,5 +84,26 @@
 "no_favorites" = "尚无收藏";
 "no_favorites_description" = "点击任何文章上的心形图标以将其保存到您的收藏夹";
 
-"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+"searching" = "搜索中...";
+"no_results" = "未找到结果";
+"try_different_search" = "尝试其他搜索词";
+"recent_searches" = "最近搜索";
+"brief_article_summary" = "文章简介...";
+"search_wikipedia_title" = "搜索维基百科";
+"search_description" = "查找文章、主题等";
+"clear" = "清除";
 
+"cache" = "缓存";
+"image_cache" = "图片缓存";
+"article_cache" = "文章缓存";
+"memory_limit" = "内存限制";
+"clear_all_cache" = "清除所有缓存";
+"cache_items" = "项";
+
+"lifetime" = "终身";
+"one_time_payment" = "一次性付款";
+"one_week" = "1周";
+"weekly" = "每周";
+"per_week" = "/周";
+
+"subscription_disclaimer" = "除非在当前期间结束前至少24小时关闭自动续订，否则订阅将自动续订。您的账户将在当前期间结束前24小时内收取续订费用。付款将在确认购买时从iTunes账户中扣除。购买后，您可以通过访问账户设置来管理您的订阅并关闭自动续订。";

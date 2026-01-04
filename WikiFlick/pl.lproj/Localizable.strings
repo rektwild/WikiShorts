@@ -86,3 +86,9 @@
 
 "no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
 
+"cache" = "Pamięć podręczna";
+"image_cache" = "Pamięć obrazów";
+"article_cache" = "Pamięć artykułów";
+"memory_limit" = "Limit pamięci";
+"clear_all_cache" = "Wyczyść całą pamięć";
+"cache_items" = "elementów";

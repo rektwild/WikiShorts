@@ -84,3 +84,9 @@
 "no_favorites" = "Chưa Có Yêu Thích";
 "no_favorites_description" = "Chạm vào biểu tượng trái tim trên bất kỳ bài viết nào để lưu vào danh sách yêu thích của bạn";
 
+"cache" = "Bộ nhớ đệm";
+"image_cache" = "Bộ nhớ đệm hình ảnh";
+"article_cache" = "Bộ nhớ đệm bài viết";
+"memory_limit" = "Giới hạn bộ nhớ";
+"clear_all_cache" = "Xóa tất cả bộ nhớ đệm";
+"cache_items" = "mục";

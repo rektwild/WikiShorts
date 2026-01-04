@@ -86,3 +86,9 @@
 
 "no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
 
+"cache" = "แคช";
+"image_cache" = "แคชรูปภาพ";
+"article_cache" = "แคชบทความ";
+"memory_limit" = "ขีดจำกัดหน่วยความจำ";
+"clear_all_cache" = "ล้างแคชทั้งหมด";
+"cache_items" = "รายการ";

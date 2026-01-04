@@ -175,6 +175,11 @@ class AdMobManager: NSObject, ObservableObject {
         }
         
         MobileAds.shared.start { [weak self] (initializationStatus: InitializationStatus) in
+            // Set test device identifiers for simulator
+            #if targetEnvironment(simulator)
+            MobileAds.shared.requestConfiguration.testDeviceIdentifiers = [ "Simulator" ]
+            #endif
+            
             Task { @MainActor [weak self] in
                 print("✅ AdMob initialized successfully")
                 self?.isAdMobInitialized = true

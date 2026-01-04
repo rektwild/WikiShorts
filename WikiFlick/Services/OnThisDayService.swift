@@ -50,7 +50,7 @@ class OnThisDayService: ObservableObject {
             // First, try to load from cache
             if let cachedData = cacheManager.loadCachedData(for: date, language: lang) {
                 await MainActor.run {
-                    self.events = cachedData.toOnThisDayResponse().events
+                    self.events = cachedData.toOnThisDayResponse().allEvents
                     self.isLoading = false
                 }
                 return
@@ -63,7 +63,7 @@ class OnThisDayService: ObservableObject {
             cacheManager.cacheData(response, for: date, language: lang)
             
             await MainActor.run {
-                self.events = response.events
+                self.events = response.allEvents
                 self.isLoading = false
             }
             
@@ -100,7 +100,7 @@ class OnThisDayService: ObservableObject {
             cacheManager.cacheData(response, for: date, language: lang)
             
             await MainActor.run {
-                self.events = response.events
+                self.events = response.allEvents
                 self.isLoading = false
             }
             
@@ -250,7 +250,7 @@ class OnThisDayCacheManager {
         let cachedData = CachedOnThisDayData(
             date: dateString,
             language: language,
-            events: response.events.map { $0.toCached() },
+            events: response.allEvents.map { $0.toCached() },
             cachedAt: Date()
         )
         

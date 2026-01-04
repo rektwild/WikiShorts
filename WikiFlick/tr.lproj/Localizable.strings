@@ -107,6 +107,7 @@
 "article_cache" = "Makale Önbelleği";
 "memory_limit" = "Bellek Sınırı";
 "clear_all_cache" = "Tüm Önbelleği Temizle";
+"cache_items" = "öğe";
 "popular" = "Popüler";
 "continue" = "Devam Et";
 "daily_reminders_setup" = "İnanılmaz Wikipedia makalelerini keşfetmek için günlük hatırlatıcılar al";
@@ -122,3 +123,7 @@
 "report_issue" = "Sorun Bildir";
 "report_alert_title" = "Makaleyi Bildir";
 "report_alert_message" = "Bu içeriği bildirdiğiniz için teşekkürler. En kısa sürede inceleyeceğiz.";
+
+"search_wikipedia_title" = "Wikipedia'da Ara";
+"search_description" = "Makaleler, konular ve daha fazlasını bul";
+"clear" = "Temizle";

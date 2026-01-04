@@ -84,3 +84,26 @@
 "no_favorites" = "Aucun Favori Pour Le Moment";
 "no_favorites_description" = "Appuyez sur l'icône en forme de cœur sur n'importe quel article pour l'enregistrer dans vos favoris";
 
+"searching" = "Recherche en cours...";
+"no_results" = "Aucun résultat trouvé";
+"try_different_search" = "Essayez un autre terme de recherche";
+"recent_searches" = "Recherches récentes";
+"brief_article_summary" = "Bref résumé de l'article...";
+"search_wikipedia_title" = "Rechercher sur Wikipédia";
+"search_description" = "Trouver des articles, des sujets et plus";
+"clear" = "Effacer";
+
+"cache" = "Cache";
+"image_cache" = "Cache d'images";
+"article_cache" = "Cache d'articles";
+"memory_limit" = "Limite de mémoire";
+"clear_all_cache" = "Vider tout le cache";
+"cache_items" = "éléments";
+
+"lifetime" = "À vie";
+"one_time_payment" = "Paiement unique";
+"one_week" = "1 Semaine";
+"weekly" = "Hebdomadaire";
+"per_week" = "/semaine";
+
+"subscription_disclaimer" = "Les abonnements se renouvellent automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours. Votre compte sera débité du renouvellement dans les 24 heures précédant la fin de la période en cours. Le paiement sera débité du compte iTunes lors de la confirmation de l'achat. Vous pouvez gérer votre abonnement et désactiver le renouvellement automatique en accédant à vos Paramètres de compte après l'achat.";

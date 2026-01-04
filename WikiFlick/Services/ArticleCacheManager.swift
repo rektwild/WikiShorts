@@ -94,6 +94,11 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
         }
     }
     
+    // MARK: - Rate Limiting
+    private var isRateLimited = false
+    private var rateLimitResetTime: Date?
+    private let rateLimitQueue = DispatchQueue(label: "com.wikishorts.rateLimit", qos: .userInitiated)
+    
     // MARK: - Image Caching
     func cacheImage(_ image: UIImage, for urlString: String) {
         imageQueue.async(flags: .barrier) { [weak self] in
@@ -120,6 +125,11 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
             return cachedImage
         }
         
+        // GLOBAL RATE LIMIT CHECK
+        if isGlobalRateLimited() {
+             return nil
+        }
+        
         guard let url = URL(string: urlString) else {
             Logger.error("Invalid URL: \(urlString)", category: .network)
             return nil
@@ -130,6 +140,9 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
         var currentRetry = 0
         
         while currentRetry <= maxRetries {
+            // Re-check rate limit before each attempt
+            if isGlobalRateLimited() { return nil }
+            
             do {
                 // Add small delay between requests to avoid rate limiting
                 if currentRetry > 0 {
@@ -140,6 +153,13 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
                 var request = URLRequest(url: url)
                 request.timeoutInterval = 20.0
                 request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+                
+                // Add contact info to User-Agent as requested by Wikimedia (and others)
+                if let bundleID = Bundle.main.bundleIdentifier {
+                    let contactUA = "\(userAgent) (\(bundleID); contact@wikiflick.app)"
+                    request.setValue(contactUA, forHTTPHeaderField: "User-Agent")
+                }
+                
                 request.cachePolicy = .returnCacheDataElseLoad
                 
                 let (data, response) = try await URLSession.shared.data(for: request)
@@ -147,15 +167,13 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
                 // Check HTTP response
                 if let httpResponse = response as? HTTPURLResponse {
                     if httpResponse.statusCode == 429 {
-                        // Rate limited - retry with backoff
-                        currentRetry += 1
-                        if currentRetry <= maxRetries {
-                            Logger.info("Rate limited (429), retry \(currentRetry)/\(maxRetries) for: \(urlString.prefix(60))...", category: .network)
-                            continue
-                        } else {
-                            Logger.error("Rate limited, max retries reached for: \(urlString.prefix(60))...", category: .network)
-                            return nil
-                        }
+                        // Rate limited - ACTIVATE GLOBAL RATE LIMIT
+                        let retryAfter = httpResponse.value(forHTTPHeaderField: "Retry-After")
+                        let waitSeconds = Double(retryAfter ?? "60") ?? 60.0
+                        setGlobalRateLimit(seconds: waitSeconds)
+                        
+                        Logger.error("Rate limited (429) received. Pausing all image requests for \(waitSeconds)s.", category: .network)
+                        return nil
                     }
                     
                     guard (200...299).contains(httpResponse.statusCode) else {
@@ -184,6 +202,12 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
                 if Task.isCancelled {
                     return nil
                 }
+                
+                // If it's a cancellation error, don't retry
+                if error is CancellationError {
+                    return nil
+                }
+                
                 Logger.error("Failed to preload image: \(urlString.prefix(60))... - \(error.localizedDescription)", category: .network)
                 currentRetry += 1
                 if currentRetry > maxRetries {
@@ -193,6 +217,29 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
         }
         
         return nil
+    }
+    
+    private func isGlobalRateLimited() -> Bool {
+        return rateLimitQueue.sync {
+            if let resetTime = rateLimitResetTime {
+                if Date() < resetTime {
+                    return true
+                } else {
+                    // Reset expired
+                    isRateLimited = false
+                    rateLimitResetTime = nil
+                    return false
+                }
+            }
+            return false
+        }
+    }
+    
+    private func setGlobalRateLimit(seconds: TimeInterval) {
+        rateLimitQueue.async(flags: .barrier) {
+            self.isRateLimited = true
+            self.rateLimitResetTime = Date().addingTimeInterval(seconds)
+        }
     }
     
     // MARK: - Cache Management

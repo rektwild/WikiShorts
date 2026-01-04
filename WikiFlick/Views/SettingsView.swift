@@ -98,7 +98,7 @@ struct SettingsView: View {
                             Text(languageManager.localizedString(key: "image_cache"))
                             Spacer()
                             let stats = ArticleCacheManager.shared.getCacheStatistics()
-                            Text("\(stats.imageCacheCount) items")
+                            Text("\(stats.imageCacheCount) \(languageManager.localizedString(key: "cache_items"))")
                                 .foregroundColor(.secondary)
                                 .font(.caption)
                         }
@@ -108,7 +108,7 @@ struct SettingsView: View {
                             Text(languageManager.localizedString(key: "article_cache"))
                             Spacer()
                             let stats = ArticleCacheManager.shared.getCacheStatistics()
-                            Text("\(stats.articleCacheCount) items")
+                            Text("\(stats.articleCacheCount) \(languageManager.localizedString(key: "cache_items"))")
                                 .foregroundColor(.secondary)
                                 .font(.caption)
                         }

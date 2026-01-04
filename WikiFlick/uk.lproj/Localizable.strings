@@ -84,3 +84,9 @@
 "no_favorites" = "Поки Що Немає Обраного";
 "no_favorites_description" = "Натисніть на значок серця на будь-якій статті, щоб зберегти її в обране";
 
+"cache" = "Кеш";
+"image_cache" = "Кеш зображень";
+"article_cache" = "Кеш статей";
+"memory_limit" = "Ліміт пам'яті";
+"clear_all_cache" = "Очистити весь кеш";
+"cache_items" = "елементів";

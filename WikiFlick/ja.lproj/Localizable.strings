@@ -84,3 +84,30 @@
 "no_favorites" = "お気に入りはまだありません";
 "no_favorites_description" = "記事のハートアイコンをタップして、お気に入りに保存します";
 
+"searching" = "検索中...";
+"no_results" = "結果が見つかりません";
+"try_different_search" = "別の検索語を試してください";
+"recent_searches" = "最近の検索";
+"brief_article_summary" = "短い記事の要約...";
+"search_wikipedia_title" = "ウィキペディアを検索";
+"search_description" = "記事、トピックなどを検索";
+"clear" = "クリア";
+
+"cache" = "キャッシュ";
+"image_cache" = "画像キャッシュ";
+"article_cache" = "記事キャッシュ";
+"memory_limit" = "メモリ制限";
+"clear_all_cache" = "すべてのキャッシュを削除";
+"cache_items" = "件";
+
+"lifetime" = "ライフタイム";
+"one_time_payment" = "1回限りのお支払い";
+"one_week" = "1週間";
+"weekly" = "週間";
+"per_week" = "/週";
+
+"subscription_disclaimer" = "サブスクリプションは、現在の期間が終了する少なくとも24時間前に自動更新をオフにしない限り、自動的に更新されます。現在の期間が終了する24時間以内に、更新料金がアカウントに請求されます。支払いは購入確認時にiTunesアカウントに請求されます。購入後、アカウント設定に移動してサブスクリプションを管理し、自動更新をオフにすることができます。";
+
+"report_issue" = "問題を報告";
+"report_alert_title" = "記事を報告";
+"report_alert_message" = "このコンテンツを報告していただきありがとうございます。できるだけ早く確認します。";

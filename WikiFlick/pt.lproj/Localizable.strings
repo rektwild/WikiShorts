@@ -84,5 +84,26 @@
 "no_favorites" = "Nenhum Favorito Ainda";
 "no_favorites_description" = "Toque no ícone de coração em qualquer artigo para salvá-lo nos seus favoritos";
 
-"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+"searching" = "Pesquisando...";
+"no_results" = "Nenhum resultado encontrado";
+"try_different_search" = "Tente um termo de busca diferente";
+"recent_searches" = "Pesquisas recentes";
+"brief_article_summary" = "Breve resumo do artigo...";
+"search_wikipedia_title" = "Pesquisar na Wikipédia";
+"search_description" = "Encontre artigos, tópicos e mais";
+"clear" = "Limpar";
 
+"cache" = "Cache";
+"image_cache" = "Cache de Imagens";
+"article_cache" = "Cache de Artigos";
+"memory_limit" = "Limite de Memória";
+"clear_all_cache" = "Limpar Todo o Cache";
+"cache_items" = "itens";
+
+"lifetime" = "Vitalício";
+"one_time_payment" = "Pagamento único";
+"one_week" = "1 Semana";
+"weekly" = "Semanal";
+"per_week" = "/semana";
+
+"subscription_disclaimer" = "As assinaturas são renovadas automaticamente, a menos que a renovação automática seja desativada pelo menos 24 horas antes do final do período atual. Sua conta será cobrada pela renovação dentro de 24 horas antes do final do período atual. O pagamento será cobrado na conta do iTunes na confirmação da compra. Você pode gerenciar sua assinatura e desativar a renovação automática acessando as Configurações da conta após a compra.";

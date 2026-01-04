@@ -109,6 +109,7 @@
 "article_cache" = "Article Cache";
 "memory_limit" = "Memory Limit";
 "clear_all_cache" = "Clear All Cache";
+"cache_items" = "items";
 "popular" = "Popular";
 "continue" = "Continue";
 "daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
@@ -124,3 +125,7 @@
 "report_issue" = "Report Issue";
 "report_alert_title" = "Report Article";
 "report_alert_message" = "Thank you for reporting this content. We will review it shortly.";
+
+"search_wikipedia_title" = "Search Wikipedia";
+"search_description" = "Find articles, topics, and more";
+"clear" = "Clear";

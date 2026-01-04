@@ -84,3 +84,26 @@
 "no_favorites" = "Noch Keine Favoriten";
 "no_favorites_description" = "Tippen Sie auf das Herzsymbol bei einem beliebigen Artikel, um ihn zu Ihren Favoriten hinzuzufügen";
 
+"searching" = "Suche läuft...";
+"no_results" = "Keine Ergebnisse gefunden";
+"try_different_search" = "Versuchen Sie einen anderen Suchbegriff";
+"recent_searches" = "Letzte Suchen";
+"brief_article_summary" = "Kurze Artikelzusammenfassung...";
+"search_wikipedia_title" = "Wikipedia durchsuchen";
+"search_description" = "Artikel, Themen und mehr finden";
+"clear" = "Löschen";
+
+"cache" = "Cache";
+"image_cache" = "Bild-Cache";
+"article_cache" = "Artikel-Cache";
+"memory_limit" = "Speicherlimit";
+"clear_all_cache" = "Gesamten Cache löschen";
+"cache_items" = "Elemente";
+
+"lifetime" = "Lebenslang";
+"one_time_payment" = "Einmalzahlung";
+"one_week" = "1 Woche";
+"weekly" = "Wöchentlich";
+"per_week" = "/Woche";
+
+"subscription_disclaimer" = "Abonnements werden automatisch verlängert, es sei denn, die automatische Verlängerung wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums deaktiviert. Ihr Konto wird innerhalb von 24 Stunden vor Ablauf des aktuellen Zeitraums für die Verlängerung belastet. Die Zahlung wird bei Bestätigung des Kaufs dem iTunes-Konto belastet. Sie können Ihr Abonnement verwalten und die automatische Verlängerung deaktivieren, indem Sie nach dem Kauf zu Ihren Kontoeinstellungen gehen.";

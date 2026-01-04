@@ -517,7 +517,7 @@ class ArticleRepository: ArticleRepositoryProtocol {
     func fetchOnThisDayEvents(month: Int, day: Int, languageCode: String) -> AnyPublisher<[OnThisDayEvent], RepositoryError> {
         return networkService.fetchOnThisDayEvents(month: month, day: day, languageCode: languageCode)
             .mapError { RepositoryError.networkError($0) }
-            .map { $0.events }
+            .map { $0.allEvents }
             .eraseToAnyPublisher()
     }
 }

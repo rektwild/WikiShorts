@@ -40,7 +40,7 @@ struct SearchView: View {
                     searchResultsListView
                 }
             }
-            .navigationTitle("Search")
+            .navigationTitle(languageManager.localizedString(key: "search"))
             .searchable(text: $searchText, prompt: languageManager.localizedString(key: "search_wikipedia"))
             .onChange(of: searchText) { newValue in
                 wikipediaService.searchWikipedia(query: newValue)
@@ -84,12 +84,12 @@ struct SearchView: View {
                 .font(.system(size: 60))
                 .foregroundColor(.white.opacity(0.4))
             
-            Text("Search Wikipedia")
+            Text(languageManager.localizedString(key: "search_wikipedia_title"))
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.white.opacity(0.8))
             
-            Text("Find articles, topics, and more")
+            Text(languageManager.localizedString(key: "search_description"))
                 .font(.body)
                 .foregroundColor(.white.opacity(0.5))
                 .multilineTextAlignment(.center)
@@ -101,7 +101,7 @@ struct SearchView: View {
             LoadingIndicatorView()
                 .scaleEffect(1.5)
             
-            Text("Searching...")
+            Text(languageManager.localizedString(key: "searching"))
                 .font(.title3)
                 .foregroundColor(.white.opacity(0.7))
         }
@@ -113,12 +113,12 @@ struct SearchView: View {
                 .font(.system(size: 60))
                 .foregroundColor(.white.opacity(0.4))
             
-            Text("No Results Found")
+            Text(languageManager.localizedString(key: "no_results"))
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.white.opacity(0.8))
             
-            Text("Try a different search term")
+            Text(languageManager.localizedString(key: "try_different_search"))
                 .font(.body)
                 .foregroundColor(.white.opacity(0.5))
                 .multilineTextAlignment(.center)

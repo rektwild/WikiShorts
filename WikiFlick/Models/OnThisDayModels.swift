@@ -11,10 +11,62 @@ import Foundation
 
 /// Represents the complete response from Wikipedia's "On this day" API
 struct OnThisDayResponse: Codable {
-    let events: [OnThisDayEvent]
+    let selected: [OnThisDayEvent]?
+    let events: [OnThisDayEvent]?
+    let births: [OnThisDayEvent]?
+    let deaths: [OnThisDayEvent]?
+    let holidays: [OnThisDayEvent]?
     
     enum CodingKeys: String, CodingKey {
-        case events = "events"
+        case selected, events, births, deaths, holidays
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        // Helper to decode [OnThisDayEvent] or handle {} (empty dict) as nil
+        func decodeSafe(_ key: CodingKeys) -> [OnThisDayEvent]? {
+            if let val = try? container.decode([OnThisDayEvent].self, forKey: key) {
+                return val
+            }
+            // If decoding as array fails, check if it's an empty dictionary
+            // We blindly assume if it's not an array, it might be the empty dict case,
+            // or we just treat it as nil to prevent crash.
+            // If the user wants to be strict: try? container.decode([String:String].self, forKey: key)
+            return nil
+        }
+        
+        selected = decodeSafe(.selected)
+        events = decodeSafe(.events)
+        births = decodeSafe(.births)
+        deaths = decodeSafe(.deaths)
+        holidays = decodeSafe(.holidays)
+    }
+    
+    init(selected: [OnThisDayEvent]?, events: [OnThisDayEvent]?, births: [OnThisDayEvent]?, deaths: [OnThisDayEvent]?, holidays: [OnThisDayEvent]?) {
+        self.selected = selected
+        self.events = events
+        self.births = births
+        self.deaths = deaths
+        self.holidays = holidays
+    }
+    
+    /// Combines all event types into a single sorted array
+    var allEvents: [OnThisDayEvent] {
+        var combined: [OnThisDayEvent] = []
+        
+        // Add selected events (curated)
+        if let selected = selected {
+            combined.append(contentsOf: selected)
+        }
+        
+        // Add general events
+        if let events = events {
+            combined.append(contentsOf: events)
+        }
+        
+        // Sort by year descending (most recent first)
+        return combined.sorted { $0.year > $1.year }
     }
 }
 
@@ -111,14 +163,19 @@ extension WikipediaPage {
 
 extension CachedOnThisDayData {
     func toOnThisDayResponse() -> OnThisDayResponse {
+        let convertedEvents = events.map { event in
+            OnThisDayEvent(
+                year: event.year,
+                text: event.text,
+                pages: event.pages.map { $0.toWikipediaPage() }
+            )
+        }
         return OnThisDayResponse(
-            events: events.map { event in
-                OnThisDayEvent(
-                    year: event.year,
-                    text: event.text,
-                    pages: event.pages.map { $0.toWikipediaPage() }
-                )
-            }
+            selected: nil,
+            events: convertedEvents,
+            births: nil,
+            deaths: nil,
+            holidays: nil
         )
     }
 }

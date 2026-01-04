@@ -207,7 +207,7 @@ struct SearchHistoryView: View {
                 
                 Spacer()
                 
-                Button(languageManager.localizedString(key: "clear_all_cache")) { // Using clear_all_cache as "Clear" is similar intention or I will add "clear" key next step. 
+                Button(languageManager.localizedString(key: "clear")) { // Using clear_all_cache as "Clear" is similar intention or I will add "clear" key next step. 
                     onClearHistory()
                 }
                 .font(.system(size: 14))

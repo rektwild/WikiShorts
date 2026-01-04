@@ -61,6 +61,11 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
         
         #if canImport(BackgroundTasks)
         if #available(iOS 13.0, *) {
+            // Skip scheduling in simulator to avoid error logs
+            #if targetEnvironment(simulator)
+                Logger.info("Skipping background task scheduling in simulator", category: .general)
+                return
+            #else
             let request = BGAppRefreshTaskRequest(identifier: backgroundTaskIdentifier)
             request.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60) // 15 minutes from now
             
@@ -70,6 +75,7 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
             } catch {
                 Logger.error("Failed to schedule background refresh: \(error)", category: .general)
             }
+            #endif
         }
         #endif
     }
