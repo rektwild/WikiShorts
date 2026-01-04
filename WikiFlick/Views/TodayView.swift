@@ -18,6 +18,7 @@ struct TodayView: View {
     
     @ObservedObject var adMobManager = AdMobManager.shared
     @StateObject private var onThisDayService = OnThisDayService()
+    @ObservedObject private var languageManager = AppLanguageManager.shared
     @EnvironmentObject var storeManager: StoreManager
     @State private var selectedEvent: OnThisDayEvent?
     @State private var showingEventDetail = false
@@ -28,7 +29,7 @@ struct TodayView: View {
     private var currentDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
-        formatter.locale = Locale(identifier: AppLanguageManager.shared.currentLanguage.rawValue)
+        formatter.locale = Locale(identifier: languageManager.currentLanguage.rawValue)
         return formatter.string(from: Date())
     }
     
@@ -97,7 +98,7 @@ struct TodayView: View {
         .sheet(isPresented: $showingPaywall) {
             PaywallView(isPresented: $showingPaywall)
         }
-        .task {
+        .task(id: languageManager.currentLanguage) {
             await onThisDayService.fetchOnThisDayEvents()
         }
     }
