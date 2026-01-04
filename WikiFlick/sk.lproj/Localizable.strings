@@ -80,3 +80,7 @@
 "today_title" = "V tento deň";
 "today_subtitle" = "Historické udalosti, ktoré sa stali v tento deň";
 "today" = "Dnes";
+"favorites" = "Obľúbené";
+"no_favorites" = "Zatiaľ Žiadne Obľúbené";
+"no_favorites_description" = "Klepnite na ikonu srdca pri akomkoľvek článku a uložte si ho medzi obľúbené";
+

@@ -80,3 +80,9 @@
 "today_title" = "Denna dag";
 "today_subtitle" = "Historiska händelser som inträffade denna dag";
 "today" = "Idag";
+"favorites" = "Favoriter";
+"no_favorites" = "Inga Favoriter Ännu";
+"no_favorites_description" = "Tryck på hjärtikonnet på valfri artikel för att spara den till dina favoriter";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

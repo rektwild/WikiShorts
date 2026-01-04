@@ -80,3 +80,9 @@
 "today_title" = "În această zi";
 "today_subtitle" = "Evenimente istorice care au avut loc în această zi";
 "today" = "Azi";
+"favorites" = "Favorite";
+"no_favorites" = "Niciun Favorit Încă";
+"no_favorites_description" = "Atingeți pictograma în formă de inimă pe orice articol pentru a-l salva în favorite";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

@@ -80,3 +80,9 @@
 "today_title" = "Tal dia com avui";
 "today_subtitle" = "Esdeveniments històrics que van passar tal dia com avui";
 "today" = "Avui";
+"favorites" = "Preferits";
+"no_favorites" = "Encara No Hi Ha Preferits";
+"no_favorites_description" = "Toca la icona del cor a qualsevol article per desar-lo als teus preferits";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

@@ -80,3 +80,7 @@
 "today_title" = "An diesem Tag";
 "today_subtitle" = "Historische Ereignisse, die an diesem Tag stattfanden";
 "today" = "Heute";
+"favorites" = "Favoriten";
+"no_favorites" = "Noch Keine Favoriten";
+"no_favorites_description" = "Tippen Sie auf das Herzsymbol bei einem beliebigen Artikel, um ihn zu Ihren Favoriten hinzuzufügen";
+

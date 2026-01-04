@@ -80,3 +80,7 @@
 "today_title" = "Pada Hari Ini";
 "today_subtitle" = "Peristiwa bersejarah yang berlaku pada hari ini";
 "today" = "Hari Ini";
+"favorites" = "Kegemaran";
+"no_favorites" = "Tiada Kegemaran Lagi";
+"no_favorites_description" = "Ketik ikon hati pada mana-mana artikel untuk menyimpannya ke kegemaran anda";
+

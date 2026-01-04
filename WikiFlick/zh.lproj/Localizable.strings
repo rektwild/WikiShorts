@@ -80,3 +80,9 @@
 "today_title" = "历史上的今天";
 "today_subtitle" = "这一天发生的历史事件";
 "today" = "今天";
+"favorites" = "收藏夹";
+"no_favorites" = "尚无收藏";
+"no_favorites_description" = "点击任何文章上的心形图标以将其保存到您的收藏夹";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

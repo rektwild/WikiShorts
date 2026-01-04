@@ -80,3 +80,9 @@
 "today_title" = "Bu kunda";
 "today_subtitle" = "Bu kunda sodir bo'lgan tarixiy voqealar";
 "today" = "Bugun";
+"favorites" = "Sevimlilar";
+"no_favorites" = "Hali Sevimli Yo'q";
+"no_favorites_description" = "Istalgan maqolani sevimlilaringizga qo'shish uchun yurak belgisiga bosing";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

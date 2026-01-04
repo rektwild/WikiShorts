@@ -80,3 +80,7 @@
 "today_title" = "På denne dag";
 "today_subtitle" = "Historiske begivenheder der skete på denne dag";
 "today" = "I dag";
+"favorites" = "Favoritter";
+"no_favorites" = "Ingen Favoritter Endnu";
+"no_favorites_description" = "Tryk på hjerteikonet på enhver artikel for at gemme den i dine favoritter";
+

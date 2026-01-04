@@ -80,3 +80,9 @@
 "today_title" = "On This Day";
 "today_subtitle" = "Historical events that happened on this day";
 "today" = "Today";
+"favorites" = "Favorittar";
+"no_favorites" = "Ingen Favorittar Enno";
+"no_favorites_description" = "Trykk på hjarteteikneet på kva som helst artikkel for å lagre det til favorittane dine";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

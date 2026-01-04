@@ -80,3 +80,9 @@
 "today_title" = "Ning Adlawa";
 "today_subtitle" = "Mga panghitabo sa kasaysayan nga nahitabo niining adlawa";
 "today" = "Karon";
+"favorites" = "Mga Paborito";
+"no_favorites" = "Wala Pay Mga Paborito";
+"no_favorites_description" = "I-tap ang heart icon ha bisan ano nga artikulo para ma-save ini ha imo mga paborito";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

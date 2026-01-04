@@ -80,3 +80,7 @@
 "today_title" = "Sel päeval";
 "today_subtitle" = "Sel päeval toimunud ajaloolised sündmused";
 "today" = "Täna";
+"favorites" = "Lemmikud";
+"no_favorites" = "Lemmikuid Pole Veel";
+"no_favorites_description" = "Puudutage südamikoon mis tahes artiklil, et salvestada see oma lemmikute hulka";
+

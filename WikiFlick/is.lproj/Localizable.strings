@@ -80,3 +80,7 @@
 "today_title" = "Á þessum degi";
 "today_subtitle" = "Sögulegir atburðir sem gerðust á þessum degi";
 "today" = "Í dag";
+"favorites" = "Uppáhald";
+"no_favorites" = "Engin Uppáhald Ennþá";
+"no_favorites_description" = "Ýttu á hjartamerkið á hvaða grein sem er til að vista hana í uppáhald";
+

@@ -80,3 +80,7 @@
 "today_title" = "Gaurko egunez";
 "today_subtitle" = "Egun honetan gertatutako gertaera historikoak";
 "today" = "Gaur";
+"favorites" = "Gogokoak";
+"no_favorites" = "Oraindik Ez Dago Gogokorik";
+"no_favorites_description" = "Sakatu bihotz-ikonoa edozein artikulutan zure gogokoetan gordetzeko";
+

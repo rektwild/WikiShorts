@@ -80,3 +80,9 @@
 "today_title" = "On This Day";
 "today_subtitle" = "Historical events that happened on this day";
 "today" = "Today";
+"favorites" = "Mga Paborito";
+"no_favorites" = "Waray Pa Mga Paborito";
+"no_favorites_description" = "I-tap an heart icon ha bisan ano nga artikulo para ma-save ini ha imo mga paborito";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

@@ -80,3 +80,7 @@
 "today_title" = "On This Day";
 "today_subtitle" = "Historical events that happened on this day";
 "today" = "Today";
+"favorites" = "Favuriti";
+"no_favorites" = "Nuddu Favuritu Ancora";
+"no_favorites_description" = "Tocca l'icona dû cori supra a qualsiasi artìculu pi' sarvàrilu nê to favuriti";
+

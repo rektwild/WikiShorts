@@ -80,3 +80,9 @@
 "today_title" = "Ar an Lá Seo";
 "today_subtitle" = "Eachtraí stairiúla a tharla ar an lá seo";
 "today" = "Inniu";
+"favorites" = "Cinn Fhabhair";
+"no_favorites" = "Gan Cinn Fhabhair Fós";
+"no_favorites_description" = "Tapáil deilbhín na croí ar aon alt chun é a shábháil i do chinn fhabhair";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

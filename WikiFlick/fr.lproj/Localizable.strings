@@ -80,3 +80,7 @@
 "today_title" = "Ce jour-là";
 "today_subtitle" = "Événements historiques survenus ce jour-là";
 "today" = "Aujourd'hui";
+"favorites" = "Favoris";
+"no_favorites" = "Aucun Favori Pour Le Moment";
+"no_favorites_description" = "Appuyez sur l'icône en forme de cœur sur n'importe quel article pour l'enregistrer dans vos favoris";
+

@@ -80,3 +80,9 @@
 "today_title" = "Sa Araw na Ito";
 "today_subtitle" = "Mga makasaysayang pangyayari na naganap sa araw na ito";
 "today" = "Ngayon";
+"favorites" = "Mga Paborito";
+"no_favorites" = "Walang Paborito Pa";
+"no_favorites_description" = "I-tap ang heart icon sa kahit anong artikulo para i-save ito sa iyong mga paborito";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

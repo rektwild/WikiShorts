@@ -80,3 +80,7 @@
 "today_title" = "Hoc die";
 "today_subtitle" = "Res gestae quae hoc die acciderunt";
 "today" = "Hodie";
+"favorites" = "Favorita";
+"no_favorites" = "Nondum Favorita";
+"no_favorites_description" = "Tange symbolum cordis in quolibet articulo ad servandum in favoritis tuis";
+

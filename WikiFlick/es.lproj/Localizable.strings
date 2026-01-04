@@ -80,3 +80,7 @@
 "today_title" = "Tal día como hoy";
 "today_subtitle" = "Eventos históricos que sucedieron en este día";
 "today" = "Hoy";
+"favorites" = "Favoritos";
+"no_favorites" = "Aún No Hay Favoritos";
+"no_favorites_description" = "Toca el ícono del corazón en cualquier artículo para guardarlo en tus favoritos";
+

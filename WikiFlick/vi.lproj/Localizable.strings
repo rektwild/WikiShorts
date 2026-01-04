@@ -80,3 +80,7 @@
 "today_title" = "Vào ngày này";
 "today_subtitle" = "Các sự kiện lịch sử đã xảy ra vào ngày này";
 "today" = "Hôm nay";
+"favorites" = "Yêu thích";
+"no_favorites" = "Chưa Có Yêu Thích";
+"no_favorites_description" = "Chạm vào biểu tượng trái tim trên bất kỳ bài viết nào để lưu vào danh sách yêu thích của bạn";
+

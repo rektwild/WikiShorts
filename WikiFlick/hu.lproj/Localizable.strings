@@ -80,3 +80,9 @@
 "today_title" = "Ezen a napon";
 "today_subtitle" = "Történelmi események, amelyek ezen a napon történtek";
 "today" = "Ma";
+"favorites" = "Kedvencek";
+"no_favorites" = "Még Nincsenek Kedvencek";
+"no_favorites_description" = "Koppints a szív ikonra bármelyik cikknél, hogy elmentsd a kedvenceid közé";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

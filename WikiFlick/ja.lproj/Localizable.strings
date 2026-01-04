@@ -80,3 +80,7 @@
 "today_title" = "今日は何の日";
 "today_subtitle" = "この日に起きた歴史的な出来事";
 "today" = "今日";
+"favorites" = "お気に入り";
+"no_favorites" = "お気に入りはまだありません";
+"no_favorites_description" = "記事のハートアイコンをタップして、お気に入りに保存します";
+

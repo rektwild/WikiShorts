@@ -80,3 +80,9 @@
 "today_title" = "오늘의 역사";
 "today_subtitle" = "오늘 일어난 역사적인 사건들";
 "today" = "오늘";
+"favorites" = "즐겨찾기";
+"no_favorites" = "아직 즐겨찾기 없음";
+"no_favorites_description" = "즐겨찾기에 저장하려면 모든 기사의 하트 아이콘을 탭하세요";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

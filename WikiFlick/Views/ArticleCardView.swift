@@ -9,6 +9,7 @@ struct ArticleCardView: View {
     @State private var imageScale: CGFloat = 0.8
     @State private var imageOpacity: Double = 0.0
     @StateObject private var languageManager = AppLanguageManager.shared
+    @StateObject private var favoritesManager = FavoritesManager.shared
     private let imageLoadingService = ImageLoadingService.shared
     
     var body: some View {
@@ -70,6 +71,7 @@ struct ArticleCardView: View {
                 .overlay(imageContent(geometry, article: article))
             
             HStack(spacing: 8) {
+                favoriteButton(article: article)
                 safariButton(article: article)
                 shareButton(article: article)
             }
@@ -195,6 +197,28 @@ struct ArticleCardView: View {
             endPoint: .bottom
         )
     }
+    private func favoriteButton(article: WikipediaArticle) -> some View {
+        Button(action: {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                favoritesManager.toggleFavorite(article)
+            }
+        }) {
+            Image(systemName: favoritesManager.isFavorite(article) ? "heart.fill" : "heart")
+                .font(.system(size: 18, weight: .medium))
+                .foregroundColor(favoritesManager.isFavorite(article) ? .red : .white)
+                .frame(width: 44, height: 44)
+                .background(
+                    Circle()
+                        .fill(Color.black.opacity(0.7))
+                        .overlay(
+                            Circle()
+                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
+                        )
+                )
+                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+        }
+    }
+    
     private func safariButton(article: WikipediaArticle) -> some View {
         Button(action: {
             if let url = URL(string: article.fullURL) {

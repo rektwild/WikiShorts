@@ -80,3 +80,9 @@
 "today_title" = "Ar Y Dydd Hwn";
 "today_subtitle" = "Digwyddiadau hanesyddol a ddigwyddodd ar y dydd hwn";
 "today" = "Heddiw";
+"favorites" = "Ffefrynnau";
+"no_favorites" = "Dim Ffefrynnau Eto";
+"no_favorites_description" = "Tapiwch yr eicon calon ar unrhyw erthygl i'w harbed i'ch ffefrynnau";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

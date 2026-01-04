@@ -80,3 +80,7 @@
 "today_title" = "Tal día como hoxe";
 "today_subtitle" = "Eventos históricos que sucederon tal día como hoxe";
 "today" = "Hoxe";
+"favorites" = "Favoritos";
+"no_favorites" = "Aínda Non Hai Favoritos";
+"no_favorites_description" = "Toca a icona do corazón en calquera artigo para gardalo nos teus favoritos";
+

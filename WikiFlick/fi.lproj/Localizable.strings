@@ -80,3 +80,9 @@
 "today_title" = "Tänä päivänä";
 "today_subtitle" = "Historiallisia tapahtumia, jotka tapahtuivat tänä päivänä";
 "today" = "Tänään";
+"favorites" = "Suosikit";
+"no_favorites" = "Ei Vielä Suosikkeja";
+"no_favorites_description" = "Napauta minkä tahansa artikkelin sydänkuvaketta tallentaaksesi sen suosikkeihisi";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

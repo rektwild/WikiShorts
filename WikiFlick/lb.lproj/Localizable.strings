@@ -80,3 +80,7 @@
 "today_title" = "Op dësem Dag";
 "today_subtitle" = "Historesch Evenementer déi op dësem Dag geschitt sinn";
 "today" = "Haut";
+"favorites" = "Favoritte";
+"no_favorites" = "Nach Keng Favoritte";
+"no_favorites_description" = "Tippt op d'Häerz-Symbol bei engem Artikel fir en an Är Favoritte ze späicheren";
+

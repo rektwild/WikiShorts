@@ -80,3 +80,9 @@
 "today_title" = "Neste dia";
 "today_subtitle" = "Eventos históricos que aconteceram neste dia";
 "today" = "Hoje";
+"favorites" = "Favoritos";
+"no_favorites" = "Nenhum Favorito Ainda";
+"no_favorites_description" = "Toque no ícone de coração em qualquer artigo para salvá-lo nos seus favoritos";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

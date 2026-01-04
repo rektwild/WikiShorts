@@ -80,3 +80,9 @@
 "today_title" = "Bu Gün";
 "today_subtitle" = "Bu gün baş vermiş tarixi hadisələr";
 "today" = "Bu gün";
+"favorites" = "Sevimlilər";
+"no_favorites" = "Hələ Sevimli Yoxdur";
+"no_favorites_description" = "İstənilən məqaləni sevimlilərə əlavə etmək üçün ürək nişanına toxunun";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

@@ -88,6 +88,9 @@
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
 "offline_mode" = "Offline mode";
+"favorites" = "Favorites";
+"no_favorites" = "No Favorites Yet";
+"no_favorites_description" = "Tap the heart icon on any article to save it to your favorites";
 
 "lifetime" = "Lifetime";
 "one_time_payment" = "One-time payment";

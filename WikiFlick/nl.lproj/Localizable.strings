@@ -80,3 +80,9 @@
 "today_title" = "Op deze dag";
 "today_subtitle" = "Historische gebeurtenissen die op deze dag plaatsvonden";
 "today" = "Vandaag";
+"favorites" = "Favorieten";
+"no_favorites" = "Nog Geen Favorieten";
+"no_favorites_description" = "Tik op het hartpictogram op een artikel om het op te slaan in je favorieten";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

@@ -80,3 +80,9 @@
 "today_title" = "Šią dieną";
 "today_subtitle" = "Istoriniai įvykiai, nutikę šią dieną";
 "today" = "Šiandien";
+"favorites" = "Mėgstamiausi";
+"no_favorites" = "Dar Nėra Mėgstamiausių";
+"no_favorites_description" = "Bakstelėkite širdies piktogramą bet kuriame straipsnyje, kad išsaugotumėte jį savo mėgstamiausiuose";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

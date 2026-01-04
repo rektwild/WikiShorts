@@ -80,3 +80,7 @@
 "today_title" = "Je ĉi tiu tago";
 "today_subtitle" = "Historiaj eventoj kiuj okazis en ĉi tiu tago";
 "today" = "Hodiaŭ";
+"favorites" = "Favoratoj";
+"no_favorites" = "Ankoraŭ Neniuj Favoratoj";
+"no_favorites_description" = "Tuŝu la koran ikonon sur ajna artikolo por konservi ĝin al viaj favoratoj";
+

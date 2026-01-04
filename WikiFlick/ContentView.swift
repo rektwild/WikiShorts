@@ -82,6 +82,16 @@ struct ContentView: View {
                 }
             }
             
+            // Favorites Tab
+            FavoritesView(
+                showingSettings: $showingSettings,
+                showingRewardAlert: $showingRewardAlert,
+                showingNoAdAlert: $showingNoAdAlert
+            )
+            .tabItem {
+                Label(languageManager.localizedString(key: "favorites"), systemImage: "heart.fill")
+            }
+            
             // Search Tab
             SearchView(
                 showingSettings: $showingSettings,

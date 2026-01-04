@@ -80,3 +80,9 @@
 "today_title" = "Na današnji dan";
 "today_subtitle" = "Povijesni događaji koji su se dogodili na današnji dan";
 "today" = "Danas";
+"favorites" = "Favoriti";
+"no_favorites" = "Još Nema Favorita";
+"no_favorites_description" = "Dodirnite ikonu srca na bilo kojem članku da ga spremite u favorite";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

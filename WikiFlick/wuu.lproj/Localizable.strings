@@ -80,3 +80,9 @@
 "today_title" = "On This Day";
 "today_subtitle" = "Historical events that happened on this day";
 "today" = "Today";
+"favorites" = "收藏";
+"no_favorites" = "还无收藏";
+"no_favorites_description" = "点击任何文章上个心形图标来保存到收藏夹";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

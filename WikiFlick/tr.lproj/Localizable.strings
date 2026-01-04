@@ -86,6 +86,9 @@
 "showing_cached_data" = "Önbelleklenmiş veriler gösteriliyor";
 "offline_mode" = "Çevrimdışı mod";
 "random_article" = "Rastgele";
+"favorites" = "Favoriler";
+"no_favorites" = "Henüz Favori Yok";
+"no_favorites_description" = "Herhangi bir makaleyi favorilerinize eklemek için kalp ikonuna dokunun";
 
 "lifetime" = "Ömür Boyu";
 "one_time_payment" = "Tek seferlik ödeme";

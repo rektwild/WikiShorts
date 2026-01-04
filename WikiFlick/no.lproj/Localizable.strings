@@ -80,3 +80,9 @@
 "today_title" = "På denne dag";
 "today_subtitle" = "Historiske hendelser som skjedde på denne dag";
 "today" = "I dag";
+"favorites" = "Favoritter";
+"no_favorites" = "Ingen Favoritter Ennå";
+"no_favorites_description" = "Trykk på hjerteikonet på hvilken som helst artikkel for å lagre den i favorittene dine";
+
+"no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
+

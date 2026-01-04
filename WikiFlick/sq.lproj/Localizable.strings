@@ -80,3 +80,7 @@
 "today_title" = "Në këtë ditë";
 "today_subtitle" = "Ngjarje historike që ndodhën në këtë ditë";
 "today" = "Sot";
+"favorites" = "Të Preferuarat";
+"no_favorites" = "Ende Pa Të Preferuara";
+"no_favorites_description" = "Prekni ikonën e zemrës në çdo artikull për ta ruajtur në të preferuarat e tua";
+
