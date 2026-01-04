@@ -2,7 +2,7 @@
 // Welsh (Wales) - cy
 
 // App Name
-WikiFlick
+WikiShorts: Darganfod Gwybodaeth
 
 // Subtitle
 Darganfod Gwybodaeth Bob Dydd

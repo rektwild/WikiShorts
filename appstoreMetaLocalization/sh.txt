@@ -2,7 +2,7 @@
 // Serbo-Croatian (Latin) - sh
 
 // App Name
-WikiFlick
+WikiShorts: Otkrijte Znanje
 
 // Subtitle
 Otkrijte Znanje Svakog Dana

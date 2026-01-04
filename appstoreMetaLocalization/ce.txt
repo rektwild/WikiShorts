@@ -2,7 +2,7 @@
 // Chechen (Chechnya) - ce
 
 // App Name
-WikiFlick
+WikiShorts: Хаарш ДІаелла
 
 // Subtitle
 ХІора Денна Хаарш ДІаелла

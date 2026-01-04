@@ -2,7 +2,7 @@
 // Sicilian (Sicily) - scn
 
 // App Name
-WikiFlick
+WikiShorts: Scopri Sapiri
 
 // Subtitle
 Scopri Sapiri Ogni Jornu

@@ -2,7 +2,7 @@
 // Scots (Scotland) - sco
 
 // App Name
-WikiFlick
+WikiShorts: Discover Kennis
 
 // Subtitle
 Discover Kennis Ilka Day

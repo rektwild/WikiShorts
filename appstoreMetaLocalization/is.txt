@@ -2,7 +2,7 @@
 // Icelandic (Iceland) - is
 
 // App Name
-WikiFlick
+WikiShorts: Uppgötvaðu Þekkingu
 
 // Subtitle
 Uppgötvaðu Þekkingu Daglega

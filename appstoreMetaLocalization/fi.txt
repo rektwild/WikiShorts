@@ -2,7 +2,7 @@
 // Finnish (Finland) - fi
 
 // App Name
-WikiFlick
+WikiShorts: Löydä Tietoa
 
 // Subtitle
 Löydä Tietoa Joka Päivä

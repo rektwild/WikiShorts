@@ -2,7 +2,7 @@
 // Italian (Italy) - it
 
 // App Name
-WikiFlick
+WikiShorts: Scopri la Conoscenza
 
 // Subtitle
 Scopri la Conoscenza Ogni Giorno

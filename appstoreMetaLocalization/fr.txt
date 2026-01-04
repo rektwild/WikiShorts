@@ -2,7 +2,7 @@
 // French (France, Canada, etc.) - fr
 
 // App Name
-WikiFlick
+WikiShorts: Découvrez le Savoir
 
 // Subtitle
 Découvrez le Savoir Chaque Jour

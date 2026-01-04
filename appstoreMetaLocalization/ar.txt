@@ -2,7 +2,7 @@
 // Arabic (MENA) - ar
 
 // App Name
-WikiFlick
+WikiShorts: اكتشف معرفة
 
 // Subtitle
 اكتشف معرفة جديدة كل يوم

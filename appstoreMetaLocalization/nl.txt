@@ -2,7 +2,7 @@
 // Dutch (Netherlands, Belgium) - nl
 
 // App Name
-WikiFlick
+WikiShorts: Ontdek Kennis
 
 // Subtitle
 Ontdek Elke Dag Kennis

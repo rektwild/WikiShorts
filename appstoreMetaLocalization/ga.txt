@@ -2,7 +2,7 @@
 // Irish (Ireland) - ga
 
 // App Name
-WikiFlick
+WikiShorts: Faigh Eolas Nua
 
 // Subtitle
 Faigh Eolas Nua Gach Lá

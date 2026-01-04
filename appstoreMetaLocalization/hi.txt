@@ -2,7 +2,7 @@
 // Hindi (India) - hi
 
 // App Name
-WikiFlick
+WikiShorts: ज्ञान खोजें
 
 // Subtitle
 हर दिन 새로운 ज्ञान खोजें

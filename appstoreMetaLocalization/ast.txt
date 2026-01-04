@@ -2,7 +2,7 @@
 // Asturian (Asturias, Spain) - ast
 
 // App Name
-WikiFlick
+WikiShorts: Descubre Conocencia
 
 // Subtitle
 Descubre Conocencia A Diariu

@@ -2,7 +2,7 @@
 // Latin (Global) - la
 
 // App Name
-WikiFlick
+WikiShorts: Invenī Scientiam
 
 // Subtitle
 Invenī Scientiam Quotidie

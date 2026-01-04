@@ -2,7 +2,7 @@
 // Lithuanian (Lithuania) - lt
 
 // App Name
-WikiFlick
+WikiShorts: Atrask Žinias
 
 // Subtitle
 Atrask Žinias Kiekvieną Dieną

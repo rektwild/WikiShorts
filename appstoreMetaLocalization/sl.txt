@@ -2,7 +2,7 @@
 // Slovenian (Slovenia) - sl
 
 // App Name
-WikiFlick
+WikiShorts: Odkrijte Znanje
 
 // Subtitle
 Vsak Dan Odkrijte Znanje

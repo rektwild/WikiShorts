@@ -2,7 +2,7 @@
 // Portuguese (Portugal, Brazil) - pt
 
 // App Name
-WikiFlick
+WikiShorts: Descubra Conhecimento
 
 // Subtitle
 Descubra Conhecimento a Cada Dia

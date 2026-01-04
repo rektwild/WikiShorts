@@ -2,7 +2,7 @@
 // Alemannic German (Switzerland, etc.) - als
 
 // App Name
-WikiFlick
+WikiShorts: Neus Wüsse Entdecke
 
 // Subtitle
 Täglich Neus Wüsse Entdecke

@@ -2,7 +2,7 @@
 // Hebrew (Israel) - he
 
 // App Name
-WikiFlick
+WikiShorts: לגלות ידע
 
 // Subtitle
 לגלות ידע חדש כל יום

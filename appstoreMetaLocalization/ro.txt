@@ -2,7 +2,7 @@
 // Romanian (Romania, Moldova) - ro
 
 // App Name
-WikiFlick
+WikiShorts: Descoperă Cunoștințe
 
 // Subtitle
 Descoperă Cunoștințe Zilnic

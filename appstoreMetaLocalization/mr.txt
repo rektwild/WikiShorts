@@ -2,7 +2,7 @@
 // Marathi (India) - mr
 
 // App Name
-WikiFlick
+WikiShorts: नवीन ज्ञान मिळवा
 
 // Subtitle
 दररोज नवीन ज्ञान मिळवा

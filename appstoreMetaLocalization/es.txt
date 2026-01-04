@@ -2,7 +2,7 @@
 // Spanish (Spain/Latin America) - es
 
 // App Name
-WikiFlick
+WikiShorts: Descubre Saber
 
 // Subtitle
 Descubre Saber Cada Día

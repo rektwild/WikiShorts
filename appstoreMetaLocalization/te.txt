@@ -2,7 +2,7 @@
 // Telugu (India) - te
 
 // App Name
-WikiFlick
+WikiShorts: జ్ఞానాన్ని కనుగొనండి
 
 // Subtitle
 ప్రతిరోజూ జ్ఞానాన్ని కనుగొనండి

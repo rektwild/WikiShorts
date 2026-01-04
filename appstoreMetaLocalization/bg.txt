@@ -2,7 +2,7 @@
 // Bulgarian (Bulgaria) - bg
 
 // App Name
-WikiFlick
+WikiShorts: Откривайте Знание
 
 // Subtitle
 Откривайте Знание Всеки Ден

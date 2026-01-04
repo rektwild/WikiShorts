@@ -2,7 +2,7 @@
 // English (US) - en
 
 // App Name
-WikiFlick
+WikiShorts: Learn & Discover
 
 // Subtitle
 Discover Knowledge Daily
@@ -11,9 +11,9 @@ Discover Knowledge Daily
 We pick the most interesting Wikipedia articles for you every day! Feed your curiosity and learn something new and exciting.
 
 // Description
-Meet the most enjoyable way to gain knowledge! WikiFlick brings the vast universe of Wikipedia to your fingertips in a modern, fast-paced format. Instead of getting lost in long, complex articles, discover new and surprising facts every single day.
+Meet the most enjoyable way to gain knowledge! WikiShorts brings the vast universe of Wikipedia to your fingertips in a modern, fast-paced format. Instead of getting lost in long, complex articles, discover new and surprising facts every single day.
 
-WikiFlick is designed to make learning a daily habit. Whether you're on a five-minute break or commuting, it's the perfect companion to expand your general knowledge.
+WikiShorts is designed to make learning a daily habit. Whether you're on a five-minute break or commuting, it's the perfect companion to expand your general knowledge.
 
 KEY FEATURES:
 
@@ -22,9 +22,9 @@ KEY FEATURES:
 • Smart Search: Instantly access any topic you're curious about and find relevant articles quickly.
 • Favorites List: Easily save your favorite articles or those you want to read later to build your own personal library.
 
-Why WikiFlick?
+Why WikiShorts?
 
-Because learning doesn't have to be boring. Access bite-sized knowledge on thousands of topics, from science and art to history and technology. Make every day a little smarter with WikiFlick.
+Because learning doesn't have to be boring. Access bite-sized knowledge on thousands of topics, from science and art to history and technology. Make every day a little smarter with WikiShorts.
 
 Download now and start exploring!
 

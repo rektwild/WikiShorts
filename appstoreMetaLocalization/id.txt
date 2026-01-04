@@ -2,7 +2,7 @@
 // Indonesian (Indonesia) - id
 
 // App Name
-WikiFlick
+WikiShorts: Temukan Pengetahuan
 
 // Subtitle
 Temukan Pengetahuan Setiap Hari

@@ -2,7 +2,7 @@
 // Greek (Greece/Cyprus) - el
 
 // App Name
-WikiFlick
+WikiShorts: Ανακάλυψε Γνώση
 
 // Subtitle
 Ανακάλυψε Γνώση Καθημερινά

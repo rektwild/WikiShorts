@@ -2,7 +2,7 @@
 // Bosnian (Bosnia and Herzegovina) - bs
 
 // App Name
-WikiFlick
+WikiShorts: Otkrijte Znanje
 
 // Subtitle
 Otkrijte Znanje Svaki Dan

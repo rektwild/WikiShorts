@@ -2,7 +2,7 @@
 // Japanese (Japan) - ja
 
 // App Name
-WikiFlick
+WikiShorts: 新しい知識を発見
 
 // Subtitle
 毎日新しい知識を発見

@@ -2,7 +2,7 @@
 // Turkmen (Turkmenistan) - tk
 
 // App Name
-WikiFlick
+WikiShorts: Bilimi Açyň
 
 // Subtitle
 Her Gün Bilimi Açyň

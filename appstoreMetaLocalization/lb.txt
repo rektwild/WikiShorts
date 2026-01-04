@@ -2,7 +2,7 @@
 // Luxembourgish (Luxembourg) - lb
 
 // App Name
-WikiFlick
+WikiShorts: Neit Wëssen Entdecken
 
 // Subtitle
 All Dag Neit Wëssen Entdecken

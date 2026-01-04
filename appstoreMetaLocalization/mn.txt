@@ -2,7 +2,7 @@
 // Mongolian (Mongolia) - mn
 
 // App Name
-WikiFlick
+WikiShorts: Шинэ Мэдлэг Нээ
 
 // Subtitle
 Өдөр Бүтэн Шинэ Мэдлэг Нээ

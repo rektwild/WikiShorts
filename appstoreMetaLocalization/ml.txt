@@ -2,7 +2,7 @@
 // Malayalam (India) - ml
 
 // App Name
-WikiFlick
+WikiShorts: പുതിയ അറിവുകൾ നേടൂ
 
 // Subtitle
 ദിവസവും പുതിയ അറിവുകൾ നേടൂ

@@ -2,7 +2,7 @@
 // Korean (South Korea) - ko
 
 // App Name
-WikiFlick
+WikiShorts: 새로운 지식 발견
 
 // Subtitle
 매일 새로운 지식 발견

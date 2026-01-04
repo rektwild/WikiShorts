@@ -2,7 +2,7 @@
 // Norwegian (Bokmål) - no
 
 // App Name
-WikiFlick
+WikiShorts: Oppdag Kunnskap
 
 // Subtitle
 Oppdag Kunnskap Hver Dag

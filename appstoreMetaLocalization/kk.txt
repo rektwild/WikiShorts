@@ -2,7 +2,7 @@
 // Kazakh (Kazakhstan) - kk
 
 // App Name
-WikiFlick
+WikiShorts: Жаңа Білім Алыңыз
 
 // Subtitle
 Күнделікті Жаңа Білім Алыңыз

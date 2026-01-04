@@ -2,7 +2,7 @@
 // Belarusian (Belarus) - be
 
 // App Name
-WikiFlick
+WikiShorts: Адкрывайце Веды
 
 // Subtitle
 Адкрывайце Веды Штодня

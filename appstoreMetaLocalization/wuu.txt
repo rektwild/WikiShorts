@@ -2,7 +2,7 @@
 // Wu Chinese (Shanghai, etc.) - wuu
 
 // App Name
-WikiFlick
+WikiShorts: 每天发现新知识
 
 // Subtitle
 每天发现新知识

@@ -2,7 +2,7 @@
 // Afrikaans (South Africa, Namibia) - af
 
 // App Name
-WikiFlick
+WikiShorts: Ontdek Kennis
 
 // Subtitle
 Ontdek Kennis Elke Dag

@@ -2,7 +2,7 @@
 // Tagalog (Philippines) - tl
 
 // App Name
-WikiFlick
+WikiShorts: Tuklasin ang Kaalaman
 
 // Subtitle
 Tuklasin ang Kaalaman Araw-araw

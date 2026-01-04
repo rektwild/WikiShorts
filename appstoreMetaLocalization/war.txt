@@ -2,7 +2,7 @@
 // Waray (Philippines) - war
 
 // App Name
-WikiFlick
+WikiShorts: Diskobreha an Kaaram
 
 // Subtitle
 Diskobreha an Kaaram Kada Adlaw

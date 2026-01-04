@@ -2,7 +2,7 @@
 // Türkçe (Türkiye) - tr
 
 // App Name (Uygulama Adı)
-WikiFlick
+WikiShorts: Kısa Bilgi
 
 // Subtitle (Alt Başlık)
 Her Gün Yeni Bilgi Keşfet
@@ -11,9 +11,9 @@ Her Gün Yeni Bilgi Keşfet
 Günün en ilginç Wikipedia makalelerini sizin için seçiyoruz! Merakınızı giderin ve genel kültürünüzü her gün zenginleştirin.
 
 // Description (Açıklama)
-Bilgiye ulaşmanın en keyifli yoluyla tanışın! WikiFlick, Wikipedia'nın sonsuz bilgi evrenini modern ve hızlı bir formatta parmaklarınızın ucuna getirir. Karmaşık ve uzun makaleler arasında kaybolmak yerine, her gün yeni ve şaşırtıcı bilgiler keşfedin.
+Bilgiye ulaşmanın en keyifli yoluyla tanışın! WikiShorts, Wikipedia'nın sonsuz bilgi evrenini modern ve hızlı bir formatta parmaklarınızın ucuna getirir. Karmaşık ve uzun makaleler arasında kaybolmak yerine, her gün yeni ve şaşırtıcı bilgiler keşfedin.
 
-WikiFlick, öğrenmeyi bir alışkanlık haline getirmeniz için tasarlandı. İster beş dakikalık bir molada, ister yolculuk yaparken, genel kültürünüzü artırmak için her an yanınızda.
+WikiShorts, öğrenmeyi bir alışkanlık haline getirmeniz için tasarlandı. İster beş dakikalık bir molada, ister yolculuk yaparken, genel kültürünüzü artırmak için her an yanınızda.
 
 TEMEL ÖZELLİKLER:
 
@@ -22,9 +22,9 @@ TEMEL ÖZELLİKLER:
 • Akıllı Arama: Merak ettiğiniz her konuya anında ulaşın ve ilgili makaleleri hızla bulun.
 • Favori Listesi: En sevdiğiniz veya daha sonra okumak istediğiniz makaleleri kolayca kaydedin ve kendi kişisel arşinizi oluşturun.
 
-Neden WikiFlick?
+Neden WikiShorts?
 
-Çünkü öğrenmek sıkıcı olmak zorunda değil. Bilimden sanata, tarihten teknolojiye kadar binlerce konuda hap bilgilere ulaşın. WikiFlick ile her gününüzü daha bilgili tamamlayın.
+Çünkü öğrenmek sıkıcı olmak zorunda değil. Bilimden sanata, tarihten teknolojiye kadar binlerce konuda hap bilgilere ulaşın. WikiShorts ile her gününüzü daha bilgili tamamlayın.
 
 Hemen indirin ve keşfetmeye başlayın!
 

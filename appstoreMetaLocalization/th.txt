@@ -2,7 +2,7 @@
 // Thai (Thailand) - th
 
 // App Name
-WikiFlick
+WikiShorts: ค้นพบความรู้
 
 // Subtitle
 ค้นพบความรู้ใหม่ทุกวัน

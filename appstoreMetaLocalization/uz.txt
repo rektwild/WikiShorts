@@ -2,7 +2,7 @@
 // Uzbek (Latin) - uz
 
 // App Name
-WikiFlick
+WikiShorts: Bilim Oling
 
 // Subtitle
 Har Kuni Bilim Oling

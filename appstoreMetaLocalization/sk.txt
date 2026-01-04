@@ -2,7 +2,7 @@
 // Slovak (Slovakia) - sk
 
 // App Name
-WikiFlick
+WikiShorts: Objavujte Vedomosti
 
 // Subtitle
 Objavujte Vedomosti Každý Deň

@@ -2,7 +2,7 @@
 // Croatian (Croatia) - hr
 
 // App Name
-WikiFlick
+WikiShorts: Otkrijte Znanje
 
 // Subtitle
 Otkrijte Znanje Svaki Dan

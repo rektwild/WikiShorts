@@ -2,7 +2,7 @@
 // Armenian (Armenia) - hy
 
 // App Name
-WikiFlick
+WikiShorts: Բացահայտեք Գիտելիք
 
 // Subtitle
 Բացահայտեք Գիտելիք Ամեն Օր

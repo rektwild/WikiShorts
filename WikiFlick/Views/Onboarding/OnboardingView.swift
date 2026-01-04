@@ -87,6 +87,10 @@ struct OnboardingView: View {
             }
         }
         .navigationViewStyle(.stack)
+        .onChange(of: selectedAppLanguage) { newLanguage in
+            // Immediately apply the selected language so onboarding screens update
+            appLanguageManager.currentLanguage = newLanguage
+        }
     }
     
     private func initializeSelections() {

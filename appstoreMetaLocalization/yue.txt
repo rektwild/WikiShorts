@@ -2,7 +2,7 @@
 // Cantonese (Hong Kong, etc.) - yue
 
 // App Name
-WikiFlick
+WikiShorts: 每日發現新知識
 
 // Subtitle
 每日發現新知識

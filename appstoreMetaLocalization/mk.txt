@@ -2,7 +2,7 @@
 // Macedonian (North Macedonia) - mk
 
 // App Name
-WikiFlick
+WikiShorts: Откривајте Знаење
 
 // Subtitle
 Откривајте Знаење Секој Ден

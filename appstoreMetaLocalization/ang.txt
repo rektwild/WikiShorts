@@ -2,7 +2,7 @@
 // Old English (Global) - ang
 
 // App Name
-WikiFlick
+WikiShorts: Onfind Lār
 
 // Subtitle
 Onfind Lār Dæġhwāmlīce

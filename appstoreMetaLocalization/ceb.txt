@@ -2,7 +2,7 @@
 // Cebuano (Philippines) - ceb
 
 // App Name
-WikiFlick
+WikiShorts: Pagdiskobre og Kahibalo
 
 // Subtitle
 Pagdiskobre og Kahibalo Kada Adlaw

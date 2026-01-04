@@ -2,7 +2,7 @@
 // Danish (Denmark) - da
 
 // App Name
-WikiFlick
+WikiShorts: Opdag Viden
 
 // Subtitle
 Opdag Viden Hver Dag

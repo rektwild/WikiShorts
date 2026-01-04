@@ -2,7 +2,7 @@
 // Estonian (Estonia) - et
 
 // App Name
-WikiFlick
+WikiShorts: Avasta Teadmisi
 
 // Subtitle
 Avasta Teadmisi Iga Päev

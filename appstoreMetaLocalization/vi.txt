@@ -2,7 +2,7 @@
 // Vietnamese (Vietnam) - vi
 
 // App Name
-WikiFlick
+WikiShorts: Khám Phá Tri Thức
 
 // Subtitle
 Khám Phá Tri Thức Mỗi Ngày

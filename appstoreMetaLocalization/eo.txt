@@ -2,7 +2,7 @@
 // Esperanto (Global) - eo
 
 // App Name
-WikiFlick
+WikiShorts: Malkovru Scion
 
 // Subtitle
 Malkovru Scion Ĉiutage

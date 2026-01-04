@@ -2,7 +2,7 @@
 // Azerbaijani (Azerbaijan) - az
 
 // App Name
-WikiFlick
+WikiShorts: Bilik Kəşf Edin
 
 // Subtitle
 Hər Gün Bilik Kəşf Edin

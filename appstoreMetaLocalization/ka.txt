@@ -2,7 +2,7 @@
 // Georgian (Georgia) - ka
 
 // App Name
-WikiFlick
+WikiShorts: აღმოაჩინე ცოდნა
 
 // Subtitle
 აღმოაჩინე ცოდნა ყოველდღე

@@ -2,7 +2,7 @@
 // Tamil (India, Sri Lanka, etc.) - ta
 
 // App Name
-WikiFlick
+WikiShorts: அறிவைக் கண்டறியுங்கள்
 
 // Subtitle
 தினமும் அறிவைக் கண்டறியுங்கள்

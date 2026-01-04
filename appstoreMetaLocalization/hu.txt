@@ -2,7 +2,7 @@
 // Hungarian (Hungary) - hu
 
 // App Name
-WikiFlick
+WikiShorts: Fedezz fel Tudást
 
 // Subtitle
 Fedezz fel Tudást Minden Nap

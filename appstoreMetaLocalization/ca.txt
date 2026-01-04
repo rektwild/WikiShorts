@@ -2,7 +2,7 @@
 // Catalan (Spain) - ca
 
 // App Name
-WikiFlick
+WikiShorts: Descobreix Coneixement
 
 // Subtitle
 Descobreix Coneixement Cada Dia

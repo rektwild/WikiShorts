@@ -2,7 +2,7 @@
 // Serbian (Cyrillic) - sr
 
 // App Name
-WikiFlick
+WikiShorts: Откријте Знање
 
 // Subtitle
 Откријте Знање Сваког Дана

@@ -2,7 +2,7 @@
 // Bengali (Bangladesh, India) - bn
 
 // App Name
-WikiFlick
+WikiShorts: নতুন জ্ঞান আবিষ্কার
 
 // Subtitle
 প্রতিদিন নতুন জ্ঞান আবিষ্কার করুন

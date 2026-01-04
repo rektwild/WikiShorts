@@ -2,7 +2,7 @@
 // Czech (Czech Republic) - cs
 
 // App Name
-WikiFlick
+WikiShorts: Objevujte Vědomosti
 
 // Subtitle
 Objevujte Vědomosti Každý Den

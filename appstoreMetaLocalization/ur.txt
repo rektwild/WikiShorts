@@ -2,7 +2,7 @@
 // Urdu (Pakistan/India) - ur
 
 // App Name
-WikiFlick
+WikiShorts: نیا علم دریافت
 
 // Subtitle
 روزانہ نیا علم دریافت کریں

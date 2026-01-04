@@ -2,7 +2,7 @@
 // Swedish (Sweden, Finland) - sv
 
 // App Name
-WikiFlick
+WikiShorts: Upptäck Kunskap
 
 // Subtitle
 Upptäck Kunskap Varje Dag

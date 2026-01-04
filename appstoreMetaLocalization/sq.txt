@@ -2,7 +2,7 @@
 // Albanian (Albania/Kosovo) - sq
 
 // App Name
-WikiFlick
+WikiShorts: Zbulo Dije
 
 // Subtitle
 Zbulo Dije Çdo Ditë

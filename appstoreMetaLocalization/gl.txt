@@ -2,7 +2,7 @@
 // Galician (Galicia, Spain) - gl
 
 // App Name
-WikiFlick
+WikiShorts: Descubre Saber
 
 // Subtitle
 Descubre Saber Cada Día

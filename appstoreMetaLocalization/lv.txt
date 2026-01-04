@@ -2,7 +2,7 @@
 // Latvian (Latvia) - lv
 
 // App Name
-WikiFlick
+WikiShorts: Atklāj Zināšanas
 
 // Subtitle
 Atklāj Zināšanas Katru Dienu

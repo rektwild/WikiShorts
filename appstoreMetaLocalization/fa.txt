@@ -2,7 +2,7 @@
 // Persian (Farsi) - fa
 
 // App Name
-WikiFlick
+WikiShorts: دانش جدید
 
 // Subtitle
 هر روز دانش جدید کشف کنید

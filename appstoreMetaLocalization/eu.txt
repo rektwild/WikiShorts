@@ -2,7 +2,7 @@
 // Basque (Basque Country) - eu
 
 // App Name
-WikiFlick
+WikiShorts: Ezagutza Berria
 
 // Subtitle
 Ezagutza Berria Egunero

@@ -2,7 +2,7 @@
 // Literary Chinese (Global) - lzh
 
 // App Name
-WikiFlick
+WikiShorts: 日知其所亡
 
 // Subtitle
 日知其所亡

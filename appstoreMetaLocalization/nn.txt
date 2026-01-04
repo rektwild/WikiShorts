@@ -2,7 +2,7 @@
 // Norwegian Nynorsk (Norway) - nn
 
 // App Name
-WikiFlick
+WikiShorts: Oppdag Kunnskap
 
 // Subtitle
 Oppdag Kunnskap Kvar Dag

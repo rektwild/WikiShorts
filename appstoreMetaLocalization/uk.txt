@@ -2,7 +2,7 @@
 // Ukrainian (Ukraine) - uk
 
 // App Name
-WikiFlick
+WikiShorts: Відкривайте Знання
 
 // Subtitle
 Відкривайте Знання Щодня

@@ -2,7 +2,7 @@
 // Malay (Malaysia, etc.) - ms
 
 // App Name
-WikiFlick
+WikiShorts: Temui Pengetahuan
 
 // Subtitle
 Temui Pengetahuan Setiap Hari

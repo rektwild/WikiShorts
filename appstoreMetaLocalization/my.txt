@@ -2,7 +2,7 @@
 // Burmese (Myanmar) - my
 
 // App Name
-WikiFlick
+WikiShorts: ဗဟုသုတသစ်များ
 
 // Subtitle
 နေ့စဉ်ဗဟုသုတသစ်များရှာဖွေပါ
