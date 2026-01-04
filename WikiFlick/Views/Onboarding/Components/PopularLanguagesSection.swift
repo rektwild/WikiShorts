@@ -3,10 +3,11 @@ import SwiftUI
 struct PopularLanguagesSection: View {
     @Binding var selectedLanguage: AppLanguage
     @Environment(\.colorScheme) var colorScheme
+    @StateObject private var languageManager = AppLanguageManager.shared
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Popular")
+            Text(languageManager.localizedString(key: "popular"))
                 .font(.system(size: 18, weight: .bold))
                 .foregroundColor(colorScheme == .dark ? .white : .black)
                 .padding(.horizontal, 16)

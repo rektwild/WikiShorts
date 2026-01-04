@@ -9,7 +9,7 @@ struct SecureURLBuilder {
     
     static func topicsURL(languageCode: String) -> URL? {
         guard isValidLanguageCode(languageCode) else {
-            print("⚠️ Invalid language code: \(languageCode)")
+            Logger.error("Invalid language code: \(languageCode)", category: .network)
             return nil
         }
         
@@ -28,17 +28,17 @@ struct SecureURLBuilder {
     
     static func searchURL(languageCode: String, query: String, limit: Int = 10) -> URL? {
         guard isValidLanguageCode(languageCode) else {
-            print("⚠️ Invalid language code: \(languageCode)")
+            Logger.error("Invalid language code: \(languageCode)", category: .network)
             return nil
         }
         
         guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            print("⚠️ Empty search query")
+            Logger.error("Empty search query", category: .network)
             return nil
         }
         
         guard limit > 0 && limit <= 50 else {
-            print("⚠️ Invalid search limit: \(limit)")
+            Logger.error("Invalid search limit: \(limit)", category: .network)
             return nil
         }
         
@@ -59,7 +59,13 @@ struct SecureURLBuilder {
     static func isValidLanguageCode(_ languageCode: String) -> Bool {
         // Validate language code format (2-3 lowercase letters, optionally with region)
         let languagePattern = "^[a-z]{2,3}(-[a-z]{2})?$"
-        let regex = try? NSRegularExpression(pattern: languagePattern, options: .caseInsensitive)
+        let regex: NSRegularExpression?
+        do {
+            regex = try NSRegularExpression(pattern: languagePattern, options: .caseInsensitive)
+        } catch {
+            Logger.fault("Failed to create language validation regex: \(error)", category: .general)
+            regex = nil
+        }
         let range = NSRange(location: 0, length: languageCode.utf16.count)
         
         guard let regex = regex,

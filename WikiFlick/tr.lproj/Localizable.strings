@@ -95,3 +95,24 @@
 "one_week" = "1 Hafta";
 "weekly" = "Haftalık";
 "per_week" = "/hafta";
+
+"back" = "Geri";
+"searching" = "Aranıyor...";
+"no_results" = "Sonuç bulunamadı";
+"try_different_search" = "Farklı bir arama terimi deneyin";
+"recent_searches" = "Son Aramalar";
+"brief_article_summary" = "Kısa makale özeti...";
+"cache" = "Önbellek";
+"image_cache" = "Görsel Önbelleği";
+"article_cache" = "Makale Önbelleği";
+"memory_limit" = "Bellek Sınırı";
+"clear_all_cache" = "Tüm Önbelleği Temizle";
+"popular" = "Popüler";
+"continue" = "Devam Et";
+"daily_reminders_setup" = "İnanılmaz Wikipedia makalelerini keşfetmek için günlük hatırlatıcılar al";
+"daily_reminders_detail" = "Saat 8:00, 13:00, 18:00 ve 23:00'te günlük hatırlatıcılar";
+"notifications_language" = "Seçtiğin dilde bildirimler";
+"disable_anytime" = "Bunu Ayarlar'dan istediğin zaman kapatabilirsin";
+"sponsored_recommended" = "Sponsorlu · Senin İçin Önerilen";
+"premium_pick" = "Premium Seçimi";
+"discover_amazing_content" = "İnanılmaz İçerikleri Keşfet";

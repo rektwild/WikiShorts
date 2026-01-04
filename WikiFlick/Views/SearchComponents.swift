@@ -30,7 +30,7 @@ struct SearchResultCardView: View {
                             .multilineTextAlignment(.leading)
                             .lineLimit(3)
                     } else {
-                        Text("Brief article summary...")
+                        Text(languageManager.localizedString(key: "brief_article_summary"))
                             .font(.system(size: 14))
                             .foregroundColor(.white.opacity(0.5))
                             .italic()
@@ -201,13 +201,13 @@ struct SearchHistoryView: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text("Recent Searches")
+                Text(languageManager.localizedString(key: "recent_searches"))
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.white.opacity(0.8))
                 
                 Spacer()
                 
-                Button("Clear") {
+                Button(languageManager.localizedString(key: "clear_all_cache")) { // Using clear_all_cache as "Clear" is similar intention or I will add "clear" key next step. 
                     onClearHistory()
                 }
                 .font(.system(size: 14))

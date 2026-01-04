@@ -62,7 +62,7 @@ class TopicNormalizationService {
                 return topic
             }
             // Unknown topic, log and skip
-            print("⚠️ Unknown topic encountered during normalization: \(topic)")
+            Logger.error("Unknown topic encountered during normalization: \(topic)", category: .general)
             return nil
         }
 

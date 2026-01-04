@@ -66,14 +66,14 @@ class ArticleLanguageManager: ObservableObject {
     func selectLanguage(_ language: AppLanguage) {
         guard isLanguageSupported(language) else {
             errorMessage = "Selected language '\(language.displayName)' is not supported for Wikipedia articles."
-            print("❌ Language selection failed: \(language.displayName) (\(language.rawValue)) is not supported")
+            Logger.error("Language selection failed: \(language.displayName) (\(language.rawValue)) is not supported", category: .ui)
             return
         }
         
         isLoading = true
         errorMessage = nil
         
-        print("🌍 Selecting language: \(language.displayName) (\(language.rawValue))")
+        Logger.info("Selecting language: \(language.displayName) (\(language.rawValue))", category: .ui)
         
         // Validate language code format
         guard !language.rawValue.isEmpty && language.rawValue.count >= 2 else {
@@ -86,7 +86,7 @@ class ArticleLanguageManager: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.selectedLanguage = language
             self.isLoading = false
-            print("✅ Language successfully changed to: \(language.displayName) (\(language.rawValue))")
+            Logger.info("Language successfully changed to: \(language.displayName) (\(language.rawValue))", category: .ui)
         }
     }
     
@@ -123,9 +123,9 @@ class ArticleLanguageManager: ObservableObject {
     // MARK: - Debug Methods
     
     func printDebugInfo() {
-        print("🌍 ArticleLanguageManager Debug Info:")
-        print("   Selected Language: \(selectedLanguage.displayName) (\(selectedLanguage.rawValue))")
-        print("   Available Languages: \(availableLanguages.count)")
-        print("   Is Supported: \(isLanguageSupported(selectedLanguage))")
+        Logger.debug("ArticleLanguageManager Debug Info:", category: .ui)
+        Logger.debug("   Selected Language: \(selectedLanguage.displayName) (\(selectedLanguage.rawValue))", category: .ui)
+        Logger.debug("   Available Languages: \(availableLanguages.count)", category: .ui)
+        Logger.debug("   Is Supported: \(isLanguageSupported(selectedLanguage))", category: .ui)
     }
 }

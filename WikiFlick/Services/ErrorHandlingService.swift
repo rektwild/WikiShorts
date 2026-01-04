@@ -158,12 +158,12 @@ class ErrorHandlingService: ErrorHandlingServiceProtocol {
     
     func logError(_ error: AppError, context: String? = nil) {
         let contextString = context.map { " [Context: \($0)]" } ?? ""
-        print("🚨 AppError [\(error.category)] \(error.localizedDescription)\(contextString)")
+        Logger.error("AppError [\(error.category)] \(error.localizedDescription)\(contextString)", category: .general)
         
         // In a production app, you might want to send this to a logging service
         // like Firebase Crashlytics or Sentry
         #if DEBUG
-        print("🔍 Error Details: \(error)")
+        Logger.debug("Error Details: \(error)", category: .general)
         #endif
     }
     
@@ -208,7 +208,7 @@ class RetryManager {
             if currentAttempt < maxAttempts && errorHandler.shouldRetry(error: appError) {
                 let delay = errorHandler.getRetryDelay(for: appError, attempt: currentAttempt)
                 
-                print("🔄 Retrying operation \(id) after \(delay)s (attempt \(currentAttempt)/\(maxAttempts))")
+                Logger.info("Retrying operation \(id) after \(delay)s (attempt \(currentAttempt)/\(maxAttempts))", category: .network)
                 
                 try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
                 return try await executeWithRetry(id: id, maxAttempts: maxAttempts, operation: operation)

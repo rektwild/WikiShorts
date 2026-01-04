@@ -91,11 +91,11 @@ struct SettingsView: View {
                 }
                 
                 // Cache Statistics Section
-                Section(header: Text("Cache")) {
+                Section(header: Text(languageManager.localizedString(key: "cache"))) {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
                             Image(systemName: "internaldrive")
-                            Text("Image Cache")
+                            Text(languageManager.localizedString(key: "image_cache"))
                             Spacer()
                             let stats = ArticleCacheManager.shared.getCacheStatistics()
                             Text("\(stats.imageCacheCount) items")
@@ -105,7 +105,7 @@ struct SettingsView: View {
                         
                         HStack {
                             Image(systemName: "doc.text")
-                            Text("Article Cache")
+                            Text(languageManager.localizedString(key: "article_cache"))
                             Spacer()
                             let stats = ArticleCacheManager.shared.getCacheStatistics()
                             Text("\(stats.articleCacheCount) items")
@@ -115,7 +115,7 @@ struct SettingsView: View {
                         
                         HStack {
                             Image(systemName: "cylinder")
-                            Text("Memory Limit")
+                            Text(languageManager.localizedString(key: "memory_limit"))
                             Spacer()
                             let stats = ArticleCacheManager.shared.getCacheStatistics()
                             Text("\(stats.imageCacheCostLimit / (1024 * 1024))MB")
@@ -131,7 +131,7 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "trash")
                                 .foregroundColor(.red)
-                            Text("Clear All Cache")
+                            Text(languageManager.localizedString(key: "clear_all_cache"))
                                 .foregroundColor(.red)
                             Spacer()
                         }
@@ -299,7 +299,7 @@ struct LanguageSelectionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Cancel") {
+                    Button(languageManager.localizedString(key: "cancel")) {
                         dismiss()
                     }
                 }

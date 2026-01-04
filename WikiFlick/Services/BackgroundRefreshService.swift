@@ -43,7 +43,7 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
             // Register background task
             BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundTaskIdentifier, using: nil) { task in
                 guard let refreshTask = task as? BGAppRefreshTask else {
-                    print("❌ Invalid background task type: \(type(of: task))")
+                    Logger.error("Invalid background task type: \(type(of: task))", category: .general)
                     task.setTaskCompleted(success: false)
                     return
                 }
@@ -55,7 +55,7 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
     
     func scheduleBackgroundRefresh() {
         guard isBackgroundRefreshEnabled else {
-            print("📱 Background refresh is disabled")
+            Logger.info("Background refresh is disabled", category: .general)
             return
         }
         
@@ -66,16 +66,16 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
             
             do {
                 try BGTaskScheduler.shared.submit(request)
-                print("🔄 Background refresh scheduled successfully")
+                Logger.info("Background refresh scheduled successfully", category: .general)
             } catch {
-                print("❌ Failed to schedule background refresh: \(error)")
+                Logger.error("Failed to schedule background refresh: \(error)", category: .general)
             }
         }
         #endif
     }
     
     func handleBackgroundRefresh() async {
-        print("🔄 Starting background refresh...")
+        Logger.info("Starting background refresh...", category: .general)
         
         // Always get all topics -> categories
         let languageCode = articleLanguageManager.languageCode
@@ -93,7 +93,7 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
         // Preload images
         await articleRepository.preloadImages(for: articles)
         
-        print("✅ Background refresh completed successfully - preloaded \(articles.count) articles")
+        Logger.info("Background refresh completed successfully - preloaded \(articles.count) articles", category: .general)
     }
     
     func enableBackgroundRefresh(_ enabled: Bool) {

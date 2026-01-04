@@ -244,7 +244,7 @@ struct SearchLoadingIndicator: View {
                     )
             }
             
-            Text("Searching...")
+                Text(languageManager.localizedString(key: "searching"))
                 .font(.system(size: 14))
                 .foregroundColor(.white.opacity(0.7))
         }
@@ -270,11 +270,11 @@ struct EmptySearchStateView: View {
                 .foregroundColor(.white.opacity(0.5))
             
             VStack(spacing: 8) {
-                Text("No results found")
+                Text(languageManager.localizedString(key: "no_results"))
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(.white)
                 
-                Text("Try searching for something else")
+                Text(languageManager.localizedString(key: "try_different_search"))
                     .font(.system(size: 14))
                     .foregroundColor(.white.opacity(0.7))
                     .multilineTextAlignment(.center)

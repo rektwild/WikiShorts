@@ -169,7 +169,7 @@ class OnThisDayService: ObservableObject {
         do {
             return try decoder.decode(OnThisDayResponse.self, from: data)
         } catch {
-            print("Decoding error: \(error)")
+            Logger.error("Decoding error: \(error)", category: .network)
             throw OnThisDayError.decodingError(error)
         }
     }
@@ -215,7 +215,11 @@ class OnThisDayCacheManager {
         cacheDirectory = cachesURL.appendingPathComponent("OnThisDayCache")
         
         // Create cache directory if it doesn't exist
-        try? fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
+        do {
+            try fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
+        } catch {
+            Logger.error("Failed to create cache directory: \(error)", category: .storage)
+        }
     }
     
     /// Generates a cache file name for a specific date and language
@@ -258,7 +262,7 @@ class OnThisDayCacheManager {
             let fileURL = cacheFileURL(for: date, language: language)
             try data.write(to: fileURL)
         } catch {
-            print("Failed to cache data: \(error)")
+            Logger.error("Failed to cache data: \(error)", category: .storage)
         }
     }
     
@@ -284,13 +288,17 @@ class OnThisDayCacheManager {
             // Check if cache is expired
             guard !cachedData.isExpired else {
                 // Remove expired cache
-                try? fileManager.removeItem(at: fileURL)
+                do {
+                    try fileManager.removeItem(at: fileURL)
+                } catch {
+                    Logger.warning("Failed to remove expired cache file: \(error)", category: .storage)
+                }
                 return nil
             }
             
             return cachedData
         } catch {
-            print("Failed to load cached data: \(error)")
+            Logger.error("Failed to load cached data: \(error)", category: .storage)
             return nil
         }
     }
@@ -301,13 +309,26 @@ class OnThisDayCacheManager {
     ///   - language: The language code
     func clearCache(for date: Date, language: String) {
         let fileURL = cacheFileURL(for: date, language: language)
-        try? fileManager.removeItem(at: fileURL)
+        do {
+            try fileManager.removeItem(at: fileURL)
+        } catch {
+             // Ignore "file not found" errors, log others
+             if (error as NSError).code != NSFileNoSuchFileError {
+                 Logger.warning("Failed to clear cache file: \(error)", category: .storage)
+             }
+        }
     }
     
     /// Clears all cached "On This Day" data
     func clearAllCache() {
-        try? fileManager.removeItem(at: cacheDirectory)
-        try? fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
+        do {
+            if fileManager.fileExists(atPath: cacheDirectory.path) {
+                try fileManager.removeItem(at: cacheDirectory)
+            }
+            try fileManager.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
+        } catch {
+            Logger.error("Failed to clear and recreate cache directory: \(error)", category: .storage)
+        }
     }
     
     /// Gets the total size of the cache in bytes

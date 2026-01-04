@@ -123,7 +123,7 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
         }
         
         guard let url = URL(string: urlString) else {
-            print("📸 Invalid URL: \(urlString)")
+            Logger.error("Invalid URL: \(urlString)", category: .network)
             return nil
         }
         
@@ -152,29 +152,29 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
                         // Rate limited - retry with backoff
                         currentRetry += 1
                         if currentRetry <= maxRetries {
-                            print("📸 Rate limited (429), retry \(currentRetry)/\(maxRetries) for: \(urlString.prefix(60))...")
+                            Logger.info("Rate limited (429), retry \(currentRetry)/\(maxRetries) for: \(urlString.prefix(60))...", category: .network)
                             continue
                         } else {
-                            print("📸 Rate limited, max retries reached for: \(urlString.prefix(60))...")
+                            Logger.error("Rate limited, max retries reached for: \(urlString.prefix(60))...", category: .network)
                             return nil
                         }
                     }
                     
                     guard (200...299).contains(httpResponse.statusCode) else {
-                        print("📸 HTTP error \(httpResponse.statusCode) for: \(urlString)")
+                        Logger.error("HTTP error \(httpResponse.statusCode) for: \(urlString)", category: .network)
                         return nil
                     }
                 }
                 
                 guard !data.isEmpty else {
-                    print("📸 Empty data for: \(urlString)")
+                    Logger.error("Empty data for: \(urlString)", category: .network)
                     return nil
                 }
                 
                 // Downsample image for memory efficiency (80-90% reduction)
                 let targetSize = CGSize(width: 800, height: 800)
                 guard let image = downsampleImage(data: data, to: targetSize) else {
-                    print("📸 Failed to downsample image (\(data.count) bytes) for: \(urlString)")
+                    Logger.error("Failed to downsample image (\(data.count) bytes) for: \(urlString)", category: .network)
                     return nil
                 }
                 
@@ -186,7 +186,7 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
                 if Task.isCancelled {
                     return nil
                 }
-                print("📸 Failed to preload image: \(urlString.prefix(60))... - \(error.localizedDescription)")
+                Logger.error("Failed to preload image: \(urlString.prefix(60))... - \(error.localizedDescription)", category: .network)
                 currentRetry += 1
                 if currentRetry > maxRetries {
                     return nil
@@ -201,7 +201,7 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     func clearImageCache() {
         imageQueue.async(flags: .barrier) { [weak self] in
             self?.imageCache.removeAllObjects()
-            print("🧹 Image cache cleared")
+            Logger.info("Image cache cleared", category: .cache)
         }
     }
     
@@ -209,7 +209,7 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
         cacheQueue.async(flags: .barrier) { [weak self] in
             self?.articleCache.removeAll()
             self?.articleAccessTime.removeAll()
-            print("🧹 Article cache cleared")
+            Logger.info("Article cache cleared", category: .cache)
         }
     }
     
@@ -250,12 +250,12 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     }
     
     private func handleMemoryWarning() {
-        print("🚨 Memory warning received - clearing caches")
+        Logger.warning("Memory warning received - clearing caches", category: .cache)
         
         // Clear half of the image cache
         imageQueue.async(flags: .barrier) { [weak self] in
             self?.imageCache.removeAllObjects()
-            print("🧹 Image cache cleared due to memory warning")
+            Logger.info("Image cache cleared due to memory warning", category: .cache)
         }
         
         // Clear half of the article cache
@@ -272,7 +272,7 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
                 self.articleAccessTime.removeValue(forKey: key)
             }
             
-            print("🧹 Article cache reduced from \(currentCount) to \(self.articleCache.count) articles due to memory warning")
+            Logger.info("Article cache reduced from \(currentCount) to \(self.articleCache.count) articles due to memory warning", category: .cache)
         }
     }
     

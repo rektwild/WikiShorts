@@ -2,6 +2,7 @@ import SwiftUI
 
 struct NotificationPermissionView: View {
     let onAllow: () -> Void
+    @StateObject private var languageManager = AppLanguageManager.shared
 
     
     var body: some View {
@@ -24,7 +25,7 @@ struct NotificationPermissionView: View {
                 
 
                 
-                Text("Get daily reminders to discover amazing Wikipedia articles")
+                Text(languageManager.localizedString(key: "daily_reminders_setup"))
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(.white.opacity(0.8))
                     .multilineTextAlignment(.center)
@@ -36,7 +37,7 @@ struct NotificationPermissionView: View {
                     Image(systemName: "clock.fill")
                         .foregroundColor(.blue)
                         .font(.system(size: 20))
-                    Text("Daily reminders at 8:00, 13:00, 18:00, and 23:00")
+                    Text(languageManager.localizedString(key: "daily_reminders_detail"))
                         .font(.system(size: 16))
                         .foregroundColor(.white)
                     Spacer()
@@ -46,7 +47,7 @@ struct NotificationPermissionView: View {
                     Image(systemName: "globe")
                         .foregroundColor(.blue)
                         .font(.system(size: 20))
-                    Text("Notifications in your selected language")
+                    Text(languageManager.localizedString(key: "notifications_language"))
                         .font(.system(size: 16))
                         .foregroundColor(.white)
                     Spacer()
@@ -56,7 +57,7 @@ struct NotificationPermissionView: View {
                     Image(systemName: "hand.raised.fill")
                         .foregroundColor(.blue)
                         .font(.system(size: 20))
-                    Text("You can disable this anytime in Settings")
+                    Text(languageManager.localizedString(key: "disable_anytime"))
                         .font(.system(size: 16))
                         .foregroundColor(.white)
                     Spacer()

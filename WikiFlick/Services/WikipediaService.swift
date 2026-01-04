@@ -30,14 +30,14 @@ class WikipediaService: ObservableObject, WikipediaServiceProtocol {
         self.articleRepository = articleRepository
         self.imageLoadingService = imageLoadingService
         
-        print("🚀 WikipediaService initialized")
+        Logger.info("WikipediaService initialized", category: .wikipedia)
     }
 
     var languageCode: String {
         let code = articleLanguageManager.languageCode
         // Ensure language is supported for Wikipedia API
         if !articleLanguageManager.isLanguageSupported(articleLanguageManager.selectedLanguage) {
-            print("⚠️ Language \(code) is not supported, falling back to English")
+            Logger.error("Language \(code) is not supported, falling back to English", category: .wikipedia)
             return "en"
         }
         return code

@@ -63,7 +63,7 @@ struct NativeAdView: UIViewRepresentable {
         
         // Ad indicator
         let adLabel = UILabel()
-        adLabel.text = "Ad"
+        adLabel.text = AppLanguageManager.shared.localizedString(key: "ad")
         adLabel.font = UIFont.systemFont(ofSize: 10, weight: .medium)
         adLabel.textColor = .systemYellow
         adLabel.backgroundColor = UIColor.black.withAlphaComponent(0.3)
@@ -334,7 +334,7 @@ struct NativeAdCardView: View {
         VStack {
             HStack {
                 Spacer()
-                Text("Ad")
+                Text(AppLanguageManager.shared.localizedString(key: "ad"))
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.black)
                     .padding(.horizontal, 8)
@@ -451,11 +451,11 @@ struct FeedAdView: View {
                 .rotationEffect(.degrees(imageOpacity * 360))
                 
                 VStack(spacing: 8) {
-                    Text("Sponsored")
+                    Text(AppLanguageManager.shared.localizedString(key: "sponsored_content"))
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.white)
                     
-                    Text("Discover Amazing Content")
+                    Text(AppLanguageManager.shared.localizedString(key: "discover_amazing_content"))
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white.opacity(0.8))
                         .multilineTextAlignment(.center)

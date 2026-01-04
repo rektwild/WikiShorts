@@ -32,7 +32,7 @@ class StoreManager: ObservableObject {
                     await transaction.finish()
                     await self.updatePurchasedProducts()
                 } catch {
-                    print("Transaction failed verification")
+                    Logger.error("Transaction failed verification", category: .payment)
                 }
             }
         }
@@ -81,7 +81,7 @@ class StoreManager: ObservableObject {
                     await updatePurchasedProducts()
                 case .unverified(let transaction, let verificationError):
                     // Log security issue but don't grant entitlement
-                    print("🚨 SECURITY: Unverified transaction detected - \(verificationError)")
+                    Logger.fault("SECURITY: Unverified transaction detected - \(verificationError)", category: .payment)
                     await transaction.finish() // Finish to remove from queue but don't grant access
                     errorMessage = "Purchase verification failed. Please contact support if this issue persists."
                 }

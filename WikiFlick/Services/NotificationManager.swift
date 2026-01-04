@@ -33,7 +33,7 @@ class NotificationManager: ObservableObject {
             )
             return granted
         } catch {
-            print("Notification permission error: \(error)")
+            Logger.error("Notification permission error: \(error)", category: .general)
             return false
         }
     }
@@ -78,9 +78,9 @@ class NotificationManager: ObservableObject {
         
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
-                print("Error scheduling notification \(identifier): \(error)")
+                Logger.error("Error scheduling notification \(identifier): \(error)", category: .general)
             } else {
-                print("Successfully scheduled notification \(identifier) for \(hour):\(String(format: "%02d", minute))")
+                Logger.info("Successfully scheduled notification \(identifier) for \(hour):\(String(format: "%02d", minute))", category: .general)
             }
         }
     }

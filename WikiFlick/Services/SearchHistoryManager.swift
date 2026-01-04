@@ -60,18 +60,25 @@ class SearchHistoryManager: ObservableObject {
     }
     
     private func loadSearchHistory() {
-        guard let data = userDefaults.data(forKey: historyKey),
-              let decodedHistory = try? JSONDecoder().decode([SearchHistory].self, from: data) else {
-            return
-        }
+        guard let data = userDefaults.data(forKey: historyKey) else { return }
         
-        // Filter out old searches (older than 30 days)
-        let cutoffDate = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
-        searchHistory = decodedHistory.filter { $0.timestamp > cutoffDate }
+        do {
+            let decodedHistory = try JSONDecoder().decode([SearchHistory].self, from: data)
+            
+            // Filter out old searches (older than 30 days)
+            let cutoffDate = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
+            searchHistory = decodedHistory.filter { $0.timestamp > cutoffDate }
+        } catch {
+            Logger.error("Failed to decode search history: \(error)", category: .storage)
+        }
     }
     
     private func saveSearchHistory() {
-        guard let encoded = try? JSONEncoder().encode(searchHistory) else { return }
-        userDefaults.set(encoded, forKey: historyKey)
+        do {
+            let encoded = try JSONEncoder().encode(searchHistory)
+            userDefaults.set(encoded, forKey: historyKey)
+        } catch {
+            Logger.error("Failed to encode search history: \(error)", category: .storage)
+        }
     }
 }
