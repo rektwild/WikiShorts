@@ -354,3 +354,12 @@ extension View {
         )
     }
 }
+
+// MARK: - Collection Extensions
+
+extension Collection {
+    /// Safe access to array elements
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
