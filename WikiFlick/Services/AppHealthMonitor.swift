@@ -107,9 +107,9 @@ final class AppHealthMonitor {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             let retrieved = cacheManager.getCachedArticle(pageId: -999)
             if retrieved == nil {
-                LoggingService.shared.logError("Cache test failed - article not retrieved", category: .cache)
+                LoggingService.shared.logError("Cache test failed - article not retrieved", category: .storage)
             } else {
-                LoggingService.shared.logInfo("Cache test passed", category: .cache)
+                LoggingService.shared.logInfo("Cache test passed", category: .storage)
             }
         }
     }
@@ -144,9 +144,9 @@ final class AppHealthMonitor {
         // Check Ad Manager
         let adManager = AdMobManager.shared
         if adManager.isCurrentNativeAdValid() {
-            LoggingService.shared.logInfo("Native ad loaded and valid", category: .ads)
+            LoggingService.shared.logInfo("Native ad loaded and valid", category: .adMob)
         } else {
-            LoggingService.shared.logWarning("No valid native ad available", category: .ads)
+            LoggingService.shared.logWarning("No valid native ad available", category: .adMob)
         }
     }
     
