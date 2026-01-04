@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct TodayView: View {
     
@@ -15,6 +16,7 @@ struct TodayView: View {
     @Binding var showingRewardAlert: Bool
     @Binding var showingNoAdAlert: Bool
     
+    @ObservedObject var adMobManager = AdMobManager.shared
     @StateObject private var onThisDayService = OnThisDayService()
     @EnvironmentObject var storeManager: StoreManager
     @State private var selectedEvent: OnThisDayEvent?
@@ -54,8 +56,8 @@ struct TodayView: View {
                                 .padding(.top, 16)
                             
                             // Banner Ad
-                            if !AdMobManager.shared.isPremiumUser {
-                                BannerAdView(adUnitID: AdMobManager.shared.bannerAdUnitID)
+                            if !adMobManager.isPremiumUser {
+                                BannerAdView(adUnitID: adMobManager.bannerAdUnitID)
                                     .frame(height: 50)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 8)
@@ -129,6 +131,13 @@ struct TodayView: View {
                 ) {
                     selectedEvent = event
                     showingEventDetail = true
+                }
+                
+                // Native Feed Ad
+                if adMobManager.shouldShowFeedAd(forArticleIndex: index),
+                   let nativeAd = adMobManager.currentNativeAd {
+                    NativeTimelineAdRow(nativeAd: nativeAd)
+                        .padding(.bottom, 24)
                 }
             }
         }
@@ -587,4 +596,41 @@ struct PageRow: View {
         showingRewardAlert: .constant(false),
         showingNoAdAlert: .constant(false)
     )
+}
+
+// MARK: - Native Timeline Ad Row
+
+struct NativeTimelineAdRow: View {
+    let nativeAd: GoogleMobileAds.NativeAd
+    @Environment(\.colorScheme) var colorScheme
+    
+    var body: some View {
+        HStack(alignment: .top, spacing: 16) {
+            // Timeline line (simplified, no dot for ad)
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.blue.opacity(0.1)]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .frame(width: 2)
+                .padding(.leading, 7) // Center align with 16 width header of timeline
+            
+            // Ad Content
+            NativeAdView(nativeAd: nativeAd)
+                .frame(height: 180)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color(UIColor.secondarySystemGroupedBackground))
+                        .shadow(
+                            color: Color.black.opacity(colorScheme == .dark ? 0.3 : 0.05),
+                            radius: 8,
+                            x: 0,
+                            y: 4
+                        )
+                )
+        }
+    }
 }
