@@ -329,3 +329,86 @@ struct SkeletonModifier: ViewModifier {
             }
     }
 }
+
+// MARK: - State Views
+
+struct ErrorStateView: View {
+    let errorMessage: String?
+    let retryAction: () -> Void
+    @StateObject private var languageManager = AppLanguageManager.shared
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.system(size: 50))
+                .foregroundColor(.yellow)
+            
+            Text(languageManager.localizedString(key: "something_went_wrong"))
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            
+            if let error = errorMessage {
+                Text(error)
+                    .font(.body)
+                    .foregroundColor(.white.opacity(0.7))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+            }
+            
+            Button(action: retryAction) {
+                Text(languageManager.localizedString(key: "try_again"))
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+                    .cornerRadius(12)
+            }
+            .padding(.horizontal, 40)
+            .padding(.top, 10)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black.ignoresSafeArea())
+    }
+}
+
+struct EmptyStateView: View {
+    let refreshAction: () -> Void
+    @StateObject private var languageManager = AppLanguageManager.shared
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "newspaper")
+                .font(.system(size: 50))
+                .foregroundColor(.white.opacity(0.5))
+            
+            Text(languageManager.localizedString(key: "no_articles_available"))
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            
+            Text(languageManager.localizedString(key: "check_connection"))
+                .font(.body)
+                .foregroundColor(.white.opacity(0.7))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+            
+            Button(action: refreshAction) {
+                Text(languageManager.localizedString(key: "retry"))
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+                    .cornerRadius(12)
+            }
+            .padding(.horizontal, 40)
+            .padding(.top, 10)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black.ignoresSafeArea())
+    }
+}

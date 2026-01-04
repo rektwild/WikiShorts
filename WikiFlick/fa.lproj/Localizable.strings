@@ -76,3 +76,7 @@
 "daily_reminder_body" = "مقالات جذاب جدید ویکی‌پدیا را کشف کنید!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "در این روز";
+"today_subtitle" = "رویدادهای تاریخی که در این روز رخ دادند";
+"today" = "امروز";

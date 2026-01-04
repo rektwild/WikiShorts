@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Aimsigh ailt nua suimiúla Vicipéid!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Ar an Lá Seo";
+"today_subtitle" = "Eachtraí stairiúla a tharla ar an lá seo";
+"today" = "Inniu";

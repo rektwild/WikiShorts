@@ -76,3 +76,7 @@
 "daily_reminder_body" = "새로운 흥미진진한 위키백과 기사를 발견하세요!";
 "random_article" = "랜덤";
 "feed" = "Feed";
+
+"today_title" = "오늘의 역사";
+"today_subtitle" = "오늘 일어난 역사적인 사건들";
+"today" = "오늘";

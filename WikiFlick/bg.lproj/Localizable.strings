@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Открийте нови увлекателни статии от Уикипедия!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "На този ден";
+"today_subtitle" = "Исторически събития, случили се на този ден";
+"today" = "Днес";

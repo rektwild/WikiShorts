@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "ഇന്നത്തെ ദിവസം";
+"today_subtitle" = "ഈ ദിവസം നടന്ന ചരിത്ര സംഭവങ്ങൾ";
+"today" = "ഇന്ന്";

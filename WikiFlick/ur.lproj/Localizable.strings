@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "آج کے دن";
+"today_subtitle" = "تاریخی واقعات جو آج کے دن پیش آئے";
+"today" = "آج";

@@ -64,7 +64,7 @@ struct ProductCard: View {
     
     private func getPriceSuffix() -> String {
         if product.id == "wiki_w" {
-            return "/week"
+            return languageManager.localizedString(key: "per_week")
         }
         return ""
     }

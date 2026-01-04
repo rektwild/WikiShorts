@@ -126,6 +126,9 @@ struct RandomArticleView: View {
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("RefreshRandomArticle"))) { _ in
             refreshFeed()
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("RefreshFeed"))) { _ in
+            refreshFeed()
+        }
         .onReceive(NotificationCenter.default.publisher(for: .articleLanguageChanged)) { _ in
             refreshFeed()
         }
@@ -176,3 +179,9 @@ struct RandomArticleView: View {
     RandomArticleView()
 }
 
+
+enum FeedItem {
+    case article(WikipediaArticle)
+    case nativeAd(NativeAd)
+    case feedAd(NativeAd)
+}

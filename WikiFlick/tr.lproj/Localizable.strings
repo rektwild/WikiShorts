@@ -14,7 +14,6 @@
 "ok" = "Tamam";
 "no_ad_available" = "Şuanda gösterilecek reklam yok, daha sonra tekrar deneyin.";
 "try_again_later" = "Daha sonra tekrar deneyin";
-"back_to_feed" = "Ana Sayfaya Dön";
 "learn_more" = "Daha Fazla";
 "sponsored_content" = "Sponsorlu İçerik";
 "ad" = "Reklam";
@@ -87,9 +86,9 @@
 "showing_cached_data" = "Önbelleklenmiş veriler gösteriliyor";
 "offline_mode" = "Çevrimdışı mod";
 "random_article" = "Rastgele";
-"feed" = "Akış";
 
 "lifetime" = "Ömür Boyu";
 "one_time_payment" = "Tek seferlik ödeme";
 "one_week" = "1 Hafta";
 "weekly" = "Haftalık";
+"per_week" = "/hafta";

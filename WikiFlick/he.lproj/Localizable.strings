@@ -76,3 +76,7 @@
 "daily_reminder_body" = "גלה מאמרי ויקיפדיה חדשים ומרתקים!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "היום בהיסטוריה";
+"today_subtitle" = "אירועים היסטוריים שהתרחשו ביום זה";
+"today" = "היום";

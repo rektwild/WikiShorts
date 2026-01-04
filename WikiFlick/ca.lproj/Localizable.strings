@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Descobreix nous articles fascinants de la Viquipèdia!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Tal dia com avui";
+"today_subtitle" = "Esdeveniments històrics que van passar tal dia com avui";
+"today" = "Avui";

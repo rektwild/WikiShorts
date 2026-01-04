@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Descoperiți articole noi fascinante de pe Wikipedia!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "În această zi";
+"today_subtitle" = "Evenimente istorice care au avut loc în această zi";
+"today" = "Azi";

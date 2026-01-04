@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Darganfyddwch erthyglau Wicipedia newydd cyffrous!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Ar Y Dydd Hwn";
+"today_subtitle" = "Digwyddiadau hanesyddol a ddigwyddodd ar y dydd hwn";
+"today" = "Heddiw";

@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "ယနေ့";
+"today_subtitle" = "ယနေ့ဖြစ်ပျက်ခဲ့သော သမိုင်းဝင်ဖြစ်ရပ်များ";
+"today" = "ယနေ့";

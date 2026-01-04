@@ -76,3 +76,7 @@
 "daily_reminder_body" = "नए दिलचस्प विकिपीडिया लेखों को खोजें!";
 "random_article" = "यादृच्छिक";
 "feed" = "Feed";
+
+"today_title" = "आज के दिन";
+"today_subtitle" = "ऐतिहासिक घटनाएं जो आज के दिन हुई थीं";
+"today" = "आज";

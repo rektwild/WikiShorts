@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Бұл күні";
+"today_subtitle" = "Бұл күні болған тарихи оқиғалар";
+"today" = "Бүгін";

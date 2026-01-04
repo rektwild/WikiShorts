@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "На денешен ден";
+"today_subtitle" = "Историски настани што се случиле на овој ден";
+"today" = "Денес";

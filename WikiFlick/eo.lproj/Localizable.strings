@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Malkovru novajn ravantajn Vikipedio-artikolojn!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Je ĉi tiu tago";
+"today_subtitle" = "Historiaj eventoj kiuj okazis en ĉi tiu tago";
+"today" = "Hodiaŭ";

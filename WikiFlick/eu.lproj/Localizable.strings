@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Aurkitu Wikipedia artikulu berri liluragarriak!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Gaurko egunez";
+"today_subtitle" = "Egun honetan gertatutako gertaera historikoak";
+"today" = "Gaur";

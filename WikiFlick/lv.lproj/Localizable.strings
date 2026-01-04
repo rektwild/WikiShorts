@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Šajā dienā";
+"today_subtitle" = "Vēsturiski notikumi, kas notika šajā dienā";
+"today" = "Šodien";

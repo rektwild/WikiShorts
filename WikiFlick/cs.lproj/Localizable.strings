@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Objevte nové fascinující články Wikipedie!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "V tento den";
+"today_subtitle" = "Historické události, které se staly v tento den";
+"today" = "Dnes";

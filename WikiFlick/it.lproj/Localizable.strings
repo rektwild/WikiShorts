@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Scopri nuovi affascinanti articoli di Wikipedia!";
 "random_article" = "Casuale";
 "feed" = "Feed";
+
+"today_title" = "Accadde oggi";
+"today_subtitle" = "Eventi storici accaduti in questo giorno";
+"today" = "Oggi";

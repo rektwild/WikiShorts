@@ -76,3 +76,7 @@
 "daily_reminder_body" = "魅力的な新しいWikipedia記事を発見しよう！";
 "random_article" = "ランダム";
 "feed" = "Feed";
+
+"today_title" = "今日は何の日";
+"today_subtitle" = "この日に起きた歴史的な出来事";
+"today" = "今日";

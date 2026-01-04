@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Откријте нове фасцинантне Википедија чланке!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "На данашњи дан";
+"today_subtitle" = "Историјски догађаји који су се десили на данашњи дан";
+"today" = "Данас";

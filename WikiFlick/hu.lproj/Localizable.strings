@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Fedezz fel új lenyűgöző Wikipédia cikkeket!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Ezen a napon";
+"today_subtitle" = "Történelmi események, amelyek ezen a napon történtek";
+"today" = "Ma";

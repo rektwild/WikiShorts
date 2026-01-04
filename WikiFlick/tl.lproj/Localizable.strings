@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Sa Araw na Ito";
+"today_subtitle" = "Mga makasaysayang pangyayari na naganap sa araw na ito";
+"today" = "Ngayon";

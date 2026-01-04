@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Á þessum degi";
+"today_subtitle" = "Sögulegir atburðir sem gerðust á þessum degi";
+"today" = "Í dag";

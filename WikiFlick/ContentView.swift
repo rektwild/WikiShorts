@@ -12,8 +12,8 @@ struct ContentView: View {
     @State private var showingSettings = false
     @State private var showingPaywall = false
     @State private var searchText = ""
-    @State private var selectedSearchArticle: WikipediaArticle?
     @State private var showingRewardAlert = false
+
     @State private var showingNoAdAlert = false
 
     @State private var isSearching = false
@@ -34,26 +34,6 @@ struct ContentView: View {
                 Label(languageManager.localizedString(key: "today"), systemImage: "doc.text.image")
             }
             
-            // Feed Tab
-            if #available(iOS 16.0, *) {
-                NavigationStack {
-                    feedContent
-                        .toolbarBackground(.visible, for: .navigationBar)
-                        .toolbarBackground(Color.black.opacity(0.9), for: .navigationBar)
-                        .toolbarColorScheme(.dark, for: .navigationBar)
-                }
-                .tabItem {
-                    Label(languageManager.localizedString(key: "feed"), systemImage: "rectangle.stack")
-                }
-            } else {
-                NavigationView {
-                    feedContent
-                }
-                .navigationViewStyle(.stack)
-                .tabItem {
-                    Label(languageManager.localizedString(key: "feed"), systemImage: "rectangle.stack")
-                }
-            }
             
             // Random Article Tab
             if #available(iOS 16.0, *) {
@@ -140,16 +120,6 @@ struct ContentView: View {
     }
     
     @ViewBuilder
-    private var feedContent: some View {
-        FeedView(selectedSearchArticle: $selectedSearchArticle)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                leadingToolbarItems
-                trailingToolbarItems
-            }
-    }
-    
-    @ViewBuilder
     private var rewardAlertButtons: some View {
         Button(languageManager.localizedString(key: "watch_ad")) {
             if AdMobManager.shared.isRewardedAdLoaded {
@@ -160,65 +130,7 @@ struct ContentView: View {
         }
         Button(languageManager.localizedString(key: "cancel"), role: .cancel) { }
     }
-    
-    private var leadingToolbarItems: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            HStack(spacing: 8) {
-                profileButton
-                if selectedSearchArticle != nil {
-                    // Back button logic if needed, usually handled by NavStack automatically for pushed views
-                    // But here selectedSearchArticle might be handling custom view switching within FeedView
-                } else if !storeManager.isPurchased("wiki_m") {
-                    removeAdsButton
-                }
-            }
-        }
-    }
-    
-    private var trailingToolbarItems: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            WikiTrailingHeaderView(
-                showingSettings: $showingSettings,
-                showingRewardAlert: $showingRewardAlert,
-                showingNoAdAlert: $showingNoAdAlert
-            )
-        }
-    }
-    
-    private var profileButton: some View {
-        Button(action: {
-            if selectedSearchArticle != nil {
-                selectedSearchArticle = nil
-            } else {
-                refreshFeed()
-            }
-        }) {
-            Image("WikiShorts-pre")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 32, height: 32)
-                .clipShape(Circle())
-        }
-    }
 
-    private var removeAdsButton: some View {
-        Button(action: {
-            showingPaywall = true
-        }) {
-            HStack(spacing: 4) {
-                Image(systemName: "nosign")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.white)
-                Text(languageManager.localizedString(key: "remove_ads"))
-                    .font(.system(size: 14, weight: .semibold))
-            }
-            .foregroundColor(.white)
-        }
-    }
-
-    private func refreshFeed() {
-        NotificationCenter.default.post(name: NSNotification.Name("RefreshFeed"), object: nil)
-    }
 }
 
 #Preview {

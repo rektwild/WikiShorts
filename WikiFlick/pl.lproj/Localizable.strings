@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Odkryj nowe fascynujące artykuły z Wikipedii!";
 "random_article" = "Losowy";
 "feed" = "Feed";
+
+"today_title" = "Tego dnia";
+"today_subtitle" = "Wydarzenia historyczne, które miały miejsce tego dnia";
+"today" = "Dziś";

@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Löydä uusia kiehtovia Wikipedia-artikkeleita!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Tänä päivänä";
+"today_subtitle" = "Historiallisia tapahtumia, jotka tapahtuivat tänä päivänä";
+"today" = "Tänään";

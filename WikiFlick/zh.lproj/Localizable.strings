@@ -76,3 +76,7 @@
 "daily_reminder_body" = "发现精彩的维基百科新文章！";
 "random_article" = "随机";
 "feed" = "Feed";
+
+"today_title" = "历史上的今天";
+"today_subtitle" = "这一天发生的历史事件";
+"today" = "今天";

@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Ανακαλύψτε νέα συναρπαστικά άρθρα της Wikipedia!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Σαν σήμερα";
+"today_subtitle" = "Ιστορικά γεγονότα που συνέβησαν σαν σήμερα";
+"today" = "Σήμερα";

@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Avastage uusi põnevaid Vikipeedia artikleid!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Sel päeval";
+"today_subtitle" = "Sel päeval toimunud ajaloolised sündmused";
+"today" = "Täna";

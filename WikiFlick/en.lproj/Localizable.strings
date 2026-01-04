@@ -14,7 +14,7 @@
 "ok" = "OK";
 "no_ad_available" = "No ads available right now, please try again later.";
 "try_again_later" = "Try again later";
-"back_to_feed" = "Back to Feed";
+"try_again_later" = "Try again later";
 "learn_more" = "Learn More";
 "sponsored_content" = "Sponsored Content";
 "ad" = "Ad";
@@ -88,10 +88,9 @@
 "close" = "Close";
 "showing_cached_data" = "Showing cached data";
 "offline_mode" = "Offline mode";
-"random_article" = "Random";
-"feed" = "Feed";
 
 "lifetime" = "Lifetime";
 "one_time_payment" = "One-time payment";
 "one_week" = "1 Week";
 "weekly" = "Weekly";
+"per_week" = "/week";

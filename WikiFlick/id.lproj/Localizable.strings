@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Temukan artikel Wikipedia baru yang menarik!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Pada Hari Ini";
+"today_subtitle" = "Peristiwa sejarah yang terjadi pada hari ini";
+"today" = "Hari Ini";

@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Diskobre an bag-o nga makapainteres nga mga artikulo han Wikipedia!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "On This Day";
+"today_subtitle" = "Historical events that happened on this day";
+"today" = "Today";

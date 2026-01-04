@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Hoc die";
+"today_subtitle" = "Res gestae quae hoc die acciderunt";
+"today" = "Hodie";

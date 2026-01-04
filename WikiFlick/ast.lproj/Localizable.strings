@@ -76,3 +76,7 @@
 "daily_reminder_body" = "¡Descubri artículos fascinantes nuevos de Wikipedia!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Tal día como güei";
+"today_subtitle" = "Fechos históricos qu'asocedieron tal día como güei";
+"today" = "Güei";

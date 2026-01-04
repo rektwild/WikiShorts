@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Yeni maraqlı Vikipediya məqalələrini kəşf edin!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Bu Gün";
+"today_subtitle" = "Bu gün baş vermiş tarixi hadisələr";
+"today" = "Bu gün";

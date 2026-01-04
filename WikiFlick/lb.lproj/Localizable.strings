@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Op dësem Dag";
+"today_subtitle" = "Historesch Evenementer déi op dësem Dag geschitt sinn";
+"today" = "Haut";

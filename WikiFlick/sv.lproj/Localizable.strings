@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Upptäck nya fascinerande Wikipedia-artiklar!";
 "random_article" = "Slumpmässig";
 "feed" = "Feed";
+
+"today_title" = "Denna dag";
+"today_subtitle" = "Historiska händelser som inträffade denna dag";
+"today" = "Idag";

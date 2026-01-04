@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Bu kunda";
+"today_subtitle" = "Bu kunda sodir bo'lgan tarixiy voqealar";
+"today" = "Bugun";

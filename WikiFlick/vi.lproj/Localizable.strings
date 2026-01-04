@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Khám phá những bài viết Wikipedia mới thú vị!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Vào ngày này";
+"today_subtitle" = "Các sự kiện lịch sử đã xảy ra vào ngày này";
+"today" = "Hôm nay";

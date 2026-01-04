@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Zbulo artikuj të rinj fascinues të Wikipedia!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Në këtë ditë";
+"today_subtitle" = "Ngjarje historike që ndodhën në këtë ditë";
+"today" = "Sot";

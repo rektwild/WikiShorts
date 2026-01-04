@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "ในวันนี้";
+"today_subtitle" = "เหตุการณ์ทางประวัติศาสตร์ที่เกิดขึ้นในวันนี้";
+"today" = "วันนี้";

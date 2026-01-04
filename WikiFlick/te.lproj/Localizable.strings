@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "ఈ రోజు";
+"today_subtitle" = "ఈ రోజు జరిగిన చారిత్రక సంఘటనలు";
+"today" = "ఈ రోజు";

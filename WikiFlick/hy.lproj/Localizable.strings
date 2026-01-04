@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Այս օրը";
+"today_subtitle" = "Պատմական իրադարձություններ, որոնք տեղի են ունեցել այս օրը";
+"today" = "Այսօր";

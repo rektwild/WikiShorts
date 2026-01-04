@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Ontdek nuwe fassinerende Wikipedia artikels!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Op Hierdie Dag";
+"today_subtitle" = "Historiese gebeure wat op hierdie dag plaasgevind het";
+"today" = "Vandag";

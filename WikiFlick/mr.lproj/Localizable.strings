@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "आजच्या दिवशी";
+"today_subtitle" = "या दिवशी घडलेल्या ऐतिहासिक घटना";
+"today" = "आज";

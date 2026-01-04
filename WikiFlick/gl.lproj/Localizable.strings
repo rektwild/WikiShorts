@@ -76,3 +76,7 @@
 "daily_reminder_body" = "Descobre novos artigos fascinantes da Wikipedia!";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"today_title" = "Tal día como hoxe";
+"today_subtitle" = "Eventos históricos que sucederon tal día como hoxe";
+"today" = "Hoxe";
