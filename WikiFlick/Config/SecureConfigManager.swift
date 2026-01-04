@@ -53,7 +53,7 @@ final class SecureConfigManager {
     func validateConfiguration() -> [String] {
         var issues: [String] = []
         
-        let requiredKeys = ["InterstitialAdUnitID", "NativeAdUnitID", "RewardedAdUnitID"]
+        let requiredKeys = ["InterstitialAdUnitID", "NativeAdUnitID", "RewardedAdUnitID", "BannerAdUnitID"]
         
         for key in requiredKeys {
             if let value = getConfigValue(for: key) {

@@ -28,7 +28,7 @@ struct BannerAdView: UIViewRepresentable {
             banner.rootViewController = rootVC
         }
         
-        banner.load(Request())
+        banner.load(AdMobManager.shared.makeAdRequest())
         return banner
     }
     

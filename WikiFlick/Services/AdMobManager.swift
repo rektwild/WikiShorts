@@ -206,7 +206,7 @@ class AdMobManager: NSObject, ObservableObject {
         }
     }
     
-    private func makeAdRequest() -> Request {
+    func makeAdRequest() -> Request {
         let request = Request()
         if let extras = GlobalAdConfig.shared.nonPersonalizedExtras {
             request.register(extras)
