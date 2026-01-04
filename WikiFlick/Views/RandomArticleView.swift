@@ -10,10 +10,10 @@ import GoogleMobileAds
 
 struct RandomArticleView: View {
     @ObservedObject private var randomManager = RandomArticleManager.shared
+    @ObservedObject private var adMobManager = AdMobManager.shared
     @State private var currentIndex = 0
     @State private var feedItems: [FeedItem] = []
     @State private var selectedSearchArticle: WikipediaArticle?
-    private let adMobManager = AdMobManager.shared
     
     var body: some View {
         ZStack {
@@ -123,6 +123,9 @@ struct RandomArticleView: View {
         .refreshable {
             refreshFeed()
         }
+        .onChange(of: adMobManager.currentNativeAd) { _ in
+            updateFeedItems()
+        }
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("RefreshRandomArticle"))) { _ in
             refreshFeed()
         }
@@ -165,13 +168,19 @@ struct RandomArticleView: View {
     }
     
     private func createFeedItems() -> [FeedItem] {
-        var feedItems: [FeedItem] = []
+        var items: [FeedItem] = []
 
-        for (_, article) in randomManager.articles.enumerated() {
-            feedItems.append(.article(article))
+        for (index, article) in randomManager.articles.enumerated() {
+            items.append(.article(article))
+            
+            // Ad insertion logic
+            if adMobManager.shouldShowFeedAd(forArticleIndex: index),
+               let nativeAd = adMobManager.currentNativeAd {
+                items.append(.feedAd(nativeAd))
+            }
         }
 
-        return feedItems
+        return items
     }
 }
 
