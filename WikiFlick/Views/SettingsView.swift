@@ -177,8 +177,7 @@ struct SettingsView: View {
                         Image(systemName: "info.circle")
                         Text(languageManager.localizedString(key: "app_version"))
                         Spacer()
-                        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
-                        Text(version)
+                        Text(Bundle.main.formattedVersion)
                             .foregroundColor(.secondary)
                     }
                     

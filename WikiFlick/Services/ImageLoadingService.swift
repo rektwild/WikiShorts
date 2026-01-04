@@ -14,9 +14,7 @@ class ImageLoadingService: ImageLoadingServiceProtocol {
     private let cacheManager: ArticleCacheManagerProtocol
     private let urlSession: URLSession
     private let userAgent: String = {
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
-        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
-        return "WikiFlick/\(version) (Build \(build))"
+        return "WikiFlick/\(Bundle.main.formattedVersion)"
     }()
     
     private init(
