@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Experiencia sin anuncios";
 "ad_free_experience_desc" = "Disfruta de lectura ininterrumpida sin ningún anuncio";
-"free_trial" = "Prueba gratuita de 2 semanas";
+"free_trial" = "2 semanas de prueba gratis";
 "free_trial_desc" = "Prueba todas las funciones premium completamente gratis";
 "faster_loading" = "Carga más rápida";
 "faster_loading_desc" = "Servidores premium para carga ultra-rápida de artículos";
@@ -97,7 +97,7 @@
 "per_week" = "/semana";
 "back" = "Atrás";
 "searching" = "Buscando...";
-"no_results" = "No se encontraron resultados";
+"no_results" = "Sin resultados";
 "try_different_search" = "Intenta con otro término de búsqueda";
 "recent_searches" = "Búsquedas recientes";
 "brief_article_summary" = "Breve resumen del artículo...";
@@ -105,7 +105,7 @@
 "image_cache" = "Caché de imágenes";
 "article_cache" = "Caché de artículos";
 "memory_limit" = "Límite de memoria";
-"clear_all_cache" = "Borrar toda la caché";
+"clear_all_cache" = "Borrar caché";
 "cache_items" = "elementos";
 "popular" = "Popular";
 "continue" = "Continuar";
@@ -118,7 +118,7 @@
 "discover_amazing_content" = "Descubrir";
 "subscription_disclaimer" = "Las suscripciones se renuevan automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual. Se le cobrará a su cuenta la renovación dentro de las 24 horas anteriores al final del período actual. El pago se cargará a la cuenta de iTunes en la confirmación de la compra. Puede administrar su suscripción y desactivar la renovación automática yendo a la Configuración de su cuenta después de la compra.";
 "report_issue" = "Reportar";
-"report_alert_title" = "Reportar Artículo";
+"report_alert_title" = "Reportar artículo";
 "report_alert_message" = "Gracias, lo revisaremos.";
 "search_wikipedia_title" = "Buscar en Wikipedia";
 "search_description" = "Encuentra artículos, temas y más";
@@ -126,7 +126,7 @@
 "no_description" = "Sin descripción";
 "pro" = "PRO";
 "free" = "GRATIS";
-"stay_updated" = "Mantente al día";
-"all_languages" = "Todos";
+"stay_updated" = "Mantente informado";
+"all_languages" = "Todos los idiomas";
 "search_languages" = "Buscar idiomas";
 "random_article" = "Aleatorio";

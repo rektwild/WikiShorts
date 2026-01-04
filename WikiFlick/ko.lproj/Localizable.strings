@@ -97,7 +97,7 @@
 "per_week" = "/주";
 "back" = "뒤로";
 "searching" = "검색 중...";
-"no_results" = "결과를 찾을 수 없습니다";
+"no_results" = "결과 없음";
 "try_different_search" = "다른 검색어로 시도해보세요";
 "recent_searches" = "최근 검색";
 "brief_article_summary" = "문서 요약...";
@@ -105,7 +105,7 @@
 "image_cache" = "이미지 캐시";
 "article_cache" = "기사 캐시";
 "memory_limit" = "메모리 제한";
-"clear_all_cache" = "모든 캐시 삭제";
+"clear_all_cache" = "캐시 지우기";
 "cache_items" = "개";
 "popular" = "인기";
 "continue" = "계속";
@@ -115,10 +115,10 @@
 "disable_anytime" = "설정에서 언제든지 해제 가능";
 "sponsored_recommended" = "스폰서 · 추천 콘텐츠";
 "premium_pick" = "프리미엄 추천";
-"discover_amazing_content" = "놀라운 콘텐츠 발견하기";
+"discover_amazing_content" = "둘러보기";
 "subscription_disclaimer" = "구독은 현재 기간이 종료되기 최소 24시간 전에 자동 갱신을 끄지 않으면 자동으로 갱신됩니다. 현재 기간이 종료되기 24시간 이내에 갱신 비용이 계정에 청구됩니다. 결제는 구매 확인 시 iTunes 계정으로 청구됩니다. 구매 후 계정 설정으로 이동하여 구독을 관리하고 자동 갱신을 끌 수 있습니다.";
-"report_issue" = "문제 신고";
-"report_alert_title" = "기사 신고";
+"report_issue" = "신고";
+"report_alert_title" = "게시물 신고";
 "report_alert_message" = "신고해 주셔서 감사합니다. 곧 검토하겠습니다.";
 "search_wikipedia_title" = "위키백과 검색";
 "search_description" = "기사, 주제 등 검색";
@@ -126,7 +126,7 @@
 "no_description" = "설명 없음";
 "pro" = "PRO";
 "free" = "무료";
-"stay_updated" = "최신 정보 받기";
+"stay_updated" = "업데이트 유지";
 "all_languages" = "모든 언어";
 "search_languages" = "언어 검색";
-"random_article" = "랜덤 기사";
+"random_article" = "랜덤";

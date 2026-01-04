@@ -97,7 +97,7 @@
 "per_week" = "/周";
 "back" = "返回";
 "searching" = "搜索中...";
-"no_results" = "未找到结果";
+"no_results" = "无结果";
 "try_different_search" = "尝试其他搜索词";
 "recent_searches" = "最近搜索";
 "brief_article_summary" = "文章简介...";
@@ -105,7 +105,7 @@
 "image_cache" = "图片缓存";
 "article_cache" = "文章缓存";
 "memory_limit" = "内存限制";
-"clear_all_cache" = "清除所有缓存";
+"clear_all_cache" = "清除缓存";
 "cache_items" = "项";
 "popular" = "热门";
 "continue" = "继续";
@@ -115,9 +115,9 @@
 "disable_anytime" = "随时在设置中关闭";
 "sponsored_recommended" = "赞助 · 推荐";
 "premium_pick" = "精选";
-"discover_amazing_content" = "发现精彩";
+"discover_amazing_content" = "发现";
 "subscription_disclaimer" = "除非在当前期间结束前至少24小时关闭自动续订，否则订阅将自动续订。您的账户将在当前期间结束前24小时内收取续订费用。付款将在确认购买时从iTunes账户中扣除。购买后，您可以通过访问账户设置来管理您的订阅并关闭自动续订。";
-"report_issue" = "报告问题";
+"report_issue" = "报告";
 "report_alert_title" = "报告文章";
 "report_alert_message" = "感谢反馈，我们会尽快审核。";
 "search_wikipedia_title" = "搜索维基百科";

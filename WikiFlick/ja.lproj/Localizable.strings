@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "広告なし体験";
 "ad_free_experience_desc" = "広告なしで中断されない読書をお楽しみください";
-"free_trial" = "2週間無料試用";
+"free_trial" = "2週間無料トライアル";
 "free_trial_desc" = "すべてのプレミアム機能を完全無料で試用";
 "faster_loading" = "高速読み込み";
 "faster_loading_desc" = "記事の超高速読み込みのためのプレミアムサーバー";
@@ -90,14 +90,14 @@
 "favorites" = "お気に入り";
 "no_favorites" = "お気に入りはまだありません";
 "no_favorites_description" = "記事のハートアイコンをタップして、お気に入りに保存します";
-"lifetime" = "ライフタイム";
-"one_time_payment" = "1回限りのお支払い";
+"lifetime" = "生涯";
+"one_time_payment" = "一回限りの支払い";
 "one_week" = "1週間";
-"weekly" = "週間";
+"weekly" = "毎週";
 "per_week" = "/週";
 "back" = "戻る";
 "searching" = "検索中...";
-"no_results" = "結果が見つかりません";
+"no_results" = "結果なし";
 "try_different_search" = "別の検索語を試してください";
 "recent_searches" = "最近の検索";
 "brief_article_summary" = "短い記事の要約...";
@@ -105,7 +105,7 @@
 "image_cache" = "画像キャッシュ";
 "article_cache" = "記事キャッシュ";
 "memory_limit" = "メモリ制限";
-"clear_all_cache" = "すべてのキャッシュを削除";
+"clear_all_cache" = "キャッシュを消去";
 "cache_items" = "件";
 "popular" = "人気";
 "continue" = "次へ";
@@ -117,7 +117,7 @@
 "premium_pick" = "プレミアム";
 "discover_amazing_content" = "発見";
 "subscription_disclaimer" = "サブスクリプションは、現在の期間が終了する少なくとも24時間前に自動更新をオフにしない限り、自動的に更新されます。現在の期間が終了する24時間以内に、更新料金がアカウントに請求されます。支払いは購入確認時にiTunesアカウントに請求されます。購入後、アカウント設定に移動してサブスクリプションを管理し、自動更新をオフにすることができます。";
-"report_issue" = "問題を報告";
+"report_issue" = "報告";
 "report_alert_title" = "記事を報告";
 "report_alert_message" = "このコンテンツを報告していただきありがとうございます。できるだけ早く確認します。";
 "search_wikipedia_title" = "ウィキペディアを検索";
@@ -126,7 +126,7 @@
 "no_description" = "説明なし";
 "pro" = "プロ";
 "free" = "無料";
-"stay_updated" = "最新情報";
+"stay_updated" = "最新情報を入手";
 "all_languages" = "すべての言語";
 "search_languages" = "言語を検索";
 "random_article" = "ランダム";

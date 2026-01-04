@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Reklamsız Deneyim";
 "ad_free_experience_desc" = "Hiçbir reklam olmadan kesintisiz okuma deneyimi yaşayın";
-"free_trial" = "2 Hafta Ücretsiz Deneme";
+"free_trial" = "2 hafta ücretsiz deneme";
 "free_trial_desc" = "Tüm premium özellikleri tamamen ücretsiz deneyin";
 "faster_loading" = "Daha Hızlı Yükleme";
 "faster_loading_desc" = "Yıldırım hızında makale yükleme için premium sunucular";
@@ -99,13 +99,13 @@
 "searching" = "Aranıyor...";
 "no_results" = "Sonuç bulunamadı";
 "try_different_search" = "Farklı bir arama terimi deneyin";
-"recent_searches" = "Son Aramalar";
+"recent_searches" = "Son aramalar";
 "brief_article_summary" = "Kısa makale özeti...";
 "cache" = "Önbellek";
 "image_cache" = "Görsel Önbelleği";
 "article_cache" = "Makale Önbelleği";
 "memory_limit" = "Bellek Sınırı";
-"clear_all_cache" = "Tüm Önbelleği Temizle";
+"clear_all_cache" = "Önbelleği Temizle";
 "cache_items" = "öğe";
 "popular" = "Popüler";
 "continue" = "Devam Et";
@@ -115,9 +115,9 @@
 "disable_anytime" = "Bunu Ayarlar'dan istediğin zaman kapatabilirsin";
 "sponsored_recommended" = "Sponsorlu · Senin İçin Önerilen";
 "premium_pick" = "Premium Seçimi";
-"discover_amazing_content" = "İnanılmaz İçerikleri Keşfet";
+"discover_amazing_content" = "Keşfet";
 "subscription_disclaimer" = "Abonelikler, geçerli dönemin bitiminden en az 24 saat önce otomatik yenileme kapatılmadığı sürece otomatik olarak yenilenir. Hesabınızdan, geçerli dönemin bitiminden önceki 24 saat içinde yenileme ücreti tahsil edilecektir. Ödeme, satın alma onayının ardından iTunes Hesabından tahsil edilecektir. Satın alma işleminden sonra Hesap Ayarlarınıza giderek aboneliğinizi yönetebilir ve otomatik yenilemeyi kapatabilirsiniz.";
-"report_issue" = "Sorun Bildir";
+"report_issue" = "Bildir";
 "report_alert_title" = "Makaleyi Bildir";
 "report_alert_message" = "Bu içeriği bildirdiğiniz için teşekkürler. En kısa sürede inceleyeceğiz.";
 "search_wikipedia_title" = "Wikipedia'da Ara";

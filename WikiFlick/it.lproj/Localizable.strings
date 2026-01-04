@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Esperienza senza pubblicità";
 "ad_free_experience_desc" = "Goditi la lettura ininterrotta senza alcuna pubblicità";
-"free_trial" = "Prova gratuita di 2 settimane";
+"free_trial" = "2 settimane di prova gratuita";
 "free_trial_desc" = "Prova tutte le funzionalità premium completamente gratis";
 "faster_loading" = "Caricamento più veloce";
 "faster_loading_desc" = "Server premium per il caricamento ultra-veloce degli articoli";
@@ -96,8 +96,8 @@
 "weekly" = "Settimanale";
 "per_week" = "/settimana";
 "back" = "Indietro";
-"searching" = "Ricerca in corso...";
-"no_results" = "Nessun risultato trovato";
+"searching" = "Cercando...";
+"no_results" = "Nessun risultato";
 "try_different_search" = "Prova con un altro termine di ricerca";
 "recent_searches" = "Ricerche recenti";
 "brief_article_summary" = "Breve riassunto dell'articolo...";
@@ -105,7 +105,7 @@
 "image_cache" = "Cache immagini";
 "article_cache" = "Cache articoli";
 "memory_limit" = "Limite memoria";
-"clear_all_cache" = "Cancella tutta la cache";
+"clear_all_cache" = "Svuota cache";
 "cache_items" = "elementi";
 "popular" = "Popolare";
 "continue" = "Continua";
@@ -118,7 +118,7 @@
 "discover_amazing_content" = "Scopri";
 "subscription_disclaimer" = "Gli abbonamenti si rinnovano automaticamente a meno che il rinnovo automatico non venga disattivato almeno 24 ore prima della fine del periodo corrente. Il tuo account verrà addebitato per il rinnovo entro 24 ore dalla fine del periodo corrente. Il pagamento verrà addebitato sull'account iTunes al momento della conferma dell'acquisto. Puoi gestire il tuo abbonamento e disattivare il rinnovo automatico andando nelle Impostazioni account dopo l'acquisto.";
 "report_issue" = "Segnala";
-"report_alert_title" = "Segnala Articolo";
+"report_alert_title" = "Segnala articolo";
 "report_alert_message" = "Grazie, controlleremo.";
 "search_wikipedia_title" = "Cerca su Wikipedia";
 "search_description" = "Trova articoli, argomenti e altro";
@@ -126,7 +126,7 @@
 "no_description" = "Nessuna descrizione";
 "pro" = "PRO";
 "free" = "GRATIS";
-"stay_updated" = "Resta Aggiornato";
-"all_languages" = "Tutte";
+"stay_updated" = "Resta aggiornato";
+"all_languages" = "Tutte le lingue";
 "search_languages" = "Cerca lingue";
 "random_article" = "Casuale";

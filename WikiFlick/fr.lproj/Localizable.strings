@@ -96,8 +96,8 @@
 "weekly" = "Hebdomadaire";
 "per_week" = "/semaine";
 "back" = "Retour";
-"searching" = "Recherche en cours...";
-"no_results" = "Aucun résultat trouvé";
+"searching" = "Recherche...";
+"no_results" = "Aucun résultat";
 "try_different_search" = "Essayez un autre terme de recherche";
 "recent_searches" = "Recherches récentes";
 "brief_article_summary" = "Bref résumé de l'article...";
@@ -105,7 +105,7 @@
 "image_cache" = "Cache d'images";
 "article_cache" = "Cache d'articles";
 "memory_limit" = "Limite de mémoire";
-"clear_all_cache" = "Vider tout le cache";
+"clear_all_cache" = "Vider le cache";
 "cache_items" = "éléments";
 "popular" = "Populaire";
 "continue" = "Continuer";
@@ -118,7 +118,7 @@
 "discover_amazing_content" = "Découvrir";
 "subscription_disclaimer" = "Les abonnements se renouvellent automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours. Votre compte sera débité du renouvellement dans les 24 heures précédant la fin de la période en cours. Le paiement sera débité du compte iTunes lors de la confirmation de l'achat. Vous pouvez gérer votre abonnement et désactiver le renouvellement automatique en accédant à vos Paramètres de compte après l'achat.";
 "report_issue" = "Signaler";
-"report_alert_title" = "Signaler Article";
+"report_alert_title" = "Signaler l'article";
 "report_alert_message" = "Merci, nous allons examiner ceci.";
 "search_wikipedia_title" = "Rechercher sur Wikipédia";
 "search_description" = "Trouver des articles, des sujets et plus";
@@ -126,7 +126,7 @@
 "no_description" = "Pas de description";
 "pro" = "PRO";
 "free" = "GRATUIT";
-"stay_updated" = "Rester informé";
-"all_languages" = "Toutes";
+"stay_updated" = "Restez informé";
+"all_languages" = "Toutes les langues";
 "search_languages" = "Rechercher langue";
 "random_article" = "Aléatoire";
