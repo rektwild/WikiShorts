@@ -73,7 +73,7 @@
 "search" = "Bilatu";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Aurkitu Wikipedia artikulu berri liluragarriak!";
-"select_app_language" = "Select App Language";
+"select_app_language" = "Hautatu aplikazioaren hizkuntza";
 "select_article_language" = "Select Article Language";
 "today" = "Gaur";
 "on_this_day" = "On This Day";
@@ -109,10 +109,10 @@
 "cache_items" = "items";
 "popular" = "Popular";
 "continue" = "Continue";
-"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
-"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
-"notifications_language" = "Notifications in your selected language";
-"disable_anytime" = "You can disable this anytime in Settings";
+"daily_reminders_setup" = "Jaso eguneroko oroigarriak Wikipediako artikulu harrigarriak aurkitzeko";
+"daily_reminders_detail" = "Eguneroko oroigarriak 8:00, 13:00, 18:00 eta 23:00etan";
+"notifications_language" = "Jakinarazpenak hautatutako hizkuntzan";
+"disable_anytime" = "Hau ezarpenetan edozein unetan desgaitu dezakezu";
 "sponsored_recommended" = "Sponsored · Recommended for You";
 "premium_pick" = "Premium Pick";
 "discover_amazing_content" = "Ezagutu";

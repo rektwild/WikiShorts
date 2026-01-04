@@ -11,9 +11,9 @@ Löydä Tietoa Joka Päivä
 Valitsemme sinulle joka päivä Wikipedian kiinnostavimmat artikkelit! Tyydytä uteliaisuutesi ja opi jotain uutta.
 
 // Description
-Koe miellyttävin tapa hankkia tietoa! WikiFlick tuo Wikipedian loputtoman universumin sormiesi ulottuville modernissa ja nopeassa muodossa. Sen sijaan, että eksyisit pitkiin ja monimutkaisiin artikkeleihin, löydä uusia ja yllättäviä faktoja joka päivä.
+Koe miellyttävin tapa hankkia tietoa! WikiShorts tuo Wikipedian loputtoman universumin sormiesi ulottuville modernissa ja nopeassa muodossa. Sen sijaan, että eksyisit pitkiin ja monimutkaisiin artikkeleihin, löydä uusia ja yllättäviä faktoja joka päivä.
 
-WikiFlick on suunniteltu tekemään oppimisesta päivittäisen tavan. Olitpa sitten viiden minuutin tauolla tai matkalla, se on täydellinen kumppani yleissivistyksesi laajentamiseen.
+WikiShorts on suunniteltu tekemään oppimisesta päivittäisen tavan. Olitpa sitten viiden minuutin tauolla tai matkalla, se on täydellinen kumppani yleissivistyksesi laajentamiseen.
 
 AVAINOMINAISUUDET:
 
@@ -22,9 +22,9 @@ AVAINOMINAISUUDET:
 • Älykäs Haku: Pääset välittömästi käsiksi mihin tahansa sinua kiinnostavaan aiheeseen ja löydä nopeasti olennaiset artikkelit.
 • Suosikkilista: Tallenna helposti suosikkiartikkelisi tai ne, jotka haluat lukea myöhemmin, rakentaaksesi oman henkilökohtaisen kirjastosi.
 
-Miksi WikiFlick?
+Miksi WikiShorts?
 
-Koska oppimisen ei tarvitse olla tylsää. Saat käyttöösi tiivistettyä tietoa tuhansista aiheista, tieteestä ja taiteesta historiaan ja teknologiaan. Tee jokaisesta päivästä hieman älykkäämpi WikiFlickin avulla.
+Koska oppimisen ei tarvitse olla tylsää. Saat käyttöösi tiivistettyä tietoa tuhansista aiheista, tieteestä ja taiteesta historiaan ja teknologiaan. Tee jokaisesta päivästä hieman älykkäämpi WikiShortsin avulla.
 
 Lataa nyt ja aloita tutkimusmatkasi!
 

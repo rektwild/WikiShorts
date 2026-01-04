@@ -73,7 +73,7 @@
 "search" = "Suchen";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
-"select_app_language" = "Select App Language";
+"select_app_language" = "Pasirinkite programos kalbą";
 "select_article_language" = "Select Article Language";
 "today" = "Šiandien";
 "on_this_day" = "On This Day";
@@ -109,10 +109,10 @@
 "cache_items" = "items";
 "popular" = "Popular";
 "continue" = "Continue";
-"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
-"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
-"notifications_language" = "Notifications in your selected language";
-"disable_anytime" = "You can disable this anytime in Settings";
+"daily_reminders_setup" = "Gaukite kasdienius priminimus atrasti nuostabius Vikipedijos straipsnius";
+"daily_reminders_detail" = "Kasdieniai priminimai 8:00, 13:00, 18:00 ir 23:00";
+"notifications_language" = "Pranešimai pasirinkta kalba";
+"disable_anytime" = "Tai galite išjungti bet kada Nustatymuose";
 "sponsored_recommended" = "Sponsored · Recommended for You";
 "premium_pick" = "Premium Pick";
 "discover_amazing_content" = "Atraskite";

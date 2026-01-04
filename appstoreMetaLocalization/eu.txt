@@ -11,9 +11,9 @@ Ezagutza Berria Egunero
 Egunero Wikipediako artikulurik interesgarrienak aukeratzen ditugu zuretzat! Ase ezazu zure jakin-mina eta ikasi zerbait berria.
 
 // Description
-Ezagutza eskuratzeko modurik atseginena aurkeztu dizugu! WikiFlick-ek Wikipediaren unibertso zabala zure esku jartzen du formatu moderno eta azkar batean. Artikulu luze eta konplexuetan galdu beharrean, aurkitu datu berri eta harrigarriak egunero.
+Ezagutza eskuratzeko modurik atseginena aurkeztu dizugu! WikiShorts-ek Wikipediaren unibertso zabala zure esku jartzen du formatu moderno eta azkar batean. Artikulu luze eta konplexuetan galdu beharrean, aurkitu datu berri eta harrigarriak egunero.
 
-WikiFlick ikaskuntza eguneroko ohitura bihurtzeko diseinatuta dago. Bost minutuko atsedenaldian edo joan-etorrian zaudela, zure kultura orokorra zabaltzeko lagun ezin hobea da.
+WikiShorts ikaskuntza eguneroko ohitura bihurtzeko diseinatuta dago. Bost minutuko atsedenaldian edo joan-etorrian zaudela, zure kultura orokorra zabaltzeko lagun ezin hobea da.
 
 EZAUGARRI NAGUSIAK:
 
@@ -22,9 +22,9 @@ EZAUGARRI NAGUSIAK:
 • Bilaketa Adimenduna: Berehala atzitu interesatzen zaizun edozein gai eta aurkitu azkar artikulu garrantzitsuak.
 • Gogokoen Zerrenda: Gorde erraz zure artikulu gogokoenak edo geroago irakurri nahi dituzunak zure liburutegi pertsonala eraikitzeko.
 
-Zergatik WikiFlick?
+Zergatik WikiShorts?
 
-Ikasteak ez duelako aspergarria izan behar. Eskuratu milaka gairi buruzko ezagutza laburtua, zientziatik eta artetik hasi eta historiaraino eta teknologiaraino. Egin egun bakoitza apur bat adimentsuagoa WikiFlick-ekin.
+Ikasteak ez duelako aspergarria izan behar. Eskuratu milaka gairi buruzko ezagutza laburtua, zientziatik eta artetik hasi eta historiaraino eta teknologiaraino. Egin egun bakoitza apur bat adimentsuagoa WikiShorts-ekin.
 
 Deskargatu orain eta hasi esploratzen!
 

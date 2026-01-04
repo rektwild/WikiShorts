@@ -73,7 +73,7 @@
 "search" = "Suchen";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
-"select_app_language" = "Select App Language";
+"select_app_language" = "ஆப்ஸ் மொழியைத் தேர்ந்தெடுக்கவும்";
 "select_article_language" = "Select Article Language";
 "today" = "இன்று";
 "on_this_day" = "On This Day";
@@ -109,10 +109,10 @@
 "cache_items" = "items";
 "popular" = "Popular";
 "continue" = "Continue";
-"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
-"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
-"notifications_language" = "Notifications in your selected language";
-"disable_anytime" = "You can disable this anytime in Settings";
+"daily_reminders_setup" = "அற்புதமான விக்கிபீடியா கட்டுரைகளை கண்டறிய தினசரி நினைவூட்டல்களைப் பெறுங்கள்";
+"daily_reminders_detail" = "தினசரி நினைவூட்டல்கள் 8:00, 13:00, 18:00 மற்றும் 23:00 மணிக்கு";
+"notifications_language" = "நீங்கள் தேர்ந்தெடுத்த மொழியில் அறிவிப்புகள்";
+"disable_anytime" = "இதை நீங்கள் எப்போது வேண்டுமானாலும் அமைப்புகளில் முடக்கலாம்";
 "sponsored_recommended" = "Sponsored · Recommended for You";
 "premium_pick" = "Premium Pick";
 "discover_amazing_content" = "கண்டறிக";

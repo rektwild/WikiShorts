@@ -73,7 +73,7 @@
 "search" = "جستجو";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "مقالات جذاب جدید ویکی‌پدیا را کشف کنید!";
-"select_app_language" = "Select App Language";
+"select_app_language" = "زبان برنامه را انتخاب کنید";
 "select_article_language" = "Select Article Language";
 "today" = "امروز";
 "on_this_day" = "On This Day";
@@ -109,10 +109,10 @@
 "cache_items" = "items";
 "popular" = "Popular";
 "continue" = "Continue";
-"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
-"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
-"notifications_language" = "Notifications in your selected language";
-"disable_anytime" = "You can disable this anytime in Settings";
+"daily_reminders_setup" = "یادآوری‌های روزانه برای کشف مقالات شگفت‌انگیز ویکی‌پدیا دریافت کنید";
+"daily_reminders_detail" = "یادآوری‌های روزانه در ساعت 8:00، 13:00، 18:00 و 23:00";
+"notifications_language" = "اعلان‌ها به زبان انتخابی شما";
+"disable_anytime" = "می‌توانید این را در هر زمان در تنظیمات غیرفعال کنید";
 "sponsored_recommended" = "Sponsored · Recommended for You";
 "premium_pick" = "Premium Pick";
 "discover_amazing_content" = "کشف کنید";

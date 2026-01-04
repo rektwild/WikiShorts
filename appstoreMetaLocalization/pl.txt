@@ -11,9 +11,9 @@ Odkrywaj Wiedzę Każdego Dnia
 Codziennie wybieramy dla Ciebie najciekawsze artykuły z Wikipedii! Zaspokój swoją ciekawość i naucz się czegoś nowego.
 
 // Description
-Poznaj najprzyjemniejszy sposób zdobywania wiedzy! WikiFlick przenosi nieskończony wszechświat Wikipedii na wyciągnięcie ręki w nowoczesnym i szybkim formacie. Zamiast gubić się w długich i złożonych artykułach, odkrywaj codziennie nowe i zaskakujące fakty.
+Poznaj najprzyjemniejszy sposób zdobywania wiedzy! WikiShorts przenosi nieskończony wszechświat Wikipedii na wyciągnięcie ręki w nowoczesnym i szybkim formacie. Zamiast gubić się w długich i złożonych artykułach, odkrywaj codziennie nowe i zaskakujące fakty.
 
-WikiFlick został zaprojektowany, aby uczynić naukę codziennym nawykiem. Niezależnie od tego, czy masz pięciominutową przerwę, czy jesteś w podróży, jest to idealny towarzysz do poszerzania Twojej wiedzy ogólnej.
+WikiShorts został zaprojektowany, aby uczynić naukę codziennym nawykiem. Niezależnie od tego, czy masz pięciominutową przerwę, czy jesteś w podróży, jest to idealny towarzysz do poszerzania Twojej wiedzy ogólnej.
 
 GŁÓWNE FUNKCJE:
 
@@ -22,9 +22,9 @@ GŁÓWNE FUNKCJE:
 • Inteligentne Wyszukiwanie: Natychmiast uzyskaj dostęp do każdego tematu, który Cię ciekawi, i szybko znajdź odpowiednie artykuły.
 • Lista Ulubionych: Łatwo zapisuj swoje ulubione artykuły lub te, które chcesz przeczytać później, aby zbudować swoją osobistą bibliotekę.
 
-Dlaczego WikiFlick?
+Dlaczego WikiShorts?
 
-Ponieważ nauka не трябва да е скучна. Uzyskaj dostęp do skondensowanej wiedzy na tysiące tematów, od nauki i sztuki po historię i technologię. Spraw, by każdy dzień był немного πιο έξυπνος z WikiFlick.
+Ponieważ nauka не трябва да е скучна. Uzyskaj dostęp do skondensowanej wiedzy na tysiące tematów, od nauki i sztuki po historię i technologię. Spraw, by każdy dzień był немного πιο έξυπνος z WikiShorts.
 
 Pobierz teraz i zacznij odkrywać!
 

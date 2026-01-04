@@ -11,9 +11,9 @@ Her Gün Bilimi Açyň
 Her gün siziň üçin Wikipediýadan iň gyzykly makalalary saýlaýarys! Bilesigelijiligiňizi kanagatlandyryň we täze bir zat öwreniň.
 
 // Description
-Bilim almagyň iň ýakymly usuly bilen tanyşyň! WikiFlick, Wikipediýanyň çäksiz älemini döwrebap we çalt formatda barmaklaryňyzyň ujuna getirýär. Uzyn we çylşyrymly makalalarda ýitirim bolmagyň ýerine, her gün täze we geň galdyryjy faktlary açyň.
+Bilim almagyň iň ýakymly usuly bilen tanyşyň! WikiShorts, Wikipediýanyň çäksiz älemini döwrebap we çalt formatda barmaklaryňyzyň ujuna getirýär. Uzyn we çylşyrymly makalalarda ýitirim bolmagyň ýerine, her gün täze we geň galdyryjy faktlary açyň.
 
-WikiFlick, öwrenmegi gündelik endige öwürmek üçin döredildi. Bäş minutlyk arakesmede bolsaňyzam, ýa-da ýolda bolsaňyzam, umumy bilimiňizi giňeltmek üçin iň oňat ýoldaşdyr.
+WikiShorts, öwrenmegi gündelik endige öwürmek üçin döredildi. Bäş minutlyk arakesmede bolsaňyzam, ýa-da ýolda bolsaňyzam, umumy bilimiňizi giňeltmek üçin iň oňat ýoldaşdyr.
 
 ESASY AÝRATYNLYKLARY:
 
@@ -22,9 +22,9 @@ ESASY AÝRATYNLYKLARY:
 • Akylly Gözleg: Sizi gyzyklandyrýan islendik tema derrew girip, degişli makalalary çalt tapyň.
 • Halanýanlaryň Sanawy: Şahsy kitaphananyzy döretmek üçin halanýan makalalaryňyzy ýa-da soň okamak isleýänleriňizi aňsatlyk bilen saklaň.
 
-Näme üçin WikiFlick?
+Näme üçin WikiShorts?
 
-Sebäbi öwrenmek içgysgynç bolmaly däl. Ylym we sungatdan taryh we tehnologiýa çenli müňlerçe tema boýunça gysga bilimleri alyň. WikiFlick bilen her günüňizi birneme akylly ediň.
+Sebäbi öwrenmek içgysgynç bolmaly däl. Ylym we sungatdan taryh we tehnologiýa çenli müňlerçe tema boýunça gysga bilimleri alyň. WikiShorts bilen her günüňizi birneme akylly ediň.
 
 Häzir göçürip alyň we öwrenip başlaň!
 

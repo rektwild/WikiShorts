@@ -11,9 +11,9 @@ Oppdag Kunnskap Hver Dag
 Vi velger de mest interessante Wikipedia-artiklene for deg hver dag! Still nysgjerrigheten din og lær noe nytt.
 
 // Description
-Møt den morsomste måten å tilegne seg kunnskap på! WikiFlick bringer det uendelige universet av Wikipedia til fingertuppene dine i et moderne og raskt format. I stedet for å gå deg vill i lange og komplekse artikler, kan du oppdage nye og overraskende fakta hver eneste dag.
+Møt den morsomste måten å tilegne seg kunnskap på! WikiShorts bringer det uendelige universet av Wikipedia til fingertuppene dine i et moderne og raskt format. I stedet for å gå deg vill i lange og komplekse artikler, kan du oppdage nye og overraskende fakta hver eneste dag.
 
-WikiFlick er designet for å gjøre læring til en daglig vane. Enten du har en femminutters pause eller pendler, er det den perfekte følgesvennen for å utvide din allmennkunnskap.
+WikiShorts er designet for å gjøre læring til en daglig vane. Enten du har en femminutters pause eller pendler, er det den perfekte følgesvennen for å utvide din allmennkunnskap.
 
 HOVEDFUNKSJONER:
 
@@ -22,9 +22,9 @@ HOVEDFUNKSJONER:
 • Smart Søk: Få umiddelbar tilgang til ethvert emne du er nysgjerrig på, og finn raskt relevante artikler.
 • Favorittliste: Lagre enkelt favorittartiklene dine eller de du vil lese senere for å bygge ditt eget personlige bibliotek.
 
-Hvorfor WikiFlick?
+Hvorfor WikiShorts?
 
-Fordi læring ikke trenger å være kjedelig. Få tilgang til kunnskap i små biter om tusenvis av emner, fra vitenskap og kunst til historie og teknologi. Gjør hver dag litt smartere med WikiFlick.
+Fordi læring ikke trenger å være kjedelig. Få tilgang til kunnskap i små biter om tusenvis av emner, fra vitenskap og kunst til historie og teknologi. Gjør hver dag litt smartere med WikiShorts.
 
 Last ned nå og begynn å utforske!
 

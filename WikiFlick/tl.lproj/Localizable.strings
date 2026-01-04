@@ -73,7 +73,7 @@
 "search" = "Suchen";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
-"select_app_language" = "Select App Language";
+"select_app_language" = "Piliin ang wika ng app";
 "select_article_language" = "Select Article Language";
 "today" = "Ngayon";
 "on_this_day" = "On This Day";
@@ -109,10 +109,10 @@
 "cache_items" = "items";
 "popular" = "Popular";
 "continue" = "Continue";
-"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
-"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
-"notifications_language" = "Notifications in your selected language";
-"disable_anytime" = "You can disable this anytime in Settings";
+"daily_reminders_setup" = "Kumuha ng araw-araw na paalala upang matuklasan ang mga kahanga-hangang artikulo sa Wikipedia";
+"daily_reminders_detail" = "Araw-araw na paalala sa 8:00, 13:00, 18:00, at 23:00";
+"notifications_language" = "Mga abiso sa iyong napiling wika";
+"disable_anytime" = "Maaari mong i-disable ito anumang oras sa Settings";
 "sponsored_recommended" = "Sponsored · Recommended for You";
 "premium_pick" = "Premium Pick";
 "discover_amazing_content" = "Tuklasin";

@@ -73,7 +73,7 @@
 "search" = "Suchen";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
-"select_app_language" = "Select App Language";
+"select_app_language" = "Veldu tungumál forrits";
 "select_article_language" = "Select Article Language";
 "today" = "Í dag";
 "on_this_day" = "On This Day";
@@ -109,10 +109,10 @@
 "cache_items" = "items";
 "popular" = "Popular";
 "continue" = "Continue";
-"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
-"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
-"notifications_language" = "Notifications in your selected language";
-"disable_anytime" = "You can disable this anytime in Settings";
+"daily_reminders_setup" = "Fáðu daglegar áminningar til að uppgötva ótrúlegar Wikipedia greinar";
+"daily_reminders_detail" = "Daglegar áminningar kl. 8:00, 13:00, 18:00 og 23:00";
+"notifications_language" = "Tilkynningar á völdu tungumáli";
+"disable_anytime" = "Þú getur slökkt á þessu hvenær sem er í Stillingar";
 "sponsored_recommended" = "Sponsored · Recommended for You";
 "premium_pick" = "Premium Pick";
 "discover_amazing_content" = "Uppgötva";

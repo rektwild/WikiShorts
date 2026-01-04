@@ -11,9 +11,9 @@ Faigh Eolas Nua Gach Lá
 Roghaimid na hailt Vicipéid is suimiúla duit gach lá! Sásaigh do chuid fiosrachta agus foghlaim rud éigin nua.
 
 // Description
-Buail leis an mbealach is taitneamhaí le heolas a fháil! Tugann WikiFlick cruinne gan teorainn na Vicipéide chugat i bhformáid nua-aimseartha agus thapa. In ionad a bheith caillte in ailt fhada chasta, faigh amach fíricí nua agus iontacha gach lá.
+Buail leis an mbealach is taitneamhaí le heolas a fháil! Tugann WikiShorts cruinne gan teorainn na Vicipéide chugat i bhformáid nua-aimseartha agus thapa. In ionad a bheith caillte in ailt fhada chasta, faigh amach fíricí nua agus iontacha gach lá.
 
-Tá WikiFlick deartha chun an fhoghlaim a dhéanamh ina nós laethúil. Cibé an bhfuil tú ar sos cúig nóiméad nó ag taisteal, is é an compánach foirfe é chun d'eolas ginearálta a leathnú.
+Tá WikiShorts deartha chun an fhoghlaim a dhéanamh ina nós laethúil. Cibé an bhfuil tú ar sos cúig nóiméad nó ag taisteal, is é an compánach foirfe é chun d'eolas ginearálta a leathnú.
 
 PRÍOMHGHNÉITHE:
 
@@ -22,9 +22,9 @@ PRÍOMHGHNÉITHE:
 • Cuardach Cliste: Faigh rochtain láithreach ar aon ábhar a bhfuil suim agat ann agus aimsigh ailt ábhartha go tapa.
 • Liosta Is Ansa: Sábháil go héasca na hailt is fearr leat nó iad siúd ar mhaith leat a léamh níos déanaí chun do leabharlann phearsanta féin a chruthú.
 
-Cén fáth WikiFlick?
+Cén fáth WikiShorts?
 
-Mar ní gá go mbeadh an fhoghlaim leadránach. Faigh rochtain ar eolas beag ar na mílte ábhar, ó eolaíocht agus ealaín go stair agus teicneolaíocht. Déan gach lá beagán níos cliste le WikiFlick.
+Mar ní gá go mbeadh an fhoghlaim leadránach. Faigh rochtain ar eolas beag ar na mílte ábhar, ó eolaíocht agus ealaín go stair agus teicneolaíocht. Déan gach lá beagán níos cliste le WikiShorts.
 
 Íoslódáil anois agus tosaigh ag taiscéaladh!
 

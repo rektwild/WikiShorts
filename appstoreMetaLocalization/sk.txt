@@ -11,9 +11,9 @@ Objavujte Vedomosti Každý Deň
 Každý deň pre vás vyberáme najzaujímavejšie články z Wikipédie! Uspokojte svoju zvedavosť a naučte sa niečo nové.
 
 // Description
-Spoznajte najpríjemnejší spôsob získavania vedomostí! WikiFlick prináša nekonečný vesmír Wikipédie na dosah ruky v modernom a rýchlom formáte. Namiesto toho, aby ste sa strácali v dlhých a zložitých článkoch, objavujte každý deň nové a prekvapivé fakty.
+Spoznajte najpríjemnejší spôsob získavania vedomostí! WikiShorts prináša nekonečný vesmír Wikipédie na dosah ruky v modernom a rýchlom formáte. Namiesto toho, aby ste sa strácali v dlhých a zložitých článkoch, objavujte každý deň nové a prekvapivé fakty.
 
-WikiFlick je navrhnutý tak, aby sa učenie stalo každodenným zvykom. Či už ste na päťminútovej prestávke alebo na cestách, je to ideálny spoločník na rozšírenie vášho všeobecného prehľadu.
+WikiShorts je navrhnutý tak, aby sa učenie stalo každodenným zvykom. Či už ste na päťminútovej prestávke alebo na cestách, je to ideálny spoločník na rozšírenie vášho všeobecného prehľadu.
 
 HLAVNÉ FUNKCIE:
 
@@ -22,9 +22,9 @@ HLAVNÉ FUNKCIE:
 • Inteligentné Vyhľadávanie: Okamžite pristupujte k akejkoľvek téme, ktorá vás zaujíma, a rýchlo nájdite relevantné články.
 • Zoznam Obľúbených: Jednoducho si uložte svoje obľúbené články alebo tie, ktoré si chcete prečítať neskôr, a vytvorte si svoju osobnú knižnicu.
 
-Prečo WikiFlick?
+Prečo WikiShorts?
 
-Pretože učenie nemusí byť nudné. Získajte prístup k stručným vedomostiam o tisíckach tém, od vedy a umenia po históriu a technológiu. Urobte každý deň o niečo múdrejším s WikiFlickom.
+Pretože učenie nemusí byť nudné. Získajte prístup k stručným vedomostiam o tisíckach tém, od vedy a umenia po históriu a technológiu. Urobte každý deň o niečo múdrejším s WikiShortsom.
 
 Stiahnite si teraz a začnite objavovať!
 

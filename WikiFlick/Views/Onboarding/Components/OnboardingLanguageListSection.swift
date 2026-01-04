@@ -51,14 +51,15 @@ struct OnboardingLanguageListSection: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
+            .contentShape(Rectangle()) // Makes entire row tappable
             .background(
                 language == selectedLanguage ? Color.primaryBlue.opacity(0.05) : Color.clear
             )
         }
+        .buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle for better tap handling
         .accessibilityLabel("\(language.displayName), \(language.englishName)")
         .accessibilityHint(language == selectedLanguage ? "Selected" : "Double tap to select")
         .accessibilityAddTraits(language == selectedLanguage ? .isSelected : [])
-        .buttonStyle(ScaleButtonStyle())
     }
     
     private func languageFlag(for language: AppLanguage) -> some View {

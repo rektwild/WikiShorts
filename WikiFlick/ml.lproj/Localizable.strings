@@ -73,7 +73,7 @@
 "search" = "Suchen";
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "Entdecke neue faszinierende Wikipedia-Artikel!";
-"select_app_language" = "Select App Language";
+"select_app_language" = "ആപ്പ് ഭാഷ തിരഞ്ഞെടുക്കുക";
 "select_article_language" = "Select Article Language";
 "today" = "ഇന്ന്";
 "on_this_day" = "On This Day";
@@ -109,10 +109,10 @@
 "cache_items" = "items";
 "popular" = "Popular";
 "continue" = "Continue";
-"daily_reminders_setup" = "Get daily reminders to discover amazing Wikipedia articles";
-"daily_reminders_detail" = "Daily reminders at 8:00, 13:00, 18:00, and 23:00";
-"notifications_language" = "Notifications in your selected language";
-"disable_anytime" = "You can disable this anytime in Settings";
+"daily_reminders_setup" = "അതിശയിപ്പിക്കുന്ന വിക്കിപീഡിയ ലേഖനങ്ങൾ കണ്ടെത്താൻ ദൈനംദിന ഓർമ്മപ്പെടുത്തലുകൾ നേടുക";
+"daily_reminders_detail" = "ദൈനംദിന ഓർമ്മപ്പെടുത്തലുകൾ 8:00, 13:00, 18:00, 23:00 ന്";
+"notifications_language" = "നിങ്ങൾ തിരഞ്ഞെടുത്ത ഭാഷയിൽ അറിയിപ്പുകൾ";
+"disable_anytime" = "ഇത് നിങ്ങൾക്ക് ഏത് സമയത്തും സെറ്റിംഗ്സിൽ പ്രവർത്തനരഹിതമാക്കാം";
 "sponsored_recommended" = "Sponsored · Recommended for You";
 "premium_pick" = "Premium Pick";
 "discover_amazing_content" = "കണ്ടെത്തുക";

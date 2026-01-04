@@ -11,9 +11,9 @@ Har Kuni Bilim Oling
 Biz siz uchun har kuni Vikipediyadan eng qiziqarli maqolalarni tanlaymiz! Qiziquvchanligingizni qondiring va yangi narsalarni o'rganing.
 
 // Description
-Bilim olishning eng yoqimli usuli bilan tanishing! WikiFlick Vikipediyaning cheksiz olamini zamonaviy va tezkor formatda barmoqlaringiz uchiga olib keladi. Uzun va murakkab maqolalarda adashib qolish o'rniga, har kuni yangi va hayratlanarli faktlarni kashf eting.
+Bilim olishning eng yoqimli usuli bilan tanishing! WikiShorts Vikipediyaning cheksiz olamini zamonaviy va tezkor formatda barmoqlaringiz uchiga olib keladi. Uzun va murakkab maqolalarda adashib qolish o'rniga, har kuni yangi va hayratlanarli faktlarni kashf eting.
 
-WikiFlick o'rganishni kundalik odatga aylantirish uchun mo'ljallangan. Besh daqiqalik tanaffusda bo'lasizmi yoki yo'lda bo'lasizmi, bu sizning umumiy bilimingizni kengaytirish uchun mukammal hamrohdir.
+WikiShorts o'rganishni kundalik odatga aylantirish uchun mo'ljallangan. Besh daqiqalik tanaffusda bo'lasizmi yoki yo'lda bo'lasizmi, bu sizning umumiy bilimingizni kengaytirish uchun mukammal hamrohdir.
 
 ASOSIY XUSUSIYATLAR:
 
@@ -22,9 +22,9 @@ ASOSIY XUSUSIYATLAR:
 • Aqlli Qidiruv: Sizni qiziqtirgan har qanday mavzuga bir zumda kiring va tegishli maqolalarni tezda toping.
 • Sevimlilar Roʻyxati: O'zingizning shaxsiy kutubxonangizni yaratish uchun sevimli maqolalaringizni yoki keyinroq o'qishni xohlaganlaringizni osongina saqlang.
 
-Nima uchun WikiFlick?
+Nima uchun WikiShorts?
 
-Chunki o'rganish zerikarli bo'lishi shart emas. Fan va san'atdan tortib tarix va texnologiyagacha bo'lgan minglab mavzular bo'yicha qisqacha bilimlarga ega bo'ling. WikiFlick bilan har bir kuningizni biroz aqlliroq qiling.
+Chunki o'rganish zerikarli bo'lishi shart emas. Fan va san'atdan tortib tarix va texnologiyagacha bo'lgan minglab mavzular bo'yicha qisqacha bilimlarga ega bo'ling. WikiShorts bilan har bir kuningizni biroz aqlliroq qiling.
 
 Hozir yuklab oling va kashf qilishni boshlang!
 

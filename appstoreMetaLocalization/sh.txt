@@ -11,9 +11,9 @@ Otkrijte Znanje Svakog Dana
 Svaki dan biramo za vas najzanimljivije članke sa Vikipedije! Zadovoljite svoju znatiželju i naučite nešto novo.
 
 // Description
-Upoznajte najprijatniji način za sticanje znanja! WikiFlick donosi ogroman univerzum Vikipedije na dohvat ruke u modernom i brzom formatu. Umesto da se gubite u dugim i složenim člancima, otkrijte nove i iznenađujuće činjenice svakog dana.
+Upoznajte najprijatniji način za sticanje znanja! WikiShorts donosi ogroman univerzum Vikipedije na dohvat ruke u modernom i brzom formatu. Umesto da se gubite u dugim i složenim člancima, otkrijte nove i iznenađujuće činjenice svakog dana.
 
-WikiFlick je dizajniran da učenje postane svakodnevna navika. Bilo da ste na pauzi od pet minuta ili putujete, savršen je pratilac za proširenje vaše opšte kulture.
+WikiShorts je dizajniran da učenje postane svakodnevna navika. Bilo da ste na pauzi od pet minuta ili putujete, savršen je pratilac za proširenje vaše opšte kulture.
 
 GLAVNE KARAKTERISTIKE:
 
@@ -22,9 +22,9 @@ GLAVNE KARAKTERISTIKE:
 • Pametna Pretraga: Trenutno pristupite bilo kojoj temi koja vas zanima i brzo pronađite relevantne članke.
 • Lista Favorita: Lako sačuvajte svoje omiljene članke ili one koje želite kasnije da pročitate kako biste izgradili svoju ličnu biblioteku.
 
-Zašto WikiFlick?
+Zašto WikiShorts?
 
-Zato što učenje ne mora biti dosadno. Pristupite sažetom znanju o hiljadama tema, od nauke i umetnosti do istorije i tehnologije. Učinite svaki dan pametnijim uz WikiFlick.
+Zato što učenje ne mora biti dosadno. Pristupite sažetom znanju o hiljadama tema, od nauke i umetnosti do istorije i tehnologije. Učinite svaki dan pametnijim uz WikiShorts.
 
 Preuzmite sada i počnite da istražujete!
 
