@@ -23,7 +23,7 @@ struct SearchResultCardView: View {
                         .multilineTextAlignment(.leading)
                         .lineLimit(2)
                     
-                    if !searchResult.description.isEmpty && searchResult.description != "No description available" {
+                    if !searchResult.description.isEmpty && searchResult.description != languageManager.localizedString(key: "no_description") {
                         Text(searchResult.description)
                             .font(.system(size: 14))
                             .foregroundColor(.white.opacity(0.7))
@@ -207,7 +207,7 @@ struct SearchHistoryView: View {
                 
                 Spacer()
                 
-                Button(languageManager.localizedString(key: "clear")) { // Using clear_all_cache as "Clear" is similar intention or I will add "clear" key next step. 
+                Button(languageManager.localizedString(key: "clear")) {
                     onClearHistory()
                 }
                 .font(.system(size: 14))

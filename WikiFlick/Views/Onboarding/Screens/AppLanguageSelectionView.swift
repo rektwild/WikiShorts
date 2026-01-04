@@ -30,7 +30,7 @@ struct AppLanguageSelectionView: View {
                 
                 // All Languages Section
                 OnboardingLanguageListSection(
-                    title: "All Languages",
+                    title: AppLanguageManager.shared.localizedString(key: "all_languages"),
                     languages: filteredLanguages,
                     selectedLanguage: $selectedLanguage
                 )
@@ -42,7 +42,7 @@ struct AppLanguageSelectionView: View {
             // Sticky Footer
             OnboardingStickyFooter(action: onContinue)
         }
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search languages")
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: Text(AppLanguageManager.shared.localizedString(key: "search_languages")))
     }
 }
 

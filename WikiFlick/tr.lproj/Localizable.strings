@@ -127,3 +127,9 @@
 "search_wikipedia_title" = "Wikipedia'da Ara";
 "search_description" = "Makaleler, konular ve daha fazlasını bul";
 "clear" = "Temizle";
+"no_description" = "Açıklama mevcut değil";
+"pro" = "PRO";
+"free" = "ÜCRETSİZ";
+"stay_updated" = "Güncel Kalın";
+"all_languages" = "Tüm Diller";
+"search_languages" = "Dillerde ara";

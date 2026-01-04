@@ -129,3 +129,9 @@
 "search_wikipedia_title" = "Search Wikipedia";
 "search_description" = "Find articles, topics, and more";
 "clear" = "Clear";
+"no_description" = "No description available";
+"pro" = "PRO";
+"free" = "FREE";
+"stay_updated" = "Stay Updated";
+"all_languages" = "All Languages";
+"search_languages" = "Search languages";

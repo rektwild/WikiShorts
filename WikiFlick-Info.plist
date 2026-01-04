@@ -5,7 +5,7 @@
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-7984188512879505~5718906477</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>Bu uygulama size daha alakalı reklamlar gösterebilmek için cihazınızı tanımlar.</string>
+	<string>$(PRODUCT_NAME) needs permission to track you to provide personalized ads.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

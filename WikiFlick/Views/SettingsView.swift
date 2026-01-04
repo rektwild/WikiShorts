@@ -26,7 +26,7 @@ struct SettingsView: View {
                             .foregroundColor(storeManager.isPurchased("wiki_m") ? .yellow : .gray)
                         Text(languageManager.localizedString(key: "account_status"))
                         Spacer()
-                        Text(storeManager.isPurchased("wiki_m") ? "PRO" : "FREE")
+                        Text(storeManager.isPurchased("wiki_m") ? languageManager.localizedString(key: "pro") : languageManager.localizedString(key: "free"))
                             .foregroundColor(storeManager.isPurchased("wiki_m") ? .yellow : .secondary)
                             .font(.system(size: 14, weight: .semibold))
                     }

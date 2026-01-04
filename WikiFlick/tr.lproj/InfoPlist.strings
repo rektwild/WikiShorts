@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  WikiShorts
+
+  Created by WikiShorts Team.
+  
+*/
+
+"NSUserTrackingUsageDescription" = "Bu uygulama size daha alakalı reklamlar gösterebilmek için cihazınızı tanımlar.";
+"CFBundleDisplayName" = "WikiShorts";
+"CFBundleName" = "WikiShorts";

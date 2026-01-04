@@ -38,7 +38,7 @@ struct OnboardingView: View {
                                     requestNotificationPermission()
                                 }
                             )
-                            .navigationTitle("Stay Updated")
+                            .navigationTitle(appLanguageManager.localizedString(key: "stay_updated"))
                             .navigationBarTitleDisplayMode(.large)
                             .toolbar {
                                 ToolbarItem(placement: .navigationBarLeading) {
@@ -49,7 +49,7 @@ struct OnboardingView: View {
                                     }) {
                                         HStack(spacing: 4) {
                                             Image(systemName: "chevron.left")
-                                            Text("Back")
+                                            Text(appLanguageManager.localizedString(key: "back"))
                                         }
                                     }
                                 }
@@ -73,7 +73,7 @@ struct OnboardingView: View {
                                     }) {
                                         HStack(spacing: 4) {
                                             Image(systemName: "chevron.left")
-                                            Text("Back")
+                                            Text(appLanguageManager.localizedString(key: "back"))
                                         }
                                     }
                                 }
