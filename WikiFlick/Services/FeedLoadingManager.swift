@@ -176,22 +176,10 @@ class FeedLoadingManager: ObservableObject {
 
     private func fetchArticlesFromAPI() async throws -> [WikipediaArticle] {
         let languageCode = articleLanguageManager.languageCode
-        let topics = topicNormalizationService.getNormalizedTopicsFromUserDefaults()
-        var categories = topicNormalizationService.getCategoriesForTopics(topics)
         
-        // Ensure minimum 5 categories for better variety
-        let minimumCategories = 5
-        if categories.count < minimumCategories || topics.contains("All Topics") {
-            // Get all available categories from all topics
-            let allTopics = topicNormalizationService.getAllSupportedTopics()
-            let allCategories = topicNormalizationService.getCategoriesForTopics(allTopics)
-            
-            // Add random categories to reach minimum
-            let additionalNeeded = minimumCategories - categories.count
-            let availableToAdd = allCategories.filter { !categories.contains($0) }
-            let randomAdditions = Array(availableToAdd.shuffled().prefix(additionalNeeded))
-            categories.append(contentsOf: randomAdditions)
-        }
+        // Always get all topics
+        let allTopics = topicNormalizationService.getAllSupportedTopics()
+        var categories = topicNormalizationService.getCategoriesForTopics(allTopics)
         
         // Always shuffle categories for randomness
         categories = Array(categories.shuffled())
@@ -255,20 +243,10 @@ class FeedLoadingManager: ObservableObject {
             }
 
             let languageCode = articleLanguageManager.languageCode
-            let topics = topicNormalizationService.getNormalizedTopicsFromUserDefaults()
-            var categories = topicNormalizationService.getCategoriesForTopics(topics)
             
-            // Ensure minimum 5 categories for better variety
-            let minimumCategories = 5
-            if categories.count < minimumCategories || topics.contains("All Topics") {
-                let allTopics = topicNormalizationService.getAllSupportedTopics()
-                let allCategories = topicNormalizationService.getCategoriesForTopics(allTopics)
-                
-                let additionalNeeded = minimumCategories - categories.count
-                let availableToAdd = allCategories.filter { !categories.contains($0) }
-                let randomAdditions = Array(availableToAdd.shuffled().prefix(additionalNeeded))
-                categories.append(contentsOf: randomAdditions)
-            }
+            // Always get all topics
+            let allTopics = topicNormalizationService.getAllSupportedTopics()
+            var categories = topicNormalizationService.getCategoriesForTopics(allTopics)
             
             // Always shuffle for randomness
             categories = Array(categories.shuffled())
@@ -330,11 +308,6 @@ class FeedLoadingManager: ObservableObject {
         refresh()
     }
 
-    func handleTopicsChange() {
-        let topics = topicNormalizationService.getNormalizedTopicsFromUserDefaults()
-        LoggingService.shared.logInfo("📝 Topics changed to: \(topics)", category: .general)
-        refresh()
-    }
 }
 
 // MARK: - Combine Extension for Async/Await

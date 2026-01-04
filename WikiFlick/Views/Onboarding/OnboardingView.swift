@@ -5,15 +5,12 @@ struct OnboardingView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var selectedAppLanguage: AppLanguage = .english
     @State private var selectedArticleLanguage: AppLanguage = .english
-    @State private var selectedTopics: Set<String> = []
     @State private var notificationPermissionGranted = false
     
     @StateObject private var appLanguageManager = AppLanguageManager.shared
     @StateObject private var articleLanguageManager = ArticleLanguageManager.shared
     
     @Binding var showOnboarding: Bool
-    
-    private let topics = TopicManager.topicDisplayNames
     
     var body: some View {
         NavigationView {
@@ -62,9 +59,7 @@ struct OnboardingView: View {
                                 selectedLanguage: $selectedArticleLanguage,
                                 availableLanguages: articleLanguageManager.availableLanguages,
                                 onContinue: {
-                                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                                        currentStep = 3
-                                    }
+                                    completeOnboarding()
                                 }
                             )
                             .navigationTitle(appLanguageManager.localizedString(key: "select_article_language"))
@@ -74,30 +69,6 @@ struct OnboardingView: View {
                                     Button(action: {
                                         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) { 
                                             currentStep = 1 
-                                        }
-                                    }) {
-                                        HStack(spacing: 4) {
-                                            Image(systemName: "chevron.left")
-                                            Text("Back")
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            OnboardingTopicSelectionView(
-                                selectedTopics: $selectedTopics,
-                                topics: topics,
-                                onGetStarted: {
-                                    completeOnboarding()
-                                }
-                            )
-                            .navigationTitle("What interests you?")
-                            .navigationBarTitleDisplayMode(.large)
-                            .toolbar {
-                                ToolbarItem(placement: .navigationBarLeading) {
-                                    Button(action: {
-                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) { 
-                                            currentStep = 2 
                                         }
                                     }) {
                                         HStack(spacing: 4) {
@@ -122,9 +93,6 @@ struct OnboardingView: View {
         // Initialize with current language manager settings
         selectedAppLanguage = appLanguageManager.currentLanguage
         selectedArticleLanguage = articleLanguageManager.selectedLanguage
-
-        // Initialize topics from UserDefaults using TopicManager
-        selectedTopics = TopicManager.getSavedTopicsAsDisplayNames()
     }
     
     private func requestNotificationPermission() {
@@ -148,9 +116,6 @@ struct OnboardingView: View {
 
         // Apply article language selection to ArticleLanguageManager
         articleLanguageManager.selectLanguage(selectedArticleLanguage)
-
-        // Save topics selection using TopicManager
-        TopicManager.saveTopics(displayNames: selectedTopics)
 
         // Mark onboarding as completed
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")

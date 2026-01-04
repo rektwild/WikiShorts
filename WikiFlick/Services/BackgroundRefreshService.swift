@@ -77,13 +77,16 @@ class BackgroundRefreshService: BackgroundRefreshServiceProtocol {
     func handleBackgroundRefresh() async {
         print("🔄 Starting background refresh...")
         
-        let selectedTopics = topicNormalizationService.getNormalizedTopicsFromUserDefaults()
+        // Always get all topics -> categories
         let languageCode = articleLanguageManager.languageCode
+        let allTopics = topicNormalizationService.getAllSupportedTopics()
+        var categories = topicNormalizationService.getCategoriesForTopics(allTopics)
+        categories = Array(categories.shuffled())
 
-        // Preload articles for better user experience
-        let articles = await articleRepository.preloadArticles(
+        // Preload articles using categories (better variety)
+        let articles = await articleRepository.preloadCategoryBasedArticles(
             count: 5,
-            topics: selectedTopics,
+            categories: categories,
             languageCode: languageCode
         )
         
