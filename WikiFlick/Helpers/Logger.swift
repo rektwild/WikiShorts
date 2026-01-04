@@ -5,10 +5,11 @@ enum LogCategory: String {
     case general = "General"
     case network = "Network"
     case ui = "UI"
-    case storage = "Storage"
+    case storage = "Storage" // Covers Cache
     case wikipedia = "Wikipedia"
-    case adMob = "AdMob"
+    case adMob = "AdMob"     // Covers Ads
     case payment = "Payment"
+    case security = "Security"
 }
 
 struct Logger {

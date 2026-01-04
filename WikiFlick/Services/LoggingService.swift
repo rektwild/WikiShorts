@@ -1,5 +1,5 @@
 import Foundation
-import os.log
+import os
 
 /// Secure logging service that only logs in debug mode and filters sensitive information
 final class LoggingService {
@@ -11,11 +11,11 @@ final class LoggingService {
     
     private static let subsystem = "com.wikishorts.app"
     
-    private lazy var generalLogger = Logger(subsystem: Self.subsystem, category: "General")
-    private lazy var networkLogger = Logger(subsystem: Self.subsystem, category: "Network")
-    private lazy var cacheLogger = Logger(subsystem: Self.subsystem, category: "Cache")
-    private lazy var securityLogger = Logger(subsystem: Self.subsystem, category: "Security")
-    private lazy var adLogger = Logger(subsystem: Self.subsystem, category: "Ads")
+    private lazy var generalLogger = os.Logger(subsystem: Self.subsystem, category: LogCategory.general.rawValue)
+    private lazy var networkLogger = os.Logger(subsystem: Self.subsystem, category: LogCategory.network.rawValue)
+    private lazy var cacheLogger = os.Logger(subsystem: Self.subsystem, category: LogCategory.storage.rawValue)
+    private lazy var securityLogger = os.Logger(subsystem: Self.subsystem, category: LogCategory.security.rawValue)
+    private lazy var adLogger = os.Logger(subsystem: Self.subsystem, category: LogCategory.adMob.rawValue)
     
     // MARK: - Logging Methods
     
@@ -58,7 +58,7 @@ final class LoggingService {
         #endif
     }
     
-    func logCacheOperation(_ operation: String, key: String, category: LogCategory = .cache) {
+    func logCacheOperation(_ operation: String, key: String, category: LogCategory = .storage) {
         #if DEBUG
         let sanitizedKey = sanitizeKey(key)
         cacheLogger.info("🗄️ Cache \(operation): \(sanitizedKey)")
@@ -85,18 +85,22 @@ final class LoggingService {
     
     // MARK: - Private Helpers
     
-    private func getLogger(for category: LogCategory) -> Logger {
+    // MARK: - Private Helpers
+    
+    private func getLogger(for category: LogCategory) -> os.Logger {
         switch category {
         case .general:
             return generalLogger
         case .network:
             return networkLogger
-        case .cache:
+        case .storage:
             return cacheLogger
         case .security:
             return securityLogger
-        case .ads:
+        case .adMob:
             return adLogger
+        default:
+            return generalLogger
         }
     }
     
@@ -135,13 +139,8 @@ final class LoggingService {
 
 // MARK: - Log Categories
 
-enum LogCategory {
-    case general
-    case network
-    case cache
-    case security
-    case ads
-}
+// MARK: - Log Categories
+// LogCategory is defined in Logger.swift
 
 // MARK: - Convenience Extensions
 

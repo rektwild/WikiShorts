@@ -196,33 +196,41 @@ struct PaywallView: View {
     }
     
     private var footerSection: some View {
-        HStack(spacing: 24) {
-            Button(languageManager.localizedString(key: "terms_of_service")) {
-                if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
-                    UIApplication.shared.open(url)
+        VStack(spacing: 16) {
+            HStack(spacing: 24) {
+                Button(languageManager.localizedString(key: "terms_of_service")) {
+                    if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                        UIApplication.shared.open(url)
+                    }
                 }
-            }
-            .font(.system(size: 11, weight: .medium))
-            .foregroundColor(.white.opacity(0.5))
-            
-            Button(languageManager.localizedString(key: "privacy_policy")) {
-                if let url = URL(string: "https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d") {
-                    UIApplication.shared.open(url)
+                .font(.system(size: 11, weight: .medium))
+                .foregroundColor(.white.opacity(0.5))
+                
+                Button(languageManager.localizedString(key: "privacy_policy")) {
+                    if let url = URL(string: "https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d") {
+                        UIApplication.shared.open(url)
+                    }
                 }
-            }
-            .font(.system(size: 11, weight: .medium))
-            .foregroundColor(.white.opacity(0.5))
+                .font(.system(size: 11, weight: .medium))
+                .foregroundColor(.white.opacity(0.5))
 
-            Button(action: {
-                Task {
-                    await storeManager.restorePurchases()
+                Button(action: {
+                    Task {
+                        await storeManager.restorePurchases()
+                    }
+                }) {
+                    Text(languageManager.localizedString(key: "restore_purchases"))
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundColor(.white.opacity(0.5))
                 }
-            }) {
-                Text(languageManager.localizedString(key: "restore_purchases"))
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
+                .disabled(storeManager.isLoading)
             }
-            .disabled(storeManager.isLoading)
+            
+            Text(languageManager.localizedString(key: "subscription_disclaimer"))
+                .font(.system(size: 10))
+                .foregroundColor(.white.opacity(0.4))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
         }
     }
 }

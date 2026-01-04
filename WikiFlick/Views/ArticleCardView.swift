@@ -11,6 +11,7 @@ struct ArticleCardView: View {
     @StateObject private var languageManager = AppLanguageManager.shared
     @StateObject private var favoritesManager = FavoritesManager.shared
     private let imageLoadingService = ImageLoadingService.shared
+    @State private var showingReportAlert = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -74,6 +75,7 @@ struct ArticleCardView: View {
                 favoriteButton(article: article)
                 safariButton(article: article)
                 shareButton(article: article)
+                reportButton(article: article)
             }
             .padding(.bottom, 8)
             .padding(.trailing, 8)
@@ -241,7 +243,7 @@ struct ArticleCardView: View {
         }
     }
     
-    private func shareButton(article: WikipediaArticle) -> some View {
+    func shareButton(article: WikipediaArticle) -> some View {
         Button(action: { shareArticle(article: article) }) {
             Image(systemName: "square.and.arrow.up.fill")
                 .font(.system(size: 18, weight: .medium))
@@ -256,6 +258,31 @@ struct ArticleCardView: View {
                         )
                 )
                 .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+        }
+    }
+    
+    private func reportButton(article: WikipediaArticle) -> some View {
+        Button(action: {
+            showingReportAlert = true
+        }) {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.system(size: 18, weight: .medium))
+                .foregroundColor(.white)
+                .frame(width: 44, height: 44)
+                .background(
+                    Circle()
+                        .fill(Color.black.opacity(0.7))
+                        .overlay(
+                            Circle()
+                                .stroke(Color.gray.opacity(0.6), lineWidth: 1)
+                        )
+                )
+                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+        }
+        .alert(languageManager.localizedString(key: "report_alert_title"), isPresented: $showingReportAlert) {
+            Button(languageManager.localizedString(key: "ok"), role: .cancel) { }
+        } message: {
+            Text(languageManager.localizedString(key: "report_alert_message"))
         }
     }
     private func shareArticle(article: WikipediaArticle) {

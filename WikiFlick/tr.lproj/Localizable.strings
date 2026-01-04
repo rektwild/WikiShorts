@@ -116,3 +116,9 @@
 "sponsored_recommended" = "Sponsorlu · Senin İçin Önerilen";
 "premium_pick" = "Premium Seçimi";
 "discover_amazing_content" = "İnanılmaz İçerikleri Keşfet";
+
+"subscription_disclaimer" = "Abonelikler, geçerli dönemin bitiminden en az 24 saat önce otomatik yenileme kapatılmadığı sürece otomatik olarak yenilenir. Hesabınızdan, geçerli dönemin bitiminden önceki 24 saat içinde yenileme ücreti tahsil edilecektir. Ödeme, satın alma onayının ardından iTunes Hesabından tahsil edilecektir. Satın alma işleminden sonra Hesap Ayarlarınıza giderek aboneliğinizi yönetebilir ve otomatik yenilemeyi kapatabilirsiniz.";
+
+"report_issue" = "Sorun Bildir";
+"report_alert_title" = "Makaleyi Bildir";
+"report_alert_message" = "Bu içeriği bildirdiğiniz için teşekkürler. En kısa sürede inceleyeceğiz.";
