@@ -111,3 +111,5 @@
 "report_issue" = "問題を報告";
 "report_alert_title" = "記事を報告";
 "report_alert_message" = "このコンテンツを報告していただきありがとうございます。できるだけ早く確認します。";
+
+"back" = "戻る";

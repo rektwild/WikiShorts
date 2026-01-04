@@ -90,3 +90,13 @@
 "memory_limit" = "Giới hạn bộ nhớ";
 "clear_all_cache" = "Xóa tất cả bộ nhớ đệm";
 "cache_items" = "mục";
+
+"search_wikipedia_title" = "Tìm kiếm Wikipedia";
+"search_description" = "Tìm bài viết, chủ đề và hơn thế nữa";
+"searching" = "Đang tìm kiếm...";
+"no_results" = "Không tìm thấy kết quả";
+"try_different_search" = "Thử một từ khóa tìm kiếm khác";
+"recent_searches" = "Tìm kiếm gần đây";
+"brief_article_summary" = "Tóm tắt ngắn gọn bài viết...";
+"clear" = "Xóa";
+"back" = "Quay lại";

@@ -84,3 +84,13 @@
 "no_favorites" = "Engin Uppáhald Ennþá";
 "no_favorites_description" = "Ýttu á hjartamerkið á hvaða grein sem er til að vista hana í uppáhald";
 
+
+"search_wikipedia_title" = "Search Wikipedia";
+"search_description" = "Find articles, topics, and more";
+"searching" = "Searching...";
+"no_results" = "No results found";
+"try_different_search" = "Try a different search term";
+"recent_searches" = "Recent Searches";
+"brief_article_summary" = "Brief article summary...";
+"clear" = "Clear";
+"back" = "Back";

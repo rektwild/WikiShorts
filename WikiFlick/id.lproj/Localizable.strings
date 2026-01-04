@@ -92,3 +92,13 @@
 "memory_limit" = "Batas Memori";
 "clear_all_cache" = "Hapus Semua Cache";
 "cache_items" = "item";
+
+"search_wikipedia_title" = "Cari di Wikipedia";
+"search_description" = "Temukan artikel, topik, dan lainnya";
+"searching" = "Mencari...";
+"no_results" = "Tidak ada hasil ditemukan";
+"try_different_search" = "Coba kata kunci pencarian lain";
+"recent_searches" = "Pencarian Terbaru";
+"brief_article_summary" = "Ringkasan artikel singkat...";
+"clear" = "Bersihkan";
+"back" = "Kembali";

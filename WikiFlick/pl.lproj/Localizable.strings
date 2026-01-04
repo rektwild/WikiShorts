@@ -92,3 +92,13 @@
 "memory_limit" = "Limit pamięci";
 "clear_all_cache" = "Wyczyść całą pamięć";
 "cache_items" = "elementów";
+
+"search_wikipedia_title" = "Szukaj w Wikipedii";
+"search_description" = "Znajdź artykuły, tematy i więcej";
+"searching" = "Wyszukiwanie...";
+"no_results" = "Nie znaleziono wyników";
+"try_different_search" = "Spróbuj innego hasła wyszukiwania";
+"recent_searches" = "Ostatnie wyszukiwania";
+"brief_article_summary" = "Krótkie podsumowanie artykułu...";
+"clear" = "Wyczyść";
+"back" = "Wstecz";

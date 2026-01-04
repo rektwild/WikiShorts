@@ -84,3 +84,13 @@
 "no_favorites" = "Aínda Non Hai Favoritos";
 "no_favorites_description" = "Toca a icona do corazón en calquera artigo para gardalo nos teus favoritos";
 
+
+"search_wikipedia_title" = "Search Wikipedia";
+"search_description" = "Find articles, topics, and more";
+"searching" = "Searching...";
+"no_results" = "No results found";
+"try_different_search" = "Try a different search term";
+"recent_searches" = "Recent Searches";
+"brief_article_summary" = "Brief article summary...";
+"clear" = "Clear";
+"back" = "Back";

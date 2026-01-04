@@ -90,3 +90,13 @@
 "memory_limit" = "Ліміт пам'яті";
 "clear_all_cache" = "Очистити весь кеш";
 "cache_items" = "елементів";
+
+"search_wikipedia_title" = "Пошук у Вікіпедії";
+"search_description" = "Знайти статті, теми та інше";
+"searching" = "Пошук...";
+"no_results" = "Результатів не знайдено";
+"try_different_search" = "Спробуйте інший пошуковий запит";
+"recent_searches" = "Нещодавні пошуки";
+"brief_article_summary" = "Короткий зміст статті...";
+"clear" = "Очистити";
+"back" = "Назад";

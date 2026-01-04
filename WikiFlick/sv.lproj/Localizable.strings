@@ -92,3 +92,13 @@
 "memory_limit" = "Minnesgräns";
 "clear_all_cache" = "Rensa all cache";
 "cache_items" = "objekt";
+
+"search_wikipedia_title" = "Sök på Wikipedia";
+"search_description" = "Hitta artiklar, ämnen och mer";
+"searching" = "Söker...";
+"no_results" = "Inga resultat hittades";
+"try_different_search" = "Prova en annan sökterm";
+"recent_searches" = "Senaste sökningar";
+"brief_article_summary" = "Kort artikelsammanfattning...";
+"clear" = "Rensa";
+"back" = "Tillbaka";

@@ -107,3 +107,5 @@
 "per_week" = "/Woche";
 
 "subscription_disclaimer" = "Abonnements werden automatisch verlängert, es sei denn, die automatische Verlängerung wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums deaktiviert. Ihr Konto wird innerhalb von 24 Stunden vor Ablauf des aktuellen Zeitraums für die Verlängerung belastet. Die Zahlung wird bei Bestätigung des Kaufs dem iTunes-Konto belastet. Sie können Ihr Abonnement verwalten und die automatische Verlängerung deaktivieren, indem Sie nach dem Kauf zu Ihren Kontoeinstellungen gehen.";
+
+"back" = "Zurück";

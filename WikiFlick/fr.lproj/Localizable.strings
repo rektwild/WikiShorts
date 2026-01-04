@@ -107,3 +107,5 @@
 "per_week" = "/semaine";
 
 "subscription_disclaimer" = "Les abonnements se renouvellent automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours. Votre compte sera débité du renouvellement dans les 24 heures précédant la fin de la période en cours. Le paiement sera débité du compte iTunes lors de la confirmation de l'achat. Vous pouvez gérer votre abonnement et désactiver le renouvellement automatique en accédant à vos Paramètres de compte après l'achat.";
+
+"back" = "Retour";

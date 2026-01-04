@@ -84,3 +84,13 @@
 "no_favorites" = "Še Ni Priljubljenih";
 "no_favorites_description" = "Tapnite ikono srca na katerem koli članku, da ga shranite med priljubljene";
 
+
+"search_wikipedia_title" = "Search Wikipedia";
+"search_description" = "Find articles, topics, and more";
+"searching" = "Searching...";
+"no_results" = "No results found";
+"try_different_search" = "Try a different search term";
+"recent_searches" = "Recent Searches";
+"brief_article_summary" = "Brief article summary...";
+"clear" = "Clear";
+"back" = "Back";

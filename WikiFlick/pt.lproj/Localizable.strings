@@ -107,3 +107,5 @@
 "per_week" = "/semana";
 
 "subscription_disclaimer" = "As assinaturas são renovadas automaticamente, a menos que a renovação automática seja desativada pelo menos 24 horas antes do final do período atual. Sua conta será cobrada pela renovação dentro de 24 horas antes do final do período atual. O pagamento será cobrado na conta do iTunes na confirmação da compra. Você pode gerenciar sua assinatura e desativar a renovação automática acessando as Configurações da conta após a compra.";
+
+"back" = "Voltar";

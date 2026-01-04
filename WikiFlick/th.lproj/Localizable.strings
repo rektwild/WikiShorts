@@ -92,3 +92,13 @@
 "memory_limit" = "ขีดจำกัดหน่วยความจำ";
 "clear_all_cache" = "ล้างแคชทั้งหมด";
 "cache_items" = "รายการ";
+
+"search_wikipedia_title" = "ค้นหาในวิกิพีเดีย";
+"search_description" = "ค้นหาบทความ หัวข้อ และอื่นๆ";
+"searching" = "กำลังค้นหา...";
+"no_results" = "ไม่พบผลลัพธ์";
+"try_different_search" = "ลองใช้คำค้นหาอื่น";
+"recent_searches" = "การค้นหาล่าสุด";
+"brief_article_summary" = "สรุปบทความโดยสังเขป...";
+"clear" = "ล้าง";
+"back" = "ย้อนกลับ";

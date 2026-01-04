@@ -92,3 +92,13 @@
 "memory_limit" = "Geheugenlimiet";
 "clear_all_cache" = "Alle cache wissen";
 "cache_items" = "items";
+
+"search_wikipedia_title" = "Zoeken in Wikipedia";
+"search_description" = "Vind artikelen, onderwerpen en meer";
+"searching" = "Zoeken...";
+"no_results" = "Geen resultaten gevonden";
+"try_different_search" = "Probeer een andere zoekterm";
+"recent_searches" = "Recente zoekopdrachten";
+"brief_article_summary" = "Korte artikelsamenvatting...";
+"clear" = "Wissen";
+"back" = "Terug";

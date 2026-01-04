@@ -107,3 +107,5 @@
 "per_week" = "/settimana";
 
 "subscription_disclaimer" = "Gli abbonamenti si rinnovano automaticamente a meno che il rinnovo automatico non venga disattivato almeno 24 ore prima della fine del periodo corrente. Il tuo account verrà addebitato per il rinnovo entro 24 ore dalla fine del periodo corrente. Il pagamento verrà addebitato sull'account iTunes al momento della conferma dell'acquisto. Puoi gestire il tuo abbonamento e disattivare il rinnovo automatico andando nelle Impostazioni account dopo l'acquisto.";
+
+"back" = "Indietro";

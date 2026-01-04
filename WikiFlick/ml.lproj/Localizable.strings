@@ -84,3 +84,13 @@
 "no_favorites" = "ഇതുവരെ പ്രിയപ്പെട്ടവ ഇല്ല";
 "no_favorites_description" = "നിങ്ങളുടെ പ്രിയപ്പെട്ടവയിലേക്ക് സംരക്ഷിക്കാൻ ഏതെങ്കിലും ലേഖനത്തിലെ ഹൃദയ ചിഹ്നത്തിൽ ടാപ്പ് ചെയ്യുക";
 
+
+"search_wikipedia_title" = "Search Wikipedia";
+"search_description" = "Find articles, topics, and more";
+"searching" = "Searching...";
+"no_results" = "No results found";
+"try_different_search" = "Try a different search term";
+"recent_searches" = "Recent Searches";
+"brief_article_summary" = "Brief article summary...";
+"clear" = "Clear";
+"back" = "Back";

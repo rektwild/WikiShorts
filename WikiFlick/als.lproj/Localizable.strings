@@ -84,3 +84,13 @@
 "no_favorites" = "No kei Favoriten";
 "no_favorites_description" = "Tipp uf s Herz-Symbol bi enem Artikel zum en zu dine Favoriten hinzuezfüege";
 
+
+"search_wikipedia_title" = "Search Wikipedia";
+"search_description" = "Find articles, topics, and more";
+"searching" = "Searching...";
+"no_results" = "No results found";
+"try_different_search" = "Try a different search term";
+"recent_searches" = "Recent Searches";
+"brief_article_summary" = "Brief article summary...";
+"clear" = "Clear";
+"back" = "Back";
