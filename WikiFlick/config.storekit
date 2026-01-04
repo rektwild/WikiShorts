@@ -11,62 +11,73 @@
   },
   "identifier" : "183FD74A",
   "nonRenewingSubscriptions" : [
-
+    {
+      "displayPrice" : "14.99",
+      "familyShareable" : false,
+      "internalID" : "DBE59819",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "wiki_life",
+      "referenceName" : "lifetime",
+      "type" : "NonRenewingSubscription"
+    }
   ],
   "products" : [
 
   ],
   "settings" : {
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_disableDialogs" : false,
     "_failTransactionsEnabled" : false,
     "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
     "_storefront" : "USA",
     "_storeKitErrors" : [
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Load Products"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Purchase"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Verification"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "App Store Sync"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Subscription Status"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "App Transaction"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Manage Subscriptions Sheet"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Refund Request Sheet"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Offer Code Redeem Sheet"
       }
-    ]
+    ],
+    "_timeRate" : 0
   },
   "subscriptionGroups" : [
     {
@@ -88,9 +99,10 @@
           "groupNumber" : 1,
           "internalID" : "78C0135E",
           "introductoryOffer" : {
+            "displayPrice" : "0.99",
             "internalID" : "96EF7F6D",
             "paymentMode" : "free",
-            "subscriptionPeriod" : "P2W"
+            "subscriptionPeriod" : "P3D"
           },
           "localizations" : [
             {
@@ -107,6 +119,38 @@
           "productID" : "wiki_m",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Monthly",
+          "subscriptionGroupID" : "8A944484",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "0.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "FF5A6EB0",
+          "introductoryOffer" : {
+            "internalID" : "9F2ACAA4",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "wiki_w",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Weekly",
           "subscriptionGroupID" : "8A944484",
           "type" : "RecurringSubscription",
           "winbackOffers" : [

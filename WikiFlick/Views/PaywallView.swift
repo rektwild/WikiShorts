@@ -7,31 +7,37 @@ struct PaywallView: View {
     @StateObject private var languageManager = AppLanguageManager.shared
     @State private var showingAlert = false
     @State private var alertMessage = ""
+    @State private var selectedProduct: Product?
     
     var body: some View {
         ZStack {
             Color.black
                 .ignoresSafeArea()
             
-            VStack(spacing: 20) {
+            VStack(spacing: 0) {
                 closeButton
+                    .padding(.bottom, 10)
                 
-                Spacer()
-                
-                VStack(spacing: 20) {
-                    headerSection
-                    featuresSection
-                    pricingSection
-                    subscribeButton
-                    restoreButton
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 24) {
+                        headerSection
+                        featuresSection
+                        pricingSection
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 10)
+                    .padding(.bottom, 20)
                 }
-                .padding(.horizontal, 24)
                 
-                Spacer()
-                
-                footerSection
+                VStack(spacing: 16) {
+                    subscribeButton
+                        .padding(.horizontal, 24)
+                    
+                    footerSection
+                }
+                .padding(.vertical, 20)
+                .background(Color.black)
             }
-            .padding(.vertical, 20)
         }
         .alert(languageManager.localizedString(key: "error"), isPresented: $showingAlert) {
             Button(languageManager.localizedString(key: "ok")) { }
@@ -42,6 +48,13 @@ struct PaywallView: View {
             if !errorMessage.isEmpty {
                 alertMessage = errorMessage
                 showingAlert = true
+            }
+        }
+        .onChange(of: storeManager.products) { products in
+            if selectedProduct == nil, let weekly = products.first(where: { $0.id == "wiki_w" }) {
+                selectedProduct = weekly
+            } else if selectedProduct == nil, let first = products.first {
+                selectedProduct = first
             }
         }
         .onAppear {
@@ -58,8 +71,8 @@ struct PaywallView: View {
                 isPresented = false
             }) {
                 Image(systemName: "xmark")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(.white.opacity(0.8))
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(.white.opacity(0.6))
                     .frame(width: 32, height: 32)
                     .background(
                         Circle()
@@ -72,14 +85,14 @@ struct PaywallView: View {
     }
     
     private var headerSection: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 12) {
             Image("WikiShorts-pre")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 120, height: 120)
+                .frame(width: 100, height: 100)
             
             Text(languageManager.localizedString(key: "wikishorts_pro"))
-                .font(.system(size: 32, weight: .bold, design: .rounded))
+                .font(.system(size: 28, weight: .bold, design: .rounded))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
         }
@@ -91,78 +104,65 @@ struct PaywallView: View {
             FeatureRow(icon: "calendar", title: languageManager.localizedString(key: "free_trial"), description: languageManager.localizedString(key: "free_trial_desc"))
             FeatureRow(icon: "bolt.fill", title: languageManager.localizedString(key: "faster_loading"), description: languageManager.localizedString(key: "faster_loading_desc"))
         }
+        .padding(.vertical, 8)
     }
     
     private var pricingSection: some View {
         VStack(spacing: 12) {
-            if let product = storeManager.getProduct(for: "wiki_m") {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(languageManager.localizedString(key: "wikishorts_pro"))
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(.white)
-                        Text(languageManager.localizedString(key: "one_month"))
-                            .font(.system(size: 12))
-                            .foregroundColor(.white.opacity(0.7))
-                        Text(languageManager.localizedString(key: "cancel_anytime"))
-                            .font(.system(size: 12))
-                            .foregroundColor(.white.opacity(0.7))
-                    }
-                    
-                    Spacer()
-                    
-                    Text(product.displayPrice + "/month")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.white)
-                }
-                .padding(20)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.white.opacity(0.1))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                        )
-                )
+            if storeManager.isLoading && storeManager.products.isEmpty {
+                loadingProductView
             } else {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(languageManager.localizedString(key: "wikishorts_pro"))
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(.white)
-                        Text(languageManager.localizedString(key: "one_month"))
-                            .font(.system(size: 12))
-                            .foregroundColor(.white.opacity(0.7))
-                        Text(languageManager.localizedString(key: "cancel_anytime"))
-                            .font(.system(size: 12))
-                            .foregroundColor(.white.opacity(0.7))
+                ForEach(storeManager.products, id: \.id) { product in
+                    ProductCard(
+                        product: product,
+                        isSelected: selectedProduct?.id == product.id,
+                        languageManager: languageManager
+                    )
+                    .contentShape(Rectangle()) // Improves tap area
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            selectedProduct = product
+                        }
                     }
-                    
-                    Spacer()
-                    
-                    Text(languageManager.localizedString(key: "loading"))
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.white.opacity(0.7))
                 }
-                .padding(20)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.white.opacity(0.1))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                        )
-                )
             }
         }
     }
     
+    private var loadingProductView: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(languageManager.localizedString(key: "wikishorts_pro"))
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.white)
+                Text(languageManager.localizedString(key: "loading"))
+                    .font(.system(size: 12))
+                    .foregroundColor(.white.opacity(0.7))
+            }
+            
+            Spacer()
+            
+            Text("...")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.white.opacity(0.7))
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.1))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                )
+        )
+    }
+    
     private var subscribeButton: some View {
         Button(action: {
-            guard let product = storeManager.getProduct(for: "wiki_m") else { return }
+            guard let product = selectedProduct else { return }
             Task {
                 await storeManager.purchase(product)
-                if storeManager.isPurchased("wiki_m") {
+                if storeManager.isPurchased(product.id) {
                     isPresented = false
                 }
             }
@@ -172,71 +172,58 @@ struct PaywallView: View {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .black))
                         .scaleEffect(0.8)
+                        .padding(.trailing, 8)
                 }
                 
-                Text(storeManager.isPurchased("wiki_m") ? languageManager.localizedString(key: "already_subscribed") : languageManager.localizedString(key: "start_free_trial"))
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.black)
+                if let product = selectedProduct, storeManager.isPurchased(product.id) {
+                    Text(languageManager.localizedString(key: "already_subscribed"))
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.black)
+                } else {
+                    Text(selectedProduct?.id == "wiki_life" ? languageManager.localizedString(key: "go_premium") : languageManager.localizedString(key: "start_free_trial"))
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.black)
+                }
             }
             .frame(maxWidth: .infinity)
             .frame(height: 56)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(storeManager.isPurchased("wiki_m") ? Color.gray : Color.white)
+                    .fill((selectedProduct != nil && storeManager.isPurchased(selectedProduct!.id)) ? Color.gray : Color.white)
             )
         }
-        .disabled(storeManager.isLoading || storeManager.isPurchased("wiki_m"))
-        .padding(.top, 8)
-    }
-    
-    private var restoreButton: some View {
-        Button(action: {
-            Task {
-                await storeManager.restorePurchases()
-            }
-        }) {
-            HStack {
-                if storeManager.isLoading {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        .scaleEffect(0.6)
-                }
-                
-                Text(languageManager.localizedString(key: "restore_purchases"))
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white.opacity(0.8))
-            }
-        }
-        .disabled(storeManager.isLoading)
+        .disabled(storeManager.isLoading || selectedProduct == nil || (selectedProduct != nil && storeManager.isPurchased(selectedProduct!.id)))
     }
     
     private var footerSection: some View {
-        VStack(spacing: 8) {
-            HStack(spacing: 20) {
-                Button(languageManager.localizedString(key: "terms_of_service")) {
-                    if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
-                        UIApplication.shared.open(url)
-                    }
+        HStack(spacing: 24) {
+            Button(languageManager.localizedString(key: "terms_of_service")) {
+                if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                    UIApplication.shared.open(url)
                 }
-                .font(.system(size: 14))
-                .foregroundColor(.white.opacity(0.6))
-                
-                Button(languageManager.localizedString(key: "privacy_policy")) {
-                    if let url = URL(string: "https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d") {
-                        UIApplication.shared.open(url)
-                    }
-                }
-                .font(.system(size: 14))
-                .foregroundColor(.white.opacity(0.6))
             }
+            .font(.system(size: 11, weight: .medium))
+            .foregroundColor(.white.opacity(0.5))
             
-            Text(languageManager.localizedString(key: "free_trial_then_price"))
-                .font(.system(size: 12))
-                .foregroundColor(.white.opacity(0.5))
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 16)
+            Button(languageManager.localizedString(key: "privacy_policy")) {
+                if let url = URL(string: "https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d") {
+                    UIApplication.shared.open(url)
+                }
+            }
+            .font(.system(size: 11, weight: .medium))
+            .foregroundColor(.white.opacity(0.5))
+
+            Button(action: {
+                Task {
+                    await storeManager.restorePurchases()
+                }
+            }) {
+                Text(languageManager.localizedString(key: "restore_purchases"))
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(.white.opacity(0.5))
+            }
+            .disabled(storeManager.isLoading)
         }
-        .padding(.top, 8)
     }
 }
 

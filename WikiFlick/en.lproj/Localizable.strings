@@ -57,7 +57,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Ad-Free Experience";
 "ad_free_experience_desc" = "Enjoy uninterrupted reading without any ads";
-"free_trial" = "2-Week Free Trial";
+"free_trial" = "3-Day Free Trial";
 "free_trial_desc" = "Try all premium features completely free";
 "faster_loading" = "Faster Loading";
 "faster_loading_desc" = "Premium servers for lightning-fast article loading";
@@ -90,3 +90,7 @@
 "offline_mode" = "Offline mode";
 "random_article" = "Random";
 "feed" = "Feed";
+
+"lifetime" = "Lifetime";
+"one_time_payment" = "One-time payment";
+"one_week" = "1 Week";

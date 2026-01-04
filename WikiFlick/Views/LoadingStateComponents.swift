@@ -54,14 +54,31 @@ struct SkeletonArticleCardView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Image skeleton
-            LoadingShimmerView(cornerRadius: 20)
-                .frame(
-                    width: geometry.size.width - 20,
-                    height: geometry.size.height * 0.55
-                )
-                .padding(.horizontal, 10)
-                .padding(.top, 120)
+            // Image skeleton with button placeholders
+            ZStack(alignment: .bottomTrailing) {
+                LoadingShimmerView(cornerRadius: 20)
+                    .frame(
+                        width: geometry.size.width - 20,
+                        height: geometry.size.height * 0.55
+                    )
+                
+                // Button placeholders (Safari & Share)
+                HStack(spacing: 8) {
+                    ForEach(0..<2) { _ in
+                        Circle()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: 44, height: 44)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                            )
+                    }
+                }
+                .padding(.bottom, 8)
+                .padding(.trailing, 8)
+            }
+            .padding(.horizontal, 10)
+            .padding(.top, 120)
             
             Spacer()
             
@@ -88,8 +105,12 @@ struct SkeletonArticleCardView: View {
             .padding(20)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 20) // Updated to 20
                     .fill(Color.black.opacity(0.85))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                    )
             )
             .padding(.horizontal, 8)
             .padding(.bottom, 50)
@@ -148,6 +169,7 @@ struct FeedLoadingView: View {
                 .transition(.opacity.combined(with: .scale(scale: 0.95)))
         }
         .background(Color.black.ignoresSafeArea())
+        .ignoresSafeArea()
     }
 }
 

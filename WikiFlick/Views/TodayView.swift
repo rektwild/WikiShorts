@@ -11,9 +11,15 @@ struct TodayView: View {
     
     // MARK: - State
     
+    @Binding var showingSettings: Bool
+    @Binding var showingRewardAlert: Bool
+    @Binding var showingNoAdAlert: Bool
+    
     @StateObject private var onThisDayService = OnThisDayService()
+    @EnvironmentObject var storeManager: StoreManager
     @State private var selectedEvent: OnThisDayEvent?
     @State private var showingEventDetail = false
+    @State private var showingPaywall = false
     
     // MARK: - Computed Properties
     
@@ -47,6 +53,14 @@ struct TodayView: View {
                                 .padding(.horizontal)
                                 .padding(.top, 16)
                             
+                            // Banner Ad
+                            if !AdMobManager.shared.isPremiumUser {
+                                BannerAdView(adUnitID: AdMobManager.shared.bannerAdUnitID)
+                                    .frame(height: 50)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 8)
+                            }
+                            
                             // Timeline
                             timelineView
                                 .padding(.horizontal)
@@ -60,11 +74,26 @@ struct TodayView: View {
             .refreshable {
                 await onThisDayService.refreshEvents()
             }
-            .sheet(isPresented: $showingEventDetail) {
-                if let event = selectedEvent {
-                    EventDetailView(event: event)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    WikiHeaderView(showingPaywall: $showingPaywall)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    WikiTrailingHeaderView(
+                        showingSettings: $showingSettings,
+                        showingRewardAlert: $showingRewardAlert,
+                        showingNoAdAlert: $showingNoAdAlert
+                    )
                 }
             }
+        }
+        .sheet(isPresented: $showingEventDetail) {
+            if let event = selectedEvent {
+                EventDetailView(event: event)
+            }
+        }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView(isPresented: $showingPaywall)
         }
         .task {
             await onThisDayService.fetchOnThisDayEvents()
@@ -553,5 +582,9 @@ struct PageRow: View {
 // MARK: - Preview
 
 #Preview {
-    TodayView()
+    TodayView(
+        showingSettings: .constant(false),
+        showingRewardAlert: .constant(false),
+        showingNoAdAlert: .constant(false)
+    )
 }

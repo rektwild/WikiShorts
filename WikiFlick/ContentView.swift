@@ -25,10 +25,14 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // Today Tab
-            TodayView()
-                .tabItem {
-                    Label(languageManager.localizedString(key: "today"), systemImage: "doc.text.image")
-                }
+            TodayView(
+                showingSettings: $showingSettings,
+                showingRewardAlert: $showingRewardAlert,
+                showingNoAdAlert: $showingNoAdAlert
+            )
+            .tabItem {
+                Label(languageManager.localizedString(key: "today"), systemImage: "doc.text.image")
+            }
             
             // Feed Tab
             if #available(iOS 16.0, *) {
@@ -61,24 +65,14 @@ struct ContentView: View {
                         .toolbarColorScheme(.dark, for: .navigationBar)
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
-                                HStack(spacing: 8) {
-                                    Button(action: {
-                                        NotificationCenter.default.post(name: NSNotification.Name("RefreshRandomArticle"), object: nil)
-                                    }) {
-                                        Image(systemName: "shuffle")
-                                            .font(.system(size: 16, weight: .medium))
-                                            .foregroundColor(.white)
-                                    }
-                                }
+                                WikiHeaderView(showingPaywall: $showingPaywall)
                             }
                             ToolbarItem(placement: .navigationBarTrailing) {
-                                Button(action: {
-                                    showingSettings = true
-                                }) {
-                                    Image(systemName: "gearshape")
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(.white)
-                                }
+                                WikiTrailingHeaderView(
+                                    showingSettings: $showingSettings,
+                                    showingRewardAlert: $showingRewardAlert,
+                                    showingNoAdAlert: $showingNoAdAlert
+                                )
                             }
                         }
                 }
@@ -91,22 +85,14 @@ struct ContentView: View {
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
-                                Button(action: {
-                                    NotificationCenter.default.post(name: NSNotification.Name("RefreshRandomArticle"), object: nil)
-                                }) {
-                                    Image(systemName: "shuffle")
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(.white)
-                                }
+                                WikiHeaderView(showingPaywall: $showingPaywall)
                             }
                             ToolbarItem(placement: .navigationBarTrailing) {
-                                Button(action: {
-                                    showingSettings = true
-                                }) {
-                                    Image(systemName: "gearshape")
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(.white)
-                                }
+                                WikiTrailingHeaderView(
+                                    showingSettings: $showingSettings,
+                                    showingRewardAlert: $showingRewardAlert,
+                                    showingNoAdAlert: $showingNoAdAlert
+                                )
                             }
                         }
                 }
@@ -117,10 +103,14 @@ struct ContentView: View {
             }
             
             // Search Tab
-            SearchView()
-                .tabItem {
-                    Label(languageManager.localizedString(key: "search"), systemImage: "magnifyingglass")
-                }
+            SearchView(
+                showingSettings: $showingSettings,
+                showingRewardAlert: $showingRewardAlert,
+                showingNoAdAlert: $showingNoAdAlert
+            )
+            .tabItem {
+                Label(languageManager.localizedString(key: "search"), systemImage: "magnifyingglass")
+            }
         }
         .accentColor(.white) // Ensure tab selection color fits dark theme
         .preferredColorScheme(.dark) // Enforce dark mode as per app style
@@ -140,6 +130,8 @@ struct ContentView: View {
         } message: {
             Text(languageManager.localizedString(key: "try_again_later"))
         }
+        .environmentObject(languageManager)
+        .environmentObject(storeManager)
         .onAppear {
             Task {
                 await storeManager.loadProducts()
@@ -185,19 +177,14 @@ struct ContentView: View {
     
     private var trailingToolbarItems: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
-            HStack(spacing: 8) {
-                // searchButton removed as we have a Search Tab now
-                if !storeManager.isPurchased("wiki_m") {
-                    giftButton
-                }
-                settingsButton
-            }
+            WikiTrailingHeaderView(
+                showingSettings: $showingSettings,
+                showingRewardAlert: $showingRewardAlert,
+                showingNoAdAlert: $showingNoAdAlert
+            )
         }
     }
     
-    // Removed bottomToolbarItems (custom home circle)
-    // Removed searchResultsOverlay and related subviews (SearchResultsSkeletonView, etc)
-
     private var profileButton: some View {
         Button(action: {
             if selectedSearchArticle != nil {
@@ -214,11 +201,6 @@ struct ContentView: View {
         }
     }
 
-    // Removed backToFeedButton logic if it relied on custom overlay state, 
-    // but keeping it simpler for now. If FeedView handles navigation internally via selectedSearchArticle, 
-    // we might not need a manual back button in toolbar if we aren't overlaying.
-    // However, the original code had backToFeedButton in leadingToolbarItems.
-    
     private var removeAdsButton: some View {
         Button(action: {
             showingPaywall = true
@@ -226,34 +208,11 @@ struct ContentView: View {
             HStack(spacing: 4) {
                 Image(systemName: "nosign")
                     .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.white)
                 Text(languageManager.localizedString(key: "remove_ads"))
                     .font(.system(size: 14, weight: .semibold))
             }
             .foregroundColor(.white)
-        }
-    }
-
-    private var giftButton: some View {
-        Button(action: {
-            if AdMobManager.shared.isRewardedAdLoaded {
-                showingRewardAlert = true
-            } else {
-                showingNoAdAlert = true
-            }
-        }) {
-            Image(systemName: "gift")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.white)
-        }
-    }
-
-    private var settingsButton: some View {
-        Button(action: {
-            showingSettings = true
-        }) {
-            Image(systemName: "gearshape")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.white)
         }
     }
 

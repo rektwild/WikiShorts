@@ -88,3 +88,7 @@
 "offline_mode" = "Çevrimdışı mod";
 "random_article" = "Rastgele";
 "feed" = "Akış";
+
+"lifetime" = "Ömür Boyu";
+"one_time_payment" = "Tek seferlik ödeme";
+"one_week" = "1 Hafta";

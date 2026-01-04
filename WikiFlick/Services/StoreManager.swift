@@ -8,12 +8,45 @@ class StoreManager: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage = ""
     
-    private let productIDs = ["wiki_m"]
+    private let productIDs = ["wiki_w", "wiki_life"]
+    private var updateListenerTask: Task<Void, Never>? = nil
     
     init() {
+        updateListenerTask = listenForTransactions()
+        
         Task {
             await loadProducts()
             await updatePurchasedProducts()
+        }
+    }
+    
+    deinit {
+        updateListenerTask?.cancel()
+    }
+    
+    func listenForTransactions() -> Task<Void, Never> {
+        return Task.detached {
+            for await result in Transaction.updates {
+                do {
+                    let transaction = try self.checkVerified(result)
+                    await transaction.finish()
+                    await self.updatePurchasedProducts()
+                } catch {
+                    print("Transaction failed verification")
+                }
+            }
+        }
+    }
+    
+    nonisolated func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+        // Check whether the JWS passes StoreKit verification.
+        switch result {
+        case .unverified:
+            // StoreKit parses the JWS, but it fails verification.
+            throw StoreError.failedVerification
+        case .verified(let safe):
+            // The result is verified. Return the unwraped value.
+            return safe
         }
     }
     
@@ -102,4 +135,8 @@ class StoreManager: ObservableObject {
     func getProduct(for id: String) -> Product? {
         return products.first { $0.id == id }
     }
+}
+
+public enum StoreError: Error {
+    case failedVerification
 }

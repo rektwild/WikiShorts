@@ -10,8 +10,14 @@ import SwiftUI
 struct SearchView: View {
     @State private var searchText = ""
     @State private var selectedSearchResult: SearchResult?
+    @State private var showingPaywall = false
     @StateObject private var wikipediaService = WikipediaService()
+    @EnvironmentObject var storeManager: StoreManager
     @StateObject private var languageManager = AppLanguageManager.shared
+    
+    @Binding var showingSettings: Bool
+    @Binding var showingRewardAlert: Bool
+    @Binding var showingNoAdAlert: Bool
     
     private let maxResults = 10
     
@@ -53,6 +59,21 @@ struct SearchView: View {
                         onNavigateToTop: nil
                     )
                 }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    WikiHeaderView(showingPaywall: $showingPaywall)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    WikiTrailingHeaderView(
+                        showingSettings: $showingSettings,
+                        showingRewardAlert: $showingRewardAlert,
+                        showingNoAdAlert: $showingNoAdAlert
+                    )
+                }
+            }
+            .sheet(isPresented: $showingPaywall) {
+                PaywallView(isPresented: $showingPaywall)
             }
         }
     }
@@ -130,6 +151,10 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(
+        showingSettings: .constant(false),
+        showingRewardAlert: .constant(false),
+        showingNoAdAlert: .constant(false)
+    )
         .preferredColorScheme(.dark)
 }
