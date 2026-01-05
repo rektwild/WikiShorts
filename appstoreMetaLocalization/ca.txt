@@ -2,10 +2,10 @@
 // Catalan (Spain) - ca
 
 // App Name
-WikiShorts: Descobreix Coneixement
+WikiShorts: Descobreix Saber
 
 // Subtitle
-Descobreix Coneixement Cada Dia
+Coneixement Cada Dia
 
 // Promotional Text
 Seleccionem per a tu els articles més interessants de la Viquipèdia cada dia! Satisfà la teva curiositat i aprèn alguna cosa nova.
@@ -27,6 +27,14 @@ Per què WikiShorts?
 Perquè aprendre no ha de ser avorrit. Accedeix a coneixement concentrat sobre milers de temes, des de ciència i art fins a història i tecnologia. Fes que cada dia sigui una mica més savi amb WikiShorts.
 
 Descarrega-la ara i comença a explorar!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 coneixement,aprendre,educació,història,ciència,art,fets,descobreix,curiositat,resum

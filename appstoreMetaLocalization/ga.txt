@@ -28,5 +28,13 @@ Mar ní gá go mbeadh an fhoghlaim leadránach. Faigh rochtain ar eolas beag ar 
 
 Íoslódáil anois agus tosaigh ag taiscéaladh!
 
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
+
 // Keywords
 eolas,foghlaim,oideachas,stair,eolaíocht,ealaín,fíricí,fionnachtain,fiosracht,achoimre

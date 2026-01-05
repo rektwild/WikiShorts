@@ -2,7 +2,7 @@
 // Welsh (Wales) - cy
 
 // App Name
-WikiShorts: Darganfod Gwybodaeth
+WikiShorts: Dysgu & Darganfod
 
 // Subtitle
 Darganfod Gwybodaeth Bob Dydd
@@ -27,6 +27,14 @@ Pam WikiShorts?
 Oherwydd nid oes rhaid i ddysgu fod yn ddiflas. Mynnwch fynediad at wybodaeth gryno ar filoedd o bynciau, o wyddoniaeth a chelf i hanes a thechnoleg. Gwnewch bob dydd ychydig yn gallach gyda WikiShorts.
 
 Lawrlwythwch nawr a dechreuwch archwilio!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 gwybodaeth,dysgu,addysg,hanes,gwyddoniaeth,celf,ffeithiau,darganfod,chwilfrydedd,crynodeb

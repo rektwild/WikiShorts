@@ -2,7 +2,7 @@
 // Romanian (Romania, Moldova) - ro
 
 // App Name
-WikiShorts: Descoperă Cunoștințe
+WikiShorts: Află Lucruri Noi
 
 // Subtitle
 Descoperă Cunoștințe Zilnic
@@ -27,6 +27,14 @@ De ce WikiShorts?
 Pentru că învățatul nu trebuie să fie plictisitor. Accesează cunoștințe concentrate despre mii de subiecte, de la știință și artă la istorie și tehnologie. Fă fiecare zi puțin mai înțeleaptă cu WikiShorts.
 
 Descarcă acum și începe să explorezi!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 cunoștințe,învățare,educație,istorie,știință,artă,fapte,descoperă,curiozitate,rezumat

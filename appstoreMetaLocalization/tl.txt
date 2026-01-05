@@ -2,10 +2,10 @@
 // Tagalog (Philippines) - tl
 
 // App Name
-WikiShorts: Tuklasin ang Kaalaman
+WikiShorts: Tuklas Kaalaman
 
 // Subtitle
-Tuklasin ang Kaalaman Araw-araw
+Kaalaman Araw-araw
 
 // Promotional Text
 Pinipili namin para sa iyo ang mga pinakakawili-wiling artikulo sa Wikipedia araw-araw! Bigyang-kasiyahan ang iyong kuryusidad at matuto ng bago.
@@ -27,6 +27,14 @@ Bakit WikiShorts?
 Dahil ang pag-aaral ay hindi kailangang maging boring. Magkaroon ng access sa pinaikling kaalaman sa libu-libong paksa, mula sa agham at sining hanggang sa kasaysayan at teknolohiya. Gawing mas matalino ang bawat araw gamit ang WikiShorts.
 
 I-download na ngayon at simulang mag-explore!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 kaalaman,matuto,edukasyon,kasaysayan,agham,sining,fakta,tuklasin,kuryusidad,buod,artikulo

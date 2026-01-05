@@ -2,7 +2,7 @@
 // Icelandic (Iceland) - is
 
 // App Name
-WikiShorts: Uppgötvaðu Þekkingu
+WikiShorts: Lærðu nýtt
 
 // Subtitle
 Uppgötvaðu Þekkingu Daglega
@@ -27,6 +27,14 @@ Hvers vegna WikiShorts?
 Vegna þess að nám þarf ekki að vera leiðinlegt. Fáðu aðgang að hnitmiðuðum upplýsingum um þúsundir efna, allt frá vísindum og listum til sögu og tækni. Gerðu hvern dag aðeins vitrari með WikiShorts.
 
 Sæktu appið núna og byrjaðu að skoða!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 þekking,læra,menntun,saga,vísindi,list,staðreyndir,uppgötva,forvitni,samantekt

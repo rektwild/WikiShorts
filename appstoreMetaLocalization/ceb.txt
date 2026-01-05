@@ -2,10 +2,10 @@
 // Cebuano (Philippines) - ceb
 
 // App Name
-WikiShorts: Pagdiskobre og Kahibalo
+WikiShorts: Diskobre Kahibalo
 
 // Subtitle
-Pagdiskobre og Kahibalo Kada Adlaw
+Kahibalo Kada Adlaw
 
 // Promotional Text
 Gipili namo para nimo ang labing makapaikag nga mga artikulo sa Wikipedia kada adlaw! Tagbawa ang imong kakuryuso ug pagkat-on og bag-o.
@@ -27,6 +27,14 @@ Nganong WikiShorts?
 Tungod kay ang pagkat-on dili kinahanglan nga makalaay. Pag-access sa gagmay nga kahibalo sa liboan ka mga hilisgutan, gikan sa siyensya ug arte hangtod sa kasaysayan ug teknolohiya. Himoa ang matag adlaw nga mas maalamon sa WikiShorts.
 
 I-download karon ug sugdi ang pagsuhid!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 kahibalo,pagkat-on,edukasyon,kasaysayan,siyensya,arte,kamatuoran,diskobre,kuryusidad,summary

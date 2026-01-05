@@ -2,10 +2,10 @@
 // Waray (Philippines) - war
 
 // App Name
-WikiShorts: Diskobreha an Kaaram
+WikiShorts: Diskobre Kaaram
 
 // Subtitle
-Diskobreha an Kaaram Kada Adlaw
+Kaaram Kada Adlaw
 
 // Promotional Text
 Ginpipili namon para ha imo an pinakainteresante nga mga artikulo ha Wikipedia kada adlaw! Tagbawa an imo pagkamausisaon ngan pag-aram hin bag-o.
@@ -27,6 +27,14 @@ Kay ano nga WikiShorts?
 Tungod kay an pag-aram diri kinahanglan magin makuri. Pag-access hin gagmay nga mga kaaram ha yinukot nga mga himangrawon, tikang ha syensya ngan arte ngadto ha kaagi ngan teknolohiya. Himua an kada adlaw nga mas maaramon pa upod an WikiShorts.
 
 Pag-download yana ngan pagtikang pagsuhid!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 kaaram,pag-aram,edukasyon,kaagi,syensya,arte,kamatuoran,diskobreha,kuryusidad,sumaryo

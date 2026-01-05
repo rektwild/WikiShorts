@@ -2,7 +2,7 @@
 // Czech (Czech Republic) - cs
 
 // App Name
-WikiShorts: Objevujte Vědomosti
+WikiShorts: Svět vědomostí
 
 // Subtitle
 Objevujte Vědomosti Každý Den
@@ -27,6 +27,14 @@ Proč WikiShorts?
 Protože učení nemusí být nuda. Získejte přístup ke stručným znalostem o tisících témat, od vědy a umění po historii a technologii. Udělejte každý den o něco chytřejším s WikiShortsem.
 
 Stáhněte si nyní a začněte objevovat!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 znalosti,učení,vzdělávání,historie,věda,umění,fakta,objevovat,zvědavost,shrnutí,články

@@ -28,5 +28,13 @@ Chunki o'rganish zerikarli bo'lishi shart emas. Fan va san'atdan tortib tarix va
 
 Hozir yuklab oling va kashf qilishni boshlang!
 
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
+
 // Keywords
 bilim,o'rganish,ta'lim,tarix,fan,san'at,faktlar,kashf eting,qiziquvchanlik,maqola

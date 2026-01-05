@@ -2,7 +2,7 @@
 // Tamil (India, Sri Lanka, etc.) - ta
 
 // App Name
-WikiShorts: அறிவைக் கண்டறியுங்கள்
+WikiShorts: அறிவை தேடு
 
 // Subtitle
 தினமும் அறிவைக் கண்டறியுங்கள்
@@ -27,6 +27,14 @@ WikiShorts கற்றலை தினசரி பழக்கமாக மா
 ஏனெனில் கற்றல் சலிப்பை ஏற்படுத்த வேண்டியதில்லை. அறிவியல் மற்றும் கலையிலிருந்து வரலாறு மற்றும் தொழில்நுட்பம் வரை ஆயிரக்கணக்கான தலைப்புகளில் சிறிய அளவிலான அறிவைப் பெறுங்கள். WikiShorts மூலம் ஒவ்வொரு நாளையும் થોડਾ తెలివిగా மாற்றండి.
 
 இప్పుதே பதிவிறக்கம் செய்து ஆராயத் தொடங்குங்கள்!
+
+
+Privacy Policy: https://www.freeprivacypolicy.com/live/affd7171-b413-4bef-bbad-b4ec83a5fa1d
+
+Terms of Service: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+// What's New
+Bug fixes and performance improvements.
 
 // Keywords
 அறிவு,கல்வி,வரலாறு,அறிவியல்,கலை,உண்மைகள்,கண்டுபிடி,ஆர்வம்,சுருக்கம்,கட்டுரைகள்
