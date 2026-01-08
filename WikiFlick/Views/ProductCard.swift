@@ -30,8 +30,12 @@ struct ProductCard: View {
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.white)
                 
-                if product.id == "wiki_w" {
-                    Text(languageManager.localizedString(key: "free_trial"))
+                if let trialText = getTrialText() {
+                    Text(trialText)
+                        .font(.system(size: 12))
+                        .foregroundColor(.white.opacity(0.8))
+                } else if product.id == "wiki_w" {
+                     Text(languageManager.localizedString(key: "free_trial"))
                         .font(.system(size: 12))
                         .foregroundColor(.white.opacity(0.8))
                 }
@@ -74,5 +78,30 @@ struct ProductCard: View {
             return languageManager.localizedString(key: "lifetime")
         }
         return languageManager.localizedString(key: "weekly")
+    }
+    
+    private func getTrialText() -> String? {
+        guard let subscription = product.subscription,
+              let offer = subscription.introductoryOffer,
+              offer.type == .introductory else {
+            return nil
+        }
+        
+        let count = offer.period.value
+        let unit = offer.period.unit
+        
+        let unitKey: String
+        switch unit {
+        case .day: unitKey = count == 1 ? "day" : "days"
+        case .week: unitKey = count == 1 ? "week" : "weeks"
+        case .month: unitKey = count == 1 ? "month" : "months"
+        case .year: unitKey = count == 1 ? "year" : "years"
+        @unknown default: return nil
+        }
+        
+        let unitString = languageManager.localizedString(key: unitKey)
+        let freeString = languageManager.localizedString(key: "free_lower")
+        
+        return "\(count) \(unitString) \(freeString)"
     }
 }

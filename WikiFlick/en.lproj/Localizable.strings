@@ -139,3 +139,14 @@
 "featured_content" = "Featured Content";
 "discover_amazing_content_body" = "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.";
 "discover_now" = "Discover Now";
+
+"day" = "Day";
+"days" = "Days";
+"week" = "Week";
+"weeks" = "Weeks";
+"month" = "Month";
+"months" = "Months";
+"year" = "Year";
+"years" = "Years";
+"free_lower" = "Free";
+

@@ -116,7 +116,7 @@ struct PaywallView: View {
     private var featuresSection: some View {
         VStack(spacing: 16) {
             FeatureRow(icon: "nosign", title: languageManager.localizedString(key: "ad_free_experience"), description: languageManager.localizedString(key: "ad_free_experience_desc"))
-            FeatureRow(icon: "calendar", title: languageManager.localizedString(key: "free_trial"), description: languageManager.localizedString(key: "free_trial_desc"))
+            FeatureRow(icon: "calendar", title: getTrialFeatureTitle(), description: languageManager.localizedString(key: "free_trial_desc"))
             FeatureRow(icon: "bolt.fill", title: languageManager.localizedString(key: "faster_loading"), description: languageManager.localizedString(key: "faster_loading_desc"))
         }
         .padding(.vertical, 8)
@@ -242,6 +242,32 @@ struct PaywallView: View {
             }
             
         }
+    }
+    private func getTrialFeatureTitle() -> String {
+        if let weeklyProduct = storeManager.products.first(where: { $0.id == "wiki_w" }),
+           let subscription = weeklyProduct.subscription,
+           let offer = subscription.introductoryOffer,
+           offer.type == .introductory {
+            
+            let count = offer.period.value
+            let unit = offer.period.unit
+            
+            let unitKey: String
+            switch unit {
+            case .day: unitKey = count == 1 ? "day" : "days"
+            case .week: unitKey = count == 1 ? "week" : "weeks"
+            case .month: unitKey = count == 1 ? "month" : "months"
+            case .year: unitKey = count == 1 ? "year" : "years"
+            @unknown default: return languageManager.localizedString(key: "free_trial")
+            }
+            
+            let unitString = languageManager.localizedString(key: unitKey)
+            let freeString = languageManager.localizedString(key: "free_lower")
+            
+            return "\(count) \(unitString) \(freeString)"
+        }
+        
+        return languageManager.localizedString(key: "free_trial")
     }
 }
 

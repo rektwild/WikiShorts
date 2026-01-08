@@ -56,7 +56,7 @@
 "wikishorts_pro" = "WikiShorts PRO";
 "ad_free_experience" = "Reklamsız Deneyim";
 "ad_free_experience_desc" = "Hiçbir reklam olmadan kesintisiz okuma deneyimi yaşayın";
-"free_trial" = "2 hafta ücretsiz";
+"free_trial" = "Ücretsiz Deneme";
 "free_trial_desc" = "Tüm premium özellikleri tamamen ücretsiz deneyin";
 "faster_loading" = "Daha Hızlı Yükleme";
 "faster_loading_desc" = "Yıldırım hızında makale yükleme için premium sunucular";
@@ -140,3 +140,13 @@
 "featured_content" = "Öne Çıkan İçerik";
 "discover_amazing_content_body" = "Sizin için özel olarak hazırlanmış harika içerikleri keşfedin! Bu sponsorlu içerik, size en iyi önerileri ve heyecan verici yeni keşifleri getiriyor.";
 "discover_now" = "Şimdi Keşfet";
+
+"day" = "Gün";
+"days" = "Gün";
+"week" = "Hafta";
+"weeks" = "Hafta";
+"month" = "Ay";
+"months" = "Ay";
+"year" = "Yıl";
+"years" = "Yıl";
+"free_lower" = "Ücretsiz";
