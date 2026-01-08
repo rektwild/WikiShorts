@@ -106,9 +106,11 @@ struct ContentView: View {
         .preferredColorScheme(.dark) // Enforce dark mode as per app style
         .sheet(isPresented: $showingSettings) {
             SettingsView()
+                .environmentObject(storeManager)
         }
         .sheet(isPresented: $showingPaywall) {
             PaywallView(isPresented: $showingPaywall)
+                .environmentObject(storeManager)
         }
         .alert(languageManager.localizedString(key: "rewarded_ad"), isPresented: $showingRewardAlert) {
             rewardAlertButtons
