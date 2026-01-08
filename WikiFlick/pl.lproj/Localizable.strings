@@ -133,11 +133,11 @@
 
 "continue_without_pro" = "Kontynuuj bez WikiShorts Pro";
 
-"selected_accessibility_hint" = "Selected";
-"double_tap_to_select" = "Double tap to select";
+"selected_accessibility_hint" = "Wybrano";
+"double_tap_to_select" = "Stuknij dwukrotnie, aby wybrać";
 "continue_next_step" = "Continue to next step";
 "proceeds_next_step" = "Proceeds to the next onboarding step";
-"featured_content" = "Featured Content";
-"discover_amazing_content_body" = "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.";
-"discover_now" = "Discover Now";
+"featured_content" = "Polecane treści";
+"discover_amazing_content_body" = "Odkryj niesamowite treści!";
+"discover_now" = "Odkryj Teraz";
 "free_lower" = "za darmo";

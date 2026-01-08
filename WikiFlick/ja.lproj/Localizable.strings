@@ -74,7 +74,7 @@
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "魅力的な新しいWikipedia記事を発見しよう！";
 "select_app_language" = "アプリの言語";
-"select_article_language" = "記事の言語";
+"select_article_language" = "記事の言語を選択";
 "today" = "今日";
 "on_this_day" = "今日は何の日";
 "today_title" = "今日は何の日";
@@ -85,8 +85,8 @@
 "error_loading_events" = "イベントの読み込みに失敗しました";
 "related_pages" = "関連ページ";
 "close" = "閉じる";
-"showing_cached_data" = "キャッシュを表示中";
-"offline_mode" = "オフライン";
+"showing_cached_data" = "キャッシュデータを表示中";
+"offline_mode" = "オフラインモード";
 "favorites" = "お気に入り";
 "no_favorites" = "お気に入りはまだありません";
 "no_favorites_description" = "記事のハートアイコンをタップして、お気に入りに保存します";
@@ -121,7 +121,7 @@
 "report_alert_title" = "記事を報告";
 "report_alert_message" = "このコンテンツを報告していただきありがとうございます。できるだけ早く確認します。";
 "search_wikipedia_title" = "ウィキペディアを検索";
-"search_description" = "記事、トピックなどを検索";
+"search_description" = "記事やトピックを検索";
 "clear" = "クリア";
 "no_description" = "説明なし";
 "pro" = "プロ";
@@ -133,11 +133,11 @@
 
 "continue_without_pro" = "WikiShorts Proなしで続行";
 
-"selected_accessibility_hint" = "Selected";
-"double_tap_to_select" = "Double tap to select";
+"selected_accessibility_hint" = "選択済み";
+"double_tap_to_select" = "ダブルタップして選択";
 "continue_next_step" = "Continue to next step";
 "proceeds_next_step" = "Proceeds to the next onboarding step";
-"featured_content" = "Featured Content";
-"discover_amazing_content_body" = "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.";
-"discover_now" = "Discover Now";
+"featured_content" = "おすすめコンテンツ";
+"discover_amazing_content_body" = "あなただけのために厳選された素晴らしいコンテンツを発見しましょう！";
+"discover_now" = "今すぐ発見";
 "free_lower" = "無料";

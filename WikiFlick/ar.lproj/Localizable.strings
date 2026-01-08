@@ -74,19 +74,19 @@
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "اكتشف مقالات ويكيبيديا جديدة ومثيرة!";
 "select_app_language" = "اختر لغة التطبيق";
-"select_article_language" = "Select Article Language";
+"select_article_language" = "اختر لغة المقال";
 "today" = "اليوم";
-"on_this_day" = "On This Day";
+"on_this_day" = "في مثل هذا اليوم";
 "today_title" = "في مثل هذا اليوم";
 "today_subtitle" = "أحداث تاريخية وقعت في مثل هذا اليوم";
 "loading_events" = "جارٍ التحميل...";
 "no_events_today" = "لا توجد أحداث اليوم";
 "no_events_description" = "تحقق لاحقاً";
 "error_loading_events" = "فشل التحميل";
-"related_pages" = "Related Pages";
-"close" = "Close";
-"showing_cached_data" = "Showing cached data";
-"offline_mode" = "Offline mode";
+"related_pages" = "صفحات ذات صلة";
+"close" = "إغلاق";
+"showing_cached_data" = "عرض البيانات المخزنة مؤقتاً";
+"offline_mode" = "وضع عدم الاتصال";
 "favorites" = "المفضلة";
 "no_favorites" = "لا توجد مفضلات بعد";
 "no_favorites_description" = "انقر على أيقونة القلب في أي مقال لحفظه في المفضلة";
@@ -133,11 +133,11 @@
 
 "continue_without_pro" = "الاستمرار بدون WikiShorts Pro";
 
-"selected_accessibility_hint" = "Selected";
-"double_tap_to_select" = "Double tap to select";
-"continue_next_step" = "Continue to next step";
-"proceeds_next_step" = "Proceeds to the next onboarding step";
-"featured_content" = "Featured Content";
-"discover_amazing_content_body" = "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.";
-"discover_now" = "Discover Now";
+"selected_accessibility_hint" = "محدد";
+"double_tap_to_select" = "انقر مرتين للتحديد";
+"continue_next_step" = "متابعة للخطوة التالية";
+"proceeds_next_step" = "ينتقل إلى خطوة الإعداد التالية";
+"featured_content" = "محتوى مميز";
+"discover_amazing_content_body" = "اكتشف محتوى مذهل مخصص لك خصيصاً!";
+"discover_now" = "اكتشف الآن";
 "free_lower" = "مجانا";

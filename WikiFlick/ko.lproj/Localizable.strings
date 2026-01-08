@@ -74,19 +74,19 @@
 "daily_reminder_title" = "WikiShorts";
 "daily_reminder_body" = "새로운 흥미진진한 위키백과 기사를 발견하세요!";
 "select_app_language" = "앱 언어 선택";
-"select_article_language" = "Select Article Language";
+"select_article_language" = "기사 언어 선택";
 "today" = "오늘";
-"on_this_day" = "On This Day";
+"on_this_day" = "오늘의 역사";
 "today_title" = "오늘의 역사";
 "today_subtitle" = "오늘 일어난 역사적인 사건들";
 "loading_events" = "이벤트 로딩 중...";
 "no_events_today" = "오늘의 이벤트를 찾을 수 없습니다";
 "no_events_description" = "역사적 이벤트를 위해 나중에 다시 확인하세요";
 "error_loading_events" = "이벤트 로드 실패";
-"related_pages" = "Related Pages";
-"close" = "Close";
-"showing_cached_data" = "Showing cached data";
-"offline_mode" = "Offline mode";
+"related_pages" = "관련 페이지";
+"close" = "닫기";
+"showing_cached_data" = "캐시된 데이터 표시 중";
+"offline_mode" = "오프라인 모드";
 "favorites" = "즐겨찾기";
 "no_favorites" = "아직 즐겨찾기 없음";
 "no_favorites_description" = "Націсніце на значок сэрца на любым артыкуле, каб захаваць яго ва ўлюбёнае";
@@ -121,7 +121,7 @@
 "report_alert_title" = "게시물 신고";
 "report_alert_message" = "신고해 주셔서 감사합니다. 곧 검토하겠습니다.";
 "search_wikipedia_title" = "위키백과 검색";
-"search_description" = "기사, 주제 등 검색";
+"search_description" = "기사 및 주제 찾기";
 "clear" = "지우기";
 "no_description" = "설명 없음";
 "pro" = "PRO";
@@ -133,11 +133,11 @@
 
 "continue_without_pro" = "WikiShorts Pro 없이 계속";
 
-"selected_accessibility_hint" = "Selected";
-"double_tap_to_select" = "Double tap to select";
+"selected_accessibility_hint" = "선택됨";
+"double_tap_to_select" = "선택하려면 두 번 탭하세요";
 "continue_next_step" = "Continue to next step";
 "proceeds_next_step" = "Proceeds to the next onboarding step";
-"featured_content" = "Featured Content";
-"discover_amazing_content_body" = "Discover amazing content tailored just for you! This sponsored content brings you the best recommendations and exciting new discoveries.";
-"discover_now" = "Discover Now";
+"featured_content" = "추천 콘텐츠";
+"discover_amazing_content_body" = "당신을 위한 놀라운 콘텐츠를 발견하세요!";
+"discover_now" = "지금 발견";
 "free_lower" = "무료";
