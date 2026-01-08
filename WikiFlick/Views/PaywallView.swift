@@ -4,7 +4,7 @@ import StoreKit
 struct PaywallView: View {
     @Binding var isPresented: Bool
     var isHardPaywall: Bool = false
-    @StateObject private var storeManager = StoreManager()
+    @EnvironmentObject var storeManager: StoreManager
     @StateObject private var languageManager = AppLanguageManager.shared
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -301,4 +301,5 @@ struct FeatureRow: View {
 
 #Preview {
     PaywallView(isPresented: .constant(true))
+        .environmentObject(StoreManager())
 }
