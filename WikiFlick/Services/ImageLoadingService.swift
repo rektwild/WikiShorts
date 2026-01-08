@@ -32,8 +32,8 @@ class ImageLoadingService: ImageLoadingServiceProtocol {
                 .eraseToAnyPublisher()
         }
         
-        // Load from network
-        guard let url = URL(string: urlString) else {
+        // Sanitize and secure the URL
+        guard let url = getSecureURL(from: urlString) else {
             return Just(nil)
                 .eraseToAnyPublisher()
         }
@@ -58,11 +58,50 @@ class ImageLoadingService: ImageLoadingServiceProtocol {
     }
     
     func preloadImage(from urlString: String) async -> UIImage? {
-        return await cacheManager.preloadImage(from: urlString)
+        // Check cache first
+        if let cachedImage = cacheManager.getCachedImage(for: urlString) {
+            return cachedImage
+        }
+        
+        // Sanitize and secure the URL
+        guard let url = getSecureURL(from: urlString) else {
+            return nil
+        }
+        
+        // If not in cache, we need to load it (cacheManager's preload might assume it handles networking, 
+        // but based on loadImage implementation, this service handles networking. 
+        // Let's check ArticleCacheManagerProtocol definition briefly. 
+        // If preloadImage on cacheManager handles network, we should pass the secured URL string there?
+        // Wait, looking at lines 60-62 in original file:
+        // return await cacheManager.preloadImage(from: urlString)
+        // This implies CacheManager DOES handle network or has its own logic.
+        // If CacheManager handles network, we might need to fix it THERE or pass the fixed URL string.
+        // Let's assume for now we should fix the string before passing it, OR cacheManager loads it.
+        // Let's check ArticleCacheManager content if possible, but assuming we fix the input string:
+        
+        let secureURLString = url.absoluteString
+        return await cacheManager.preloadImage(from: secureURLString)
     }
     
     func getCachedImage(for urlString: String) -> UIImage? {
         return cacheManager.getCachedImage(for: urlString)
+    }
+    
+    // MARK: - Private Helper
+    
+    private func getSecureURL(from urlString: String) -> URL? {
+        var secureString = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Handle protocol-relative URLs (e.g., //upload.wikimedia.org/...)
+        if secureString.hasPrefix("//") {
+            secureString = "https:" + secureString
+        }
+        // Upgrade HTTP to HTTPS
+        else if secureString.hasPrefix("http://") {
+            secureString = secureString.replacingOccurrences(of: "http://", with: "https://")
+        }
+        
+        return URL(string: secureString)
     }
 }
 

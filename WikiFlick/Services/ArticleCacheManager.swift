@@ -130,7 +130,7 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
              return nil
         }
         
-        guard let url = URL(string: urlString) else {
+        guard let url = getSecureURL(from: urlString) else {
             Logger.error("Invalid URL: \(urlString)", category: .network)
             return nil
         }
@@ -267,6 +267,22 @@ class ArticleCacheManager: ArticleCacheManagerProtocol {
     }
     
     // MARK: - Private Helpers
+    
+    private func getSecureURL(from urlString: String) -> URL? {
+        var secureString = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Handle protocol-relative URLs (e.g., //upload.wikimedia.org/...)
+        if secureString.hasPrefix("//") {
+            secureString = "https:" + secureString
+        }
+        // Upgrade HTTP to HTTPS
+        else if secureString.hasPrefix("http://") {
+            secureString = secureString.replacingOccurrences(of: "http://", with: "https://")
+        }
+        
+        return URL(string: secureString)
+    }
+
     private func calculateImageMemoryCost(_ image: UIImage) -> Int {
         // Calculate approximate memory cost (width * height * 4 bytes for RGBA)
         return Int(image.size.width * image.size.height * 4)
