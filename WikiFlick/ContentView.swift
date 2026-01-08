@@ -18,7 +18,7 @@ struct ContentView: View {
 
     @State private var isSearching = false
     @State private var isSearchFocused = false
-    @StateObject private var storeManager = StoreManager()
+    @EnvironmentObject var storeManager: StoreManager
     @StateObject private var languageManager = AppLanguageManager.shared
     @StateObject private var searchHistoryManager = SearchHistoryManager.shared
 
@@ -123,7 +123,6 @@ struct ContentView: View {
             Text(languageManager.localizedString(key: "try_again_later"))
         }
         .environmentObject(languageManager)
-        .environmentObject(storeManager)
         .onAppear {
             Task {
                 await storeManager.loadProducts()
@@ -147,4 +146,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(StoreManager())
 }

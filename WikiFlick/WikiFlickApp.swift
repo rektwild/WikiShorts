@@ -13,6 +13,7 @@ struct WikiShortsApp: App {
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
     @State private var showInitialPaywall = false
     @StateObject private var backgroundManager = AppBackgroundManager()
+    @StateObject private var storeManager = StoreManager()
     
     init() {
         // Bildirim sistemini başlat
@@ -46,6 +47,7 @@ struct WikiShortsApp: App {
                         .withErrorHandling()
                 }
             }
+            .environmentObject(storeManager)
             .onChange(of: showOnboarding) { newValue in
                 if !newValue {
                     showInitialPaywall = true
@@ -53,6 +55,7 @@ struct WikiShortsApp: App {
             }
             .fullScreenCover(isPresented: $showInitialPaywall) {
                 PaywallView(isPresented: $showInitialPaywall, isHardPaywall: true)
+                    .environmentObject(storeManager)
                     .interactiveDismissDisabled()
             }
         }
