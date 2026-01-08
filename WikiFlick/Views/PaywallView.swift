@@ -190,7 +190,7 @@ struct PaywallView: View {
                         .padding(.trailing, 8)
                 }
                 
-                if let product = selectedProduct, storeManager.isPurchased(product.id) {
+                if storeManager.hasPremiumAccess {
                     Text(languageManager.localizedString(key: "already_subscribed"))
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.black)
@@ -204,10 +204,10 @@ struct PaywallView: View {
             .frame(height: 56)
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill((selectedProduct != nil && storeManager.isPurchased(selectedProduct!.id)) ? Color.gray : Color.white)
+                    .fill(storeManager.hasPremiumAccess ? Color.gray : Color.white)
             )
         }
-        .disabled(storeManager.isLoading || selectedProduct == nil || (selectedProduct != nil && storeManager.isPurchased(selectedProduct!.id)))
+        .disabled(storeManager.isLoading || selectedProduct == nil || storeManager.hasPremiumAccess)
     }
     
     private var footerSection: some View {
