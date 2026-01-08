@@ -22,16 +22,16 @@ struct SettingsView: View {
             List {
                 Section(languageManager.localizedString(key: "status")) {
                     HStack {
-                        Image(systemName: storeManager.isPurchased("wiki_m") ? "crown.fill" : "person.circle")
-                            .foregroundColor(storeManager.isPurchased("wiki_m") ? .yellow : .gray)
+                        Image(systemName: storeManager.hasPremiumAccess ? "crown.fill" : "person.circle")
+                            .foregroundColor(storeManager.hasPremiumAccess ? .yellow : .gray)
                         Text(languageManager.localizedString(key: "account_status"))
                         Spacer()
-                        Text(storeManager.isPurchased("wiki_m") ? languageManager.localizedString(key: "pro") : languageManager.localizedString(key: "free"))
-                            .foregroundColor(storeManager.isPurchased("wiki_m") ? .yellow : .secondary)
+                        Text(storeManager.hasPremiumAccess ? languageManager.localizedString(key: "pro") : languageManager.localizedString(key: "free"))
+                            .foregroundColor(storeManager.hasPremiumAccess ? .yellow : .secondary)
                             .font(.system(size: 14, weight: .semibold))
                     }
                     
-                    if !storeManager.isPurchased("wiki_m") {
+                    if !storeManager.hasPremiumAccess {
                         Button(action: {
                             showingPaywall = true
                         }) {

@@ -17,7 +17,7 @@ class AdMobManager: NSObject, ObservableObject {
     
     // MARK: - Constants
     private enum Constants {
-        static let premiumProductID = "wiki_m"
+
         static let interstitialAdFrequency = 10
         static let nativeAdFrequency = 5
         static let feedAdFrequency = 5
@@ -72,7 +72,7 @@ class AdMobManager: NSObject, ObservableObject {
         super.init()
         
         // Set initial premium status
-        self.isPremiumUser = storeManager.isPurchased(Constants.premiumProductID)
+        self.isPremiumUser = storeManager.hasPremiumAccess
         
         #if DEBUG
         validateAdConfiguration()
@@ -93,7 +93,9 @@ class AdMobManager: NSObject, ObservableObject {
     
     private func handleSubscriptionChange(purchasedProducts: Set<String>) {
         let wasPremium = isPremiumUser
-        let isPremiumNow = purchasedProducts.contains(Constants.premiumProductID)
+        let isPremiumNow = purchasedProducts.contains("wiki_w") || 
+                           purchasedProducts.contains("wiki_life") || 
+                           purchasedProducts.contains("wiki_m")
         
         // Update published properties
         self.isPremiumUser = isPremiumNow
@@ -198,7 +200,7 @@ class AdMobManager: NSObject, ObservableObject {
     // MARK: - Premium Subscription Control
     
     private func isPremiumActive() -> Bool {
-        return storeManager.isPurchased(Constants.premiumProductID)
+        return storeManager.hasPremiumAccess
     }
     
     private func configureAdSettings(for attStatus: ATTStatus) {

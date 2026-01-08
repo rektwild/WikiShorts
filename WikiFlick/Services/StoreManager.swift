@@ -132,6 +132,12 @@ class StoreManager: ObservableObject {
         return purchasedProducts.contains(productID)
     }
     
+    var hasPremiumAccess: Bool {
+        return purchasedProducts.contains("wiki_w") || 
+               purchasedProducts.contains("wiki_life") || 
+               purchasedProducts.contains("wiki_m")
+    }
+    
     func getProduct(for id: String) -> Product? {
         return products.first { $0.id == id }
     }

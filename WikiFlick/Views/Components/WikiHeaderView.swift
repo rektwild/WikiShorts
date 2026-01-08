@@ -25,7 +25,7 @@ struct WikiHeaderView: View {
             }
             
             // Remove Ads Button (only if not purchased)
-            if !storeManager.isPurchased("wiki_m") {
+            if !storeManager.hasPremiumAccess {
                 Button(action: {
                     showingPaywall = true
                 }) {

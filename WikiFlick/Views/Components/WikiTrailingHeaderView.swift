@@ -17,7 +17,7 @@ struct WikiTrailingHeaderView: View {
     var body: some View {
         HStack(spacing: 8) {
             // Gift Button (Rewarded Ad) - Hide if purchased
-            if !storeManager.isPurchased("wiki_m") {
+            if !storeManager.hasPremiumAccess {
                 Button(action: {
                     if AdMobManager.shared.isRewardedAdLoaded {
                         showingRewardAlert = true
